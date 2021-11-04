@@ -24,6 +24,15 @@ Note: sometimes specifying the fields is necessary (lack of field listing wont w
 
 https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/SearchReference/Fillnull
 
+### fieldformat vs eval
+- FieldFormat only modifies the display of the value. Useful to maintain sorting by numbers/currency
+
+### Dedup
+Removes duplicate fields
+
+### geom
+Creates choropleth map visualizations
+
 ## Lookups
 
 ### Upload a Lookup
@@ -57,4 +66,34 @@ Lookup list files do not allow updating by default - manual recreation is requir
 index=*
 | search ([| inputlookup ioc_ip.csv | fields IP | rename IP as dest_ip] OR [| inputlookup ioc_ip.csv | fields IP | rename IP as src_ip])
 ```
+
+## Macro
+Settings > Advanced Search > Search Macros > Add New
+- Allows storing a search string that can be referenced later using the macro name.
+- Can add arguments, which allows passing data into the macro search.
+  - Can use validation checks on arguments
+- Called using `macroname`
+
+
+## Workflow Actions
+Settings > Fields > Workflow Actions > Add New
+- Get/Post to pass information to external sources, or back to Splunk to perform secondary search
+- For example, a link that opens a browser to a WHOIS page, automatically looking up a given IP Address based on the src_ip field content via $src_ip$.
+
+
+## Data Models
+Settings > Data Models > New Data Model
+- Events, Searchs, Transactions
+- Allows mass normalization and subsequent correlation searches/reports/alerts
+- Allows more efficient reporting when used with Pivots
+- Root event/object > child object > childobject****
+- Root Search should be avoided, as they do not benefit from search speedup
+
+
+## CIM
+- Has to be installed on a vanilla install
+- Use Aliases to map an original field to normalized CIM fields (e.g. src_ip)
+
+
+
 
