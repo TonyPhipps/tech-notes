@@ -17,3 +17,15 @@ Commands
 - Activate/enter the virtual env (Linux): `.\env\Scripts\activate`
 - Install any dependencies: `python -m pip install -r requirements.txt`
 - Deactivate/Exit the current virtual env: `deactivate`
+
+
+# Regular Expression
+Search a string with a regex including a group, then return the full match and the first group matched.
+```
+import re
+string = '    3aJ51CCn7bRFG71Cna2BUopLFqEbW1T0Pw4WzhW'
+regex = '[^\w]((bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39})'
+matches = re.search(regex, string)
+print(matches.group(0)) # full match, including subgroups
+print(matches.group(1)) # first group matched
+```
