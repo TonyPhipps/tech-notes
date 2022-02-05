@@ -18,3 +18,9 @@ dd if=/dev/urandom of=/dev/sda status=progress
 dd if=/dev/zero of=/dev/sda status=progress
 dd if=/dev/urandom of=/dev/sda status=progress
 ```
+
+## Disable USB suspension
+Some devices, like a wireless mouse USB dongle, may go into suspension mode and never return, requiring reinserting the dongle. This fixes that.
+```
+echo on | sudo tee /sys/bus/usb/devices/*/power/level >/dev/null
+```
