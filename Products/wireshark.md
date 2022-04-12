@@ -5,7 +5,9 @@
 - ip.addr
 - ip.src
 - ip.dst
-- udp.
+- udp.dstport
+- udp.port
+- udp.srcport
 
 
 # Operators
@@ -17,8 +19,10 @@
 - le or <=
 
 # Logic
-- $$ - and
-- || - or
+- and or $$
+- or or ||
+- xor or ^^
+- not or !
 
 
 # References and Resources
