@@ -1,3 +1,10 @@
+# IP address and NIC info
+```
+ip a show
+ifconfig -a
+```
+
+
 # crontab
 
 ## List crontab jobs for current user
