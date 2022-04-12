@@ -1,9 +1,12 @@
-# Prusa Mini with PETG on Powdered Steel Sheet
+# Prusa Mini+
+## Magic Number
+Uses a 1.8 degree stepper with a leadscrew with 4mm lead. This makes the distance corresponding to a full step 4/200 = 0.02mm. Your layer height should be a multiple of this.
+Source: https://github.com/prusa3d/Original-Prusa-MINI/blob/master/DOCUMENTATION/ELECTRONICS/mini-motor-kit.pdf
 
-## First Time Setup
+# Filament Calibration
 Perform these steps with any new filament brand or type
 
-Start with a "Generic PETG profile"
+Start with a "Generic profile"
 
 # Checkpoint 1 - Ensure bed is clean
 - Dawn dish soap and hot water, then window cleaner, then IPA
@@ -37,29 +40,29 @@ Goal - Good first-layer adhesion
 Goal - Eliminate stringing when moving without extracting
 
 - Retraction Speed
-Determines how quickly retraction is carried out.
-  - Start at 30mm/s and go down by 1mm/s increments until oozing/stringing/gaps when starting a new line go away
-  - With PETG, retraction speed is more important than distance, but Retraction Distance being too high show similar symptoms.
+    Determines how quickly retraction is carried out.
+  - PETG - Start at 30mm/s and go down by 1mm/s increments until oozing/stringing/gaps when starting a new line go away
+  - PETG - retraction speed is more important than distance, but Retraction Distance being too high show similar symptoms.
 
 - Deretraction Speed (or Restart Speed)
-Determines how quickly filament is fed after a retraction.
-- Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
+    Determines how quickly filament is fed after a retraction.
+  - PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
 
 - Retraction Distance
-  - Direct Drive: 2 - 4mm
-  - Bowden: 5 - 7mm
+  - PETG - Direct Drive: 2 - 4mm
+  - PETG - Bowden: 5 - 7mm
   - But not greater than the height of the nozzle
   - It's too high if gaps form (due to under-extrusion).
   
 - Travel Speed
-  - First layer speed 15-25mm
+  - PETG - First layer speed 15-25mm
   - set to 999 and let printer go as fast as possible when not printing
   - Higher is typically better to avoid ooze/drip
 
 - Calibrate Retraction Minimum Travel
   Controls how frequently retraction occurs in a specific area.
-  - 1-2mm
-  - Start at 2mm and reduce by 0.1mm increments
+  - PETG - 1-2mm
+  - PETG - Start at 2mm and reduce by 0.1mm increments
 - https://www.printables.com/model/105989-fast-stringing-retraction-tests/
 
 
