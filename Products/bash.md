@@ -46,3 +46,17 @@ echo on | sudo tee /sys/bus/usb/devices/*/power/level >/dev/null
 ```
 lspci -nn | egrep -i "3d|display|vga"
 ```
+
+# History
+```
+history
+```
+or 
+```
+cat ~/.bash_history
+```
+
+# Check for IP Routing
+```
+cat /proc/sys/net/ipv4/ip_forward
+```
