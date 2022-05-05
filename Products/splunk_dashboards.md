@@ -3,7 +3,7 @@ Sample Dashboard
 - Leverages radio buttons to reset filters
 - Multiple widgets used to aggregate key fields
 - Widgets leverage tokens to allow cross-widget filtering
-- Shows all relevant fields for relevant events
+- Shows all relevant fields for matching events
 
 ```
 <form>
