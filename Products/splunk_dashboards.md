@@ -16,7 +16,6 @@ Sample Dashboard
     <set token="user">*</set>
     <set token="action">*</set>
   </init>
-  
   <fieldset submitButton="true" autoRun="true">
     <input type="radio" token="resetTokens" searchWhenChanged="true">
       <label></label>
@@ -54,13 +53,12 @@ Sample Dashboard
       <initialValue>*</initialValue>
     </input>
   </fieldset>
-  
   <row>
     <panel>
       <title>Event Timeline</title>
       <chart>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -83,7 +81,7 @@ Sample Dashboard
       <title>Source IP</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -113,7 +111,7 @@ Sample Dashboard
       <title>Host</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -145,7 +143,7 @@ Sample Dashboard
       <title>User</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -175,7 +173,7 @@ Sample Dashboard
       <title>Action</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -205,7 +203,7 @@ Sample Dashboard
       <title>Event ID</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -235,7 +233,7 @@ Sample Dashboard
       <title>Event Name</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -267,7 +265,7 @@ Sample Dashboard
       <title>Events</title>
       <table>
         <search>
-          <query>index=ics-* sourcetype=WinEventLog:Security
+          <query>index=windows-security* sourcetype=WinEventLog:Security
 | search src_ip = "$ip$"
 | search name = "$name$"
 | search user = "$user$"
@@ -282,6 +280,7 @@ Sample Dashboard
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
+        <option name="wrap">false</option>
       </table>
     </panel>
   </row>
