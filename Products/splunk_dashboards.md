@@ -1,4 +1,6 @@
-Sample Dashboard
+### Sample Dashboard
+This approach allows an analyst to quickly gain familiarity with an event source and quickly investigate any suspicious activity
+
 - Presents filters for time and key fields at the top
 - Leverages radio buttons to reset filters
 - Multiple widgets used to aggregate key fields
