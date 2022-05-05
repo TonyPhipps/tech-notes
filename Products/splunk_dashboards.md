@@ -2,7 +2,7 @@ Sample Dashboard
 - Presents filters for time and key fields at the top
 - Leverages radio buttons to reset filters
 - Multiple widgets used to aggregate key fields
-- Widgets leverage tokens to allow cross-widget filtering
+- Widgets leverage tokens to allow cross-widget filtering (based on clicking a cell containing a value)
 - Shows all relevant fields for matching events
 
 ```
