@@ -1,5 +1,5 @@
 ### Sample Dashboard
-This approach allows an analyst to quickly gain familiarity with an event source and quickly investigate any suspicious activity
+This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
 
 - Presents filters for time and key fields at the top
 - Leverages radio buttons to reset filters
