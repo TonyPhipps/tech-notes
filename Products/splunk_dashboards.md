@@ -52,7 +52,14 @@ Sample Dashboard
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
+    <input type="text" token="EventCode" searchWhenChanged="true">
+      <label>Event ID</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
   </fieldset>
+  
+  
   <row>
     <panel>
       <title>Event Timeline</title>
