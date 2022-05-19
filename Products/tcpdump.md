@@ -10,7 +10,8 @@ tcpdump -i eth0 -n -vvv port 1024 and host 1.1.1.1 -w capture.pcap
 tcpdump -i eth0 -n
 ```
 
-###
+
+### Capture to file
 Run -D to see interfaces
 Run a quick check to make sure you have the right interface.
 Capture all traffic to capture.pcap, splitting into 10GB file sizes to allow later analysis (e.g. via Wireshark).
