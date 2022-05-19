@@ -24,6 +24,13 @@
 - xor or ^^
 - not or !
 
+# Common Filter Examples
+### In any frame, Find a non-case-sensitive string
+```
+frame matches "(?i)google"
+```
+
+
 
 # References and Resources
 - https://packetlife.net/library/cheat-sheets/
