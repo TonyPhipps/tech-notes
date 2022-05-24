@@ -8,6 +8,12 @@ show version
 show running-config 
 ```
 
+### Show logs and loggingo information
+```
+show logging
+show logging onboard
+```
+
 ### SPAN one VLAN to one Port
 ```
 enable
