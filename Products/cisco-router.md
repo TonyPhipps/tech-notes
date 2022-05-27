@@ -50,3 +50,6 @@ username john privilege 15 secret GoodPassword
 ```
 no username john
 ```
+
+### ACL
+- Each inbound and outbound ACL should end in ```deny any any log```
