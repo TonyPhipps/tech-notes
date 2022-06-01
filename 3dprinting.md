@@ -8,10 +8,10 @@ Perform these steps with any new filament brand or type
 
 Start with a "Generic profile"
 
-# Checkpoint 1 - Ensure bed is clean
+## Checkpoint 1 - Ensure bed is clean
 - Dawn dish soap and hot water, then window cleaner, then IPA
 
-# Checkpoint 2 - Calibrate temperatures and nozzle height
+## Checkpoint 2 - Calibrate temperatures and nozzle height
 Goal - Good first-layer adhesion
 
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
@@ -32,11 +32,11 @@ Goal - Good first-layer adhesion
   - Slightly higher temp for first layers (usually 5deg higher).
   - Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
 
-# Checkpoint 3 - Ensure bed is level
+## Checkpoint 3 - Ensure bed is level
 - Goal - Good first-layer adhesion throughout bed surface
 - https://www.printables.com/model/45752-3x3-bed-level-calibration
 
-# Checkpoint 4 - Test and fix retraction-related settings
+## Checkpoint 4 - Test and fix retraction-related settings
 Goal - Eliminate stringing when moving without extracting
 
 - Retraction Speed
@@ -66,7 +66,7 @@ Goal - Eliminate stringing when moving without extracting
 - https://www.printables.com/model/105989-fast-stringing-retraction-tests/
 
 
-# Checkpoint 5 - Final Test
+## Checkpoint 5 - Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
  
@@ -102,3 +102,8 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Slow down Deretraction/Restart Speed. Often this is half as much as Retraction Speed
 - Add Extra Length on Restart
 - Retract on Layer Change - Toggle
+
+## Small Parts Detaching Mid-Print
+Like miniature figures with small surface area touching the bed... going 
+- Ensure bed is clean. Initial adhesion could have been poor due to dust.
+- Consider adding a brim 
