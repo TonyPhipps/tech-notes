@@ -4,7 +4,7 @@ Uses a 1.8 degree stepper with a leadscrew with 4mm lead. This makes the distanc
 Source: https://github.com/prusa3d/Original-Prusa-MINI/blob/master/DOCUMENTATION/ELECTRONICS/mini-motor-kit.pdf
 
 # Filament Calibration
-Perform these steps with any new filament brand or type
+Perform these steps with any new filament brand or type. This is especially the case if, after changing to a different filament spool, you notice oddities like peeling off the bed surface.
 
 Start with a "Generic profile"
 
