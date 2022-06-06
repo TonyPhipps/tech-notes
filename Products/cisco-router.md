@@ -8,7 +8,7 @@ show version
 show running-config 
 ```
 
-### Show logs and loggingo information
+### Show logs and logging information
 ```
 show logging
 show logging onboard
@@ -18,8 +18,6 @@ show logging onboard
 ```
 enable
 configuration terminal
-interface fastethernet 12/0/15
-
 monitor session 1 source vlan 100
 monitor session 1 destination interface gigabitethernet1/0/23
 end
