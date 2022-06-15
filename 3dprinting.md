@@ -107,3 +107,7 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
 - Consider adding a brim 
+
+
+# Matte and Silk Filament
+You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
