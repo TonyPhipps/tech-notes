@@ -39,3 +39,8 @@ no monitor session all
 copy running-config startup-config 
 ```
 
+### Show ARP Table
+```
+show arp
+```
+
