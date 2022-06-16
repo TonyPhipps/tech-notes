@@ -51,3 +51,8 @@ no username john
 
 ### ACL
 - Each inbound and outbound ACL should end in ```deny any any log```
+
+Show ARP Table
+```
+show arp
+```
