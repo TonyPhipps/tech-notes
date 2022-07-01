@@ -106,8 +106,19 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
-- Consider adding a brim 
+- Ensure bed is not too hot for the filament. PLA can't take much more than 60deg celsius.
+- Consider adding a brim
 
+## Warping
+To avoid warping with PLA...
+- The print bed should be properly leveled
+- The distance between nozzle and print bed should not be too far
+- The print bed temperature should be high enough (60+ for PLA)
+- The print bed adhesion should be good enough (clean bed, glue, etc.)
+- The ambient temperature should be as homogeneous as possible (block gusts)
+
+# Second Layer Peels Away Like "Gills"
+- Reduce Z Offset a bit. It may be too smashed, causing layer 2 to not reach and stick very well.
 
 # Matte and Silk Filament
 You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
