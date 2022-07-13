@@ -37,6 +37,27 @@ dd if=/dev/zero of=/dev/sda status=progress
 dd if=/dev/urandom of=/dev/sda status=progress
 ```
 
+## Bit-for-Bit Drive Copy to Compressed File
+```
+dd bs=512 -flag=fullblock conv=noerror,sync if=/dev/sda of=/home/user/newimage.dd status=progress | gzip -c > /media/ubuntu/path/newimage.img.gz
+```
+
+## Bit-for-Bit Drive Copy Across Network from a Windows Box
+Source (sending):
+```
+dd if=\\.\f: | nc 192.168.1.1 1234
+```
+
+Target (receiving):
+```
+nc -l -p 1234 | dd newimage.img
+```
+
+## Restore dd Backup to a Drive
+```
+gunzip -c image.img.gz | dd bs=512 iflag=fullblock of=/dev/sda status=progress
+```
+
 ## Write a .iso Image to a Drive
 ```
 lsblk
