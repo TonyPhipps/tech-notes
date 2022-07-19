@@ -39,14 +39,14 @@ no monitor session all
 copy running-config startup-config 
 ```
 
-### Create a user with encrypted password
+### Create Admin Account
 ```
-username john privilege 15 secret GoodPassword
+username admin privilege 15 secret PASSWORD
 ```
 
 ### Remove a user
 ```
-no username john
+no username admin
 ```
 
 ### ACL
