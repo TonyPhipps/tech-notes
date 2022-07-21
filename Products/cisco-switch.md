@@ -44,3 +44,7 @@ copy running-config startup-config
 show arp
 ```
 
+### Create Admin Account
+```
+username admin privilege 15 secret PASSWORD
+```
