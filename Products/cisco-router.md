@@ -56,3 +56,23 @@ no username admin
 ```
 show arp
 ```
+
+### Disable Commonly Unused Services
+```
+no boot network
+no ip boot server
+no ip bootp server
+no ip classless
+no ip dns server
+no ip identd
+no ip finger
+no ip http server
+no ip rcmd rcp-enable
+no ip rcmd rsh-enable
+no service config
+no service finger
+no service tcp-small-servers
+no service udp-small-servers
+no service pad
+```
+
