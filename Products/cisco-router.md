@@ -57,7 +57,8 @@ no username admin
 show arp
 ```
 
-### Disable Commonly Unused Services
+### Disable Commonly Unused Services 
+[STIG V-216557](https://www.stigviewer.com/stig/cisco_ios_router_rtr/2020-09-23/finding/V-216557)
 ```
 no boot network
 no ip boot server
