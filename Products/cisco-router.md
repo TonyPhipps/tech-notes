@@ -77,3 +77,8 @@ no service udp-small-servers
 no service pad
 ```
 
+### Disable VPN Aggressive Mode
+Aggressive mode does not set up the initial encrypted connection used to protect the peer authentication. Negotiation is quicker, and the initiator and responder ID pass in the clear.
+```
+crypto isakmp aggressive-mode disable
+```
