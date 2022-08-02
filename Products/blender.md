@@ -1,0 +1,11 @@
+# Blender Addons Pack for 3D Print Modeling
+- 3D View: MeasureIt
+- 3D View: Stored Views
+- Add Mesh: Extra Objects
+- Add Mesh: BoltFactory
+- Import-Export: Autocad DXF Format
+- Mesh: tinyCAD Mesh tools
+- Object: Bool Tool
+- Object: Align Tools
+- Interface: 3D-Print Toolbox
+- Mesh: F2
