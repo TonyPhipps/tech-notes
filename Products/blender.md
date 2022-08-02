@@ -41,7 +41,7 @@ Spacebar Action: Search
 - System Memory: Check
 - Video Memory: Check
 
-## Side Menu
+## Side Menu (n key)
 ### View
 - Clip Start: 0.1
 - End: 100000
