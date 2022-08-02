@@ -5,6 +5,9 @@
 - Resolution Scale: 1.25
 - Line Width: Thick
 
+### Themes
+- Wire Edit: [a bright blue]
+- Vertex Size: 4mm
 
 ### Keymap
 Spacebar Action: Search
@@ -37,4 +40,9 @@ Spacebar Action: Search
 - Scene Statistics: Check
 - System Memory: Check
 - Video Memory: Check
+
+## Side Menu
+### View
+- Clip Start: 0.1
+- End: 100000
 
