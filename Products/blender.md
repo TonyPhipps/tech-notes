@@ -46,3 +46,9 @@ Spacebar Action: Search
 - Clip Start: 0.1
 - End: 100000
 
+## External Addons
+- CAD Transform for blender
+
+# Resources
+- https://blenderartists.org
+- 
