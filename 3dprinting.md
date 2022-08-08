@@ -116,6 +116,8 @@ To avoid warping with PLA...
 - The print bed temperature should be high enough (60+ for PLA)
 - The print bed adhesion should be good enough (clean bed, glue, etc.)
 - The ambient temperature should be as homogeneous as possible (block gusts)
+- Too many bottom layers may cause warping.
+- Fan being too high, too soon may cause warping. Consider increase number of layers without fan and/or how many layers spent stepping up to max fan speed.
 
 # Second Layer Peels Away Like "Gills"
 - Reduce Z Offset a bit. It may be too smashed, causing layer 2 to not reach and stick very well.
