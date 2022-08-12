@@ -74,7 +74,7 @@ https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 # Recommended Test Prints
 - Bed-Level Squares
 - Flat keychain
-- Filament Clip
+- Roly Poly Coin Fidget
 
 
 # Cold Pull
@@ -88,6 +88,36 @@ https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 - While the hotend is cooling down, continuously push the filament down so that it extrudes from the nozzle. Do so until it cools down to the point where you can’t push anymore through (around 160 - 170 °C).
 - When the temperature is near 90 °C, hold the X-axis arm to support it, and pull the filament straight up using your hands or pliers, out of the Extruder. Pull it firmly and steadily.
 - Repeat one more time.
+
+# Changing Nozzle
+Reference 
+https://help.prusa3d.com/article/changing-replacing-the-nozzle-mini_134235
+
+## Prep
+
+- 16mm wrench/spanner, or an adjustable wrench to secure the heater block
+  - A very large spanner or an adjustable wrench can quickly drain heat from the heater block and may cause a Thermal runaway error, depending on how it grips the block.
+- A pair of pliers or a 7mm socket to unscrew the nozzle
+- Non-flammable surface to place the used hot nozzle on (i.e. plate or aluminum foil).
+- Unload the filament. Optionally, do a coldpull.
+
+## Steps
+- Preheat to 230c
+- Clean the heat block and nozzle as necessary (brass brush)
+- Preheat to 270-280c
+- Move Z axis up to max
+- Hold Heat Block with wrench to prevent twisting
+- Use 7mm socket to unscrew the HOT nozzle and place in tray
+- Insert new nozzle and screw until it stops moving (not excessive)
+- Ensure a small gap between nozzle top and heat block after installing (~.5mm)
+- Clean the print bed
+- Perform first layer calibration
+
+
+# Layer Height
+Layer height should not exceed 80% of the width of hte nozzle
+- .25mm nozzle max layer height = .2mm
+- .40mm nozzle max layer height = .32mm
 
 # Troubleshooting
 
