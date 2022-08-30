@@ -88,3 +88,8 @@ cat ~/.bash_history
 ```
 cat /proc/sys/net/ipv4/ip_forward
 ```
+
+# Linux Standard Base Release Information
+```
+lsb_release -a
+```
