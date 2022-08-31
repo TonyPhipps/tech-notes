@@ -12,3 +12,8 @@ apt upgrade -y
 apt-add-repository contrib
 apt-add-repository non-free
 ```
+
+# Install Legacy Nvidia Drivers
+```
+apt install nvidia-legacy-390xx-driver firmware-misc-nonfree
+```
