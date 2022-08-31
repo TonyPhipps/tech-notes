@@ -11,6 +11,7 @@ apt upgrade -y
 ```
 apt-add-repository contrib
 apt-add-repository non-free
+apt update
 ```
 
 # Install Legacy Nvidia Drivers
