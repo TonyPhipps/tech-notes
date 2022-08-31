@@ -7,7 +7,7 @@ apt list --upgradable
 apt upgrade -y
 ```
 
-# Enable Non-Free
+# Enable Contrib and Non-Free Repositories
 ```
 apt-add-repository contrib
 apt-add-repository non-free
