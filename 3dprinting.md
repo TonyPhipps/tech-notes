@@ -137,7 +137,9 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
 - Ensure bed is not too hot for the filament. PLA can't take much more than 60deg celsius.
+- Add a part that is a very thin, short line to join the small part to. Height should match layer height, thickness should be about .8, and length should be as long as needed.
 - Consider adding a brim
+
 
 ## Warping
 To avoid warping with PLA...
