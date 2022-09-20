@@ -96,4 +96,11 @@ Settings > Data Models > New Data Model
 
 
 
+## Search Examples
+### For Each Source IP Show Statistics Per Destination IP
 
+```
+... 
+| stats values(dest_ip) dc(dest_ip) as UniqueDestinations by src_ip
+| where UniqueDestinations >= 10
+ ```
