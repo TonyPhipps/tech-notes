@@ -104,3 +104,14 @@ Settings > Data Models > New Data Model
 | stats values(dest_ip) dc(dest_ip) as UniqueDestinations by src_ip
 | where UniqueDestinations >= 10
  ```
+ 
+ ###  Given one search, get additional fields from another search based on a matching field
+ 
+ ```
+ index="windows" host="*" ip="*" 
+| stats count by host, ip
+| rename ip as src_ip
+| join type=inner src_ip 
+    [ search index="switch"
+    | fields src_ip, mac]
+```
