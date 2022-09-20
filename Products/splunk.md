@@ -110,8 +110,13 @@ Settings > Data Models > New Data Model
  ```
  index="windows" host="*" ip="*" 
 | stats count by host, ip
-| rename ip as src_ip
-| join type=inner src_ip 
+| join type=inner left=L right=R where L.ip = R.src_ip
     [ search index="switch"
     | fields src_ip, mac]
 ```
+
+### Same as above, but with multiple expected matches/results
+index="windows" d_host="*" ip="*" 
+			| stats count by d_host, ip
+			| join type=inner left=L right=R where L.ip = R.src_ip
+			    [ search index"firewall" | stats values(dest_ip) by src_ip]
