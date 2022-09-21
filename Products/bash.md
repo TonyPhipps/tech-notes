@@ -93,3 +93,9 @@ cat /proc/sys/net/ipv4/ip_forward
 ```
 lsb_release -a
 ```
+
+# Misc
+### Get IP address and send it through curl to an API
+```
+MSG=$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//') && curl -s -F "token=xxx" -F "user=yyy" -F "message=$MSG" https://api.pushover.net/1/messages.json
+```
