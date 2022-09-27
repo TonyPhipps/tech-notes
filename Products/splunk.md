@@ -1,6 +1,16 @@
 # Splunk
 
-## Search
+## Search Quick Reference
+
+### To Lower or Upper
+To clean up some results, you may want to force lower (or upper) casing.
+```
+| eval hostL=lower(host)
+```
+or
+```
+| eval hostU=upper(host)
+```
 
 ### Fill Null
 For the current search results, fill all empty field values:
@@ -96,7 +106,7 @@ Settings > Data Models > New Data Model
 
 
 
-## Search Examples
+## Larger Search Examples
 ### For Each Source IP Show Statistics Per Destination IP
 
 ```
@@ -115,8 +125,10 @@ Settings > Data Models > New Data Model
     | fields src_ip, mac]
 ```
 
-### Same as above, but with multiple expected matches/results
+OR do the same, but with multiple expected matches/results
+```
 index="windows" d_host="*" ip="*" 
-			| stats count by d_host, ip
-			| join type=inner left=L right=R where L.ip = R.src_ip
-			    [ search index"firewall" | stats values(dest_ip) by src_ip]
+| stats count by d_host, ip
+| join type=inner left=L right=R where L.ip = R.src_ip
+[ search index"firewall" | stats values(dest_ip) by src_ip]
+```
