@@ -8,68 +8,81 @@ Perform these steps with any new filament brand or type. This is especially the 
 
 Start with a "Generic profile"
 
-## Checkpoint 1 - Ensure bed is clean
-- Dawn dish soap and hot water, then window cleaner, then IPA
+## Checkpoint 1 - Clean Bed
+- Dawn dish soap and hot water, then window cleaner, then isopropyl alcohol 90%+
 
-## Checkpoint 2 - Calibrate temperatures and nozzle height
+## Checkpoint 2 - Level Bed
+- Goal - Good first-layer adhesion throughout bed surface
+- https://www.printables.com/model/45752-3x3-bed-level-calibration
+
+## Checkpoint 3 - Temperatures and Nozzle Height
 Goal - Good first-layer adhesion
 
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
 - Set Bed Temp to lowest suggested temp by filament manufacturer  
 - Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
 
-- Adjust Nozzle Temp
-  - Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
+### Adjust Nozzle Temp
+- Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
+- Consider using a temp tower (https://www.printables.com/model/39810-improved-all-in-one-temperature-and-bridging-tower)
 
-- Adjust Nozzle Height
-  - Live-adjust Nozzle Distance
-  - until a solid object is produced
-  - Peeling apart is too high
-  - Smushed to the point its causing peaks between lines is too low
+### Adjust Nozzle Height
+- Live-adjust Nozzle Distance
+- until a solid object is produced
+- Peeling apart is too high
+- Smushed to the point its causing peaks between lines is too low
 
-- Adjust Bed Temp
-  - Go up 1-5deg if pieces lift off on edges
-  - Slightly higher temp for first layers (usually 5deg higher).
-  - Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
+### Adjust Bed Temp
+- Go up 1-5deg if pieces lift off on edges
+- Slightly higher temp for first layers (usually 5deg higher).
+- Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
 
-## Checkpoint 3 - Ensure bed is level
-- Goal - Good first-layer adhesion throughout bed surface
-- https://www.printables.com/model/45752-3x3-bed-level-calibration
+## Checkpoint 4 - Extrusion
+Print a [cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip).
+- Adjust the Extrusion Multiplier accordingly by 1-2%:
+  - If there is too much material near the perimeters, decrease the Extrusion Multiplier value.
+  - If there are visible gaps between layer lines, increase the Extrusion Multiplier value. (Microscopic gaps near the perimeters are OK.)
 
-## Checkpoint 4 - Test and fix retraction-related settings
+
+## Checkpoint 5 - Retraction Settings
 Goal - Eliminate stringing when moving without extracting
 
-- Retraction Speed
-    Determines how quickly retraction is carried out.
-  - PETG - Start at 30mm/s and go down by 1mm/s increments until oozing/stringing/gaps when starting a new line go away
-  - PETG - retraction speed is more important than distance, but Retraction Distance being too high show similar symptoms.
-
-- Deretraction Speed (or Restart Speed)
-    Determines how quickly filament is fed after a retraction.
-  - PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
-
-- Retraction Distance
-  - PETG - Direct Drive: 2 - 4mm
-  - PETG - Bowden: 5 - 7mm
-  - But not greater than the height of the nozzle
-  - It's too high if gaps form (due to under-extrusion).
+Print this and adjust settings
+ - https://www.printables.com/model/105989-fast-stringing-retraction-tests/
+ 
+### Retraction Distance
+- PETG - Direct Drive: 2 - 4mm
+- PETG - Bowden: 5-7mm. Start at 5, go up in 1mm increments until stringing is gone.
+- It's too high if gaps form (due to under-extrusion).
+- It's too low if stringing occurs.
+- If you get blobs, but minimal stringing, move on to Retraction Speed.
+- DO NOT exceed the overall length of the nozzle (from the tip to the big opening the filament enters at) or you may cause jams
   
-- Travel Speed
-  - PETG - First layer speed 15-25mm
-  - set to 999 and let printer go as fast as possible when not printing
-  - Higher is typically better to avoid ooze/drip
+### Retraction Speed
+Determines how quickly retraction is carried out.
+- PETG - Start at 20mm/s and go up by 1-5mm/s increments until oozing/stringing goes away
+- PETG - Retraction Speed is more important than Length/Distance, but Retraction Length/Distance being too high can show similar symptoms.
 
-- Calibrate Retraction Minimum Travel
-  Controls how frequently retraction occurs in a specific area.
-  - PETG - 1-2mm
-  - PETG - Start at 2mm and reduce by 0.1mm increments
-- https://www.printables.com/model/105989-fast-stringing-retraction-tests/
+### Deretraction Speed (or Restart Speed)
+Determines how quickly filament is fed after a retraction.
+- PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
+
+
+### Travel Speed
+- PETG - First layer speed 15-25mm
+- set to 999 and let printer go as fast as possible when not printing
+- Higher is typically better to avoid ooze/drip
+
+### Calibrate Retraction Minimum Travel
+Controls how frequently retraction occurs in a specific area.
+- PETG - 1-2mm
+- PETG - Start at 2mm and reduce by 0.1mm increments
+
 
 
 ## Checkpoint 5 - Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
- 
 
 # Recommended Test Prints
 - Bed-Level Squares
