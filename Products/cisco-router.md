@@ -82,3 +82,39 @@ Aggressive mode does not set up the initial encrypted connection used to protect
 ```
 crypto isakmp aggressive-mode disable
 ```
+
+
+### Setup Event Forwarding to Syslog Server
+```
+enable
+configure terminal
+service sequence-numbers
+service timestamps log datetime localtime show-timezone msec
+logging trap informational
+logging 192.168.1.1
+logging facility local2
+logging source-interface loopback0
+logging userinfo
+logging on
+end
+show logging
+copy running-config startup-config
+```
+
+### Shutdown One or More Switchports
+```
+interface gigabitethernet0/2
+shutdown
+
+
+interface range gigabitethernet0/2 - 24
+shutdown
+```
+
+### Record Console Commands to Syslog
+```
+event manager applet CLIaccounting
+event cli pattern ".*" sync no skip no
+action 1.0 syslog priority informational msg "$_cli_msg"
+set 2.0 _exit_status 1
+```
