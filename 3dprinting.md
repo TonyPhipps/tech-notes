@@ -170,3 +170,8 @@ To avoid warping with PLA...
 
 # Matte and Silk Filament
 You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
+
+# PETG Overhangs
+PETG adheres strongest with no fan, but overhangs are terrible. In order to get the best of both worlds, use these codes to enable fans when needed - overhangs.
+- ```M106 S125``` to set fan to 50% (on Prusa Mini, anyway)
+- ```M107``` to disable fan
