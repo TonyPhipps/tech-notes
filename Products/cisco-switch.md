@@ -48,3 +48,30 @@ show arp
 ```
 username admin privilege 15 secret PASSWORD
 ```
+
+### Setup Event Forwarding to Syslog Server
+```
+enable
+configure terminal
+service sequence-numbers
+service timestamps log datetime localtime show-timezone msec
+logging trap informational
+logging 192.168.1.1
+logging facility local2
+logging source-interface loopback0
+logging userinfo
+logging on
+end
+show logging
+copy running-config startup-config
+```
+
+### Shutdown One or More Switchports
+```
+interface gigabitethernet0/2
+shutdown
+
+
+interface range gigabitethernet0/2 - 24
+shutdown
+```
