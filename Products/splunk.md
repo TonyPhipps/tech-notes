@@ -1,5 +1,17 @@
 # Splunk
 
+## Ingestion
+
+Review the settings for a conf file and see where the settings are merged from
+```
+splunk btool inputs list --debug
+```
+
+Reload Inputs.confg
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
 ## Search Quick Reference
 
 ### To Lower or Upper
