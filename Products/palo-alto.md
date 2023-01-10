@@ -1,3 +1,12 @@
+# GUI Interface
+
+## Restrict Access to Management Interface
+- Device > Setup > Interfaces > Management Interface > Set Permitted IP Address ranges
+
+## Enable Logging of Admin Activity
+- Device > Setup > Management > Logging and Reporting Settings > Gear Icon > Log Export and Reporting > Log Admin Activity > Debug and Operational Commands + UI Actions
+
+
 # Console Commands
 
 ## Show System Info
