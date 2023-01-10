@@ -1,3 +1,7 @@
+# Misc
+- Name the Logging Profile "default" to have it added to all future firewall rules by default
+
+
 # GUI Interface
 
 ## Restrict Access to Management Interface
