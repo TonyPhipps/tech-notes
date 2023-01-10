@@ -10,6 +10,18 @@
 ## Enable Logging of Admin Activity
 - Device > Setup > Management > Logging and Reporting Settings > Gear Icon > Log Export and Reporting > Log Admin Activity > Debug and Operational Commands + UI Actions
 
+## Import & Export Config Files
+- Device > Setup > Operations
+- Uploaded configs are staged as "Candidate Config" until committed via the big Commit button in the top right.
+
+
+## Upload a New Config From File
+- Device > Setup > Operations > Import named configuration snapshot
+  - find xml
+- Device > Setup > Operations > Load Named configuration snapshot
+- The uploaded config is now the "candidate config"
+Commit > Commit all changes
+
 
 # Console Commands
 
