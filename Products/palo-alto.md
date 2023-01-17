@@ -31,6 +31,8 @@ Generate a self-signed certificate on a new device to avoid using the default si
     - Provide a Name and select the Certificate generated earlier
     - Set Min Version to TLSv1.2
     - OK
+  - Select the SSL/TLS Service Profile just created
+  - OK
 - Perform a Commit
 
 # Console Commands
