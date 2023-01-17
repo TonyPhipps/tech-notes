@@ -20,11 +20,17 @@ Commit > Commit all changes
 ## Generate a New Self-Signed Root Certificate Authority Certificate
 Generate a self-signed certificate on a new device to avoid using the default signature to manage the firewall.
 - Device > Certificate Management > Certificates
-- Click Generate at the bottom edge of the screen
-- Provide a Certificate Name, Common Name
-- Check Certificate Authortiy
-- Change other options as needed
-- Click Generate
+  - Click Generate at the bottom edge of the screen
+  - Provide a Certificate Name, Common Name
+  - Check Certificate Authortiy
+  - Change other options as needed
+  - Click Generate
+  - Perform a Commit
+- Device > Setup > Management > General Settings
+  - SSL/TLS Service Profile > New
+    - Provide a Name and select the Certificate generated earlier
+    - Set Min Version to TLSv1.2
+    - OK
 - Perform a Commit
 
 # Console Commands
