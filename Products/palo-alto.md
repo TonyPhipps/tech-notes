@@ -17,6 +17,15 @@
 - The uploaded config is now the "candidate config"
 Commit > Commit all changes
 
+## Generate a New Self-Signed Root Certificate Authority Certificate
+Generate a self-signed certificate on a new device to avoid using the default signature to manage the firewall.
+- Device > Certificate Management > Certificates
+- Click Generate at the bottom edge of the screen
+- Provide a Certificate Name, Common Name
+- Check Certificate Authortiy
+- Change other options as needed
+- Click Generate
+- Perform a Commit
 
 # Console Commands
 
