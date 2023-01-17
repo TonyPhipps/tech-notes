@@ -57,6 +57,13 @@ lsblk
 sudo dd bs=4M if=Downloads/thefile.iso of=/dev/sdd conv=fdatasync status=progress
 ```
 
+### Create ISO Image of a Disc
+First, find the device. Then, copy it.
+```
+mount
+dd if=dev/sra0 of=thedisc.iso
+```
+
 # Disable USB suspension
 Some devices, like a wireless mouse USB dongle, may go into suspension mode and never return, requiring reinserting the dongle. This fixes that.
 ```
