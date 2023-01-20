@@ -1,8 +1,6 @@
 - [Setting Up pfSense as a Home Router/Firewall](#setting-up-pfsense-as-a-home-routerfirewall)
   - [Initial Setup](#initial-setup)
   - [Basic Firewall Setup](#basic-firewall-setup)
-  - [DNS Blocking](#dns-blocking)
-  - [Web Proxy Category Blocking with SquidGuard](#web-proxy-category-blocking-with-squidguard)
 - [Backup Settings](#backup-settings)
 - [Extras](#extras)
 
@@ -132,6 +130,11 @@ This is basically hard-mode. You will have to create Pass rules above this rule 
 - System > Package Manager > Available Packages
 - Search for VPN and find "openvpn-client-export"
 - Install it
+
+### Export Client Configs
+- VPN > OpenVPN > Client-Export
+- Remote Access Server: yourserver
+- Host Name Resolution: Interface IP Address
 
 
 # Extras
