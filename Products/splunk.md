@@ -3,12 +3,12 @@
 ## Discovery
 List indices available
 ```
-| eventcount summarize=false index=* | dedup index | fields index
+| eventcount summarize=false index=* | fields index | dedup index
 ```
 
 List sourcetypes available
 ```
-index=something | dedup sourcetype | fields sourcetype | chart count by sourcetype
+index=something | fields sourcetype | dedup sourcetype | chart count by sourcetype
 ```
 
 ## Ingestion
