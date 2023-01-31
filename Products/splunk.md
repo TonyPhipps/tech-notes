@@ -8,7 +8,7 @@ List indices available
 
 List sourcetypes available
 ```
-index=something | fields sourcetype | dedup sourcetype | chart count by sourcetype
+index=something | fields sourcetype | dedup sourcetype | table sourcetype
 ```
 
 ## Ingestion
