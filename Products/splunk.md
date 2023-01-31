@@ -1,5 +1,11 @@
 # Splunk
 
+## Discovery
+List indices available
+```
+| eventcount summarize=false index=* | dedup index | fields index
+```
+
 ## Ingestion
 
 Review the settings for a conf file and see where the settings are merged from
