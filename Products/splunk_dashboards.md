@@ -353,7 +353,7 @@ This approach allows an analyst to gain familiarity with an event source and qui
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
-    <input type="dropdown" token="action">
+    <input type="dropdown" token="action" searchWhenChanged="true">
       <label>Action</label>
       <choice value="*">*</choice>
       <choice value="allowed">allowed</choice>
