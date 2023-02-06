@@ -18,11 +18,6 @@ Review the settings for a conf file and see where the settings are merged from
 splunk btool inputs list --debug
 ```
 
-Reload Inputs.confg
-```
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
-```
-
 ## Search Quick Reference
 
 ### To Lower or Upper
@@ -67,15 +62,7 @@ Removes duplicate fields
 Creates choropleth map visualizations
 
 ## Lookups
-### Lookup Table Config Files
-Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
-```
-[lookup_trusted_environmentvariable]
-	batch_index_query = 0
-	case_sensitive_match = 0
-	filename = lookup_trusted_environmentvariable.csv
- match_type = WILDCARD(VariableL)
-```
+
 
 ### Upload a Lookup
 - Navigate to the App that will use the lookup
@@ -130,12 +117,6 @@ Settings > Data Models > New Data Model
 - Allows more efficient reporting when used with Pivots
 - Root event/object > child object > childobject****
 - Root Search should be avoided, as they do not benefit from search speedup
-
-
-## CIM
-- Has to be installed on a vanilla install
-- Use Aliases to map an original field to normalized CIM fields (e.g. src_ip)
-
 
 
 ## Larger Search Examples
