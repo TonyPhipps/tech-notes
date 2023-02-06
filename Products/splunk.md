@@ -61,8 +61,73 @@ Removes duplicate fields
 ### geom
 Creates choropleth map visualizations
 
-## Lookups
+### Determine String Length
+```
+| eval PathLength=len(Path)
+```
 
+### Sort Results
+```
+| sort + PathLength
+```
+
+### Aggregate Results
+```
+| stats count by Path, CommandLine, PathLength, CommandLineLength
+```
+
+### Make a LowerCase version of a Field
+```
+| eval CommandLineLower=lower(CommandLine)
+```
+
+### Exclude a list of items
+```
+Type=Error NOT [ inputlookup safecodes.csv | return 10000 EventCode ]
+```
+
+### Determine Standard Deviation
+```	
+index="processes"
+	| eval cmdlen=len(CommandLine) 
+	| eventstats stdev(cmdlen) as stdev,avg(cmdlen) as avg by Computer
+	| stats max(cmdlen) as maxlen, values(stdev) as stdevperhost, values(avg) as avgperhost by Computer,CommandLine 
+  | where maxlen>4*stdevperhost+avgperhost
+```
+
+### Identify High Entropy Occurrences
+```
+index="processes" Computer=$asset$ UserName=$user$ (ProcessName=$keyword$ OR Path=$keyword$ OR CommandLine=$keyword$ OR MainModule=$keyword$) 
+	| eval PathL= lower(Path)
+	| rex field=PathL "^(?<filepath>.*\\\)(?<filename>[^\\\]+)"
+	| search filepath!=*windowsapps*
+	| lookup ut_shannon_lookup word as PathL
+	| eval entropy=round(ut_shannon,6)
+	| stats count by entropy, filepath, filename
+	| where entropy > 4.5
+  | sort - entropy
+```
+
+### Determine Levenshtein Scores
+```
+index="processes" Path=*\System\* 
+	| rex field=Path "(?<filename>[^\\\\/]*$)" 
+	| stats values(Computer) as hosts dc(Computer) as num_hosts values(Path) as Images by filename 
+	| eval levenshtein_scores="" 
+	| eval comparisonterm="svchost.exe" | lookup ut_levenshtein_lookup word1 as filename, word2 as comparisonterm | eval levenshtein_scores=mvappend(levenshtein_scores, ut_levenshtein) | eval score{ut_levenshtein} = comparisonterm 
+	| eval comparisonterm="iexplore.exe" | lookup ut_levenshtein_lookup word1 as filename, word2 as comparisonterm | eval levenshtein_scores=mvappend(levenshtein_scores, ut_levenshtein) | eval score{ut_levenshtein} = comparisonterm 
+	| eval comparisonterm="ipconfig.exe" | lookup ut_levenshtein_lookup word1 as filename, word2 as comparisonterm | eval levenshtein_scores=mvappend(levenshtein_scores, ut_levenshtein) | eval score{ut_levenshtein} = comparisonterm 
+	| eval comparisonterm="explorer.exe" | lookup ut_levenshtein_lookup word1 as filename, word2 as comparisonterm | eval levenshtein_scores=mvappend(levenshtein_scores, ut_levenshtein)  | eval score{ut_levenshtein} = comparisonterm 
+	| eventstats max(num_hosts) as max_num_hosts | where isnull(mvfilter(levenshtein_scores="0")) AND min(levenshtein_scores) <3 | eval lowest_levenshtein_score=min(levenshtein_scores) 
+	| eval suspect_files = "" | foreach score* [eval temp = "<<FIELD>>" 
+	| rex field=temp "(?<num>\d*)$" 
+	| eval suspect_files=if(num<3,mvappend('<<FIELD>>', suspect_files),suspect_files) 
+	| fields - temp "<<FIELD>>"] 
+	| eval percentage_of_hosts_affected = round(100*num_hosts/max_num_hosts,2) 
+  | fields filename lowest_levenshtein_score suspect_files Images num_hosts percentage_of_hosts_affected
+```
+
+## Lookups
 
 ### Upload a Lookup
 - Navigate to the App that will use the lookup
