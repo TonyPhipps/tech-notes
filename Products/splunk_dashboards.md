@@ -11,7 +11,7 @@ This approach allows an analyst to gain familiarity with an event source and qui
 <form>
   <label>Windows Security Event Logs</label>
   <init>
-    <set token="src_ip">*</set>
+    <set token="ip">*</set>
     <set token="host">*</set>
     <set token="name">*</set>
     <set token="EventCode">*</set>
@@ -295,4 +295,273 @@ This approach allows an analyst to gain familiarity with an event source and qui
   </row>
 </form>
 
+```
+
+
+### Palo Alto Threat Starter Dashboard
+```
+<form theme="dark" version="1.1">
+  <label>Palo Alto Threat</label>
+  <init>
+    <set token="src_ip">*</set>
+    <set token="dest_ip">*</set>
+    <set token="threat">*</set>
+    <set token="action">*</set>
+  </init>
+  <fieldset submitButton="true" autoRun="true">
+    <input type="radio" token="resetTokens" searchWhenChanged="true">
+      <label></label>
+      <choice value="reset">Reset Inputs</choice>
+      <choice value="retain">Retain</choice>
+      <default>retain</default>
+      <change>
+        <condition value="reset">
+          <set token="src_ip">*</set>
+          <set token="dest_ip">*</set>
+          <set token="Threat">*</set>
+          <set token="action">*</set>
+          <set token="resetTokens">retain</set>
+          <set token="form.resetTokens">retain</set>
+        </condition>
+      </change>
+    </input>
+    <input type="time" token="TimeRange" searchWhenChanged="true">
+      <label>Time Range</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="text" token="src_ip" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="text" token="dest_ip" searchWhenChanged="true">
+      <label>Destination IP Address</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="text" token="threat" searchWhenChanged="true">
+      <label>Threat</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="action">
+      <label>Action</label>
+      <choice value="*">*</choice>
+      <choice value="allowed">allowed</choice>
+      <choice value="blocked">blocked</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Event Timeline</title>
+      <chart>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| timechart count</query>
+          <earliest>$TimeRange.earliest$</earliest>
+          <latest>$TimeRange.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Event Timechart by Subtype</title>
+      <chart>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| timechart count by log_subtype</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">collapsed</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">1</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="height">229</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">1</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Source IP</title>
+      <table>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| chart count by src_ip
+| sort - count</query>
+          <earliest>$TimeRange.earliest$</earliest>
+          <latest>$TimeRange.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="src_ip">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Destination IP</title>
+      <table>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| chart count by dest_ip
+| sort - count</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="dest_ip">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Threat</title>
+      <table>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| chart count by threat</query>
+          <earliest>-4mon@mon</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="threat">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Action</title>
+      <table>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| chart count by action
+| sort - count</query>
+          <earliest>$TimeRange.earliest$</earliest>
+          <latest>$TimeRange.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="action">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Events</title>
+      <table>
+        <search>
+          <query>index=yourindex sourcetype=pan:threat
+| search src_ip = "$src_ip$"
+| search dest_ip = "$dest_ip$"
+| search threat = "$threat$"
+| search action = "$action$"
+| fields _time, log_subtype, threat, threat_category, severity, action, app, app:category, category, src_ip, src_port, dest_ip, dest_port, _raw
+| sort - _time</query>
+          <earliest>$TimeRange.earliest$</earliest>
+          <latest>$TimeRange.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="wrap">false</option>
+      </table>
+    </panel>
+  </row>
+</form>
 ```
