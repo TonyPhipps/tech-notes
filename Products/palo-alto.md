@@ -1,6 +1,15 @@
 # Syslog
+
+## System
+This feed houses DHCP logs.
+
 ```
-receive_time, serial, type, subtype, time_generated, src, dst, natsrc, natdst, rule, srcuser, dstuser, app, vsys, from, to, inbound_if, outbound_if, logset, sessionid, repeatcnt, sport, dport, natsport, natdport, flags, proto, action, bytes, bytes_sent, bytes_received, packets, start, elapsed, category, seqno, actionflags, srcloc, dstloc, pkts_sent, pkts_received, session_end_reason, dg_hier_level_1 to dg_hier_level_4, vsys_name, device_name, action_source, src_uuid, dst_uuid, tunnelid/imsi, monitortag/imei, parent_session_id, parent_start_time, tunnel, assoc_id, chunks, chunks_sent, chunks_received, rule_uuid, HTTP/2 Connection, link_change_count, policy_id, link_switches, sdwan_cluster, sdwan_device_type, sdwan_cluster_type, sdwan_site, dynusergroup_name
+FUTURE_USE, receive_time, serial, type, subtype, FUTURE_USE, time_generated, vsys, eventid, object, FUTURE_USE, FUTURE_USE, module, severity, opaque, seqno, actionflags, dg_hier_level_1, dg_hier_level_2, dg_hier_level_3, dg_hier_level_4, vsys_name, device_name
+```
+
+## Traffic
+```
+FUTURE_USE, receive_time, serial, type, subtype, FUTURE_USE, time_generated, src, dst, natsrc, natdst, rule, srcuser, dstuser, app, vsys, from, to, inbound_if, outbound_if, logset, FUTURE_USE, sessionid, repeatcnt, sport, dport, natsport, natdport, flags, proto, action, bytes, bytes_sent, bytes_received, packets, start, elapsed, category, FUTURE_USE, seqno, actionflags, srcloc, dstloc, FUTURE_USE, pkts_sent, pkts_received, session_end_reason, dg_hier_level_1 to dg_hier_level_4, vsys_name, device_name, action_source, src_uuid, dst_uuid, tunnelid/imsi, monitortag/imei, parent_session_id, parent_start_time, tunnel, assoc_id, chunks, chunks_sent, chunks_received, rule_uuid, HTTP/2 Connection, link_change_count, policy_id, link_switches, sdwan_cluster, sdwan_device_type, sdwan_cluster_type, sdwan_site, dynusergroup_name
 ```
 - https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions/traffic-log-fields
 
