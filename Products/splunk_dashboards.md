@@ -7,6 +7,8 @@ This approach allows an analyst to gain familiarity with an event source and qui
 - Widgets leverage tokens to allow cross-widget filtering (based on clicking a cell containing a value)
 - Shows all relevant fields for matching events
 
+<details>
+  
 ```
 <form>
   <label>Windows Security Event Logs</label>
@@ -297,8 +299,12 @@ This approach allows an analyst to gain familiarity with an event source and qui
 
 ```
 
+</details>
 
 ### Palo Alto Threat Starter Dashboard
+
+<details>
+
 ```
 <form theme="dark" version="1.1">
   <label>Palo Alto Threat</label>
@@ -565,3 +571,5 @@ This approach allows an analyst to gain familiarity with an event source and qui
   </row>
 </form>
 ```
+
+</details>
