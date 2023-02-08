@@ -38,6 +38,8 @@ splunk btool inputs list --debug
 | List contents of a lookup | `\| inputlookup mylookup` |
 | Determine if the contents of a field are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]` |
 | Determine if the contents of one of two fields are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [\| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
+| Convert numbers to date | `\| convert ctime(DateField)` |
+| Search for a list of values in one field | `Logon_Type IN (2,10)` |
 
 ## Search Use Cases
 
