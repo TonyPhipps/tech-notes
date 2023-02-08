@@ -31,10 +31,11 @@ splunk btool inputs list --debug
 | Remove duplicate fields | `... \| dedup host` |
 | Createa choropleth map visualizations | `geom` |
 | Determine String Length | `\| eval PathLength=len(Path)` |
-| Extract Fields via Rex (regex). Use of greedy wildcards (*) starts and ends at newlines | `\| rex field=fieldname "regex(?<newfieldname>regex)"` |
+| Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines | `\| rex field=fieldname "regex(?<newfieldname>regex)"` |
 | Sort Results  | `\| sort + PathLength` |
 | Aggregate Results | `\| stats count by Path, CommandLine, PathLength, CommandLineLength` |
 | Exclude a list of items | ` Type=Error NOT [ inputlookup safecodes.csv | return 10000 EventCode ]` |
+| List contents of a lookup | `\| inputlookup mylookup` |
 | Determine if the contents of a field are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]` |
 | Determine if the contents of one of two fields are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [\| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
 
@@ -122,10 +123,6 @@ index="windows" d_host="*" ip="*"
   - Provide a name (typically matches the csv name without extension .csv)
   - Save
 
-### List contents of a lookup
-```
-| inputlookup mylookup
-```
 
 ### Update a Lookup
 Lookup list files do not allow updating by default - manual recreation is required. Or... install Lookup List Editor
