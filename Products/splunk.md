@@ -77,6 +77,8 @@ Creates choropleth map visualizations
 ### Extracting Fields via Rex (regex)
 
 | rex field=fieldname "regex(?<newfieldname>regex)"
+	
+- Use of greedy wildcards (*) starts and ends at newlines
 
 ```
 | rex field=_raw "\sType=(?<type>.*)" 
