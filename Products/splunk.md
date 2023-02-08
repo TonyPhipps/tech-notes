@@ -52,6 +52,14 @@ Note: sometimes specifying the fields is necessary (lack of field listing wont w
 
 https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/SearchReference/Fillnull
 
+### Find Events Without a Specific Field/Column
+
+Use NOT fieldname=*
+
+```
+index="windows" sourcetype=WinEventLog:Security EventCode=4624 NOT Message=*
+```
+
 ### fieldformat vs eval
 - FieldFormat only modifies the display of the value. Useful to maintain sorting by numbers/currency
 
