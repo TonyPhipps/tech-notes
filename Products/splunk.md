@@ -34,12 +34,11 @@ splunk btool inputs list --debug
 | Extract Fields via Rex (regex). Use of greedy wildcards (*) starts and ends at newlines | `\| rex field=fieldname "regex(?<newfieldname>regex)"` |
 | Sort Results  | `\| sort + PathLength` |
 | Aggregate Results | `\| stats count by Path, CommandLine, PathLength, CommandLineLength` |
+| Exclude a list of items | ` Type=Error NOT [ inputlookup safecodes.csv | return 10000 EventCode ]` |
+| Determine if the contents of a field are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]` |
+| Determine if the contents of one of two fields are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [\| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
 
-
-### Exclude a list of items
-```
-Type=Error NOT [ inputlookup safecodes.csv | return 10000 EventCode ]
-```
+## Search Use Cases
 
 ### Determine Standard Deviation
 ```	
@@ -82,6 +81,32 @@ index="processes" Path=*\System\*
   | fields filename lowest_levenshtein_score suspect_files Images num_hosts percentage_of_hosts_affected
 ```
 
+### For Each Source IP Show Statistics Per Destination IP
+
+```
+... 
+| stats values(dest_ip) dc(dest_ip) as UniqueDestinations by src_ip
+| where UniqueDestinations >= 10
+ ```
+ 
+ ###  Given one search, get additional fields from another search based on a matching field
+ 
+ ```
+ index="windows" host="*" ip="*" 
+| stats count by host, ip
+| join type=inner left=L right=R where L.ip = R.src_ip
+    [ search index="switch"
+    | fields src_ip, mac]
+```
+
+OR do the same, but with multiple expected matches/results
+```
+index="windows" d_host="*" ip="*" 
+| stats count by d_host, ip
+| join type=inner left=L right=R where L.ip = R.src_ip
+[ search index"firewall" | stats values(dest_ip) by src_ip]
+```
+
 ## Lookups
 
 ### Upload a Lookup
@@ -110,11 +135,6 @@ Lookup list files do not allow updating by default - manual recreation is requir
   - Edit existing entries or...
   - Import a new or updated version to merge with the selected lookup list
 
-### Use a Lookup to Compare More than One Field
-```
-index=*
-| search ([| inputlookup ioc_ip.csv | fields IP | rename IP as dest_ip] OR [| inputlookup ioc_ip.csv | fields IP | rename IP as src_ip])
-```
 
 ## Macro
 Settings > Advanced Search > Search Macros > Add New
@@ -139,29 +159,3 @@ Settings > Data Models > New Data Model
 - Root Search should be avoided, as they do not benefit from search speedup
 
 
-## Larger Search Examples
-### For Each Source IP Show Statistics Per Destination IP
-
-```
-... 
-| stats values(dest_ip) dc(dest_ip) as UniqueDestinations by src_ip
-| where UniqueDestinations >= 10
- ```
- 
- ###  Given one search, get additional fields from another search based on a matching field
- 
- ```
- index="windows" host="*" ip="*" 
-| stats count by host, ip
-| join type=inner left=L right=R where L.ip = R.src_ip
-    [ search index="switch"
-    | fields src_ip, mac]
-```
-
-OR do the same, but with multiple expected matches/results
-```
-index="windows" d_host="*" ip="*" 
-| stats count by d_host, ip
-| join type=inner left=L right=R where L.ip = R.src_ip
-[ search index"firewall" | stats values(dest_ip) by src_ip]
-```
