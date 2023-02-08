@@ -74,6 +74,20 @@ Creates choropleth map visualizations
 | eval PathLength=len(Path)
 ```
 
+### Extracting Fields via Rex (regex)
+
+| rex field=fieldname "regex(?<newfieldname>regex)"
+
+```
+| rex field=_raw "\sType=(?<type>.*)" 
+| rex field=_raw "Keywords=(?<keywords>.*)" 
+| rex field=_raw "TaskCategory=(?<taskcategory>.*)" 
+| rex field=_raw "OpCode=(?<opcode>.*)" 
+| rex field=_raw "Message=(?<name>.*)\n" 
+| rex field=Message "New Logon:\s(?<newlogon>.*\})"
+| rex field=newlogon "Account Name:\s(?<newlogon_accountname>.*)"
+```
+
 ### Sort Results
 ```
 | sort + PathLength
