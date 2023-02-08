@@ -44,6 +44,8 @@ splunk btool inputs list --debug
 ## Search Use Cases
 
 ### Determine Standard Deviation
+<details>
+	
 ```	
 index="processes"
 	| eval cmdlen=len(CommandLine) 
@@ -51,8 +53,11 @@ index="processes"
 	| stats max(cmdlen) as maxlen, values(stdev) as stdevperhost, values(avg) as avgperhost by Computer,CommandLine 
   | where maxlen>4*stdevperhost+avgperhost
 ```
+</details>	
 
 ### Identify High Entropy Occurrences
+<details>
+
 ```
 index="processes" Computer=$asset$ UserName=$user$ (ProcessName=$keyword$ OR Path=$keyword$ OR CommandLine=$keyword$ OR MainModule=$keyword$) 
 	| eval PathL= lower(Path)
@@ -64,8 +69,11 @@ index="processes" Computer=$asset$ UserName=$user$ (ProcessName=$keyword$ OR Pat
 	| where entropy > 4.5
   | sort - entropy
 ```
-
+</details>	
+	
 ### Determine Levenshtein Scores
+<details>
+
 ```
 index="processes" Path=*\System\* 
 	| rex field=Path "(?<filename>[^\\\\/]*$)" 
@@ -83,16 +91,20 @@ index="processes" Path=*\System\*
 	| eval percentage_of_hosts_affected = round(100*num_hosts/max_num_hosts,2) 
   | fields filename lowest_levenshtein_score suspect_files Images num_hosts percentage_of_hosts_affected
 ```
-
+</details>
+	
 ### For Each Source IP Show Statistics Per Destination IP
+<details>
 
 ```
 ... 
 | stats values(dest_ip) dc(dest_ip) as UniqueDestinations by src_ip
 | where UniqueDestinations >= 10
  ```
- 
+ </details>
+
  ###  Given one search, get additional fields from another search based on a matching field
+<details>
  
  ```
  index="windows" host="*" ip="*" 
@@ -109,7 +121,20 @@ index="windows" d_host="*" ip="*"
 | join type=inner left=L right=R where L.ip = R.src_ip
 [ search index"firewall" | stats values(dest_ip) by src_ip]
 ```
+</details>
 
+### List Only Last Occurring Events by Another_Field
+
+<details>
+
+```
+index="windows" cribl=yes sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,10,11,12,13)
+| stats max(_time) AS Last_Login BY Account_Name
+| search NOT Account_Name IN ("*$", DWM-*, UMFD-*)
+| convert ctime(Last_Login)	
+```	
+</details>
+	
 ## Lookups
 
 ### Upload a Lookup
