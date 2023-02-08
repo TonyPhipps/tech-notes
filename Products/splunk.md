@@ -20,90 +20,21 @@ splunk btool inputs list --debug
 
 ## Search Quick Reference
 
-### To Lower or Upper
-To clean up some results, you may want to force lower (or upper) casing.
-```
-| eval hostL=lower(host)
-```
-or
-```
-| eval hostU=upper(host)
-```
+| Goal  | Example |
+| ------------- | ------------- |
+| To Lower  | `\| eval hostL=lower(host)`  |
+| To Upper  | `\| eval hostU=upper(host)`  |
+| Fill Null values with empty string | `\| fillnull value=NULL` |
+| Fill all empty field values in the "host" and "kbps" fields with the string "unknown"| `\| fillnull value=unknown host kbps` |
+| Find Events Without a Specific Field/Column | `... NOT Message=*` |
+| Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency. | `\| fieldformat "First Event"=strftime('First Event', "%c")` |
+| Remove duplicate fields | `... \| dedup host` |
+| Createa choropleth map visualizations | `geom` |
+| Determine String Length | `\| eval PathLength=len(Path)` |
+| Extract Fields via Rex (regex). Use of greedy wildcards (*) starts and ends at newlines | `\| rex field=fieldname "regex(?<newfieldname>regex)"` |
+| Sort Results  | `\| sort + PathLength` |
+| Aggregate Results | `\| stats count by Path, CommandLine, PathLength, CommandLineLength` |
 
-### Fill Null
-For the current search results, fill all empty field values:
-
-```
-... | fillnull
-```
-
-For the current search results, fill all empty field values with the string "NULL":
-
-```
-... | fillnull value=NULL
-```
-
-Fill all empty field values in the "host" and "kbps" fields with the string "unknown" by adding the fillnull command to your search:
-
-```
-... | fillnull value=unknown host kbps
-```
-Note: sometimes specifying the fields is necessary (lack of field listing wont work on any null fields). Unknown if this is tied to a setting.
-
-https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/SearchReference/Fillnull
-
-### Find Events Without a Specific Field/Column
-
-Use NOT fieldname=*
-
-```
-index="windows" sourcetype=WinEventLog:Security EventCode=4624 NOT Message=*
-```
-
-### fieldformat vs eval
-- FieldFormat only modifies the display of the value. Useful to maintain sorting by numbers/currency
-
-### Dedup
-Removes duplicate fields
-
-### geom
-Creates choropleth map visualizations
-
-### Determine String Length
-```
-| eval PathLength=len(Path)
-```
-
-### Extracting Fields via Rex (regex)
-
-| rex field=fieldname "regex(?<newfieldname>regex)"
-	
-- Use of greedy wildcards (*) starts and ends at newlines
-
-```
-| rex field=_raw "\sType=(?<type>.*)" 
-| rex field=_raw "Keywords=(?<keywords>.*)" 
-| rex field=_raw "TaskCategory=(?<taskcategory>.*)" 
-| rex field=_raw "OpCode=(?<opcode>.*)" 
-| rex field=_raw "Message=(?<name>.*)\n" 
-| rex field=Message "New Logon:\s(?<newlogon>.*\})"
-| rex field=newlogon "Account Name:\s(?<newlogon_accountname>.*)"
-```
-
-### Sort Results
-```
-| sort + PathLength
-```
-
-### Aggregate Results
-```
-| stats count by Path, CommandLine, PathLength, CommandLineLength
-```
-
-### Make a LowerCase version of a Field
-```
-| eval CommandLineLower=lower(CommandLine)
-```
 
 ### Exclude a list of items
 ```
