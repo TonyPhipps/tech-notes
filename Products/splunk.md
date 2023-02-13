@@ -27,6 +27,7 @@ splunk btool inputs list --debug
 | Fill Null values with empty string | `\| fillnull value=NULL` |
 | Fill all empty field values in the "host" and "kbps" fields with the string "unknown"| `\| fillnull value=unknown host kbps` |
 | Find Events Without a Specific Field/Column | `... NOT Message=*` |
+| Include Events with or Without a Specific Field/Column | `\| eval field1=if(isnull(field1),"missing",field1))` |
 | Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency. | `\| fieldformat "First Event"=strftime('First Event', "%c")` |
 | Remove duplicate fields | `... \| dedup host` |
 | Createa choropleth map visualizations | `geom` |
