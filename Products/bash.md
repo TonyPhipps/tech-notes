@@ -1,3 +1,14 @@
+# Add user to sudoers
+```
+su -
+usermod -aG sudo username
+```
+
+or add this to /etc/sudoers file
+```
+$ username ALL=(ALL: ALL) ALL
+```
+
 # crontab
 
 ### List crontab jobs for current user
