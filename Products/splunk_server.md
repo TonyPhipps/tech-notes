@@ -5,7 +5,9 @@ dpkg --status splunk
 ```
 
 # Start
+For the first time, best to run as root just to test things out.
 ```
+su -
 /opt/splunk/bin/splunk start
 ```
 
