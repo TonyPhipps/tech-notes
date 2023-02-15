@@ -136,6 +136,61 @@ This is basically hard-mode. You will have to create Pass rules above this rule 
 - Remote Access Server: yourserver
 - Host Name Resolution: Interface IP Address
 
+# Xbox Open NAT
+- all Xboxes must be configured with a STATIC IP.
+  - under the Xbox Settings, Network, Advanced settings, I use MANUAL IP address setting.
+    - put a static IP inside the range of your network.
+    - as an example:
+      - IP: 192.168.1.20
+      - Subnet: 255.255.255.0
+      - Gateway: 192.168.100.1
+      - DNS: Point it at your PFSENSE box.  192.168.1.1
+      - Secondary DNS: Use Google:  8.8.8.8
+    - Alternate PORT:  not needed // leave at default
+    - clear any alternate MAC addresses.
+  - Save these settings and SHUT DOWN your XBOX.
+  - Pull the plug
+
+- Inside PFSENSE, go to Services/ UPnP & NAT-PMP
+  - Setup your settings like this (click image for larger version):
+![xbox1-1024x932](https://user-images.githubusercontent.com/17801619/219172278-3daf371c-c775-4668-bba6-f8bd41d6cda6.jpg)
+
+✔ Enable UPnP & NAT-PMP
+
+✔ Allow UPnP Port Mapping
+
+✔ Allow NAT-PMP Port Mapping
+
+Set External Interface to yours
+
+Set Interfaces to your LAN Name
+
+✔ Log packets handled by UPnP & NAT-PMP rules.
+
+✔ Deny access to UPnP & NAT-PMP by default
+
+ACL Entries: ```allow 53-65535 192.168.1.20/32 53-65535``` (using your xbox static address)
+
+Notes:
+- under ACL ENTRIES, each XBOX’s STATIC IP address must be on it’s own line here.  If you have multiple XBOX’s, create one line entry for each XBOX and edit the IP ADDRESS
+- HIT SAVE to save your settings here.
+
+- Go to Firewall / NAT / Outbound
+  - Make sure that the MODE is set to Hybrid Outbound NAT rule generation.
+  - Add a mapping (see below, click for larger image)
+![xbox2-1-1024x952](https://user-images.githubusercontent.com/17801619/219172973-6a077a1c-2cd4-416c-8a72-fa06cf688a0b.jpg)
+
+NOTES:
+- under SOURCE, you must put the IP address for your XBOX here.
+- Repeat and add mappings for EACH XBOX (and IP ADDRESS) inside your LAN
+- SAVE CHANGES
+
+- Plug the power back into your Xbox
+- Power it on
+- Once it is booted, go to NETWORK / SETTINGS.
+- RE-RUN NAT TYPE test
+- RE-RUN MULTIPLAYER test
+- you should now have "OPEN" NAT
 
 # Extras
 - Use your DD-WRT router as a switch
