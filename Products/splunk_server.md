@@ -27,3 +27,26 @@ ps -ef | grep splunk
 
 # Apps
 - $SPLUNK_HOME/etc/apps/appname/...
+Structure
+```
+$SPLUNK_HOME/etc/apps/appname/
+  /bin
+    README
+  /default
+    app.conf
+    /data
+      /ui
+        /nav
+          default.xml
+        /views
+          README
+  /local
+    app.conf
+  /metadata
+    default.meta
+    local.meta
+```
+- /bin contains supporting files (scripts, etc.)
+- /local is where user-customized configurations, navigation components, and views are stored.
+- /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
+- /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
