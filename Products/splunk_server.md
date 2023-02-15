@@ -25,3 +25,5 @@ Check who service is running as. Note that the service will NOT run properly wit
 ps -ef | grep splunk
 ```
 
+# Apps
+- $SPLUNK_HOME/etc/apps/appname/...
