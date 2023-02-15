@@ -202,9 +202,4 @@ NOTES:
 - RE-RUN MULTIPLAYER test
 - you should now have "OPEN" NAT
 
-# Extras
-- Use your DD-WRT router as a switch
-  - https://wiki.dd-wrt.com/wiki/index.php/Switch
-
-
 
