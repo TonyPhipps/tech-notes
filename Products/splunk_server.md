@@ -14,6 +14,7 @@ su -
 Don't forget to register for a Splunk Developer license and apply it
 - https://dev.splunk.com/enterprise/dev_license/
 - Settings > System > Licensing
+- ```/opt/splunk/bin/splunk restart```
 
 Accept EULA
 provide username/password to configure splunk with
