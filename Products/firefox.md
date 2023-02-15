@@ -13,8 +13,8 @@
 Set Tab width to only show icons (great if using a vertical tab addon)
 ```
 .tabbrowser-tab:not([pinned]) {
-max-width: 30px !important;
-min-width: 30px !important;
+max-width: 35px !important;
+min-width: 35px !important;
 }
 ```
 
