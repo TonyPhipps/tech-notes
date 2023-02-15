@@ -11,6 +11,10 @@ su -
 /opt/splunk/bin/splunk start
 ```
 
+Don't forget to register for a Splunk Developer license and apply it
+- https://dev.splunk.com/enterprise/dev_license/
+- Settings > System > Licensing
+
 Accept EULA
 provide username/password to configure splunk with
 
@@ -19,3 +23,4 @@ Check who service is running as. Note that the service will NOT run properly wit
 ```
 ps -ef | grep splunk
 ```
+
