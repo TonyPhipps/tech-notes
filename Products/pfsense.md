@@ -155,22 +155,19 @@ This is basically hard-mode. You will have to create Pass rules above this rule 
   - Setup your settings like this (click image for larger version):
 ![xbox1-1024x932](https://user-images.githubusercontent.com/17801619/219172278-3daf371c-c775-4668-bba6-f8bd41d6cda6.jpg)
 
-✔ Enable UPnP & NAT-PMP
+<details>
+  
+  - ✔ Enable UPnP & NAT-PMP
+  - ✔ Allow UPnP Port Mapping
+  - ✔ Allow NAT-PMP Port Mapping
+  - Set External Interface to yours
+  - Set Interfaces to your LAN Name
+  - ✔ Log packets handled by UPnP & NAT-PMP rules.
+  - ✔ Deny access to UPnP & NAT-PMP by default
+  - ACL Entries: ```allow 53-65535 192.168.1.20/32 53-65535``` (using your xbox static address)
 
-✔ Allow UPnP Port Mapping
-
-✔ Allow NAT-PMP Port Mapping
-
-Set External Interface to yours
-
-Set Interfaces to your LAN Name
-
-✔ Log packets handled by UPnP & NAT-PMP rules.
-
-✔ Deny access to UPnP & NAT-PMP by default
-
-ACL Entries: ```allow 53-65535 192.168.1.20/32 53-65535``` (using your xbox static address)
-
+</details>
+  
 Notes:
 - under ACL ENTRIES, each XBOX’s STATIC IP address must be on it’s own line here.  If you have multiple XBOX’s, create one line entry for each XBOX and edit the IP ADDRESS
 - HIT SAVE to save your settings here.
@@ -179,6 +176,19 @@ Notes:
   - Make sure that the MODE is set to Hybrid Outbound NAT rule generation.
   - Add a mapping (see below, click for larger image)
 ![xbox2-1-1024x952](https://user-images.githubusercontent.com/17801619/219172973-6a077a1c-2cd4-416c-8a72-fa06cf688a0b.jpg)
+
+<details>
+
+  - Set Interface to your WAN
+  - Set Address Family to IPv4
+  - Set Protocol to any
+  - Set Source to Network | 192.168.1.20 | 32
+  - Set Destination to Any
+  - Set Translation Address to Interface Address
+  - ✔ Static Port
+  - Set Misc > Description to something like "Xbox One X for gaming OPEN NAT"
+
+</details>
 
 NOTES:
 - under SOURCE, you must put the IP address for your XBOX here.
