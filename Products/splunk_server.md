@@ -26,6 +26,8 @@ ps -ef | grep splunk
 ```
 
 # Apps
+- see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
+
 - $SPLUNK_HOME/etc/apps/appname/...
 Structure
 ```
@@ -50,3 +52,18 @@ $SPLUNK_HOME/etc/apps/appname/
 - /local is where user-customized configurations, navigation components, and views are stored.
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
+
+# Splunk Universal Forwarder
+- Install it
+- Go to C:\Program Files\SplunkUniversalForwarder\etc\system\local\
+- Make inputs.conf:
+```
+[WinEventLog://Application]
+disabled = 0
+
+[WinEventLog://Security]
+disabled = 0
+
+[WinEventLog://System]
+disabled = 0
+```
