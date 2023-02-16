@@ -25,6 +25,19 @@
 - Copy app folders to \etc\apps\
 - Edit the settings in \etc\apps\yourapp\local\inputs.conf. If this file is not there, you will need to just copy the \yourapp\default folder and rename it to Local
 
+## Troubleshooting
+
+### Deployment Server
+- Deploymentclient.conf basic example
+```
+[deployment-client]
+
+[target-broker:deploymentServer]
+targetUri = 192.168.1.2:8089
+```
+
+- Check ```\SplunkUniversalForwarder\var\log\splunk\splunkd.log``` for entries with "DC:" and surrounding entries with "HTTPPubSubCommection"
+
 References
 - https://docs.splunk.com/Documentation/Forwarder/9.0.4/Forwarder/InstallaWindowsuniversalforwarderfromaninstaller
 - https://docs.splunk.com/Documentation/Forwarder/9.0.4/Forwarder/Configuretheuniversalforwarder
