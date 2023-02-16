@@ -106,6 +106,7 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
 Use this to manage apps of clients, like Universal Forwarder apps.
 - Copy at least one app to \Splunk\etc\deployment-apps\
   - Ensure it's visible under Settings > Distributed Environment > Forwarder Management > Apps tab
+  - Consider the need to "Restart Splunkd" in the App settings. This is likely necessary to check.
 - Create a Server Class
   - Navigate to Settings > Distributed Environment > Forwarder Management > Apps tab
   - Find the app, and click Edit
