@@ -17,9 +17,11 @@
   - index = perfmon
   - index = whatever
 - Restart the SplunkForwarder service
+- Note: you may not receive logs immediately depending on the stanza's checkpointInterval setting
 
 ## Addons
 - Copy app folders to \etc\apps\
+- Edit the settings in \etc\apps\yourapp\local\inputs.conf. If this file is not there, you will need to just copy the \yourapp\default folder and rename it to Local
 
 References
 - https://docs.splunk.com/Documentation/Forwarder/9.0.4/Forwarder/InstallaWindowsuniversalforwarderfromaninstaller
