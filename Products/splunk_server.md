@@ -101,3 +101,15 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
 	filename = lookup_trusted_environmentvariable.csv
  match_type = WILDCARD(VariableL)
 ```
+
+# Deployment Server
+Use this to manage apps of clients, like Universal Forwarder apps.
+- Copy at least one app to \Splunk\etc\deployment-apps\
+  - Ensure it's visible under Settings > Distributed Environment > Forwarder Management > Apps tab
+- Create a Server Class
+  - Navigate to Settings > Distributed Environment > Forwarder Management > Apps tab
+  - Find the app, and click Edit
+  - Click Server Classes > \[+\] > New Server Class
+  - Name it according to the group of clients, like "Unversal Forwarders"
+  - Add the apps you wish to deploy/manage
+  - Add clients - use "\*" to simply apply to any client that phones in.
