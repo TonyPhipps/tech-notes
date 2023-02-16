@@ -25,7 +25,7 @@ Check who service is running as. Note that the service will NOT run properly wit
 ps -ef | grep splunk
 ```
 
-## Configuration
+## Web Interface
 - Configuration is typically done via the web interface, but browsers are not allowed to run on servers with administrative accounts (ie, the accounts we always use on our server)
 - Splunk uses port 8000 for it's web interface, so from your local workstation, browse to http://servername:8000 to interact with the web GUI
 - The command Line Interface works from the server.
@@ -58,20 +58,11 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
-# Splunk Universal Forwarder
-- Install it
-- Go to C:\Program Files\SplunkUniversalForwarder\etc\system\local\
-- Make inputs.conf:
-```
-[WinEventLog://Application]
-disabled = 0
-
-[WinEventLog://Security]
-disabled = 0
-
-[WinEventLog://System]
-disabled = 0
-```
+# Receiver
+Set this up in order to receive logs, like from a Universal Forwarder.
+- Settings > Forwarding and Receiving
+- Receive Data > Configure Receiving
+- New Receiving Port > 9997 > Save
 
 # Folder Monitoring
 To add a folder on the server to be monitored by Splunk, run:
