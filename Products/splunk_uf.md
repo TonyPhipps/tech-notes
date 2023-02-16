@@ -21,11 +21,14 @@
 - Restart the SplunkForwarder service
 - Note: you may not receive logs immediately depending on the stanza's checkpointInterval setting
 
-## Addons
+## Apps
 - Copy app folders to \etc\apps\
 - Edit the settings in \etc\apps\yourapp\local\inputs.conf. If this file is not there, you will need to just copy the \yourapp\default folder and rename it to Local
 
 ## Troubleshooting
+
+# Apps
+- If you're using a \[powershell:...\] stanza, the service kicks off the collection by first running splunk-powershell.ps1, which will be subject to any ScriptExecutionPolicy set.
 
 ### Deployment Server (*client-side*)
 - Deploymentclient.conf basic example
