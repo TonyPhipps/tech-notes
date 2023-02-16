@@ -3,9 +3,11 @@
 ## Installation
 - Best to check all the logs during installation rather than after installation.
   - The configuration file will be \etc\apps\SplunkUniversalFowarder\local\inputs.conf
-- Set any user/password you like. This is to modify the configuration on the specific machine.
-- Deployment Server - You should be able to confirm access to this port via web. e.g. http://server:8089 and get a response. 
+- Set any user/password you like. This is to modify the configuration on the specific machine via splunk.exe in CLI.
+- Deployment Server - You should be able to confirm access to this port via web. e.g. http://192.168.1.2:8089 and get a response. 
   - The configuration file will be \etc\system\local\deploymentclient.conf
+    - you may need to add [deployment-client] at the top of the file to get it to properly handshake/phone home to the deployment server
+  - Receiving indexer works with hostname but, for some reason, Deployment Server only worked with IP.
 - Receiving Indexer - This one won't have a web frontend. 
   - The configuration file will be \etc\system\local\outputs.conf
   - NOTE: A server must be configured to receive on this port in order to actually receive the data sent by this client.
