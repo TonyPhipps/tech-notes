@@ -27,7 +27,7 @@
 
 ## Troubleshooting
 
-### Deployment Server
+### Deployment Server (*client-side*)
 - Deploymentclient.conf basic example
 ```
 [deployment-client]
