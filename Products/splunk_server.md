@@ -97,3 +97,13 @@ To list all folders being monitored, run:
 - Leaving all other settings default, Save the role
 
 
+# Lookups
+## Lookup Table Config Files
+Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
+```
+[lookup_trusted_environmentvariable]
+	batch_index_query = 0
+	case_sensitive_match = 0
+	filename = lookup_trusted_environmentvariable.csv
+ match_type = WILDCARD(VariableL)
+```
