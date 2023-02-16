@@ -10,6 +10,13 @@
   - The configuration file will be \etc\system\local\outputs.conf
   - NOTE: A server must be configured to receive on this port in order to actually receive the data sent by this client.
 
+## Change Destination Index
+- Create the index on the server
+- Edit \etc\apps\SplunkUniversalFowarder\local\inputs.conf, adding a line similar to this to each [\[stanza\]](https://docs.splunk.com/Splexicon:Stanza)
+  - index = wineventlog
+  - index = perfmon
+  - index = whatever
+
 ## Addons
 - Copy app folders to \etc\apps\
 
