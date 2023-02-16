@@ -25,6 +25,11 @@ Check who service is running as. Note that the service will NOT run properly wit
 ps -ef | grep splunk
 ```
 
+## Configuration
+- Configuration is typically done via the web interface, but browsers are not allowed to run on servers with administrative accounts (ie, the accounts we always use on our server)
+- Splunk uses port 8000 for it's web interface, so from your local workstation, browse to http://servername:8000 to interact with the web GUI
+- The command Line Interface works from the server.
+
 # Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
 
@@ -67,3 +72,28 @@ disabled = 0
 [WinEventLog://System]
 disabled = 0
 ```
+
+# Folder Monitoring
+To add a folder on the server to be monitored by Splunk, run:
+```
+\Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
+```
+To list all folders being monitored, run:
+```
+\Splunk\bin> .\splunk list monitor
+```
+
+## Reload Inputs.confg
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
+
+# Uploading Data
+
+## Add an Uploader Role
+- Navigate to Settings > Access Controls > Roles
+- Add an "Uploader" role with the "input_file" capability.
+- Leaving all other settings default, Save the role
+
+
