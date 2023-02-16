@@ -16,6 +16,7 @@
   - index = wineventlog
   - index = perfmon
   - index = whatever
+- Restart the SplunkForwarder service
 
 ## Addons
 - Copy app folders to \etc\apps\
