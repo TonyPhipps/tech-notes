@@ -112,4 +112,11 @@ Use this to manage apps of clients, like Universal Forwarder apps.
   - Click Server Classes > \[+\] > New Server Class
   - Name it according to the group of clients, like "Unversal Forwarders"
   - Add the apps you wish to deploy/manage
-  - Add clients - use "\*" to simply apply to any client that phones in.
+  - Add clients - use "\*" to simply apply to any client that phones home.
+- Updating an App
+  - Simply editing the files in the app doesn't appear to push updates to clients. You may need to uninstall the App, then reinstall
+    - Settings > Distributed Environment > Forwarder Management > Apps tab
+    - Actions > Edit > Uninstall App
+    - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
+    - Actions > Edit > Edit > Server Classes > Add it back
+  
