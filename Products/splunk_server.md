@@ -11,13 +11,14 @@ su -
 /opt/splunk/bin/splunk start
 ```
 
-Don't forget to register for a Splunk Developer license and apply it
-- https://dev.splunk.com/enterprise/dev_license/
-- Settings > System > Licensing
-- ```/opt/splunk/bin/splunk restart```
+- Configuration is typically done via the web interface, but browsers are not allowed to run on servers with administrative accounts (ie, the accounts we always use on our server)
+- Splunk uses port 8000 for it's web interface, so from your local workstation, browse to http://servername:8000 to interact with the web GUI
+- The command Line Interface works from the server.
+- Don't forget to register for a Splunk Developer license and apply it
+  - https://dev.splunk.com/enterprise/dev_license/
+  - Settings > System > Licensing
+  - Then restart via ```/opt/splunk/bin/splunk restart```
 
-Accept EULA
-provide username/password to configure splunk with
 
 # Troubleshoot
 Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
@@ -25,10 +26,12 @@ Check who service is running as. Note that the service will NOT run properly wit
 ps -ef | grep splunk
 ```
 
-## Web Interface
-- Configuration is typically done via the web interface, but browsers are not allowed to run on servers with administrative accounts (ie, the accounts we always use on our server)
-- Splunk uses port 8000 for it's web interface, so from your local workstation, browse to http://servername:8000 to interact with the web GUI
-- The command Line Interface works from the server.
+## Reload Inputs.confg
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
+
 
 # Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
@@ -58,13 +61,17 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
-# Receiver
+
+# Uploading Data
+
+## Receiving Indexer
 Set this up in order to receive logs, like from a Universal Forwarder.
 - Settings > Forwarding and Receiving
 - Receive Data > Configure Receiving
 - New Receiving Port > 9997 > Save
 
-# Folder Monitoring
+
+## Folder Monitoring
 To add a folder on the server to be monitored by Splunk, run:
 ```
 \Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
@@ -74,15 +81,8 @@ To list all folders being monitored, run:
 \Splunk\bin> .\splunk list monitor
 ```
 
-## Reload Inputs.confg
-```
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
-```
-
-
-# Uploading Data
-
-## Add an Uploader Role
+## Manually Provide Logs
+- Add an Uploader Role
 - Navigate to Settings > Access Controls > Roles
 - Add an "Uploader" role with the "input_file" capability.
 - Leaving all other settings default, Save the role
