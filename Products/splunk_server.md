@@ -19,6 +19,9 @@ su -
   - Settings > System > Licensing
   - Then restart via ```/opt/splunk/bin/splunk restart```
 
+# Indexes
+## Create
+- Settings > Indexes > New Index
 
 # Troubleshoot
 Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
