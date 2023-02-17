@@ -1,3 +1,8 @@
+# Ensure curl package is installed
+```
+apt install curl
+```
+
 # Install Splunk
 ```
 dpkg -i splunk_package_name.deb
