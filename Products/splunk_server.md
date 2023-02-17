@@ -26,6 +26,17 @@ su -
   - Settings > System > Licensing
   - Then restart via ```/opt/splunk/bin/splunk restart```
 
+## Configure Splunk to Run as a Service at Bootup
+Give the target account rights to the installation folder
+```chown -R bob $SPLUNK_HOME```
+
+edit ```/etc/init.d/splunk```
+after ```RETVAL=0``` add ```USER=bob```
+
+Run this
+```/opt/splunk/bin/splunk enable boot-start -user bob```
+
+
 ## Create Indexes
 Consider creating an index for each log pipeline
 - Settings > Indexes > New Index
