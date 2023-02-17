@@ -1,15 +1,17 @@
-# Ensure curl package is installed
+# Quick First Time Install Guide
+
+## Ensure curl package is installed
 ```
 apt install curl
 ```
 
-# Install Splunk
+## Install Splunk
 ```
 dpkg -i splunk_package_name.deb
 dpkg --status splunk
 ```
 
-# Start
+## Start
 For the first time, best to run as root just to test things out.
 ```
 su -
@@ -24,24 +26,37 @@ su -
   - Settings > System > Licensing
   - Then restart via ```/opt/splunk/bin/splunk restart```
 
-# Indexes
-## Create
+## Create Indexes
+Consider creating an index for each log pipeline
 - Settings > Indexes > New Index
+Be mindful of  Max Size of Entire Index, as this will control rollover times. Lower dramatically for lab environment.
 
-# Troubleshoot
-Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
-```
-ps -ef | grep splunk
-```
+## Setup a Receiving Indexer
+Set this up in order to receive logs, like from a Universal Forwarder.
+- Settings > Forwarding and Receiving
+- Receive Data > Configure Receiving
+- New Receiving Port > 9997 > Save
 
-## Reload Inputs.confg
-```
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
-```
-
-
-
-# Apps
+## Setup a Deployment Server
+Use this to manage apps of clients, like Universal Forwarder apps.
+- Copy at least one app to \Splunk\etc\deployment-apps\
+  - Ensure it's visible under Settings > Distributed Environment > Forwarder Management > Apps tab
+  - Consider the need to "Restart Splunkd" in the App settings. This is likely necessary to check.
+- Create a Server Class
+  - Navigate to Settings > Distributed Environment > Forwarder Management > Apps tab
+  - Find the app, and click Edit
+  - Click Server Classes > \[+\] > New Server Class
+  - Name it according to the group of clients, like "Unversal Forwarders"
+  - Add the apps you wish to deploy/manage
+  - Add clients - use "\*" to simply apply to any client that phones home.
+- Updating an App
+  - Simply editing the files in the app doesn't appear to push updates to clients. You may need to uninstall the App, then reinstall
+    - Settings > Distributed Environment > Forwarder Management > Apps tab
+    - Actions > Edit > Uninstall App
+    - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
+    - Actions > Edit > Edit > Server Classes > Add it back
+  
+## Install Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
 
 - $SPLUNK_HOME/etc/apps/appname/...
@@ -70,16 +85,7 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
 
-# Uploading Data
-
-## Receiving Indexer
-Set this up in order to receive logs, like from a Universal Forwarder.
-- Settings > Forwarding and Receiving
-- Receive Data > Configure Receiving
-- New Receiving Port > 9997 > Save
-
-
-## Folder Monitoring
+# Folder Monitoring
 To add a folder on the server to be monitored by Splunk, run:
 ```
 \Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
@@ -89,7 +95,7 @@ To list all folders being monitored, run:
 \Splunk\bin> .\splunk list monitor
 ```
 
-## Manually Provide Logs
+# Manually Provide Logs
 - Add an Uploader Role
 - Navigate to Settings > Access Controls > Roles
 - Add an "Uploader" role with the "input_file" capability.
@@ -107,22 +113,13 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
  match_type = WILDCARD(VariableL)
 ```
 
-# Deployment Server
-Use this to manage apps of clients, like Universal Forwarder apps.
-- Copy at least one app to \Splunk\etc\deployment-apps\
-  - Ensure it's visible under Settings > Distributed Environment > Forwarder Management > Apps tab
-  - Consider the need to "Restart Splunkd" in the App settings. This is likely necessary to check.
-- Create a Server Class
-  - Navigate to Settings > Distributed Environment > Forwarder Management > Apps tab
-  - Find the app, and click Edit
-  - Click Server Classes > \[+\] > New Server Class
-  - Name it according to the group of clients, like "Unversal Forwarders"
-  - Add the apps you wish to deploy/manage
-  - Add clients - use "\*" to simply apply to any client that phones home.
-- Updating an App
-  - Simply editing the files in the app doesn't appear to push updates to clients. You may need to uninstall the App, then reinstall
-    - Settings > Distributed Environment > Forwarder Management > Apps tab
-    - Actions > Edit > Uninstall App
-    - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
-    - Actions > Edit > Edit > Server Classes > Add it back
-  
+# Troubleshoot
+Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
+```
+ps -ef | grep splunk
+```
+
+## Reload Inputs.confg
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
