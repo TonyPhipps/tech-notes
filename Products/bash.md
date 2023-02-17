@@ -6,7 +6,7 @@ usermod -aG sudo username
 
 or add this to /etc/sudoers file
 ```
-$ username ALL=(ALL: ALL) ALL
+username ALL=(ALL: ALL) ALL
 ```
 
 # crontab
