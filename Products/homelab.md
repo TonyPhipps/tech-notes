@@ -18,6 +18,9 @@
 - Change Gateway on all VMs, all adapters to 10.0.0.1
 - Ping www.google.com to confirm
 
+## Linux Tips and Trips for HyperV
+- Disable UEFI secure boot via the PowerShell command ```Set-VMFirmware -vmname "Splunk" -EnableSecureBoot Off```
 
 # Recommended Lab Specs
 - Splunk Server - 1 CPU, 2GB RAM, 30GB hard drive
+
