@@ -49,11 +49,13 @@ apt-get install lutris
 - /etc/ssh/ssh_config (client config)
 - /etc/ssh/sshd_config (server config)
 - /etc/ssh contains the private/public key pairs identifying your host
+- Use something like [WinSCP](https://winscp.net/eng/download.php) or [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/) to connect
 
 ## Regenerate keys
 ```
 rm /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
 ```
+
 
 
