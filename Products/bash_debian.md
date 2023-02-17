@@ -43,3 +43,17 @@ sudo gedit /etc/apt/sources.list.d/lutris.list
 apt-get update
 apt-get install lutris
 ```
+
+# Install OpenSSH Server
+```apt install openssh-server```
+- /etc/ssh/ssh_config (client config)
+- /etc/ssh/sshd_config (server config)
+- /etc/ssh contains the private/public key pairs identifying your host
+
+## Regenerate keys
+```
+rm /etc/ssh/ssh_host_*
+dpkg-reconfigure openssh-server
+```
+
+
