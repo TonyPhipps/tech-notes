@@ -17,3 +17,7 @@
 - Set all adapters (2x on GW1, with second adapter being 10.0.0.253) to NatSwitch
 - Change Gateway on all VMs, all adapters to 10.0.0.1
 - Ping www.google.com to confirm
+
+
+# Recommended Lab Specs
+- Splunk Server - 1 CPU, 2GB RAM, 30GB hard drive
