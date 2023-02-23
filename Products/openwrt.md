@@ -25,3 +25,4 @@
 - Network > Switch
 - Set the WAN port to "untagged" for VLAN ID 1.
 - Set the WAN port to "off" for VLAN ID 2.
+- That port can now be used as an effective uplink, like the other ports.
