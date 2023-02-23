@@ -20,3 +20,8 @@
 - System > Startup
   - Disable firewall, dnsmasq, odhcpd
 - System > Reboot
+
+# Set WAN port as "Another Switchport"
+- Network > Switch
+- Set the WAN port to "untagged" for VLAN ID 1.
+- Set the WAN port to "off" for VLAN ID 2.
