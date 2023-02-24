@@ -83,6 +83,17 @@ index = kiwi
 disabled = 0
 index = kiwi
 ```
+
+To add a folder on the server to be monitored by Splunk via command line:
+```
+\Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
+```
+
+To list all folders being monitored, run:
+```
+./splunk list monitor
+```
+ 
  
 ## Install Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
@@ -112,16 +123,6 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
-
-# Folder Monitoring
-To add a folder on the server to be monitored by Splunk, run:
-```
-\Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
-```
-To list all folders being monitored, run:
-```
-\Splunk\bin> .\splunk list monitor
-```
 
 # Manually Provide Logs
 - Add an Uploader Role
