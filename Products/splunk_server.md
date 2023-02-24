@@ -93,8 +93,12 @@ To list all folders being monitored, run:
 ```
 ./splunk list monitor
 ```
- 
- 
+Whether modifying inputs.conf or using commandline, restart the Splunk service OR reload the inputs config
+
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
 ## Install Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
 
@@ -148,7 +152,7 @@ Check who service is running as. Note that the service will NOT run properly wit
 ps -ef | grep splunk
 ```
 
-## Reload Inputs.confg
+## Reload Inputs.conf
 While in the Splunk dir (/opt/splunk/bin)
 ```
 ./splunk _internal call /services/data/inputs/monitor/_reload -auth
