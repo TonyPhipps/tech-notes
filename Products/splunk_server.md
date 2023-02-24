@@ -131,6 +131,7 @@ ps -ef | grep splunk
 ```
 
 ## Reload Inputs.confg
+While in the Splunk dir (/opt/splunk/bin)
 ```
 ./splunk _internal call /services/data/inputs/monitor/_reload -auth
 ```
