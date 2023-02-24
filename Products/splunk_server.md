@@ -67,6 +67,23 @@ Use this to manage apps of clients, like Universal Forwarder apps.
     - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
     - Actions > Edit > Edit > Server Classes > Add it back
   
+## Monitor Files or Folders
+This can be done on other forwarders, but you may simply want to monitor directly on the server (like a shared folder or another /var/log)
+
+- If needed, make the file /opt/splunk/etc/system/local/inputs.conf
+- Edit /opt/splunk/etc/system/local/inputs.conf
+
+Add your typical monitoring stanzas ([reference](# https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
+```
+[monitor:///var/log/kiwi]
+disabled = 0
+index = kiwi
+
+[monitor://C:\kiwi]
+disabled = 0
+index = kiwi
+```
+ 
 ## Install Apps
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
 
