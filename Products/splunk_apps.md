@@ -1,6 +1,8 @@
 # Creating an App
 - see https://dev.splunk.com/enterprise/tutorials/quickstart_old/createyourfirstapp/
 
+Essentially, make a folder with the app name, then add files. You really don't need much to get started, just a local folder and an inputs.conf file.
+
 - $SPLUNK_HOME/etc/apps/appname/...
 Structure
 ```
