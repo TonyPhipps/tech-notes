@@ -67,6 +67,8 @@ Use this to manage apps of clients, like Universal Forwarder apps.
     - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
     - Actions > Edit > Edit > Server Classes > Add it back
   
+# Automatically Ingest
+Best done by managed systems.. heavy fowarders or UF's with apps. But you can edit the files under ```/opt/splunk/etc/system/local/``` and effectively treat the folder as an app running on the server.
 
 # Manually Provide Logs
 - Add an Uploader Role
