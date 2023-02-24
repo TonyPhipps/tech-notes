@@ -40,6 +40,8 @@ index = kiwi
 sourcetype = kiwi
 ```
 
+Don't forget to restart the Splunk Forwarder service!
+
 ## Troubleshooting
 
 # Apps
