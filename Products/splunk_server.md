@@ -136,6 +136,12 @@ $SPLUNK_HOME/etc/apps/appname/
 - Add an "Uploader" role with the "input_file" capability.
 - Leaving all other settings default, Save the role
 
+# Field Extraction During Ingest
+- ```props.conf``` will apply your configuration settings to your data while being indexed ([resource 1](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf) [resource 2](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
+- ```transforms.conf``` contains settings and values that you can use to configure data transformations. ([resource](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf))
+- Both should be placed in a custom app in the folder ```$SPLUNK_HOME/etc/apps/myapp/local/``` or on the server in the folder ```$SPLUNK_HOME/etc/system/local/```
+
+
 
 # Lookups
 ## Lookup Table Config Files
