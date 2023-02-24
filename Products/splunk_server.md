@@ -73,7 +73,7 @@ This can be done on other forwarders, but you may simply want to monitor directl
 - If needed, make the file /opt/splunk/etc/system/local/inputs.conf
 - Edit /opt/splunk/etc/system/local/inputs.conf
 
-Add your typical monitoring stanzas ([reference](# https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
+Add your typical monitoring stanzas ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
 ```
 [monitor:///var/log/kiwi]
 disabled = 0
