@@ -70,6 +70,12 @@ Use this to manage apps of clients, like Universal Forwarder apps.
 # Automatically Ingest
 Best done by managed systems.. heavy fowarders or UF's with apps. But you can edit the files under ```/opt/splunk/etc/system/local/``` and effectively treat the folder as an app running on the server.
 
+Whether modifying inputs.conf or using commandline, restart the Splunk service OR reload the inputs config
+
+```
+./splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
 # Manually Provide Logs
 - Add an Uploader Role
 - Navigate to Settings > Access Controls > Roles
