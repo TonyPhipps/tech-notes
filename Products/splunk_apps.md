@@ -7,16 +7,17 @@ Structure
 $SPLUNK_HOME/etc/apps/appname/
   /bin
     README
-  /default
+  /default and/or  /local
     app.conf
+    inputs.conf
+    props.conf
+    transforms.conf
     /data
       /ui
         /nav
           default.xml
         /views
           README
-  /local
-    app.conf
   /metadata
     default.meta
     local.meta
@@ -27,22 +28,24 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
 
-# Change Destination Index
-- Create the index on the server
-- Edit \etc\apps\SplunkUniversalFowarder\local\inputs.conf, adding a line similar to this to each [\[stanza\]](https://docs.splunk.com/Splexicon:Stanza)
-  - index = wineventlog
-  - index = perfmon
-  - index = whatever
-- Restart the SplunkForwarder service
+# Inputs.conf
+
+Create/edit the file at ```.../myapp/local/inputs.conf``` and add a [\[stanza\]](https://docs.splunk.com/Splexicon:Stanza) for each input desired ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
+- Editing this requires a restart the SplunkForwarder service
 - Note: you may not receive logs immediately depending on the stanza's checkpointInterval setting
 
+## Monitor Output of PowerShell Scripts
+Put script in ```$SplunkHome\etc\apps\myapp\bin\something.ps1```
+```
+[powershell://Meerkat:Get-ARP]
+index = meerkat
+schedule = */5 * * * *
+script = Import-Module "$SplunkHome\etc\apps\Meerkat\bin\Modules\Get-ARP.psm1"; Get-ARP
+sourcetype = Meerkat:Get-ARP
+```
+
 ## Monitor Files or Folders
-This can be done on other forwarders, but you may simply want to monitor directly on the server (like a shared folder or another /var/log)
 
-- If needed, make the file /opt/splunk/etc/system/local/inputs.conf
-- Edit /opt/splunk/etc/system/local/inputs.conf
-
-Add your typical monitoring stanzas ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
 ```
 [monitor:///var/log/kiwi]
 disabled = 0
@@ -57,23 +60,19 @@ sourcetype = kiwi
 
 To add a folder on the server to be monitored by Splunk via command line:
 ```
-\Splunk\bin> .\splunk add monitor "E:\temp\SplunkAdd"
+.\splunk add monitor "E:\temp\SplunkAdd"
 ```
 
 To list all folders being monitored, run:
 ```
-./splunk list monitor
+.\splunk list monitor
 ```
-Whether modifying inputs.conf or using commandline, restart the Splunk service OR reload the inputs config
 
-```
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
-```
+Always restart the Splunk Forwarder service when making changes to files.
 
 # Field Extraction During Ingest
-- ```props.conf``` will apply your configuration settings to your data while being indexed ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
-- ```transforms.conf``` contains settings and values that you can use to configure data transformations. ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
-- Both should be placed in a custom app in the folder ```$SPLUNK_HOME/etc/apps/myapp/local/```
+- ```...myapp/local/props.conf``` will apply your configuration settings to your data while being indexed ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
+- ```...myapp/local/transforms.conf``` contains settings and values that you can use to configure data transformations. ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
 
 
 # Troubleshooting
