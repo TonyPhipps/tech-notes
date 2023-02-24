@@ -24,6 +24,22 @@
 - Copy app folders to \etc\apps\
 - Edit the settings in \etc\apps\yourapp\local\inputs.conf. If this file is not there, you will need to just copy the \yourapp\default folder and rename it to Local
 
+
+## Monitor Files or Folders
+
+Add your typical monitoring stanzas ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
+```
+[monitor:///var/log/kiwi]
+disabled = 0
+index = kiwi
+sourcetype = kiwi
+
+[monitor://C:\kiwi]
+disabled = 0
+index = kiwi
+sourcetype = kiwi
+```
+
 ## Troubleshooting
 
 # Apps
