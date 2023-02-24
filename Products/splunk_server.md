@@ -78,10 +78,12 @@ Add your typical monitoring stanzas ([reference](https://docs.splunk.com/Documen
 [monitor:///var/log/kiwi]
 disabled = 0
 index = kiwi
+sourcetype = kiwi
 
 [monitor://C:\kiwi]
 disabled = 0
 index = kiwi
+sourcetype = kiwi
 ```
 
 To add a folder on the server to be monitored by Splunk via command line:
