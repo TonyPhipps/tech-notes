@@ -3,8 +3,9 @@
 
 Essentially, make a folder with the app name, then add files. You really don't need much to get started, just a local folder and an inputs.conf file.
 
-- $SPLUNK_HOME/etc/apps/appname/...
-Structure
+To activate, copy/move to ```$SPLUNK_HOME/etc/apps/appname/...``` or on the server at ```.../splunk/etc/deployment-apps/```
+
+Structure:
 ```
 $SPLUNK_HOME/etc/apps/appname/
   /bin
