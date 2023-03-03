@@ -124,3 +124,16 @@ MSG=$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*
 xrandr --listmonitors
 xrandr --output DP-1-3 --primary
 ```
+
+### Mount a Drive at Bootup
+ls -al /dev/disk/by-uuid/
+edit ```/etc/fstab```
+Add an entry at the end of the file, something like
+```
+UUID=19fa40a3-fd17-412f-9063-a29ca0e75f93 /media/data   ext4    defaults,noatime        0       0
+```
+Verify fstab is not broken via
+```
+findmnt --verify
+```
+
