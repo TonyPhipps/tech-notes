@@ -126,7 +126,9 @@ xrandr --output DP-1-3 --primary
 ```
 
 ### Mount a Drive at Bootup
+```
 ls -al /dev/disk/by-uuid/
+```
 edit ```/etc/fstab```
 Add an entry at the end of the file, something like
 ```
