@@ -118,3 +118,9 @@ lspci -nn | egrep -i "3d|display|vga"
 ```
 MSG=$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//') && curl -s -F "token=xxx" -F "user=yyy" -F "message=$MSG" https://api.pushover.net/1/messages.json
 ```
+
+### Set Primary Monitor
+```
+xrandr --listmonitors
+xrandr --output DP-1-3 --primary
+```
