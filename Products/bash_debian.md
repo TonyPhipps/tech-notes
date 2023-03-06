@@ -57,5 +57,15 @@ rm /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
 ```
 
+# Setup Firewall
+Remove all traces of Iptables and flush all iptables rules
+
+```# iptables -F && apt remove iptables iptables-persistent```
+
+Nftables should be installed by default, but just in case...  
+```# apt install nftables```
+
+ We can see that there are no rules via
+```# nft list ruleset```
 
 

@@ -69,7 +69,7 @@ Use this to manage apps of clients, like Universal Forwarder apps.
     - Wait for Apps Tab > Clients number to go down to where you need it (probably zero)
     - Actions > Edit > Edit > Server Classes > Add it back
   
-# Automatically Ingest
+# Ingest Logs
 Best done by managed systems.. heavy fowarders or UF's with apps. But you can edit the files under ```/opt/splunk/etc/system/local/``` and effectively treat the folder as an app running on the server.
 
 Whether modifying inputs.conf or using commandline, restart the Splunk service OR reload the inputs config
@@ -77,6 +77,18 @@ Whether modifying inputs.conf or using commandline, restart the Splunk service O
 ```
 ./splunk _internal call /services/data/inputs/monitor/_reload -auth
 ```
+
+## Syslog (UDP)
+- Settings > Data > Data Inputs
+- UDP > Add New
+- Provide Port, Source Name Override (optional), Only Accept Connection From (optional)
+- Next
+- Source Type: Operating System > syslog
+- App Context: Search & Reporting (search)
+- Method: IP
+- Index: set as needed
+- Review
+- 
 
 # Manually Provide Logs
 - Add an Uploader Role

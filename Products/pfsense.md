@@ -1,8 +1,21 @@
 - [Setting Up pfSense as a Home Router/Firewall](#setting-up-pfsense-as-a-home-routerfirewall)
   - [Initial Setup](#initial-setup)
+  - [Logging](#logging)
   - [Basic Firewall Setup](#basic-firewall-setup)
+    - [Default-deny Outbound](#default-deny-outbound)
 - [Backup Settings](#backup-settings)
-- [Extras](#extras)
+- [VPN](#vpn)
+  - [Generate a Certificate Authority (CA) Certificate](#generate-a-certificate-authority-ca-certificate)
+  - [Generate a Servedr Certificate for the VPN](#generate-a-servedr-certificate-for-the-vpn)
+  - [Create a User to use with VPN](#create-a-user-to-use-with-vpn)
+  - [Create a User Certificate](#create-a-user-certificate)
+  - [Create the Actual OpenVPN Server](#create-the-actual-openvpn-server)
+  - [Verify](#verify)
+  - [Allow VPN Pool to Reach Out of the Network](#allow-vpn-pool-to-reach-out-of-the-network)
+  - [Allow Connecting to VPN from Public](#allow-connecting-to-vpn-from-public)
+  - [Install OpenVPN Client Export Utility](#install-openvpn-client-export-utility)
+    - [Export Client Configs](#export-client-configs)
+- [Xbox Open NAT](#xbox-open-nat)
 
 
 # Setting Up pfSense as a Home Router/Firewall
@@ -17,6 +30,20 @@ Assumes you are using a Netgate SG-1100
   - Run through the setup wizard with all defaults
   - Primary DNS server suggestion - [OpenDNS](https://support.opendns.com/hc/en-us/articles/228006047-Generalized-Router-Configuration-Instructions)
 
+
+## Logging
+- Status > System Logs > Settings
+  - Log Message Format: syslog
+  - Log firewall default blocks: 
+    - Check "Log packets matched from the default block rules in the ruleset"
+    - Check "Log packets matched from the default pass rules put in the ruleset"
+    - Check "Log packets blocked by 'Block Bogon Networks' rules"
+    - Check "Log packets blocked by 'Block Private Networks' rules"
+  - Enable Remote Logging >  Check "Enable Remote Logging"
+    - Source Address: Default (Any)
+    - IP Protocol: IPv4
+    - Remote Log Servers: fill IP:port as needed
+    - Remote Syslog Contents: Everything
 
 ## Basic Firewall Setup
 The pfSense firewall blocks WAN traffic by default - any traffic that doesn't match any rules is dropped silently.
