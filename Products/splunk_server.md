@@ -44,6 +44,8 @@ Consider creating an index for each log pipeline
 - Settings > Indexes > New Index
 Be mindful of  Max Size of Entire Index, as this will control rollover times. Lower dramatically for lab environment.
 
+NOTE: Ensure any indexes created have the appropriate permissions assigned the user running the service. e.g. ```chown -R bob /media/data/logs/pfsense/db```
+
 ## Setup a Receiving Indexer
 Set this up in order to receive logs, like from a Universal Forwarder.
 - Settings > Forwarding and Receiving
@@ -75,20 +77,56 @@ Best done by managed systems.. heavy fowarders or UF's with apps. But you can ed
 Whether modifying inputs.conf or using commandline, restart the Splunk service OR reload the inputs config
 
 ```
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
+$SPLUNK_HOME/bin/splunk _internal call /services/data/inputs/monitor/_reload -auth
+```
+
+Verify edits made it in to live inputs via
+```
+$SPLUNK_HOME/bin/splunk btool inputs list --debug
 ```
 
 ## Syslog (UDP)
+Conf approach
+Edit ```$SPLUNK_HOME/etc/system/local/inputs.conf``` and add your input. After your inputs are added, Splunk will need to be restarted (or forced to reload inputs) to recognize these changes.
+Sample inputs.conf:
+```
+[udp://515]
+connection_host = ip
+host = pfsense
+index = pfsense
+sourcetype = pfsense
+no_appending_timestamp = true
+```
+
+Web GUI approach
+Not recommended, but here's how...
 - Settings > Data > Data Inputs
 - UDP > Add New
 - Provide Port, Source Name Override (optional), Only Accept Connection From (optional)
 - Next
-- Source Type: Operating System > syslog
-- App Context: Search & Reporting (search)
+- Source Type: New (pfsense)
+- Source Type Category: Custom
+- Source Type Description: blank
+- App Context: Search & Reporting (search) (this will add the input to ```$SPLUNK_HOME/etc/apps/search/local/inputs.conf```)
 - Method: IP
 - Index: set as needed
-- Review
-- 
+- Review > Submit
+- Edit ```$SPLUNK_HOME/etc/apps/search/local/inputs.conf```
+  - Add a line ```no_appending_timestamp = true``` to the udp stanza matching the one just created.
+  - Reload inputs via ```./splunk _internal call /services/data/inputs/monitor/_reload -auth```
+
+# Monitor a Folder
+inputs.conf snippet depicting ingestion from the server itself at path /ingest
+```
+[monitor:///ingest]
+disabled = false
+host = splunk
+index = kiwi
+sourcetype = kiwisyslog
+whitelist = .*\.txt
+```
+
+See https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf
 
 # Manually Provide Logs
 - Add an Uploader Role
@@ -124,3 +162,19 @@ While in the Splunk dir (/opt/splunk/bin)
 ```
 ./splunk _internal call /services/data/inputs/monitor/_reload -auth
 ```
+
+## Determine Cause of Input Issue
+$SPLUNK_HOME defaults to /opt/splunk/
+Replace [stanzaname] with your stanza's name.
+```
+grep ERROR $SPLUNK_HOME/var/log/splunk/splunkd.log | grep [stanzaname]
+```
+
+# Apps
+## Install App from File
+- Apps > Manage Apps
+- Install App From File
+
+## Recommended Apps
+- Config Explorer - https://apps.splunk.com/apps/id/config_explorer
+  - Especially useful in a dev environment as you can access config files directly from the browser, rather than remoting in to the server.
