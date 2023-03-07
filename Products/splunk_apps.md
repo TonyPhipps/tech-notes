@@ -82,7 +82,7 @@ Always restart the Splunk Forwarder service when making changes to files.
 - ```...myapp/local/transforms.conf``` contains settings and values that you can use to configure data transformations. ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
 
 # Split One Input into Multiple Sourcetypes
-This sample will walk through splitting an input log stream into multiple sourcetypes by triggering on keywords (via regex) within those logs that define their sourcetype.
+This sample will walk through splitting an input log stream into multiple sourcetypes by triggering on keywords (via regex) within those logs that define their sourcetype. For example, most endpoints that record/forward logs in syslog format send multiple major groupings of event types.
 
 Create/edit 3 files and add the following content to each.
 
@@ -135,6 +135,7 @@ FORMAT = sourcetype::WinEventLog:Microsoft-Windows-PowerShell/Operational
 ## See for more info
 - https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Advancedsourcetypeoverrides
 - https://docs.splunk.com/Documentation/Splunk/9.0.4/Data/DataIngest
+- https://docs.splunk.com/Documentation/Splunk/9.0.4/Knowledge/Exampleconfigurationsusingfieldtransforms
 
 
 # Troubleshooting
