@@ -77,9 +77,16 @@ To list all folders being monitored, run:
 Always restart the Splunk Forwarder service when making changes to files.
 
 # Field Extraction During Ingest
-- ```...myapp/local/props.conf``` will apply your configuration settings to your data while being indexed ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
+Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
 
-- ```...myapp/local/transforms.conf``` contains settings and values that you can use to configure data transformations. ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
+```...myapp/local/props.conf```  ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
+Example
+```
+[syslog]
+EXTRACT-syslogISOtab = ^(?<DateTime>.+?)\t(?<Priority>.+?)\t(?<Host>.+?)\t(?<Message>.+)
+```
+
+```...myapp/local/transforms.conf``` ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
 
 # Split One Input into Multiple Sourcetypes
 This sample will walk through splitting an input log stream into multiple sourcetypes by triggering on keywords (via regex) within those logs that define their sourcetype. For example, most endpoints that record/forward logs in syslog format send multiple major groupings of event types.
