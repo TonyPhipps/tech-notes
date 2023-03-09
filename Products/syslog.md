@@ -42,7 +42,8 @@ Examples:
 - ```^(<(?<priority>\d\|\d{2}\|1[1-8]\d\|19[01])>)*(?<version>\d{1,2})\s(?<timestamp>-\|(?<fullyear>[12]\d{3})-(?<month>0\d\|[1][012])-(?<mday>[012]\d\|3[01])T(?<hour>[01]\d\|2[0-4]):(?<minute>[0-5]\d):(?<second>[0-5]\d\|60)(?:\.(?<secfrac>\d{1,6}))?(?<numoffset>Z\|[+-]\d{2}:\d{2}))\s(?<hostname>[\S]{1,255})\s(?<appname>[\S]{1,48})\s(?<procid>[\S]{1,128})\s(?<msgid>[\S]{1,32})\s(?<structureddata>-\|(?:\[.+?(?<!\\)\])+)(?:\s(?<msg>.+))?$```
 
 - Regular Expression, extended for readability:
-- ```(?#regexp & naming based on RFC5424)
+- ```
+(?#regexp & naming based on RFC5424)
 ^(<(?<priority>\d\|\d{2}\|1[1-8]\d\|19[01])>)*
 (?<version>\d{1,2})\s
 (?<timestamp>-\|(?<fullyear>[12]\d{3})-(?<month>0\d\|[1][012])-(?<mday>[012]\d\|3[01])T(?<hour>[01]\d\|2[0-4]):(?<minute>[0-5]\d):(?<second>[0-5]\d\|60)(?#60seconds can be used for leap year!)(?:\.(?<secfrac>\d{1,6}))?(?<numoffset>Z\|[+-]\d{2}:\d{2})(?#=timezone))\s
@@ -51,6 +52,7 @@ Examples:
 (?<procid>[\S]{1,128})\s
 (?<msgid>[\S]{1,32})\s
 (?<structureddata>-\|(?:\[.+?(?<!\\)\])+)
-(?:\s(?<msg>.+))?$```
+(?:\s(?<msg>.+))?$
+```
 
 Notes: Application, PID, MessageID and Structured-Data can be NULL, which SHOULD be represented by the dash character "-", but may just be missing. The Message can also be entirely empty. Any changes from the fully, complete standard may require modifying the above regex samples. Odds are, whatever you are working with is not a 100% match to the RFC... hopefully it's at least consistent with itself :)
