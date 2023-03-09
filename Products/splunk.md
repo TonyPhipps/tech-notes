@@ -11,13 +11,6 @@ List sourcetypes available
 index=something | fields sourcetype | chart count by sourcetype
 ```
 
-## Ingestion
-
-Review the settings for a conf file and see where the settings are merged from
-```
-splunk btool inputs list --debug
-```
-
 ## Search Quick Reference
 
 | Goal  | Example |
@@ -41,6 +34,14 @@ splunk btool inputs list --debug
 | Determine if the contents of one of two fields are in a lookup | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [\| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
 | Convert numbers to date | `\| convert ctime(DateField)` |
 | Search for a list of values in one field | `Logon_Type IN (2,10,11,12,13)` |
+
+## Rex
+Test your regex on fake events
+```
+| makeresults
+| eval _raw="your fake event"
+| rex = "your rex"
+```
 
 ## Search Use Cases
 

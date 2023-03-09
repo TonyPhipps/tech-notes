@@ -31,7 +31,10 @@ Run this
 ```/opt/splunk/bin/splunk enable boot-start```
 
 Give the target account rights to the installation folder
-```chown -R bob $SPLUNK_HOME```
+```
+chown -R bob $SPLUNK_HOME
+chmod -R 700 $SPLUNK_HOME
+```
 
 edit ```/etc/init.d/splunk```
 after ```RETVAL=0``` add ```USER=bob```
@@ -155,6 +158,13 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
 Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
 ```
 ps -ef | grep splunk
+```
+
+## Ingestion
+
+Review the settings for a conf file and see where the settings are merged from
+```
+splunk btool inputs list --debug
 ```
 
 ## Reload Inputs.conf
