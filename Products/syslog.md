@@ -16,12 +16,12 @@ Feb 16 00:03:00 hostname MSWinEventLog 6 Microsoft-Windows-WMI-Activity/Operatio
 
 #### Regular Expression
 ```
-^(<(?<priority>[0-9]+)>)*\s*(?<timestamp>-|(?<month>\w+)\s(?<mday>[012]\d|3[01])\s(?<hour>[01]\d|2[0-4]):(?<minute>[0-5]\d):(?<second>[0-5]\d|60)?)\s(?<host>[^\s]+)\s(?<application>[^\s:\[]*)(?:\s\[*(?<pid>[0-9]+)\]*)?(?:[:\s]+)?(?<message>.*)$
+^(?:<(?<priority>[0-9]+)>)*\s*(?<timestamp>-|(?<month>\w+)\s(?<mday>[012]\d|3[01])\s(?<hour>[01]\d|2[0-4]):(?<minute>[0-5]\d):(?<second>[0-5]\d|60)?)\s(?<host>[^\s]+)\s(?<application>[^\s:\[]*)(?:\s\[*(?<pid>[0-9]+)\]*)?(?:[:\s]+)?(?<message>.*)$
 ```
 
 Same expression, but extended for readability
 ```
-^(<(?<priority>[0-9]+)>)*\s*
+^(?:<(?<priority>[0-9]+)>)*\s*
 (?<timestamp>-|
     (?<month>\w+)\s
     (?<mday>[012]\d|3[01])\s
@@ -32,7 +32,7 @@ Same expression, but extended for readability
 (?<application>[^\s:\[]*)
 (?:\s\[*(?<pid>[0-9]+)\]*)?
 (?:[:\s]+)?
-(?<message>.*)$
+(?<message>.*)
 ```
 
 
