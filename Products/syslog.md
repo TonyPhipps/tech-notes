@@ -7,7 +7,6 @@ Priority Timestamp Host Application: Message
 Examples:
 ```
 <131>Jan 23 17:05:05 rdmlpavesi1d gs-rest-service error message slf4j thread:http-nio-8080-exec-1 priority:ERROR category:command.AppSyslogd.Application exception:
-Feb 16 00:03:00 hostname MSWinEventLog 6 Microsoft-Windows-WMI-Activity/Operational 51531 Thu Feb 16 00:02:59 2018 5857 Microsoft-Windows-WMI-Activity S-1-5-20 N/A Information hostname 0 Win32_WIN32_TERMINALSERVICE_Prov provider started with result code 0x0. HostProcess = wmiprvse.exe; ProcessID = 503; ProviderPath = %SystemRoot%\system32\tscfgwmi.dll
 <118> Apr 18 16:32:58 10.0.1.11 QAUDJRN: [AF@0 event="AF-Authority failure" violation="A-Not authorized to object" actual_type="AF-A" jrn_seq="1001363" timestamp="20120418163258988000" job_name="QPADEV000B" user_name="TESTFORAF" job_number="256937" err_user="TESTFORAF" ip_addr="10.0.1.23" port="55875" action="Undefined(x00)" val_job="QPADEV000B" val_user="TESTFORAF" val_jobno="256937" object="AFTEST" object_library="CUS9242" object_type="*FILE" pgm_name="" pgm_libr="" workstation=""]
 <34>Oct 11 22:14:15 mymachine su: 'su root' failed for lonvick on /dev/pts/8
 <34>Oct 11 22:14:15 mymachine su [9]: 'su root' failed for lonvick on /dev/pts/8
