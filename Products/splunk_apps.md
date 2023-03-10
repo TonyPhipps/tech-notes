@@ -142,7 +142,10 @@ FORMAT = sourcetype::WinEventLog:Microsoft-Windows-PowerShell/Operational
 ## See for more info
 - https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Advancedsourcetypeoverrides
 - https://docs.splunk.com/Documentation/Splunk/latest/Data/DataIngest
+- https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms
 - https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Exampleconfigurationsusingfieldtransforms
+- https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Createandmaintainsearch-timefieldextractionsthroughconfigurationfiles
+
 
 
 # Troubleshooting

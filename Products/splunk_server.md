@@ -180,6 +180,12 @@ Replace [stanzaname] with your stanza's name.
 grep ERROR $SPLUNK_HOME/var/log/splunk/splunkd.log | grep [stanzaname]
 ```
 
+## Refresh Most Things
+Like props.conf, transforms.conf, etc.
+```
+http://yourserver:8000/en-US/debug/refresh
+```
+
 # Apps
 ## Install App from File
 - Apps > Manage Apps
@@ -188,3 +194,4 @@ grep ERROR $SPLUNK_HOME/var/log/splunk/splunkd.log | grep [stanzaname]
 ## Recommended Apps
 - Config Explorer - https://apps.splunk.com/apps/id/config_explorer
   - Especially useful in a dev environment as you can access config files directly from the browser, rather than remoting in to the server.
+
