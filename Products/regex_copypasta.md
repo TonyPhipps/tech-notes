@@ -174,10 +174,14 @@ Microsoft-Windows-WMI-Activity/Operation Event UserData Field
 (NotificationQuery\s=\s+(?<NotificationQuery>.+?)(?:;|$)\s)?
 (Id\s=\s+(?<ID>.+?)(?:;|$)\s)?
 (ClientMachine\s=\s+(?<ClientMachine>.+?)(?:;|$)\s)?
+(OwnerName\s=\s+(?<OwnerName>.+?)(?:;|$)\s)?
 (User\s=\s+(?<User>.+?)(?:;|$)\s)?
 (UserName\s=\s+(?<UserName>.+?)(?:;|$)\s)?
+(HostProcessID\s=\s+(?<HostProcessID>.+?)(?:;|$)\s)?
 (ClientProcessId\s=\s+(?<ClientProcessID>.+?)(?:;|$)\s)?
 (ClientMachine\s=\s+(?<Client_Machine>.+?)(?:;|$)\s)?
+(Provider\s=\s+(?<Provider>.+?)(?:;|$)\s)?
+(queryID\s=\s+(?<queryID>.+?)(?:;|$)\s)?
 (Component\s=\s+(?<Component>.+?)(?:;|$)\s)?
 (Operation\s=\s+(?<Operation>.+?)(?:;|$)\s)?
 (ResultCode\s=\s+(?<ResultCode>.+?)(?:;|$)\s)?
