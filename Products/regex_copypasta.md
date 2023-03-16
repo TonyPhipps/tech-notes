@@ -1,4 +1,9 @@
-Windows Security Event XML (extended regex)
+Window Securit Event
+```
+(?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Computer>.+?)\t(?<Field1>.+?)\t(?<EventName>[\w\s]+\.?)\s(?<EventXML>.+)
+```
+
+Windows Security Event UserData Field
 <expand>
 ```
 (Subject:(?<Subject>
@@ -157,3 +162,26 @@ Windows Security Event XML (extended regex)
 )?
 ```
 </expand>
+
+Microsoft-Windows-WMI-Activity/Operation Event
+```
+(?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Level>.+?)\t(?<Computer>.+?)\t(?<opCode>.+?)\s(?<UserData>.+)
+```
+
+Microsoft-Windows-WMI-Activity/Operation Event UserData Field
+```
+(Namespace\s=\s+(?<Namespace>.+?)(?:;|$)\s)?
+(NotificationQuery\s=\s+(?<NotificationQuery>.+?)(?:;|$)\s)?
+(Id\s=\s+(?<ID>.+?)(?:;|$)\s)?
+(ClientMachine\s=\s+(?<ClientMachine>.+?)(?:;|$)\s)?
+(User\s=\s+(?<User>.+?)(?:;|$)\s)?
+(UserName\s=\s+(?<UserName>.+?)(?:;|$)\s)?
+(ClientProcessId\s=\s+(?<ClientProcessID>.+?)(?:;|$)\s)?
+(ClientMachine\s=\s+(?<Client_Machine>.+?)(?:;|$)\s)?
+(Component\s=\s+(?<Component>.+?)(?:;|$)\s)?
+(Operation\s=\s+(?<Operation>.+?)(?:;|$)\s)?
+(ResultCode\s=\s+(?<ResultCode>.+?)(?:;|$)\s)?
+(Consumer\s=\s+(?<Consumer>.+?)(?:;|$)\s)?
+(PossibleCause\s=\s+(?<PossibleCause>.+?)(?:;|$)\s?)?
+```
+
