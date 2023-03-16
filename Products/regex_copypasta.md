@@ -1,6 +1,6 @@
 Window Securit Event
 ```
-(?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Computer>.+?)\t(?<Field1>.+?)\t(?<EventName>[\w\s]+\.?)\s(?<EventXML>.+)
+(?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Computer>.+?)\t(?<Field1>.+?)\t(?<EventName>[\w\s]+\.?)\s(?<UserData>.+)
 ```
 
 Windows Security Event UserData Field
