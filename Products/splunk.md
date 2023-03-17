@@ -16,25 +16,25 @@ index=something | fields sourcetype | chart count by sourcetype
 | Goal                                                                                            | Example                                                             |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | To Lower                                                                                        | `\| eval hostL=lower(host)`                                         |
-| To Upper                                                                                        | `| eval hostU=upper(host)`                                          |
-| Fill Null values with empty string                                                              | `| fillnull value=NULL`                                             |
-| Fill all empty field values in the "host" and "kbps" fields with the string "unknown"           | `| fillnull value=unknown host kbps`                                |
+| To Upper                                                                                        | `\| eval hostU=upper(host)`                                          |
+| Fill Null values with empty string                                                              | `\| fillnull value=NULL`                                             |
+| Fill all empty field values in the "host" and "kbps" fields with the string "unknown"           | `\| fillnull value=unknown host kbps`                                |
 | Find Events Without a Specific Field/Column                                                     | `... NOT Message=*`                                                 |
-| Include Events with or Without a Specific Field/Column                                          | `| eval field1=if(isnull(field1),"missing",field1))`                |
-| Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency. | `| fieldformat "First Event"=strftime('First Event', "%c")`         |
-| Remove duplicate fields                                                                         | `... | dedup host`                                                  |
+| Include Events with or Without a Specific Field/Column                                          | `\| eval field1=if(isnull(field1),"missing",field1))`                |
+| Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency. | `\| fieldformat "First Event"=strftime('First Event', "%c")`         |
+| Remove duplicate fields                                                                         | `... \| dedup host`                                                  |
 | Createa choropleth map visualizations                                                           | `geom`                                                              |
-| Determine String Length                                                                         | `| eval PathLength=len(Path)`                                       |
-| Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines        | `| rex field=fieldname "regex(?<newfieldname>regex)"`               |
-| Sort Results                                                                                    | `| sort + PathLength`                                               |
-| Aggregate Results                                                                               | `| stats count by Path, CommandLine, PathLength, CommandLineLength` |
-| Exclude a list of items                                                                         | ` Type=Error NOT [ inputlookup safecodes.csv | return 10000 EventCode ]` |
-| List contents of a lookup                                                                       | `| inputlookup mylookup`                                            |
-| Determine if the contents of a field are in a lookup                                            | `| search ([| inputlookup ioc_ip.csv | fields IP | rename IP as dest_ip]`     |
-| Determine if the contents of one of two fields are in a lookup                                  | `| search ([| inputlookup ioc_ip.csv | fields IP | rename IP as dest_ip] OR [ | inputlookup ioc_ip.csv | fields IP | rename IP as src_ip])` |
-| Convert numbers to date                                                                         | `| convert ctime(DateField)`                                        |
+| Determine String Length                                                                         | `\| eval PathLength=len(Path)`                                       |
+| Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines        | `\| rex field=fieldname "regex(?<newfieldname>regex)"`               |
+| Sort Results                                                                                    | `\| sort + PathLength`                                               |
+| Aggregate Results                                                                               | `\| stats count by Path, CommandLine, PathLength, CommandLineLength` |
+| Exclude a list of items                                                                         | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]` |
+| List contents of a lookup                                                                       | `\| inputlookup mylookup`                                            |
+| Determine if the contents of a field are in a lookup                                            | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]`     |
+| Determine if the contents of one of two fields are in a lookup                                  | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [ \| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
+| Convert numbers to date                                                                         | `\| convert ctime(DateField)`                                        |
 | Search for a list of values in one field                                                        | `Logon_Type IN (2,10,11,12,13)`                                     |
-| Merge multiple column names into one                                                            | `| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`  |
+| Merge multiple column names into one                                                            | `\| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`  |
 
 ## Rex
 Test your regex on fake events
