@@ -15,7 +15,7 @@ index=something | fields sourcetype | chart count by sourcetype
 
 | Goal                                                                                            | Example                                                             |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| To Lower                                                                                        | `| eval hostL=lower(host)`                                          |
+| To Lower                                                                                        | `\| eval hostL=lower(host)`                                         |
 | To Upper                                                                                        | `| eval hostU=upper(host)`                                          |
 | Fill Null values with empty string                                                              | `| fillnull value=NULL`                                             |
 | Fill all empty field values in the "host" and "kbps" fields with the string "unknown"           | `| fillnull value=unknown host kbps`                                |
