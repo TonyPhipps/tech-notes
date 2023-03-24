@@ -73,3 +73,76 @@ Public Sub DeleteEmptyColumns()
 End Sub
 ```
 - F5 to run.
+
+
+## Allow Multiselect in Data Validation Dropdowns
+
+<expand>
+```
+Private Sub Worksheet_Change(ByVal Target As Range)
+    'Updated by Extendoffice 2023/01/11
+    'Updated by Ken Gardner 2022/07/11
+    Dim xRng As Range
+    Dim xValue1 As String
+    Dim xValue2 As String
+    Dim semiColonCnt As Integer
+    Dim xType As Integer
+    If Target.Count > 1 Then Exit Sub
+    On Error Resume Next
+    
+    xType = 0
+    xType = Target.Validation.Type
+    If xType = 3 Then
+        Application.ScreenUpdating = False
+        Application.EnableEvents = False
+        xValue2 = Target.Value
+        Application.Undo
+        xValue1 = Target.Value
+        Target.Value = xValue2
+        If xValue1 <> "" Then
+            If xValue2 <> "" Then
+                If xValue1 = xValue2 Or xValue1 = xValue2 & ";" Or xValue1 = xValue2 & "; " Then ' leave the value if only one in list
+                    xValue1 = Replace(xValue1, "; ", "")
+                    xValue1 = Replace(xValue1, ";", "")
+                    Target.Value = xValue1
+                ElseIf InStr(1, xValue1, "; " & xValue2) Then
+                    xValue1 = Replace(xValue1, xValue2, "") ' removes existing value from the list on repeat selection
+                    Target.Value = xValue1
+                ElseIf InStr(1, xValue1, xValue2 & ";") Then
+                    xValue1 = Replace(xValue1, xValue2, "")
+                    Target.Value = xValue1
+                Else
+                    Target.Value = xValue1 & "; " & xValue2
+                End If
+                Target.Value = Replace(Target.Value, ";;", ";")
+                Target.Value = Replace(Target.Value, "; ;", ";")
+                If Target.Value <> "" Then
+                    If Right(Target.Value, 2) = "; " Then
+                        Target.Value = Left(Target.Value, Len(Target.Value) - 2)
+                    End If
+                End If
+                If InStr(1, Target.Value, "; ") = 1 Then ' check for ; as first character and remove it
+                    Target.Value = Replace(Target.Value, "; ", "", 1, 1)
+                End If
+                If InStr(1, Target.Value, ";") = 1 Then
+                    Target.Value = Replace(Target.Value, ";", "", 1, 1)
+                End If
+                semiColonCnt = 0
+                For i = 1 To Len(Target.Value)
+                    If InStr(i, Target.Value, ";") Then
+                        semiColonCnt = semiColonCnt + 1
+                    End If
+                Next i
+                If semiColonCnt = 1 Then ' remove ; if last character
+                    Target.Value = Replace(Target.Value, "; ", "")
+                    Target.Value = Replace(Target.Value, ";", "")
+                End If
+            End If
+        End If
+        Application.EnableEvents = True
+        Application.ScreenUpdating = True
+    End If
+End Sub
+```
+
+</expand>
