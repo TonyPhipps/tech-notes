@@ -47,6 +47,7 @@ Where "05:00" is the time offset, currently adding 5h to make it GMT
 - Insert > Module
 - Paste
 
+<details>
 ```
 Public Sub DeleteEmptyColumns()
     Dim SourceRange As Range
@@ -72,6 +73,8 @@ Public Sub DeleteEmptyColumns()
     End If
 End Sub
 ```
+</details>
+
 - F5 to run.
 
 
