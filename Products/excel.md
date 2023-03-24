@@ -77,7 +77,7 @@ End Sub
 
 ## Allow Multiselect in Data Validation Dropdowns
 
-<expand>
+<details>
 ```
 Private Sub Worksheet_Change(ByVal Target As Range)
     'Updated by Extendoffice 2023/01/11
@@ -145,4 +145,4 @@ Private Sub Worksheet_Change(ByVal Target As Range)
 End Sub
 ```
 
-</expand>
+</details>
