@@ -118,3 +118,100 @@ event cli pattern ".*" sync no skip no
 action 1.0 syslog priority informational msg "$_cli_msg"
 set 2.0 _exit_status 1
 ```
+
+
+### Upgrade IOS
+Upgrade a Cisco ISR Router, using a  1921 in this sample
+
+<expand>
+- show version (get memory size)
+
+```	
+Router>show version
+…
+Cisco CISCO1921/K9 (revision 1.0) with 491520K/32768K bytes of memory.
+Processor board ID FTX183784SA
+2 Gigabit Ethernet interfaces
+1 terminal line
+1 Virtual Private Network (VPN) Module
+DRAM configuration is 64 bits wide with parity disabled.
+255K bytes of non-volatile configuration memory.
+245744K bytes of USB Flash usbflash0 (Read/Write)
+…
+```
+491520K + 32768 = 524288 / 1024 = 512 MB DRAM
+
+- Check available space for the new ios.bin file
+
+```
+Router#dir
+Directory of usbflash0:/
+
+    1  -rw-          34   Apr 2 2023 01:17:48 +00:00  pnp-tech-time
+    2  -rw-       99921   Apr 2 2023 01:18:00 +00:00  pnp-tech-discovery-summary
+    3  -rw-    85054748  Oct 12 2021 04:34:44 +00:00  c1900-universalk9-mz.SPA.157-3.M9.bin
+    4  -rw-    85053068  May 24 2021 05:44:30 +00:00  c1900-universalk9-mz.SPA.157-3.M8.bin
+
+```
+  - Ensure sufficient storage is available to hold incoming ios file
+  - If space is needed, you can remove via ```delete [filename]```
+
+- Set the appropriate interface to have an IP, or pull a DHCP addres
+
+```
+enable
+configure terminal
+int g0/0
+ip address dhcp
+```
+
+- Start the tftp server, hosting the iso file
+- Open the firewall or disable it temporarily
+- Copy the file via 
+
+```
+copy tftp flash0
+[ip address]
+[filename]
+[filename]
+```
+
+```
+Router#copy tftp flash0
+Address or name of remote host [192.168.1.123]?
+Source filename [c1900-universalk9-mz.SPA.158-3.M7.bin]?
+Destination filename [flash0]? c1900-universalk9-mz.SPA.158-3.M7.bin
+Accessing tftp://192.168.1.123/c1900-universalk9-mz.SPA.158-3.M7.bin...
+Loading c1900-universalk9-mz.SPA.158-3.M7.bin from 192.168.1.123 (via GigabitEthernet0/0): !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[OK - 86844008 bytes]
+
+86844008 bytes copied in 134.428 secs (646026 bytes/sec)
+```
+		
+- Apply the new IOS.bin as startup image, with fallback to previous
+
+```
+Router#enable
+Router#configure terminal
+Router(config)#no boot system
+Router(config)#boot system usbflash0:c1900-universalk9-mz.SPA.158-3.M7.bin
+Router(config)#boot system usbflash0:c1900-universalk9-mz.SPA.157-3.M9.bin
+Router(config)#exit
+Router#copy run start
+Destination filename [startup-config]?
+Building configuration...
+[OK]
+Router#
+```
+		
+- Cross your fingers and reboot
+
+```
+Router#reload
+Proceed with reload? [confirm]
+
+*Apr  3 17:57:30.996: %SYS-5-RELOAD: Reload requested by console. Reload Reason: Reload Command.
+…
+Router#show version
+```
+</expand>
