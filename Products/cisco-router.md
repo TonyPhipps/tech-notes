@@ -123,7 +123,8 @@ set 2.0 _exit_status 1
 ### Upgrade IOS
 Upgrade a Cisco ISR Router, using a  1921 in this sample
 
-<expand>
+<details>
+
 - show version (get memory size)
 
 ```	
@@ -214,4 +215,5 @@ Proceed with reload? [confirm]
 …
 Router#show version
 ```
-</expand>
+
+</details>
