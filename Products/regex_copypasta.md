@@ -4,7 +4,9 @@ Window Security Event
 ```
 
 Windows Security Event UserData Field
-<expand>
+
+<details>
+
 ```
 (Subject:(?<Subject>
     (\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?
@@ -161,7 +163,8 @@ Windows Security Event UserData Field
     )?
 )?
 ```
-</expand>
+
+</details>
 
 Microsoft-Windows-WMI-Activity/Operation Event
 ```
