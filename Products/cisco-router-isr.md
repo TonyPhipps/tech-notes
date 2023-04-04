@@ -14,6 +14,11 @@ show logging
 show logging onboard
 ```
 
+### Show File System contents
+```
+dir /all /recursive
+```
+
 ### SPAN one VLAN to one Port
 ```
 enable
@@ -21,11 +26,6 @@ configuration terminal
 monitor session 1 source vlan 100
 monitor session 1 destination interface gigabitethernet1/0/23
 end
-```
-
-### Show File System
-```
-dir /all
 ```
 
 ### Review current "monitors"
