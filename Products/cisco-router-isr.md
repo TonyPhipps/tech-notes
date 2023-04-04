@@ -23,6 +23,11 @@ monitor session 1 destination interface gigabitethernet1/0/23
 end
 ```
 
+### Show File System
+```
+dir /all
+```
+
 ### Review current "monitors"
 ```
 show monitor
