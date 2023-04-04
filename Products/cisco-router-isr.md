@@ -222,3 +222,200 @@ Router#show version
 ```
 
 </details>
+
+### Install and Configure Anyconnect/Secure Client
+
+<details>
+
+- Get Cisco Secure Client
+https://software.cisco.com/download/home/286330811/type/282364313/release/5.0.01242?i=!pp
+
+- Setup a tftp server and host the file
+https://www.solarwinds.com/free-tools/free-tftp-server
+
+- Pull the file via copy command
+
+```
+Router# mkdir webvpn
+Router# copy tftp: usbflash0:/webvpn/
+
+Address or name of remote host [192.168.1.123]?
+Source filename [cisco-secure-client-win-5.0.01242-webdeploy-k9.pkg]?
+Destination filename [/webvpn/cisco-secure-client-win-5.0.01242-webdeploy-k9.pkg]?
+
+Accessing tftp://192.168.1.123/cisco-secure-client-win-5.0.01242-webdeploy-k9.pkg...
+Loading cisco-secure-client-win-5.0.01242-webdeploy-k9.pkg from 192.168.1.123 (via GigabitEthernet0/0): !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[OK - 95816631 bytes]
+		
+95816631 bytes copied in 148.748 secs (644154 bytes/sec)
+```
+
+- Enable the package
+
+```
+Router# config t
+
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+Router(config)# crypto vpn anyconnect usbflash0:/webvpn/cisco-secure-client-win-5.0.01242-webdeploy-k9.pkg sequence 1
+
+(be patient, this can take several minutes)
+SSLVPN Package SSL-VPN-Client (seq:1): installed successfully
+```
+
+- Generate RSA Keypair and Self-Signed Certificate
+
+```
+Router# conf t
+
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+Router(config)# crypto key generate rsa label SSLVPN_KEYPAIR modulus 2048
+
+The name for the keys will be: SSLVPN_KEYPAIR
+
+% The key modulus size is 2048 bits
+% Generating 2048 bit RSA keys, keys will be non-exportable...
+[OK] (elapsed time was 14 seconds)
+
+Router(config)# end
+Router# show crypto key mypubkey rsa SSLVPN_KEYPAIR
+
+% Key pair was generated at: 21:37:53 UTC Apr 3 2023
+Key name: SSLVPN_KEYPAIR
+Key type: RSA KEYS
+  Storage Device: not specified
+  Usage: General Purpose Key
+  Key is not exportable.
+  Key Data:
+  ........ 300D0609 2A864886 F70D0101 01050003 82010F00 3082010A 02820101
+  00D78E95 31B39C4B B018AF94 2116FFCB 34B807DE 6829278C 53A5C3D9 AD4E514B
+  80963E3E CC663B42 2F08D766 A4E0883E AAB9C7BA B31865EE BC670F35 B2A1A307
+  6CF42B40 63A64019 7439E368 06430CC8 61DFD16A D58235DB E207B8F8 4FC0931B
+  E1D48852 EB588923 349AF5C2 ........ B3BEF2B5 D0A39091 AC8E94A6 909FD55A
+  C94E3250 0C7D4DFB C6EF03C0 1B3112D4 208DA2C2 0628B7E9 61999F1A 4B13C143
+  599B414A 94BA19A9 0D40FF13 636507D6 9E3E8C66 22C06107 22D23AE9 74E6035A
+  E0026BF8 07357F3C 9BE5B73C F52BDA70 016BD8CB B30584F3 26054FC9 95020FD9
+  6889258C 6F52DF39 EE0C7203 30377434 CBF11EFE A094C9C4 D01A62EF ........
+77020301 0001
+```
+
+- Configure a PKI Trustpoint
+
+```
+Router# config t
+
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+Router(config)# crypto pki trustpoint SSLVPN_CERT
+Router(ca-trustpoint)# enrollment selfsigned
+Router(ca-trustpoint)# subject-name CN=myvpn
+Router(ca-trustpoint)# rsakeypair  SSLVPN_KEYPAIR
+```
+
+- Generate the Certificate
+
+```
+Router(config)#crypto pki enroll SSLVPN_CERT
+% Include the router serial number in the subject name? [yes/no]: no
+% Include an IP address in the subject name? [no]: no
+Generate Self Signed Router Certificate? [yes/no]: yes
+
+Router Self Signed Certificate successfully created
+```	
+
+- Validate Certificate Creation
+
+```
+Router# show crypto pki certificates SSLVPN_CERT
+
+Router Self-Signed Certificate
+  Status: Available
+  Certificate Serial Number (hex): 02
+  Certificate Usage: General Purpose
+  Issuer:
+    hostname=Router.domain
+    cn=myvpn
+  Subject:
+    Name: Router.domain
+    hostname=Router.domain
+    cn=myvpn
+  Validity Date:
+    start date: 21:44:06 UTC Apr 3 2023
+    end   date: 00:00:00 UTC Jan 1 2030
+Associated Trustpoints: SSLVPN_CERT
+```
+
+- Enable HTTPS Server
+
+```
+Router# conf t
+
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+Router(config)# ip http secure-server
+
+CRYPTO_PKI: setting trustpoint policy TP-self-signed-806861376 to use keypair TP-self-signed-806861376% Generating 1024 bit RSA keys, keys will be non-exportable...
+[OK] (elapsed time was 2 seconds)
+
+*Apr  3 20:46:30.247: %SSH-5-ENABLED: SSH 1.99 has been enabled
+*Apr  3 20:46:30.367: %PKI-4-NOCONFIGAUTOSAVE: Configuration was modified.  Issue "write memory" to save new IOS PKI configuration
+
+Router(config)# ip http authentication local
+```
+
+- Setup AAA Local and add a user
+
+```
+Router(config)# aaa new-model
+Router(config)# aaa auth
+Router(config)# aaa authentication login SSLVPN_AAA local
+Router(config)# username admin privilege 15 secret aGoodPassword
+```
+
+- Define VPN Address Pool and Split Tunnel Access List to be used by Clients
+
+```
+ip local pool SSLVPN_POOL 192.168.2.1 192.168.2.10
+access-list 1 permit 192.168.0.0 0.0.255.255
+```
+
+- Configure Loopback 0 and a Virtual-Template Interface (VTI)
+
+```
+Router(config)# int loopback 0
+*Apr  3 22:01:07.795: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up
+Router(config-if)# ip add 172.16.1.1 255.255.255.255
+
+Router(config)# int Virtual-template 1
+Router(config-if)# ip unnumbered Loopback 0
+```
+
+- Configure WebVPN Gateway
+
+```
+Router(config)# webvpn gateway SSLVPN_GATEWAY
+Router(config-webvpn-gateway)# ip address 123.123.123.123 port 443
+Router(config-webvpn-gateway)# http-redirect port 80
+Router(config-webvpn-gateway)# ssl trustpoint SSLVPN_CERT
+Router(config-webvpn-gateway)# inservice
+```
+
+- Configure WebVPN Gateway, Context, and Group Policy
+
+```
+Router(config)# webvpn context SSL_Context
+Router(config-webvpn-context)# gateway SSLVPN_Gateway
+Router(config-webvpn-context)# virtual-template 1
+Router(config-webvpn-context)# inservice
+Router(config-webvpn-context)# aaa authentication list SSLVPN_AAA
+Router(config-webvpn-context)# policy group SSL_Policy
+Router(config-webvpn-group)# functions svc-enabled
+Router(config-webvpn-group)# svc address-pool "SSLVPN_POOL" netmask 255.255.255.0
+Router(config-webvpn-group)# svc split include acl 1
+Router(config-webvpn-group)# svc dns-server primary 8.8.8.8
+Router(config-webvpn-group)# exit
+Router(config-webvpn-context)# default-group-policy SSL_Policy
+```
+
+</details>
