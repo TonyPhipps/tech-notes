@@ -133,7 +133,7 @@ Upgrade a Cisco ISR Router, using a  1921 in this sample
 - show version (get memory size)
 
 ```	
-Router>show version
+Router> show version
 …
 Cisco CISCO1921/K9 (revision 1.0) with 491520K/32768K bytes of memory.
 Processor board ID FTX183784SA
@@ -150,7 +150,8 @@ DRAM configuration is 64 bits wide with parity disabled.
 - Check available space for the new ios.bin file
 
 ```
-Router#dir
+Router# dir
+
 Directory of usbflash0:/
 
     1  -rw-          34   Apr 2 2023 01:17:48 +00:00  pnp-tech-time
@@ -183,10 +184,12 @@ copy tftp flash0
 ```
 
 ```
-Router#copy tftp flash0
+Router# copy tftp flash0
+
 Address or name of remote host [192.168.1.123]?
 Source filename [c1900-universalk9-mz.SPA.158-3.M7.bin]?
 Destination filename [flash0]? c1900-universalk9-mz.SPA.158-3.M7.bin
+
 Accessing tftp://192.168.1.123/c1900-universalk9-mz.SPA.158-3.M7.bin...
 Loading c1900-universalk9-mz.SPA.158-3.M7.bin from 192.168.1.123 (via GigabitEthernet0/0): !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [OK - 86844008 bytes]
@@ -197,28 +200,31 @@ Loading c1900-universalk9-mz.SPA.158-3.M7.bin from 192.168.1.123 (via GigabitEth
 - Apply the new IOS.bin as startup image, with fallback to previous
 
 ```
-Router#enable
-Router#configure terminal
-Router(config)#no boot system
-Router(config)#boot system usbflash0:c1900-universalk9-mz.SPA.158-3.M7.bin
-Router(config)#boot system usbflash0:c1900-universalk9-mz.SPA.157-3.M9.bin
-Router(config)#exit
-Router#copy run start
+Router# enable
+Router# configure terminal
+Router(config)# no boot system
+Router(config)# boot system usbflash0:c1900-universalk9-mz.SPA.158-3.M7.bin
+Router(config)# boot system usbflash0:c1900-universalk9-mz.SPA.157-3.M9.bin
+Router(config)# exit
+Router# copy run start
+
 Destination filename [startup-config]?
+
 Building configuration...
 [OK]
-Router#
 ```
 		
 - Cross your fingers and reboot
 
 ```
-Router#reload
+Router# reload
+
 Proceed with reload? [confirm]
 
 *Apr  3 17:57:30.996: %SYS-5-RELOAD: Reload requested by console. Reload Reason: Reload Command.
 …
-Router#show version
+
+Router# show version
 ```
 
 </details>
