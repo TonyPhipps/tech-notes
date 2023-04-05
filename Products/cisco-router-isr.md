@@ -324,7 +324,8 @@ Router(ca-trustpoint)# rsakeypair  SSLVPN_KEYPAIR
 ```
 Router(config)#crypto pki enroll SSLVPN_CERT
 % Include the router serial number in the subject name? [yes/no]: no
-% Include an IP address in the subject name? [no]: no
+% Include an IP address in the subject name? [no]: yes
+(give the IP Address)
 Generate Self Signed Router Certificate? [yes/no]: yes
 
 Router Self Signed Certificate successfully created
@@ -382,7 +383,7 @@ Router(config)# username admin privilege 15 secret aGoodPassword
 - Define VPN Address Pool and Split Tunnel Access List to be used by Clients
 
 ```
-ip local pool SSLVPN_POOL 192.168.2.1 192.168.2.10
+ip local pool SSLVPN_POOL 192.168.10.1 192.168.10.10
 access-list 1 permit 192.168.0.0 0.0.255.255
 ```
 
