@@ -380,7 +380,7 @@ Router(config)# aaa authentication login SSLVPN_AAA local
 Router(config)# username admin privilege 15 secret aGoodPassword
 ```
 
-- Define VPN Address Pool and Split Tunnel Access List to be used by Clients
+- Define VPN Address Pool and an Access List to associate with it later in the webvpn context policy.
 
 ```
 ip local pool SSLVPN_POOL 192.168.10.1 192.168.10.10
