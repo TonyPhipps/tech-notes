@@ -392,13 +392,15 @@ access-list 1 permit 192.168.0.0 0.0.255.255
 ```
 Router(config)# int loopback 0
 *Apr  3 22:01:07.795: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up
-Router(config-if)# ip add 172.16.1.1 255.255.255.255
+Router(config-if)# ip add 192.168.1.1 255.255.255.255
 
 Router(config)# int Virtual-template 1
 Router(config-if)# ip unnumbered Loopback 0
 ```
 
 - Configure WebVPN Gateway
+
+The IP set here will be what the Secure Client will be given to connect to.
 
 ```
 Router(config)# webvpn gateway SSLVPN_GATEWAY
