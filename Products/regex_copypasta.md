@@ -1,3 +1,8 @@
+Split Filename from Filepath
+```
+(?<Filepath>.+\\)(?<Filename>.+)
+```
+
 Window Security Event
 ```
 (?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Computer>.+?)\t(?<Field1>.+?)\t(?<EventName>[\w\s]+\.?)\s(?<UserData>.+)
