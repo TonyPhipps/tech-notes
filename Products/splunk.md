@@ -8,7 +8,7 @@ List indices available
 
 List sourcetypes available
 ```
-index=something | fields sourcetype | chart count by sourcetype
+index=something | fields index,sourcetype | stats count by index,sourcetype
 ```
 
 ## Search Quick Reference
