@@ -9,7 +9,7 @@ Window Security Event
 ```
 
 Windows Security Event UserData Field
-
+This regex is designed to target ONLY the UserData XML Field.
 <details>
 
 ```
@@ -172,28 +172,30 @@ Windows Security Event UserData Field
 </details>
 
 Microsoft-Windows-WMI-Activity/Operation Event
+This regex is designed to target ONLY the UserData XML Field.
 ```
 (?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Level>.+?)\t(?<Computer>.+?)\t(?<opCode>.+?)\s(?<UserData>.+)
 ```
 
 Microsoft-Windows-WMI-Activity/Operation Event UserData Field
+This regex is designed to target ONLY the UserData XML Field.
 ```
-(Namespace\s=\s+(?<Namespace>.+?)(?:;|$)\s)?
-(NotificationQuery\s=\s+(?<NotificationQuery>.+?)(?:;|$)\s)?
-(Id\s=\s+(?<ID>.+?)(?:;|$)\s)?
-(ClientMachine\s=\s+(?<ClientMachine>.+?)(?:;|$)\s)?
-(OwnerName\s=\s+(?<OwnerName>.+?)(?:;|$)\s)?
-(User\s=\s+(?<User>.+?)(?:;|$)\s)?
-(UserName\s=\s+(?<UserName>.+?)(?:;|$)\s)?
-(HostProcessID\s=\s+(?<HostProcessID>.+?)(?:;|$)\s)?
-(ClientProcessId\s=\s+(?<ClientProcessID>.+?)(?:;|$)\s)?
-(ClientMachine\s=\s+(?<Client_Machine>.+?)(?:;|$)\s)?
-(Provider\s=\s+(?<Provider>.+?)(?:;|$)\s)?
-(queryID\s=\s+(?<queryID>.+?)(?:;|$)\s)?
-(Component\s=\s+(?<Component>.+?)(?:;|$)\s)?
-(Operation\s=\s+(?<Operation>.+?)(?:;|$)\s)?
-(ResultCode\s=\s+(?<ResultCode>.+?)(?:;|$)\s)?
-(Consumer\s=\s+(?<Consumer>.+?)(?:;|$)\s)?
-(PossibleCause\s=\s+(?<PossibleCause>.+?)(?:;|$)\s?)?
+(Namespace\s=\s+(?<Namespace>.+?)(?:;|$))?
+(NotificationQuery\s=\s+(?<NotificationQuery>.+?)(?:;|$))?
+(Id\s=\s+(?<ID>.+?)(?:;|$))?
+(ClientMachine\s=\s+(?<ClientMachine>.+?)(?:;|$))?
+(User\s=\s+(?<User>.+?)(?:;|$))?
+(UserName\s=\s+(?<UserName>.+?)(?:;|$))?
+(ClientProcessId\s=\s+(?<ClientProcessID>.+?)(?:;|$))?
+(ClientMachine\s=\s+(?<Client_Machine>.+?)(?:;|$))?
+(Component\s=\s+(?<Component>.+?)(?:;|$))?
+(Operation\s=\s+(?<Operation>.+?)(?:;|$))?
+(ResultCode\s=\s+(?<ResultCode>.+?)(?:;|$))?
+(Consumer\s=\s+(?<Consumer>.+?)(?:;|$))?
+(PossibleCause\s=\s+(?<PossibleCause>.+?)(?:;|$))?
+((?<EventName>.+?\.)\s+)?
+(HostProcess\s=\s+(?<HostProcess>.+?)
+(?:;|$))?(\s+ProcessID\s=\s+(?<ProcessID>.+?)
+(?:;|$))?(\s+ProviderPath\s=\s+(?<ProviderPath>.+?)(?:;|$))?
 ```
 
