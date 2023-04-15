@@ -1,6 +1,6 @@
-Compare Cell B2 to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's 4th column
+Compare Cell A1 to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's 4th column
 ```
-=VLOOKUP(B2,LookupSheet,4,FALSE)
+=VLOOKUP(A1,LookupSheet!A:B,4,FALSE)
 ```
 
 Compare cell B2 to LookupSheet's column B and find a matching row, then populate this Cell with the LookupSheet's matching row's column A cell contents.
