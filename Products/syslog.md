@@ -101,3 +101,23 @@ The same, but extended for readability:
 
 Notes: 
 - Any changes from the fully, complete standard may require modifying the above regex samples. Odds are, whatever you are working with is not a 100% match to the RFC... hopefully it's at least consistent with itself :)
+
+
+# Splitting Message Details
+Often applications will provide a message that is difficult to parse programmatically due to a sentence structure. For example
+
+```
+Finished checkpoint of "databasetable"
+User ID 'admin' does not exist
+create table #Something (tmstp datetime, gtpos4 double)
+Connection terminated abnormally; client socket shut down
+mkdir /temp
+Disconnected TCPIP client's AppInfo: IP=192.168.1.101
+```
+
+We can, with a fair amount of consistency, parse out the 'message_title' from the 'message_details' with the following regex, assuming 'message' is already parsed out and targeted for this operation
+
+```
+^(?<message_title>.+?)(?<message_details>((\s[\"'#-\/])|([:;,]\s)).+)$
+```
+Note... a message with NO special characters may require additional logic to simply copy 'messsage' into either 'message_title' or 'message_details'.

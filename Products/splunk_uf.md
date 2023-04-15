@@ -19,6 +19,50 @@ Don't forget to restart the Splunk Forwarder service when making changes!
 
 # Troubleshooting
 
+### Verify service is running
+```
+.\bin\splunk.exe status
+```
+
+### Verify expected inputs config
+```
+$SPLUNK_HOME = "C:\Program Files\SplunkUniversalForwarder"
+cd $SPLUNK_HOME
+.\bin\splunk.exe btool inputs list --debug
+```
+
+### Verify Splunk Forwarder ports open
+```
+netstat -abno | findstr 9997
+```
+
+### Verify contact with Splunk Server
+```
+ping 192.168.0.xxx
+```
+
+### Check for errors related to the stanza
+Any of these commands may be helpful.
+```
+Get-Content ./var/log/splunk/splunkd.log | Select-Object -Last 1000 | Select-String "stanzaname"
+Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait
+Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait | Select-String "stanzaname"
+```
+
+## Updating Apps
+When an app is updated, whether locally installed or via a Deployment Server, is very likely some or all updates won't take affect until the service is restarted.
+
+Below is an example of logs from a setup with a Deployment server where the app was updated on the server, but no affect took place beyond updating the raw files until after SplunkForwarder service was restarted manually.
+```
+04-14-2023 12:06:36.274 -0600 INFO  DeployedApplication [8464 HttpClientPollingThread_562CE57F-481D-4C4D-87A0-9C347577E8AD] - Checksum mismatch 0 <> 8097892441118415882 for 
+app=Meerkat. Will reload from='192.168.1.2:8089/services/streams/deployment?name=default:everyone:Meerkat'
+04-14-2023 12:06:36.289 -0600 INFO  DeployedApplication [8464 HttpClientPollingThread_562CE57F-481D-4C4D-87A0-9C347577E8AD] - Downloaded 
+url=192.168.1.2:8089/services/streams/deployment?name=default:everyone:Meerkat to file='C:\Program Files\SplunkUniversalForwarder\var\run\everyone\Meerkat-1681495492.bundle' sizeKB=390
+04-14-2023 12:06:36.305 -0600 INFO  DeployedApplication [8464 HttpClientPollingThread_562CE57F-481D-4C4D-87A0-9C347577E8AD] - Installing app=Meerkat to='C:\Program 
+Files\SplunkUniversalForwarder\etc\apps\Meerkat'
+04-14-2023 12:06:36.367 -0600 INFO  ApplicationManager [8464 HttpClientPollingThread_562CE57F-481D-4C4D-87A0-9C347577E8AD] - Detected app creation: Meerkat
+```
+
 ## Deployment Server (*client-side*)
 - Deploymentclient.conf basic example
 ```
