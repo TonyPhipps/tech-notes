@@ -1,5 +1,8 @@
 # Quick First Time Install Guide
 
+Recommended **Lab** Specs
+- Splunk Server - 1 CPU, 2GB RAM, 30GB hard drive
+
 ## Ensure curl package is installed
 ```
 apt install curl
