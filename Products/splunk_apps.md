@@ -76,6 +76,10 @@ To list all folders being monitored, run:
 
 Always restart the Splunk Forwarder service when making changes to files.
 
+See for more
+- https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf
+- https://docs.splunk.com/Documentation/Splunk/latest/Data/Specifyinputpathswithwildcards
+
 # Field Extraction During Ingest
 Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
 

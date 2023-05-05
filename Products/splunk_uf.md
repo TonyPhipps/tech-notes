@@ -43,10 +43,19 @@ ping 192.168.0.xxx
 
 ### Check for errors related to the stanza
 Any of these commands may be helpful.
+
+Nix
 ```
 Get-Content ./var/log/splunk/splunkd.log | Select-Object -Last 1000 | Select-String "stanzaname"
 Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait
 Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait | Select-String "stanzaname"
+```
+
+Win
+```
+Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" | Select-Object -Last 1000 | Select-String "stanzaname"
+Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" -Tail 5 -Wait
+Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" -Tail 5 -Wait | Select-String "stanzaname"
 ```
 
 ## Updating Apps
