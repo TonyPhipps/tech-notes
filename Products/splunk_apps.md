@@ -80,6 +80,27 @@ See for more
 - https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf
 - https://docs.splunk.com/Documentation/Splunk/latest/Data/Specifyinputpathswithwildcards
 
+### Monitor CSV Files
+
+inputs.conf
+```
+[monitor://C:\REC\*files.csv]
+disabled = 0
+index = my_csv_file
+sourcetype = Stuff
+```
+
+props.conf
+```
+[Stuff]
+disabled = false
+INDEXED_EXTRACTIONS = CSV
+HEADER_FIELD_LINE_NUMBER = 1
+SHOULD_LINEMERGE = false
+TIMESTAMP_FIELDS = DateColumnName
+TIME_FORMAT = %Y-%m-%d %H:%M:%SZ
+```
+
 # Field Extraction During Ingest
 Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
 
