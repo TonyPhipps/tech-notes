@@ -86,6 +86,7 @@ inputs.conf
 ```
 [monitor://C:\REC\*files.csv]
 disabled = 0
+initCrcLength = 512
 index = my_csv_file
 sourcetype = Stuff
 ```
@@ -99,6 +100,7 @@ HEADER_FIELD_LINE_NUMBER = 1
 SHOULD_LINEMERGE = false
 TIMESTAMP_FIELDS = DateColumnName
 TIME_FORMAT = %Y-%m-%d %H:%M:%SZ
+ALWAYSOPENFILE = 1
 ```
 
 # Field Extraction During Ingest
