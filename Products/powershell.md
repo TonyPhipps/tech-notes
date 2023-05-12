@@ -24,3 +24,25 @@ ForEach ($Result in $GroupedStuff) {
     $Result | Add-Member -MemberType NoteProperty -Name "UserName" -Value $fields[2]
 }
 ```
+
+
+## Store Output Streams to Variable
+```
+$InfoVar
+$ErrorVar
+$FullOutput
+
+Do-Something -InformationVariable InfosVar -ErrorVariable ErrorsVar
+
+$FullOutput += "{0}`n" -f $InfosVar[0].MessageData
+
+if ($ErrorsVar.Count -ne 0) {
+    foreach ($ErrorFound in $ErrorsVar) {
+        $FullOutput += "`t{0}`n" -f $ErrorsVar[0].MessageData
+    }
+}
+```
+
+
+
+Add $ to InfoFar and ErrorVar if you want the Information and Errors to NOT be sent down the pipeline.
