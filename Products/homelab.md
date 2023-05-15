@@ -18,6 +18,7 @@
 - Set all adapters (2x on GW1, with second adapter being 10.0.0.253) to NatSwitch
 - Change Gateway on all VMs, all adapters to 10.0.0.1
 - Ping www.google.com to confirm
+- Set DNS to your internal DNS (if any), and secondary as something like Google, Quad9, etc.
 
 ## Linux Tips and Trips for HyperV
 - Disable UEFI secure boot via the PowerShell command ```Set-VMFirmware -vmname "Splunk" -EnableSecureBoot Off```
