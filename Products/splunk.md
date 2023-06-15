@@ -137,7 +137,27 @@ index="windows" cribl=yes sourcetype=WinEventLog:Security EventCode=4624 Logon_T
 | convert ctime(Last_Login)	
 ```	
 </details>
-	
+
+
+### Using Foreach for Evals
+If you have multiple eval statements, it may be worth using a foreach to apply the same formula to multiple fields. This can signficantly reduce code repetition in your search string.
+
+The exmaple below will check if a list of fields exist, and if not, make the field with the value "missing"
+
+```
+| foreach field1 field2 field3 field4 [ eval <<FIELD>>=if(isnull(<<FIELD>>),"missing",<<FIELD>>) ]
+
+```
+
+
+### Get the Latest Only
+Some data, like from a vulnerability scanner, polls for the same data, but you may only want to see the latest results.
+
+```
+| stats latest(_time) as _time, latest(field1) as field1, latest(field2) as field2, by host
+```
+
+
 ## Lookups
 
 ### Upload a Lookup
