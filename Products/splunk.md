@@ -154,7 +154,7 @@ The exmaple below will check if a list of fields exist, and if not, make the fie
 Some data, like from a vulnerability scanner, polls for the same data, but you may only want to see the latest results.
 
 ```
-| stats latest(_time) as _time, latest(field1) as field1, latest(field2) as field2, by host
+| stats latest(_time) as _time, values(field1) as field1, values(field2) as field2, by host
 ```
 
 
