@@ -145,7 +145,7 @@ If you have multiple eval statements, it may be worth using a foreach to apply t
 The exmaple below will check if a list of fields exist, and if not, make the field with the value "missing"
 
 ```
-| foreach field1 field2 field3 field4 [ eval <<FIELD>> = if( (len(<<FIELD>>)=0 OR (<<FIELD>>)="" OR isnull(<<FIELD>>)), "Missing", <<FIELD>>) ]
+| foreach field1 field2 field3 field4 [ eval <<FIELD>> = if (isnull(trim(<<FIELD>>)) OR trim(<<FIELD>>)=="", "Missing", <<FIELD>>) ]
 
 ```
 
