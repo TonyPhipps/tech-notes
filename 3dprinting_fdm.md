@@ -100,6 +100,13 @@ https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 - Roly Poly Coin Fidget
 
 
+# Recommended Filament Tuning
+Assuming your printer is already calibrated, these are best to develop for each new filmanet you work with.
+- Extrusion via [Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip)
+- Temperature tuning
+- Retraction tuning
+
+
 # Cold Pull
 - Unload Filament
 - Purge once
@@ -185,3 +192,6 @@ You can typically print the same normal/satin filament as matte by reducing the 
 PETG adheres strongest with no fan, but overhangs are terrible. In order to get the best of both worlds, use these codes to enable fans when needed - overhangs.
 - ```M106 S125``` to set fan to 50% (on Prusa Mini, anyway)
 - ```M107``` to disable fan
+
+
+A great alternative to all this: https://teachingtechyt.github.io/calibration.html
