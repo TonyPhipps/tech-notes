@@ -3,8 +3,8 @@
 Uses a 1.8 degree stepper with a leadscrew with 4mm lead. This makes the distance corresponding to a full step 4/200 = 0.02mm. Your layer height should be a multiple of this.
 Source: https://github.com/prusa3d/Original-Prusa-MINI/blob/master/DOCUMENTATION/ELECTRONICS/mini-motor-kit.pdf
 
-# Filament Calibration
-Perform these steps with any new filament brand or type. This is especially the case if, after changing to a different filament spool, you notice oddities like peeling off the bed surface.
+# Printer Calibration
+Perform these steps whenever you set up a new printer or make a major change, including swapping out the nozzle.
 
 Start with a "Generic profile"
 
@@ -101,10 +101,10 @@ https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 
 # Recommended Filament Tuning
-Assuming your printer is already calibrated, these are best to develop for each new filmanet you work with.
+Assuming your printer is already calibrated, each new filament you work with will need a far shorter tuning checklist.
 - Extrusion via [Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip)
-- Temperature tuning
-- Retraction tuning
+- Temperature tuning ([example](https://www.printables.com/model/514058-5-tier-temp-tower))
+- Retraction tuning ([example](https://www.printables.com/model/514065-retraction-tuner))
 
 
 # Cold Pull
