@@ -37,7 +37,17 @@ Goal - Good first-layer adhesion
 - Slightly higher temp for first layers (usually 5deg higher).
 - Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
 
-## Checkpoint 4 - Extrusion
+## Checkpoint 4 - Extrusion Multiplier
+
+### Precise Method
+Download the 40mm [cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip).
+- Slice it using the Vase Mode and your most-often used layer height and print it. You can find Vase mode (Print Settings →  Layers and perimeters →  Spiral vase).
+- Make three or more measurements in the middle of each wall and calculate the overall average thickness.
+- Calculate the extrusion multiplier using the following formula: Extrusion multiplier = (Current Extrusion width (0.45) / Average measured wall thickness).
+- Adjust the Extrusion Multiplier in Filament Settings → Filament
+- Re-print the cube with new settings and repeat these steps if necessary.
+
+### Imprecise Method
 Print a [cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip).
 - Adjust the Extrusion Multiplier accordingly by 1-2%:
   - If there is too much material near the perimeters, decrease the Extrusion Multiplier value.
