@@ -88,9 +88,12 @@ Controls how frequently retraction occurs in a specific area.
 - PETG - 1-2mm
 - PETG - Start at 2mm and reduce by 0.1mm increments
 
+## Checkpoint 5 - E-Steps
+- https://teachingtechyt.github.io/calibration.html#esteps
+- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
 
 
-## Checkpoint 5 - Final Test
+## Checkpoint 6 - Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 
