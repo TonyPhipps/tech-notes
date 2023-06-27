@@ -92,6 +92,11 @@ Controls how frequently retraction occurs in a specific area.
 - https://teachingtechyt.github.io/calibration.html#esteps
 - Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
 
+## Checkpoint 6 - Linear Advance
+- https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
+- https://teachingtechyt.github.io/calibration.html#linadv
+- This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
+
 
 ## Checkpoint 6 - Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
