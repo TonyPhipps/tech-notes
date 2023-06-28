@@ -218,6 +218,13 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 | table index sourcetype latest recent
 ```
 
+## List All Saved Searches
+```
+| rest /servicesNS/-/-/saved/searches 
+| search eai:acl.app="*yourapp*"
+| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id
+```
+
 ## Rex Magic
 
 ### Derive the Application Logs within Linux:Messages
