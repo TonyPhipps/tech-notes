@@ -207,6 +207,17 @@ Settings > Data Models > New Data Model
 - Root Search should be avoided, as they do not benefit from search speedup
 
 
+## Key Data Feed Alert
+
+Check the latest 7 days for logs, then review the last one day. If a log source has missing logs for an entire day, recent will equal zero and is worth firing an alert to the administrator.
+```
+| tstats latest(_time) as latest where index=* earliest=-7d by sourcetype, index
+| eval recent = if(latest > relative_time(now(),"-1d"),1,0)
+| eval latest = strftime(latest,"%c")
+| where recent = 0
+| table index sourcetype latest recent
+```
+
 ## Rex Magic
 
 ### Derive the Application Logs within Linux:Messages
