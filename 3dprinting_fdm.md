@@ -3,8 +3,8 @@
 Uses a 1.8 degree stepper with a leadscrew with 4mm lead. This makes the distance corresponding to a full step 4/200 = 0.02mm. Your layer height should be a multiple of this.
 Source: https://github.com/prusa3d/Original-Prusa-MINI/blob/master/DOCUMENTATION/ELECTRONICS/mini-motor-kit.pdf
 
-# Filament Calibration
-Perform these steps with any new filament brand or type. This is especially the case if, after changing to a different filament spool, you notice oddities like peeling off the bed surface.
+# Printer Calibration
+Perform these steps whenever you set up a new printer or make a major change, including swapping out the nozzle.
 
 Start with a "Generic profile"
 
@@ -88,9 +88,17 @@ Controls how frequently retraction occurs in a specific area.
 - PETG - 1-2mm
 - PETG - Start at 2mm and reduce by 0.1mm increments
 
+## Checkpoint 5 - E-Steps
+- https://teachingtechyt.github.io/calibration.html#esteps
+- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
+
+## Checkpoint 6 - Linear Advance
+- https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
+- https://teachingtechyt.github.io/calibration.html#linadv
+- This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 
 
-## Checkpoint 5 - Final Test
+## Checkpoint 6 - Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 
@@ -101,10 +109,10 @@ https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 
 # Recommended Filament Tuning
-Assuming your printer is already calibrated, these are best to develop for each new filmanet you work with.
+Assuming your printer is already calibrated, each new filament you work with will need a far shorter tuning checklist.
 - Extrusion via [Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip)
-- Temperature tuning
-- Retraction tuning
+- Temperature tuning ([example](https://www.printables.com/model/514058-5-tier-temp-tower))
+- Retraction tuning ([example](https://www.printables.com/model/514065-retraction-tuner))
 
 
 # Cold Pull
