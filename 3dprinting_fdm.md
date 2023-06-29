@@ -77,7 +77,6 @@ Determines how quickly retraction is carried out.
 Determines how quickly filament is fed after a retraction.
 - PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
 
-
 ### Travel Speed
 - PETG - First layer speed 15-25mm
 - set to 999 and let printer go as fast as possible when not printing
@@ -102,17 +101,12 @@ Controls how frequently retraction occurs in a specific area.
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 
-# Recommended Test Prints
-- Bed-Level Squares
-- Flat keychain
-- Roly Poly Coin Fidget
-
-
-# Recommended Filament Tuning
-Assuming your printer is already calibrated, each new filament you work with will need a far shorter tuning checklist.
-- Extrusion via [Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip)
-- Temperature tuning ([example](https://www.printables.com/model/514058-5-tier-temp-tower))
-- Retraction tuning ([example](https://www.printables.com/model/514065-retraction-tuner))
+# Filament Calibration
+Assuming your printer is already calibrated, it's recommended some settings be tuned specifically to each filament vendor/type/feature/color variation.
+- Extrusion ([Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip))
+- Temperature tuning ([model](https://www.printables.com/model/514058-5-tier-temp-tower))
+- Retraction tuning ([model](https://www.printables.com/model/408609-prusa-mini-retraction-tower-pla-petg))
+- Linear Advance ([model](https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe))
 
 
 # Cold Pull
