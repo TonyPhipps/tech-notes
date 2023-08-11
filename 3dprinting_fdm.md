@@ -8,38 +8,47 @@ Perform these steps whenever you set up a new printer or make a major change, in
 
 Start with a "Generic profile"
 
-## Checkpoint 1 - Clean Bed
+## Clean Bed
+Should not require major adjustments between different filaments.
 - Dawn dish soap and hot water, then window cleaner, then isopropyl alcohol 90%+
 
-## Checkpoint 2 - Level Bed
+## Level Bed
+Should not require major adjustments between different filaments.
 - Goal - Good first-layer adhesion throughout bed surface
 - https://www.printables.com/model/45752-3x3-bed-level-calibration
 
-## Checkpoint 3 - Nozzle Height
-Goal - Good first-layer adhesion
-
-- Set Nozzle Temp to lowest suggested temp by filament manufacturer
-- Set Bed Temp to lowest suggested temp by filament manufacturer  
-- Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
-
-# Filament Calibration
-
-### Adjust Nozzle Temp
-- Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
-- Consider using a temp tower (https://www.printables.com/model/39810-improved-all-in-one-temperature-and-bridging-tower)
-
-### Adjust Nozzle Height
+## Set Initial Nozzle Height
+Should not require major adjustments between different filaments.
 - Live-adjust Nozzle Distance
 - until a solid object is produced
 - Peeling apart is too high
 - Smushed to the point its causing peaks between lines is too low
+- Set Nozzle Temp to lowest suggested temp by filament manufacturer
+- Set Bed Temp to lowest suggested temp by filament manufacturer
+- Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
 
-### Adjust Bed Temp
+## Adjust Bed Temp
+Should not require major adjustments between different filaments.
 - Go up 1-5deg if pieces lift off on edges
 - Slightly higher temp for first layers (usually 5deg higher).
 - Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
 
-## Checkpoint 4 - Extrusion Multiplier
+## E-Steps
+- https://teachingtechyt.github.io/calibration.html#esteps
+- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
+
+
+# Filament Calibration
+Assuming your printer is already calibrated, it's recommended some settings be tuned specifically to each filament vendor/type/feature/color variation. Details are provided after this quick summary.
+
+- Extrusion Multiplier / Flow ([Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip))
+- Linear Advance / Pressure Advance ([model](https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe))
+  - Adjust Extrusion Multiplier first
+- Temperature ([model](https://www.printables.com/model/514058-5-tier-temp-tower))
+- Retraction ([model](https://www.printables.com/model/408609-prusa-mini-retraction-tower-pla-petg))
+- Max Volumetric speed ([model](https://www.printables.com/model/342075-extrusion-test-structure))
+
+## Extrusion Multiplier / Flow
 
 ### Precise Method
 Download the 40mm [cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip).
@@ -55,8 +64,16 @@ Print a [cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-me
   - If there is too much material near the perimeters, decrease the Extrusion Multiplier value.
   - If there are visible gaps between layer lines, increase the Extrusion Multiplier value. (Microscopic gaps near the perimeters are OK.)
 
+## Linear Advance/Pressure Advance 
+- https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
+- https://teachingtechyt.github.io/calibration.html#linadv
+- This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 
-## Checkpoint 5 - Retraction Settings
+## Temperature
+- Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
+- Consider using a temp tower (https://www.printables.com/model/39810-improved-all-in-one-temperature-and-bridging-tower)
+
+## Retraction Settings
 Goal - Eliminate stringing when moving without extracting
 
 Print this and adjust settings
@@ -89,27 +106,22 @@ Controls how frequently retraction occurs in a specific area.
 - PETG - 1-2mm
 - PETG - Start at 2mm and reduce by 0.1mm increments
 
-## Checkpoint 5 - E-Steps
-- https://teachingtechyt.github.io/calibration.html#esteps
-- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
 
-## Checkpoint 6 - Linear Advance
-- https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
-- https://teachingtechyt.github.io/calibration.html#linadv
-- This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
+## Max Volumetric Speed
+- ([model](https://www.printables.com/model/342075-extrusion-test-structure))
+- Using calipers or a ruler, measure the height of the print at that point.
+- Use the following calculation to determine the correct max flow value: 
+```start + (height-measured * step)```
+
+For example, if the print quality began to suffer at 19mm measured from the bottom, the calculation would be: ```5 + (19 * 0.5)`````` , or 13mm³/s. Enter your number into the "Max volumetric speed" value in the filament settings.
 
 
-## Checkpoint 6 - Final Test
+## Final Test
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
-
-# Filament Calibration
-Assuming your printer is already calibrated, it's recommended some settings be tuned specifically to each filament vendor/type/feature/color variation.
-- Extrusion/Flow ([Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip))
-- Linear Advance/Pressure Advance ([model](https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe))
-- Temperature ([model](https://www.printables.com/model/514058-5-tier-temp-tower))
-- Retraction ([model](https://www.printables.com/model/408609-prusa-mini-retraction-tower-pla-petg))
-- Max Volumetric speed ([model](https://www.printables.com/model/342075-extrusion-test-structure))
+Great calibration guide alternatives that may provide useful tips/clarifications
+- https://teachingtechyt.github.io/calibration.html
+- https://github.com/SoftFever/OrcaSlicer/wiki/Calibration
 
 
 # Cold Pull
@@ -199,4 +211,3 @@ PETG adheres strongest with no fan, but overhangs are terrible. In order to get 
 - ```M107``` to disable fan
 
 
-A great alternative to all this: https://teachingtechyt.github.io/calibration.html
