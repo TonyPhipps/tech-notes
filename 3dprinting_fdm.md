@@ -15,12 +15,14 @@ Start with a "Generic profile"
 - Goal - Good first-layer adhesion throughout bed surface
 - https://www.printables.com/model/45752-3x3-bed-level-calibration
 
-## Checkpoint 3 - Temperatures and Nozzle Height
+## Checkpoint 3 - Nozzle Height
 Goal - Good first-layer adhesion
 
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
 - Set Bed Temp to lowest suggested temp by filament manufacturer  
 - Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+
+# Filament Calibration
 
 ### Adjust Nozzle Temp
 - Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
