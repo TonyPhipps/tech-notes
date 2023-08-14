@@ -43,9 +43,12 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 
 - Extrusion Multiplier / Flow ([Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip))
 - Linear Advance / Pressure Advance ([model](https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe))
-  - Adjust Extrusion Multiplier first
+  - Adjust Extrusion Multiplier in G-code file first
+  - Set final result in Filament's "Custom G-code"
 - Temperature ([model](https://www.printables.com/model/514058-5-tier-temp-tower))
 - Retraction ([model](https://www.printables.com/model/408609-prusa-mini-retraction-tower-pla-petg))
+  - Set M900 to Linear Advancce in G-Code
+  - Set M104 and M109 to Nozzle Temp in G-Code
 - Max Volumetric speed ([model](https://www.printables.com/model/342075-extrusion-test-structure))
 
 ## Extrusion Multiplier / Flow
@@ -79,10 +82,9 @@ Goal - Eliminate stringing when moving without extracting
 Print this and adjust settings
  - https://www.printables.com/model/105989-fast-stringing-retraction-tests/
  
-### Retraction Distance
+### Retraction Distance / Length
 - PETG - Direct Drive: 2 - 4mm
-- PETG - Bowden: 5-7mm. Start at 5, go up in 1mm increments until stringing is gone.
-- It's too high if gaps form (due to under-extrusion).
+- PETG - Bowden: 5-7mm. Print a retraction tower at 5, 6, and 7. If you like, go down to .5 increments to find the best length/distance.
 - It's too low if stringing occurs.
 - If you get blobs, but minimal stringing, move on to Retraction Speed.
 - DO NOT exceed the overall length of the nozzle (from the tip to the big opening the filament enters at) or you may cause jams
@@ -92,20 +94,18 @@ Determines how quickly retraction is carried out.
 - PETG - Start at 20mm/s and go up by 1-5mm/s increments until oozing/stringing goes away
 - PETG - Retraction Speed is more important than Length/Distance, but Retraction Length/Distance being too high can show similar symptoms.
 
-### Deretraction Speed (or Restart Speed)
+### Deretraction Speed (or Restartdfgdf Speed)
 Determines how quickly filament is fed after a retraction.
 - PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
 
-### Travel Speed
+### Minimum Travel after Retraction
+Controls how frequently retraction occurs in a specific area.
+- PETG - 1-2mm. Start at 2mm and reduce by 0.1mm increments
+
+## Travel Speed
 - PETG - First layer speed 15-25mm
 - set to 999 and let printer go as fast as possible when not printing
 - Higher is typically better to avoid ooze/drip
-
-### Calibrate Retraction Minimum Travel
-Controls how frequently retraction occurs in a specific area.
-- PETG - 1-2mm
-- PETG - Start at 2mm and reduce by 0.1mm increments
-
 
 ## Max Volumetric Speed
 - ([model](https://www.printables.com/model/342075-extrusion-test-structure))
@@ -115,8 +115,9 @@ Controls how frequently retraction occurs in a specific area.
 
 For example, if the print quality began to suffer at 19mm measured from the bottom, the calculation would be: ```5 + (19 * 0.5)`````` , or 13mm³/s. Enter your number into the "Max volumetric speed" value in the filament settings.
 
-
 ## Final Test
+Consider revisiting the tests to ensure absolute perfection. For example, it's likely worth redoing Extrusion testing again at this point to ensure accuracy, if that's needed.
+
 https://www.printables.com/model/61996-nano-all-in-one-3d-printer-test
 
 Great calibration guide alternatives that may provide useful tips/clarifications
