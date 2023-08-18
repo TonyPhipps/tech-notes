@@ -36,6 +36,7 @@ index=something | fields index,sourcetype | stats count by index,sourcetype
 | Search for a list of values in one field                                                              | `Logon_Type IN (2,10,11,12,13)`                                                                                                                    |
 | Merge multiple column names into one                                                                  | `\| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`                                                                                |
 | Replace one backslash with two                                                                        | `\| eval Path=replace(Path, "\\\\", "\\\\\\")`                                                                                                     |
+| Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)`                       |
 
 ## Rex
 Test your regex on fake events
