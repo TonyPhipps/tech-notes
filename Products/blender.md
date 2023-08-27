@@ -6,28 +6,28 @@
 - Line Width: Thick
 
 ### Themes
-- Wire Edit: [a bright blue]
-- Vertex Size: 4mm
+- 3d Viewport > Wire Edit: [a bright blue]
+- 3d Viewport > Vertex Size: 4mm
 
 ### Keymap
-Spacebar Action: Search
+- Preferences > Spacebar Action: Search
 
 ### Addons
 - 3D View: MeasureIt
 - 3D View: Stored Views
-- Add Mesh: Extra Objects
 - Add Mesh: BoltFactory
+- Add Mesh: Extra Objects
 - Import-Export: Autocad DXF Format
-- Mesh: tinyCAD Mesh tools
-- Object: Bool Tool
-- Object: Align Tools
-- Interface: 3D-Print Toolbox
+- Mesh: 3D-Print Toolbox
 - Mesh: F2
+- Mesh: tinyCAD Mesh tools
+- Object: Align Tools
+- Object: Bool Tool
 
 ### System
 - Undo Steps: 256
 
-## Scene Properties
+## Scene (bottom right)
 ### Units
 - Unit Scale: 0.001
 - Length: Millimeters
@@ -49,6 +49,16 @@ Spacebar Action: Search
 ## External Addons
 - CAD Transform for blender
 
-# Resources
+## Resources
 - https://blenderartists.org
-- 
+
+
+# Make Text 3d
+- Enter Object Mode
+- Shift+A > Text
+- TAB > Type in the text you want
+- Navigate in bottom right to Data (letter a)
+- Transform > Set Size
+- Font > Select Font
+- Geometry > set Extrusion
+- Export as .STL
