@@ -177,7 +177,9 @@ Symptoms of a clog (usually burned up bits)
 - May notice filament sticking to nozzle more due to partial clog redirecting the stream of molten filament to one side as it extrudes.
 - May notice clicking sounds in stepper motor. This is the sound of skipping, since less filament moved forward than calculated due to the nozzle clog.
 
-Unload the filament and do a couple cold pulls.
+to fix...
+- Unload the filament and do a couple cold pulls.
+- Remove the section of filament (usually up to a foot) that may be damaged from the stepper motor grinding.
 
 ## Stringing/Pulling Tweaks
 Sometimes the next layer or neighboring line sticks, causing stringing, pulling, or sticking to the nozzle and wreaking havoc. These settings may help.
