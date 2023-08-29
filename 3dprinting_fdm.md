@@ -169,6 +169,16 @@ Layer height should not exceed 80% of the width of hte nozzle
 
 # Troubleshooting
 
+## Clogged Nozzle
+Symptoms of a clog (usually burned up bits)
+- Usually occurs after some sort of print failure, where the filament ends up "stuck" in the nozzle too long and burns into hardened chunks.
+- May have issue with first layer sticking to build plate
+- May have issue with 2nd layer sticking to first layer
+- May notice filament sticking to nozzle more due to partial clog redirecting the stream of molten filament to one side as it extrudes.
+- May notice clicking sounds in stepper motor. This is the sound of skipping, since less filament moved forward than calculated due to the nozzle clog.
+
+Unload the filament and do a couple cold pulls.
+
 ## Stringing/Pulling Tweaks
 Sometimes the next layer or neighboring line sticks, causing stringing, pulling, or sticking to the nozzle and wreaking havoc. These settings may help.
 - Lift Z or Z Hop - lower or disable
@@ -184,9 +194,9 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
-- Ensure bed is not too hot for the filament. PLA can't take much more than 60deg celsius.
+- Ensure bed is not too hot for the filament. PLA 55c-65c, PETG 80c-90cc
 - Right-click the object and "Add part" a slab.
-  - Resize the slab to be as tall as a single layer, .8mm wide, and as long as needed to either connect to a nearby object for support or make another thin circle to attach it to.
+  - Resize the slab to be as tall as a single layer, 1mm wide, and as long as needed to either connect to a nearby object for support or make another thin circle to attach it to.
 - Consider adding a brim
 
 
