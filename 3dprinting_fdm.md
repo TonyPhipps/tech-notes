@@ -130,11 +130,11 @@ Great calibration guide alternatives that may provide useful tips/clarifications
 - Purge once
 - Ensure Hotend is in position to reduce stress on arm (e.g. right side of Mini+)
 - Expose top of Hotend by removing any hardware (e.g. 10mm top nut on Mini+)
-- Set Nozzle Temperature to 270deg C
+- Set Nozzle Temperature to 270c
 - Insert the filament into the hotend feed hole. Make sure that the filament tip is cut to make inserting it easier.
 - Set Nozzle Temperature to 0
-- While the hotend is cooling down, continuously push the filament down so that it extrudes from the nozzle. Do so until it cools down to the point where you can’t push anymore through (around 160 - 170 °C).
-- When the temperature is near 90 °C, hold the X-axis arm to support it, and pull the filament straight up using your hands or pliers, out of the Extruder. Pull it firmly and steadily.
+- While the hotend is cooling down, continuously push the filament down so that it extrudes from the nozzle. Do so until it cools down to the point where you can’t gently push anymore through (around 160c - 170c).
+- When the temperature is near 90c (for PLA) or 150c for PETG, hold the X-axis arm to support it, and pull the filament straight up using your hands or pliers, out of the Extruder. Pull it firmly and steadily.
 - Repeat one more time.
 
 # Changing Nozzle
