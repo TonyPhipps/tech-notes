@@ -180,6 +180,7 @@ Symptoms of a clog (usually burned up bits)
 to fix...
 - Unload the filament and do a couple cold pulls.
 - Remove the section of filament (usually up to a foot) that may be damaged from the stepper motor grinding.
+- You can try these again, but if they don't work, you may simply have a damaged nozzle that needs replaced. A bur can cause a permanent clog, which has most of the same symptoms as a clog.
 
 ## Stringing/Pulling Tweaks
 Sometimes the next layer or neighboring line sticks, causing stringing, pulling, or sticking to the nozzle and wreaking havoc. These settings may help.
