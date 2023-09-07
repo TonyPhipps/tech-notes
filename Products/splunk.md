@@ -1,5 +1,9 @@
 # Splunk
 
+## Tips and Tricks
+- Alert creation - the "Suppress results with field value" field accepts comma-delimited lists of multiple items.
+
+
 ## Discovery
 List indices available
 ```
