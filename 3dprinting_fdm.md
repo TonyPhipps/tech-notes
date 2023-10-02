@@ -10,7 +10,7 @@ Start with a "Generic profile"
 
 ## Clean Bed
 Should not require major adjustments between different filaments.
-- Dawn dish soap and hot water, then window cleaner, then isopropyl alcohol 90%+
+- Dawn dish soap and hot water, then isopropyl alcohol 90%+
 
 ## Level Bed
 Should not require major adjustments between different filaments.
@@ -26,6 +26,31 @@ Should not require major adjustments between different filaments.
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
 - Set Bed Temp to lowest suggested temp by filament manufacturer
 - Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+
+
+# Changing Nozzle
+Reference 
+https://help.prusa3d.com/article/changing-replacing-the-nozzle-mini_134235
+
+## Prep
+
+- 16mm wrench/spanner, or an adjustable wrench to secure the heater block
+  - A very large spanner or an adjustable wrench can quickly drain heat from the heater block and may cause a Thermal runaway error, depending on how it grips the block.
+- A pair of pliers or a 7mm socket to unscrew the nozzle
+- Non-flammable surface to place the used hot nozzle on (i.e. plate or aluminum foil).
+- Unload the filament. Optionally, do a coldpull.
+
+## Steps
+- Preheat to 230c
+- Clean the heat block and nozzle as necessary (brass brush)
+- Preheat to 270-280c
+- Move Z axis up to max
+- Hold Heat Block with wrench to prevent twisting
+- Use 7mm socket to unscrew the HOT nozzle and place in tray
+- Insert new nozzle and screw until it stops moving (not excessive)
+- Ensure a small gap between nozzle top and heat block after installing (~.5mm)
+- Clean the print bed
+- Perform first layer calibration
 
 ## Adjust Bed Temp
 Should not require major adjustments between different filaments.
@@ -88,13 +113,18 @@ Print this and adjust settings
 - It's too low if stringing occurs.
 - If you get blobs, but minimal stringing, move on to Retraction Speed.
 - DO NOT exceed the overall length of the nozzle (from the tip to the big opening the filament enters at) or you may cause jams
-  
+
+### Retraction Z-Lift
+
+
+### Retraction Amount Before Wipe
+
 ### Retraction Speed
 Determines how quickly retraction is carried out.
 - PETG - Start at 20mm/s and go up by 1-5mm/s increments until oozing/stringing goes away
 - PETG - Retraction Speed is more important than Length/Distance, but Retraction Length/Distance being too high can show similar symptoms.
 
-### Deretraction Speed (or Restartdfgdf Speed)
+### Deretraction Speed (or Restart Speed)
 Determines how quickly filament is fed after a retraction.
 - PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
 
@@ -137,30 +167,6 @@ Great calibration guide alternatives that may provide useful tips/clarifications
 - When the temperature is near 90c (for PLA) or 150c for PETG, hold the X-axis arm to support it, and pull the filament straight up using your hands or pliers, out of the Extruder. Pull it firmly and steadily.
 - Repeat one more time.
 
-# Changing Nozzle
-Reference 
-https://help.prusa3d.com/article/changing-replacing-the-nozzle-mini_134235
-
-## Prep
-
-- 16mm wrench/spanner, or an adjustable wrench to secure the heater block
-  - A very large spanner or an adjustable wrench can quickly drain heat from the heater block and may cause a Thermal runaway error, depending on how it grips the block.
-- A pair of pliers or a 7mm socket to unscrew the nozzle
-- Non-flammable surface to place the used hot nozzle on (i.e. plate or aluminum foil).
-- Unload the filament. Optionally, do a coldpull.
-
-## Steps
-- Preheat to 230c
-- Clean the heat block and nozzle as necessary (brass brush)
-- Preheat to 270-280c
-- Move Z axis up to max
-- Hold Heat Block with wrench to prevent twisting
-- Use 7mm socket to unscrew the HOT nozzle and place in tray
-- Insert new nozzle and screw until it stops moving (not excessive)
-- Ensure a small gap between nozzle top and heat block after installing (~.5mm)
-- Clean the print bed
-- Perform first layer calibration
-
 
 # Layer Height
 Layer height should not exceed 80% of the width of hte nozzle
@@ -168,6 +174,15 @@ Layer height should not exceed 80% of the width of hte nozzle
 - .40mm nozzle max layer height = .32mm
 
 # Troubleshooting
+
+## Something's Just Off
+- Consider toggling the following
+  - Print Settings > Layers and Perimeters > Detect Thin Walls
+  - Print Settings > Layers and Perimeters > Thick Bridges
+  - Print Settings > Layers and Perimeters > Fill Gaps
+  - Print Settings > Layers and Perimeters > Perimeter Generation between Classic and Arachne
+  - Filament - Filament Override > Wipe While Retracting (and amount %)
+
 
 ## Clogged Nozzle
 Symptoms of a clog (usually burned up bits)
@@ -194,6 +209,9 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Add Extra Length on Restart
 - Retract on Layer Change - Toggle
 
+## Gaps after Deretraction
+- Likely due to loss of pressure. Add "Extra Length on Restart" in .2mm increments.
+
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
@@ -201,7 +219,6 @@ Like miniature figures with small surface area touching the bed... going
 - Right-click the object and "Add part" a slab.
   - Resize the slab to be as tall as a single layer, 1mm wide, and as long as needed to either connect to a nearby object for support or make another thin circle to attach it to.
 - Consider adding a brim
-
 
 ## Warping
 To avoid warping with PLA...
@@ -219,9 +236,10 @@ To avoid warping with PLA...
 # Matte and Silk Filament
 You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
 
-# PETG Overhangs
-PETG adheres strongest with no fan, but overhangs are terrible. In order to get the best of both worlds, use these codes to enable fans when needed - overhangs.
-- ```M106 S125``` to set fan to 50% (on Prusa Mini, anyway)
-- ```M107``` to disable fan
+# Custom G-Code
 
-
+## PETG Overhangs
+- ```M106 S125``` sets fan to 50% (on Prusa Mini)
+- ```M107```  Disables fan
+- ```M220 S100``` - Sets speed to 100%
+- ```M220 S50``` - Sets speed to 50%
