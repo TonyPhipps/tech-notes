@@ -43,7 +43,8 @@ dd if=/dev/urandom of=/dev/sda status=progress
 
 ### Bit-for-Bit Drive Copy to Compressed File
 ```
-dd bs=512 -flag=fullblock conv=noerror,sync if=/dev/sda of=/home/user/newimage.dd status=progress | gzip -c > /media/ubuntu/path/newimage.img.gz
+lsblk
+dd bs=512 -flag=fullblock conv=noerror,sync if=/dev/sda of=/home/user/newimage.dd status=progress | gzip -c > /media/ubuntu/path/newimage_YYYY-MM-DD.img.gz.img.gz
 ```
 
 ### Bit-for-Bit Drive Copy Across Network from a Windows Box
