@@ -177,6 +177,15 @@ This specific example basically says "show me EventCodes that were not observed 
 source=WinEventLog:System NOT ([| search source=WinEventLog:System earliest=-6h | table EventCode]) | stats count by EventCode
 ```
 
+or with tstats (when only dealing with indexed fields or data models)
+
+```
+| tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
+    [| tstats latest(_time) where index=something sourcetype=this earliest=-7d latest=-1d by index, host 
+    | table index, host]) by index, host 
+| eval latest_str = strftime(latest,"%c")
+| table host, index, latest, latest_str
+```
 
 ## Lookups
 
