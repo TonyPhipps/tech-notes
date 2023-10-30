@@ -171,6 +171,12 @@ Some data, like from a vulnerability scanner, polls for the same data, but you m
 | stats latest(_time) as _time, values(field1) as field1, values(field2) as field2, by host
 ```
 
+### Find Newly Observed Events
+This specific example basically says "show me EventCodes that were not observed in the last 6h.
+```
+source=WinEventLog:System NOT ([| search source=WinEventLog:System earliest=-6h | table EventCode]) | stats count by EventCode
+```
+
 
 ## Lookups
 
