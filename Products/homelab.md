@@ -50,3 +50,13 @@ mklink /d "C:\Local\LabOriginal" "D:\hyperv\LabOriginal"
 
 ## Notes
 - HYD-CM1 already has WSUS installed.
+
+
+## Install Edge
+```
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+md -Path $env:temp\edgeinstall -erroraction SilentlyContinue | Out-Null
+$Download = join-path $env:temp\edgeinstall MicrosoftEdgeEnterpriseX64.msi
+Invoke-WebRequest 'http://go.microsoft.com/fwlink/?LinkID=2093437'  -OutFile $Download
+Start-Process "$Download" -ArgumentList "/quiet"
+```
