@@ -47,3 +47,6 @@ Where...
 - your new location is D:\hyperv\LabOriginal\ServerParent.vhdx
 
 mklink /d "C:\Local\LabOriginal" "D:\hyperv\LabOriginal"
+
+## Notes
+- HYD-CM1 already has WSUS installed.
