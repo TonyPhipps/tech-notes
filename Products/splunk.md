@@ -32,6 +32,7 @@ index=something | fields index,sourcetype | stats count by index,sourcetype
 | Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines              | `\| rex field=fieldname "regex(?<newfieldname>regex)"`                                                                                             |
 | Sort Results                                                                                          | `\| sort + PathLength`                                                                                                                             |
 | Aggregate Results                                                                                     | `\| stats count by Path, CommandLine, PathLength, CommandLineLength`                                                                               |
+| Aggregate Results by specific fields - show a list of values for those fields across events           | `\|  stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                                                     |
 | Exclude a list of items                                                                               | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]`                                                                          |
 | List contents of a lookup                                                                             | `\| inputlookup mylookup`                                                                                                                          |
 | Determine if the contents of a field are in a lookup                                                  | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]`                                                                      |
@@ -171,6 +172,21 @@ Some data, like from a vulnerability scanner, polls for the same data, but you m
 | stats latest(_time) as _time, values(field1) as field1, values(field2) as field2, by host
 ```
 
+### Find Newly Observed Events
+This specific example basically says "show me EventCodes that were not observed in the last 6h.
+```
+source=WinEventLog:System NOT ([| search source=WinEventLog:System earliest=-6h | table EventCode]) | stats count by EventCode
+```
+
+or with tstats (when only dealing with indexed fields or data models)
+
+```
+| tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
+    [| tstats latest(_time) where index=something sourcetype=this earliest=-7d latest=-1d by index, host 
+    | table index, host]) by index, host 
+| eval latest_str = strftime(latest,"%c")
+| table host, index, latest, latest_str
+```
 
 ## Lookups
 

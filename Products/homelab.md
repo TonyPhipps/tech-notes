@@ -40,3 +40,10 @@ Every 1hr these lab instances will shut down. These steps will prevent that.
   - Execute ```rename c:\windows\system32\wlms\wlms.exe wlms1.exe```
 
 Following above steps disables the hourly shutdown of VM after expiry of license but the easiest way is to Activate the windows by providing a legal key. Since this is not a supported method please do not use this on laptops/VMs that are in production.
+
+## Dealing with Moving Parent Images
+Where...
+- your original location was C:\Local\LabOriginal\ServerParent.vhdx
+- your new location is D:\hyperv\LabOriginal\ServerParent.vhdx
+
+mklink /d "C:\Local\LabOriginal" "D:\hyperv\LabOriginal"

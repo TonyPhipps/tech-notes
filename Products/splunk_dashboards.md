@@ -572,4 +572,99 @@ This approach allows an analyst to gain familiarity with an event source and qui
 </form>
 ```
 
+
+
+</details>
+
+
+### Add Expand/Collapse Buttons to Panels
+
+<details>
+
+Add this to your init section
+```
+...
+<init>
+    <set token="showExpandLink1">true</set>
+    <set token="showExpandLink2">true</set>
+    <set token="showExpandLink3">true</set>
+    <set token="showExpandLink4">true</set>
+    <set token="showExpandLink5">true</set>
+    <set token="showExpandLink6">true</set>
+    <set token="showExpandLink7">true</set>
+    <set token="showExpandLink8">true</set>
+    <set token="showExpandLink9">true</set>
+    <set token="showExpandLink10">true</set>
+  </init>
+...
+```
+
+Add this as your first \<row\>
+```
+...
+  <row depends="$alwaysHideCSSStyleOverride$">
+    <panel>
+      <html>
+      <html>
+        <style>
+          div[id^="linkCollapse"],
+          div[id^="linkExpand"]{
+            width: 64px !important;
+            float: right;
+          }
+          div[id^="linkCollapse"] button,
+          div[id^="linkExpand"] button{
+            flex-grow: 0;
+            border-radius: 25px;
+            border-width: thin;
+            border-color: lightgrey;
+            border-style: inset;
+            width: 32px;
+            padding: 10px;
+          }
+          div[id^="linkCollapse"] label,
+          div[id^="linkExpand"] label{
+            display:none;
+          }
+          div[id^="panel"].fieldset{
+            padding: 0px;
+          }
+        </style>
+      </html>
+      </html>
+    </panel>
+  </row>
+...
+```
+
+Add this just after the <title> closes for the panel you'd like to be collapsible.
+```
+...
+</title>
+      <input id="linkCollapse1" type="link" token="tokLinkCollapse1" searchWhenChanged="true" depends="$showCollapseLink1$">
+        <label></label>
+        <choice value="collapse">vvv</choice>
+        <change>
+          <condition value="collapse">
+            <unset token="showCollapseLink1"></unset>
+            <set token="showExpandLink1">true</set>
+            <unset token="form.tokLinkCollapse1"></unset>
+          </condition>
+        </change>
+      </input>
+      <input id="linkExpand1" type="link" token="tokLinkExpand1" searchWhenChanged="true" depends="$showExpandLink1$">
+        <label></label>
+        <choice value="expand">>>></choice>
+        <change>
+          <condition value="expand">
+            <set token="showCollapseLink1">true</set>
+            <unset token="showExpandLink1"></unset>
+            <unset token="form.tokLinkExpand1"></unset>
+          </condition>
+        </change>
+      </input>
+      <table rejects="$showExpandLink1$">
+        <search>
+		...
+  ```
 </details>
