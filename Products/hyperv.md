@@ -7,3 +7,4 @@ Great for labbing!
 - Use 192.168.0.0/24 range.
 - There will be no DHCP.
 - There is no way to remotely access the machines from the LAN unless you create NAT rules to enable access via port translation.
+- Be sure to change the Gateway to 10.0.0.1 on the DC01 server at the very least, or it won't be able to resolve DNS queries for the others.
