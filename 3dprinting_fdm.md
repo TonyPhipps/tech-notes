@@ -175,6 +175,11 @@ Layer height should not exceed 80% of the width of hte nozzle
 
 # Troubleshooting
 
+## Overhangs Warp Upward
+- Reduce Nozzle Temp
+- Reduce Speed
+- Increase fan speed
+
 ## Something's Just Off
 - Consider toggling the following
   - Print Settings > Layers and Perimeters > Detect Thin Walls
@@ -182,7 +187,6 @@ Layer height should not exceed 80% of the width of hte nozzle
   - Print Settings > Layers and Perimeters > Fill Gaps
   - Print Settings > Layers and Perimeters > Perimeter Generation between Classic and Arachne
   - Filament - Filament Override > Wipe While Retracting (and amount %)
-
 
 ## Clogged Nozzle
 Symptoms of a clog (usually burned up bits)
