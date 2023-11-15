@@ -7,6 +7,14 @@ Mercury X Wash and Cure Bundle
 - Typically wash and cure each for 5-6min. Increase for higher print complexity, possibly moving/flipping in the cure station every 2-3min
 - Filter out and cure waste after 30 uses.
 
+# Calibration
+Cones of Calibration, by Tabletop Foundry
+- youtu.be/o2ySL-Sw8QI
+- https://www.tableflipfoundry.com/_files/archives/dba9ae_79fdc9c846f44461979f9b0bca9986ae.zip?dn=The%20Cones%20of%20Calibration.zip
+- Increment exposure time DOWN if the FAILURE side is printing the top cones
+- Increment exposure time UP if the SUCCESS side is failing to print top cones
+- Increment by 0.1s, or 0.05s as you get closer
+
 # Lychee Miniature Workflow
 
 # 3d Printer
@@ -24,15 +32,22 @@ Mercury X Wash and Cure Bundle
 - Select the model
 - Magic
   - Disable Auto Orientation
-  - Support Presets: Light
-  - I'm Feeling Lucky
-  - Select all supports via click and drag
-  - Reduce Tip Diameter of all supports to 0.20
-  - Click Create to add a custom support
-  - Name in Miniature
-  - Add new supports where needed
+  - Support Presets: Medium
+  - Click I'm Feeling Lucky
+  - Add Medium supports all the way around the mini's base, in a circle near the edge
+  - Add a new Profile: ".40 Diameter"
+    - Tip Diameter: .30
+    - Tip Length: 2.00
+    - Diameter: 1.00
+    - Click Create to add the custom support to favorites
+  - Inspect the Medium supports added
+    - Reduce troublesome spots to the "Light" or the ".40 Diameter" profile.
+  - REMOVE supports as needed.
+    - Tiny supports that don't make any sense often occur
+  - Add new "Light" supports where needed
     - Flimsy areas
-    - Areas where the white layer light looks more like a puddle as you over over areas
+    - Inspect highlighted overhang areas
+      - Especially areas where the white layer light looks more like a puddle as you over over areas
 
 ## Back to Layout
 Only if you want multiple copies in one print 
