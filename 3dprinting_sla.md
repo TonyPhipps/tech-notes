@@ -35,7 +35,8 @@ Cones of Calibration, by Tabletop Foundry
 - Prepare
   - Click Light
   - Auto > Generate Automatic Supports
-    - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
+  - Raft > Shape Wall
+  - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
   - Click Medium
     - Add Medium supports all the way around the mini's base, in a circle near the edge
   - Click Light
