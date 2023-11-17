@@ -7,6 +7,10 @@
 - Inventory > Hosts > vCenter Server (top level)
 - Monitor Tab
 
+Allow Virtual Hosts to Communicate Cross ESXi Hosts
+	• vSphere > ESXi Host > Configure > Virtual Switches > Connection > Edit Settings > Security
+Check Override for Promiscuous Mode and set it to Accept
+
 # Updates
 - Review update sequence if performing full version upgrades
   - Update sequence for vSphere 7.0 and its compatible VMware products
@@ -23,7 +27,6 @@
 - Select Baselines needed and click Remediate
 - Review status in the pullup in bottom of VSphere Client screen (Recent Tasks)
 - ESXi Hosts may need to be removed from Maintenance Mode manually post update.
-
 
 NOTE: Before updating ESXi Hosts, export a list of machine states in order to return them all to normal.
 - vSphere > Hosts > ESXi Host > VMs > Export
