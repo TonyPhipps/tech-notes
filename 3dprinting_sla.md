@@ -30,24 +30,24 @@ Cones of Calibration, by Tabletop Foundry
 
 ## Prepare
 - Select the model
-- Magic
-  - Disable Auto Orientation
-  - Support Presets: Medium
-  - Click I'm Feeling Lucky
-  - Add Medium supports all the way around the mini's base, in a circle near the edge
-  - Add a new Profile: ".40 Diameter"
-    - Tip Diameter: .30
-    - Tip Length: 2.00
-    - Diameter: 1.00
-    - Click Create to add the custom support to favorites
-  - Inspect the Medium supports added
-    - Reduce troublesome spots to the "Light" or the ".40 Diameter" profile.
-  - REMOVE supports as needed.
-    - Tiny supports that don't make any sense often occur
-  - Add new "Light" supports where needed
-    - Flimsy areas
-    - Inspect highlighted overhang areas
-      - Especially areas where the white layer light looks more like a puddle as you over over areas
+- Layout
+  - Rotate back 40deg so face is on looking up
+- Prepare
+  - Click Light
+  - Auto > Generate Automatic Supports
+    - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
+  - Click Medium
+    - Add Medium supports all the way around the mini's base, in a circle near the edge
+  - Click Light
+  - Island
+    - Set Accuracy to Detailed
+    - Click Search Selected
+      - Add new "Light" or "Mini Supports" where the red dots show up
+        - Remember you can hold ALT to force connection points when creating a support
+        - Remember you can make a "normal" support then check the box for "Mini Support"
+  - Manual
+    - Bracings
+    
 
 ## Back to Layout
 Only if you want multiple copies in one print 
