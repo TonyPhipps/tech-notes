@@ -34,19 +34,23 @@ Cones of Calibration, by Tabletop Foundry
   - Rotate back 40deg so face is on looking up
 - Prepare
   - Click Light
-  - Auto > Generate Automatic Supports
-  - Raft > Shape Wall
-  - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
-  - Click Medium
-    - Add Medium supports all the way around the mini's base, in a circle near the edge
-  - Click Light
-  - Island
-    - Set Accuracy to Detailed
+  - Click Auto
+    - Change Supports density to Ultra
+    - Generate Automatic Supports
+  - Click Island
+    - Set Accuracy to Real
     - Click Search Selected
-      - Add new "Light" or "Mini Supports" where the red dots show up
-        - Remember you can hold ALT to force connection points when creating a support
-        - Remember you can make a "normal" support then check the box for "Mini Support"
-  - Manual
+      - Cllick Add supports to all islands
+      - If any spots fail, add new "Light" or "Mini Supports" where the red dots show up
+  - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
+  - Add supports as needed
+    - Remember you can hold ALT to force connection points when creating a support
+    - Remember you can make a "normal" support then check the box for "Mini Support"
+  - Click Medium
+    - Add Medium supports all the way around the mini's base, in a circle near the edge  
+  - Click Raft 
+    - Select Shape Wall
+  - Click Manual
     - Bracings
     
 
