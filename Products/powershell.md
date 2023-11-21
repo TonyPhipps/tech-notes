@@ -1,6 +1,4 @@
-# Initial Windows 10 Setup
-
-## Remove Empty Directories Recursively
+# Remove Empty Directories Recursively
 ```
 Get-ChildItem $Destination -Directory -Recurse |
     Foreach-Object { $_.FullName} |
@@ -14,17 +12,17 @@ Get-ChildItem $Destination -Directory -Recurse |
 Get-ChildItem c:\ -Depth 0 -Directory | Where-Object {$_.Name -notmatch "windows|Program Files|Program Files \(x86\)"} | Get-Childitem -Recurse
 ```
 
-## Deduplicate An Array of Objects By Selecting Only the Latest Date
+# Deduplicate An Array of Objects By Selecting Only the Latest Date
 ```
 $UniqueList = $completelist | Group-Object -Property ID | ForEach-Object{$_.Group | Sort-Object -Property StartTime -Descending | Select-Object -First 1}
 ```
 
-## Sort A Hashtable by Key Name
+# Sort A Hashtable by Key Name
 ```
 $myHashtable.GetEnumerator() | Sort-Object Key
 ```
 
-## Group On Multiple Fields, then Restore Those Field Values
+# Group On Multiple Fields, then Restore Those Field Values
 ```
 $GroupedStuff = $Things | Group-Object Host,DateScanned,UserName
 ForEach ($Result in $GroupedStuff) {
@@ -35,7 +33,7 @@ ForEach ($Result in $GroupedStuff) {
 }
 ```
 
-## Store Output Streams to Variable
+# Store Output Streams to Variable
 ```
 $InfoVar
 $ErrorVar
