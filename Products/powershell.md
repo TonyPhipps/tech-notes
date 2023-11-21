@@ -1,4 +1,4 @@
-# Query a for a registry value's data at the given key
+### Query a for a registry value's data at the given key
 ```
 $key = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\EventForwarding\SubscriptionManager"
 $value = "1"
@@ -6,7 +6,7 @@ $data = (Get-ItemProperty -path $key).$value
 $data
 ```
 
-# Remove Empty Directories Recursively
+### Remove Empty Directories Recursively
 ```
 Get-ChildItem $Destination -Directory -Recurse |
     Foreach-Object { $_.FullName} |
@@ -15,22 +15,22 @@ Get-ChildItem $Destination -Directory -Recurse |
                 Remove-Item
 ```
 
-# Force Get-Childitem to NOT pull Windows directory or Program Files directories.
+### Force Get-Childitem to NOT pull Windows directory or Program Files directories.
 ```
 Get-ChildItem c:\ -Depth 0 -Directory | Where-Object {$_.Name -notmatch "windows|Program Files|Program Files \(x86\)"} | Get-Childitem -Recurse
 ```
 
-# Deduplicate An Array of Objects By Selecting Only the Latest Date
+### Deduplicate An Array of Objects By Selecting Only the Latest Date
 ```
 $UniqueList = $completelist | Group-Object -Property ID | ForEach-Object{$_.Group | Sort-Object -Property StartTime -Descending | Select-Object -First 1}
 ```
 
-# Sort A Hashtable by Key Name
+### Sort A Hashtable by Key Name
 ```
 $myHashtable.GetEnumerator() | Sort-Object Key
 ```
 
-# Group On Multiple Fields, then Restore Those Field Values
+### Group On Multiple Fields, then Restore Those Field Values
 ```
 $GroupedStuff = $Things | Group-Object Host,DateScanned,UserName
 ForEach ($Result in $GroupedStuff) {
@@ -41,7 +41,7 @@ ForEach ($Result in $GroupedStuff) {
 }
 ```
 
-# Store Output Streams to Variable
+### Store Output Streams to Variable
 ```
 $InfoVar
 $ErrorVar
@@ -60,7 +60,7 @@ if ($ErrorsVar.Count -ne 0) {
 
 Add $ to InfoFar and ErrorVar if you want the Information and Errors to NOT be sent down the pipeline.
 
-# Run an encoded command
+### Run an encoded command
 ```
 $Command = 'Get-Service BITS' 
 $Encoded = [convert]::ToBase64String([System.Text.encoding]::Unicode.GetBytes($command)) 
@@ -68,7 +68,7 @@ powershell.exe -encoded $Encoded
 ```
 
 
-# Convert .json file to PowerShell objects
+### Convert .json file to PowerShell objects
 ```
 $file = "file.json"
 $json = Get-Content $file | ConvertFrom-Json
@@ -78,7 +78,7 @@ $records = $json._embedded.records
 $records
 ```
 
-# Convert plain text to base64
+### Convert plain text to base64
 ```
 $Text = 'This is a secret and should be hidden'
 $Bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
@@ -86,25 +86,25 @@ $EncodedText = [Convert]::ToBase64String($Bytes)
 $EncodedText
 ```
 
-# Convert base64 to plain text
+### Convert base64 to plain text
 ```
 $base64_string = "VABoAGkAcwAgAGkAcwAgAGEAIABzAGUAYwByAGUAdAAgAGEAbgBkACAAcwBoAG8AdQBsAGQAIABiAGUAIABoAGkAZABkAGUAbgA="
 [System.Text.Encoding]::Default.GetString([System.Convert]::FromBase64String($base64_string))
 ```
 
-# Resolve Shortened URL
+### Resolve Shortened URL
 ```
 $URL = "http://tinyurl.com/KindleWireless"
 (Invoke-WebRequest -Uri $URL -MaximumRedirection 0 -ErrorAction Ignore).Headers.Location
 ```
 
-# Merge CSV files
+### Merge CSV files
 ```
 Get-ChildItem *.csv | Select-Object name -ExpandProperty name | Import-Csv | export-csv -NoTypeInformation merged.csv
 ```
 
 
-# Timeout a Command
+### Timeout a Command
 Use this to effectively assign a timeout to any command or command block.
 ```
 Start-Job {                
