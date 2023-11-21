@@ -42,17 +42,17 @@ Cones of Calibration, by Tabletop Foundry
     - Click Search Selected
       - Cllick Add supports to all islands
       - If any spots fail, add new "Light" or "Mini Supports" where the red dots show up
-  - REMOVE supports as needed. Tiny supports that don't make any sense often occur.
+  - REMOVE supports as needed.
+    - Most supports on areas NOT marked as an overhand.
   - Add supports as needed
-    - Remember you can hold ALT to force connection points when creating a support
-    - Remember you can make a "normal" support then check the box for "Mini Support"
+    - Try to attach to existing bases if able (hold ALT on the model, then the support base)
+    - Only make a support "mini" if
+      - ... it's in a tiny spot and you need the support but don't intend to remove it (well hidden)
+      - ... after making a Light support, the angles are so wonky that it makes no sense and should be converted to mini to simplify
   - Click Medium
     - Add Medium supports all the way around the mini's base, in a circle near the edge  
   - Click Raft 
     - Select Shape Wall
-  - Click Manual
-    - Bracings
-    
 
 ## Back to Layout
 Only if you want multiple copies in one print 
@@ -60,5 +60,11 @@ Only if you want multiple copies in one print
 - Copy > Set Number of (Extra) Copies
 - Click Duplicate Selection
 
+## Saving
+- Save each model as its own .lys file
+- When you prepare to print, import these models into a "plate print" file
+
+
 ## Export
 - Export Slices to File (.ctb for Elegoo Saturn 2)
+
