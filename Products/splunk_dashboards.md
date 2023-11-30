@@ -1,3 +1,27 @@
+### Search Base
+At the top:
+```
+<search id="base1">
+  <query>
+    index="index_name" (ProductName=#1# OR ProductName=#2# OR ProductName=#3# OR etc.) 
+    | stats count by host ProductName
+  </query>
+  <earliest>$TimeRange.earliest$</earliest>
+  <latest>$TimeRange.latest$</latest>
+  <sampleRatio>1</sampleRatio>
+</search>
+```
+
+At the applicable widget(s):
+```
+<search base="base1">
+  <query>
+    search ProductName="Skype"
+    | stats count
+  </query>
+</search>
+```
+
 ### Sample Dashboard
 This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
 
