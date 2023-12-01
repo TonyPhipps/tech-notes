@@ -258,7 +258,6 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 If ran as an alert, will find "Newly Observed" events. If used in a widget or report, will show unique events.
 ```
 index="something"
-| eval _time = strptime(DateScanned, "%Y-%m-%d %T%Z")
 | eventstats max(_time) as last_seen min(_time) as first_seen by host, ProcessName
 |  where last_seen == first_seen
 ```
