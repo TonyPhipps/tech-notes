@@ -180,13 +180,12 @@ Layer height should not exceed 80% of the width of hte nozzle
 - Reduce Speed
 - Increase fan speed
 
-## Something's Just Off
-- Consider toggling the following
-  - Print Settings > Layers and Perimeters > Detect Thin Walls
-  - Print Settings > Layers and Perimeters > Thick Bridges
-  - Print Settings > Layers and Perimeters > Fill Gaps
-  - Print Settings > Layers and Perimeters > Perimeter Generation between Classic and Arachne
-  - Filament - Filament Override > Wipe While Retracting (and amount %)
+## Clicking extruder
+- Could also be wet or oily filament.
+- Could be partial nozzle block.
+- Could be printing so fast that hotend can't keep up with melting.
+- Could be extruder wheel (idler) is not tight enough.
+- Could be worn extruder gear.
 
 ## Clogged Nozzle
 Symptoms of a clog (usually burned up bits)
@@ -215,6 +214,7 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 
 ## Gaps after Deretraction
 - Likely due to loss of pressure. Add "Extra Length on Restart" in .2mm increments.
+- See "Clicking Extruder"
 
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
@@ -234,8 +234,16 @@ To avoid warping with PLA...
 - Too many bottom layers may cause warping.
 - Fan being too high, too soon may cause warping. Consider increase number of layers without fan and/or how many layers spent stepping up to max fan speed.
 
-# Second Layer Peels Away Like "Gills"
+## Second Layer Peels Away Like "Gills"
 - Reduce Z Offset a bit. It may be too smashed, causing layer 2 to not reach and stick very well.
+
+## Something's Just Off
+- Consider toggling the following
+  - Print Settings > Layers and Perimeters > Detect Thin Walls
+  - Print Settings > Layers and Perimeters > Thick Bridges
+  - Print Settings > Layers and Perimeters > Fill Gaps
+  - Print Settings > Layers and Perimeters > Perimeter Generation between Classic and Arachne
+  - Filament - Filament Override > Wipe While Retracting (and amount %)
 
 # Matte and Silk Filament
 You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
