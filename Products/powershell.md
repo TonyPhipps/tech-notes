@@ -1,3 +1,9 @@
+### Ways to Stop a Script or Contents
+- break - stops the current loop runspace.
+- :label (then later) break label - break out of the loop runspace with the referenced labl. Good for nested loops.
+- continue - stops the current runspace, allowing parent runspace to continue.
+- exit - stops the full powershell process and exits the console window, if in one.
+
 ### Query a for a registry value's data at the given key
 ```
 $key = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\EventForwarding\SubscriptionManager"
