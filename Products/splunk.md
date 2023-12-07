@@ -255,13 +255,20 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 ```
 
 ## Find Results Not in a Subsearch of Older Events
+This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
+
 ```
 index="something" therestofyoursearch
 | stats count by _time, host, field1
 | fields - count 
+| search 
+    [ search index="something" therestofyoursearch earliest=-7d latest=-1d 
+    | stats count by host
+    | fields - count
+        ]
 | search NOT
     [ search index="something" therestofyoursearch earliest=-7d latest=-1d 
-    | stats count by host, field1
+    | stats count by field1
     | fields - count
         ]
 ```
