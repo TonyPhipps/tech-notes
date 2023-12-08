@@ -30,5 +30,5 @@ git config http.sslVerify false
 ### Export recent Git Changes to CSV
 Execute using PowerShell
 ```
-git --no-pager log --pretty=format:'\"%h\", \"%an\", \"%ci\", \"%s\", \"%b\"' --after "2023-11-30" | ConvertFrom-CSV -header Hash, Author, Date, Message, Title | Export-CSV changelog.csv -NoTypeInformation
+git --no-pager log --pretty=format:'\"%h\", \"%an\", \"%ci\", \"%s\", \"%b\"' --after "2023-11-30" | ConvertFrom-CSV -header Hash, Author, Date, Message, Body | Export-CSV changelog.csv -NoTypeInformation
 ```
