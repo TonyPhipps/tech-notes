@@ -1,6 +1,8 @@
 # Installation
 - Best to check all the logs during installation rather than after installation.
-  - The configuration file will be \etc\apps\SplunkUniversalFowarder\local\inputs.conf
+  - The configuration file will be in one of these
+    - \etc\system\local\inputs.conf
+    - \etc\apps\SplunkUniversalFowarder\local\inputs.conf
 - Set any user/password you like. This is to modify the configuration on the specific machine via splunk.exe in CLI.
 - Deployment Server - You should be able to confirm access to this port via web. e.g. http://192.168.1.2:8089 and get a response. 
   - The configuration file will be \etc\system\local\deploymentclient.conf
@@ -16,6 +18,19 @@ NOTE: It's best to manage these via the server's Distributed Environment Forward
 
 
 Don't forget to restart the Splunk Forwarder service when making changes!
+
+
+# Listen for Syslog
+- Edit ```\etc\apps\system\inputs.conf```
+```
+[tcp://192.168.1.10:514]
+sourcetype = syslog
+```
+- Edit ```\etc\apps\system\outputs.conf```
+```
+[tcpout-server://192.168.1.20:9997]
+```
+
 
 # Troubleshooting
 
@@ -86,4 +101,4 @@ targetUri = 192.168.1.2:8089
 # References
 - https://docs.splunk.com/Documentation/Forwarder/9.0.4/Forwarder/InstallaWindowsuniversalforwarderfromaninstaller
 - https://docs.splunk.com/Documentation/Forwarder/9.0.4/Forwarder/Configuretheuniversalforwarder
- 
+- https://docs.splunk.com/Documentation/Splunk/9.1.2/Admin/Inputsconf
