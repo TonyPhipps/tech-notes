@@ -256,7 +256,6 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 
 ## Find Results Not in a Subsearch of Older Events
 This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
-NOTE: You man need to surround field names that have special characters in their values with single quotes!
 
 ```
 index="something" therestofyoursearch
