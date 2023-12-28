@@ -1,15 +1,22 @@
-Split Filename from Filepath
+#### Split Filename from Filepath
 ```
 (?<Filepath>.+\\)(?<Filename>.+)
 ```
 
-Window Security Event
+#### Pull Specific Field from Windows Events
+```
+(?ms)Subject:.+?Account\sName:\s+(?<Subject_AccountName>[^\n]+)
+Logon\sType:\s+(?<LogonType>[^\n]+)
+```
+
+
+#### Window Security Event
 ```
 (?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Computer>.+?)\t(?<Field1>.+?)\t(?<EventName>[\w\s]+\.?)\s(?<UserData>.+)
 ```
 
-Windows Security Event UserData Field
-This regex is designed to target ONLY the UserData XML Field.
+#### Windows Security Event (UserData XML Field)
+
 <details>
 
 ```
@@ -19,6 +26,20 @@ This regex is designed to target ONLY the UserData XML Field.
     (\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?
     (\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?
     (\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?
+    )?
+)?
+
+(Account\sFor\sWhich\sLogon\sFailed:(?<AccounLogonFailed>
+    (\s+Security\sID:\s+(?<AccounLogonFailed_SecurityID>.+?)(?:\n|$))?
+    (\s+Account\sName:\s+(?<AccounLogonFailed_AccountName>.+?)(?:\n|$))?
+    (\s+Account\sDomain:\s+(?<AccounLogonFailed_AccountDomain>.+?)(?:\n|$))?
+    )?
+)?
+
+(Failure\sInformation:(?<FailureInformation>
+    (\s+Failure\sReason:\s+(?<FailureInfo_FailureReason>.+?)(?:\n|$))?
+    (\s+Status:\s+(?<FailureInfo_Status>.+?)(?:\n|$))?
+    (\s+Sub\sStatus:\s+(?<FailureInfo_SubStatus>.+?)(?:\n|$))?
     )?
 )?
 
@@ -49,6 +70,8 @@ This regex is designed to target ONLY the UserData XML Field.
 )?
 
 (Process\sInformation:(?<ProcessInfo>
+    (\s+Caller\sProcess\sID:\s+(?<ProcessInfo_CallerProcessID>.+?)(?:\n|$))?
+    (\s+Caller\sProcess\sName:\s+(?<ProcessInfo_CallerProcessName>.+?)(?:\n|$))?
     (\s+Process\sID:\s+(?<ProcessInfo_ProcessID>.+?)(?:\n|$))?
     (\s+Process\sName:\s+(?<ProcessInfo_ProcessName>.+?)(?:\n|$))?
     (\s+New\sProcess\sID:\s+(?<ProcessInfo_NewProcessID>.+?)(?:\n|$))?
@@ -90,7 +113,6 @@ This regex is designed to target ONLY the UserData XML Field.
     (\s+Name:\s+(?<CalloutInfo_Name>.+?)(?:\n|$))?
     )?
 )?
-
 
 (Requested\sOperation:(?<RequestedOperation>
     (\s+Desired\sAccess:\s+(?<RequestedOperation_DesiredAccess>.+?)(?:\n|$))?
@@ -171,14 +193,14 @@ This regex is designed to target ONLY the UserData XML Field.
 
 </details>
 
-Microsoft-Windows-WMI-Activity/Operation Event
-This regex is designed to target ONLY the UserData XML Field.
+#### Microsoft-Windows-WMI-Activity/Operation Event (UserData XML Field)
+
 ```
 (?<Channel>.+?)\t(?<EventRecordID>.+?)\t(?<TimeCreated>.+?)\t(?<EventID>.+?)\t(?<ProviderName>.+?)\t+(?<User>.+?)\t(?<Keywords>.+?)\t(?<Level>.+?)\t(?<Computer>.+?)\t(?<opCode>.+?)\s(?<UserData>.+)
 ```
 
-Microsoft-Windows-WMI-Activity/Operation Event UserData Field
-This regex is designed to target ONLY the UserData XML Field.
+#### Microsoft-Windows-WMI-Activity/Operation Event (UserData XML Field)
+
 ```
 (Namespace\s=\s+(?<Namespace>.+?)(?:;|$))?
 (NotificationQuery\s=\s+(?<NotificationQuery>.+?)(?:;|$))?
