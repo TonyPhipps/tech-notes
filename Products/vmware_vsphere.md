@@ -35,3 +35,9 @@ NOTE: Before updating ESXi Hosts, export a list of machine states in order to re
 - It's possible Lifecycle Manager times out, like if Remediation takes over 30min
 - "VMware vSphere Lifecycle Manager timed out waiting for host to reconnect after reboot. To ensure complete installation, reconnect the host, exit maintenance mode, and run a scan. Check host agent, vpxa and esxupdate logs for details."
 
+## Enable Jump Frames on Virtual Switches
+- Hosts > ESXi Host > Configure > Newtorking > Virtual Switches
+- SCROLL DOWN if needed.
+- EXPAND the switch by clicking the arrow on the left
+- Click EDIT
+- In Properties, set MTU (Bytes) to a maximum of 9000

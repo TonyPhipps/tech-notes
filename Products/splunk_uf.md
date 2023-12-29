@@ -21,7 +21,7 @@ Don't forget to restart the Splunk Forwarder service when making changes!
 
 
 # Listen for Syslog
-- Edit ```\etc\apps\system\inputs.conf```
+- Edit ```\etc\apps\SplunkUniversalForwarder\local\```
 ```
 [tcp://192.168.1.10:514]
 sourcetype = syslog

@@ -30,6 +30,9 @@
 frame matches "(?i)google"
 ```
 
+# Fragmentation
+(ip.flags.mf==1 or ip.frag_offset gt 0)
+
 
 
 # References and Resources
