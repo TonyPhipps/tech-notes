@@ -75,3 +75,14 @@ shutdown
 interface range gigabitethernet0/2 - 24
 shutdown
 ```
+
+### Set Jumbo Frame Support to 9000 Bytes
+(9000 bytes plus 14 byte header)
+```
+show system mtu
+config t
+system mtu jumbo bytes 9000
+end
+copy running-config startup-config
+reload
+```
