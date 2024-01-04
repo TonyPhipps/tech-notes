@@ -22,8 +22,9 @@ Don't forget to restart the Splunk Forwarder service when making changes!
 
 # Listen for Syslog
 - Edit ```\etc\apps\SplunkUniversalForwarder\local\```
+- use this format to listen to just one IP ```[tcp://192.168.1.10:514]```
 ```
-[tcp://192.168.1.10:514]
+[tcp://514]
 sourcetype = syslog
 ```
 - Edit ```\etc\apps\system\outputs.conf```
