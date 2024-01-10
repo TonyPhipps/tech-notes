@@ -298,3 +298,12 @@ index=ics-cpn-cbp-scada sourcetype="linux:messages"
 ```
 
 </details>
+
+## Multivalue Fields
+Some fields are loaded with multiple values. For example, a Members field may contain a list of members, separated by a delimeter of ";" (semicolon).
+
+Jim; Sally; Bob
+
+```
+| makemv delim=; Members
+```
