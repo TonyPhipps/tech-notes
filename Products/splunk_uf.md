@@ -11,6 +11,9 @@
   - The configuration file will be \etc\system\local\outputs.conf
   - NOTE: A server must be configured to receive on this port in order to actually receive the data sent by this client.
 
+# Input Status Page
+localhost:8089/services/admin/inputstatus
+
 # Apps
 NOTE: It's best to manage these via the server's Distributed Environment Forwarder Management interface
 - Copy app folders to \etc\apps\
