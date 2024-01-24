@@ -37,7 +37,10 @@ Should not require major adjustments between different filaments.
 - Smushed to the point its causing peaks between lines is too low
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
 - Set Bed Temp to lowest suggested temp by filament manufacturer
-- Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+- Print a thin square test
+  - [First layer test 60x60 mm square / Z calibration](https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+- Alternate model:
+  - [Calibration Strip for simple Live Z/First Layer calibration ](https://www.printables.com/model/105404-calibration-strip-for-simple-live-zfirst-layer-cal)
 
 
 # Changing Nozzle
