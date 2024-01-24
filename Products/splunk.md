@@ -52,6 +52,7 @@ System Searches
 | Review Triggered Alerts   | `index=_audit action="alert_fired"`                                                                                                                                                                                                                                                                                                                                                                                               |
 | Review Notables           | `index=notable`                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Export all Saved Searches | `\| rest /servicesNS/-/-/saved/searches \| search eai:acl.app="*" \| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id` |
+| Investigate Parse Issues  | `index=_internal log_level="ERROR" source="*keyword*"`                                                                                                                                                                                                                                                                                                                                                                            |
 
 ## Rex
 Test your regex on fake events
@@ -172,6 +173,12 @@ Some data, like from a vulnerability scanner, polls for the same data, but you m
 
 ```
 | stats latest(_time) as _time, values(field1) as field1, values(field2) as field2, by host
+```
+
+Version 2
+```
+| eventstats max(_time) as latest by host
+| where _time=latest
 ```
 
 ### Find Newly Observed Events
