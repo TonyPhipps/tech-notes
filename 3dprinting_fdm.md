@@ -31,13 +31,17 @@ Should not require major adjustments between different filaments.
 
 ## Set Initial Nozzle Height
 Should not require major adjustments between different filaments.
-- Live-adjust Nozzle Distance
-- until a solid object is produced
-- Peeling apart is too high
-- Smushed to the point its causing peaks between lines is too low
 - Set Nozzle Temp to lowest suggested temp by filament manufacturer
 - Set Bed Temp to lowest suggested temp by filament manufacturer
-- Print a thin square test (https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+- Print a Z calibration test
+  - [First layer test 60x60 mm square / Z calibration](https://www.printables.com/model/9838-first-layer-test-60x60-mm-square-z-calibration)
+- Alternate model:
+  - [Calibration Strip for simple Live Z/First Layer calibration ](https://www.printables.com/model/105404-calibration-strip-for-simple-live-zfirst-layer-cal)
+- Live-adjust Nozzle Distance until you can no longer see gaps between the lines
+  - Hold the print up to light and inpect it. It should have no gaps
+  - Peeling apart is too high of a Z offset
+  - Smushed to the point its causing peaks between lines is too low of a Z offset
+  - Repeat until satisfied
 
 
 # Changing Nozzle
