@@ -1,7 +1,9 @@
 # Splunk
 
-## Tips and Tricks
-- Alert creation - the "Suppress results with field value" field accepts comma-delimited lists of multiple items.
+## Saved Alerts
+- Use Alert Type: Scheduled whenever possible to preserve resources. Set time frame to the largest acceptable window.
+- Set an Expires time that is 2-3 times how long the search should take for the given time frame (defined by schedule)
+- The "Suppress results with field value" field accepts comma-delimited lists of multiple items.
 
 
 ## Discovery
