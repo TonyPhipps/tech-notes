@@ -117,3 +117,80 @@ Start-Job {
     hostname
 } | Wait-Job -Timeout 3 | Receive-Job
 ```
+
+
+# Active Directory
+Find AD User by Name
+```
+Get-ADUser -filter {Name -like "Phipps*"} 
+```
+
+Find AD User by EDIPI
+```
+Get-ADUser -filter {UserPrincipalName -like "1265990947*"} 
+```
+
+Get All PCs in Active Directory
+```
+Get-ADComputer -filter * | Select DNSHostName
+```
+
+Get AD Properties of a single system
+```
+Get-ADComputer -Filter {Name -like "coll64447gv"} -Properties *
+Get-ADComputer -LDAPFilter '(Name=coll64447gv)' -Properties *
+
+```
+
+Get list of Active PCs in Active Directory
+```
+$LastActiveDate = (Get-Date).Adddays(-(30)) 
+
+$ActiveComputers = Get-ADComputer -Filter {LastLogonTimeStamp -gt $LastActiveDate -and Enabled -eq $True -and OperatingSystem -like "*Windows*"} -Properties DNSHostName, IPv4Address, Enabled, OperatingSystem, OperatingSystemVersion, LastLogonDate
+```
+
+Get All Users of a Group, Recursively
+```
+$Members = Get-AdGroupMember 'J614 Cyber Emergency Response Team - (ALL)' -Recursive
+$Members | 
+  Get-ADUser -Property Name, EmailAddress, UserPrincipalName | 
+  Select Name, EmailAddress, UserPrincipalName | 
+  Export-csv C:\Users\c014736\Desktop\CERT.csv -NoTypeInformation
+```
+
+Get Exchange Servers
+```
+Get-ADComputer -Filter * -Properties * | Where-Object {$_.ServicePrincipalName -like '*exchange*'} | Select-Object name
+```
+
+# Windows Events
+Get Windows Event Logs sumamry
+```
+Get-WinEvent -ListLog * | Select-Object * | Where-Object {($_.RecordCount -ne $null) -and ($_.RecordCount -ne 0)}
+```
+
+Get Logs
+```
+Get-Winevent -LogName "Windows PowerShell"
+Get-WinEvent -LogName "Microsoft-Windows-Powershell/Operational"
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational"
+Get-WinEvent -LogName "Microsoft-Windows-PrintService/Operational"
+Get-WinEvent -LogName "Microsoft-Windows-AppLocker/EXE and DLL"
+```
+
+Filter Logs
+```
+Get-WinEvent -FilterHashtable @{LogName = "Security"; ID = "4663"}
+Get-WinEvent -FilterHashTable @{LogName="Microsoft-Windows-AppLocker/EXE and DLL"; ID="8003","8004"} | select *
+```
+
+Get Logs (with XML data)
+```
+Get-WinEvent -FilterHashTable @{LogName="Microsoft-Windows-AppLocker/EXE and DLL"; ID="8002"} | Foreach-Object { $_.ToXml() }
+```
+
+Get AppLocker Logs (different info)
+```
+Get-AppLockerFileInformation –EventLog -LogPath "Microsoft-Windows-AppLocker/EXE and DLL" –EventType Audited –Statistics
+```
+

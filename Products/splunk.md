@@ -293,6 +293,24 @@ index="something"
 |  where last_seen == first_seen
 ```
 
+## Find Latest Logon Date Among Accounts Appearing on Multiple DC's
+
+- Two date fields are lastLogon and LastLogonDate
+- The same account may have different values for these two fields, and may different from DC to DC.
+
+```
+| eval strlastLogon = strptime(lastLogon, "%m/%d/%Y %H:%M:%S %P")
+| eval strLastLogonDate = strptime(LastLogonDate, "%m/%d/%Y %H:%M:%S %P")
+| eval LatestLogonDate = case(strlastLogon >= strLastLogonDate, lastLogon, strlastLogon < strLastLogonDate, LastLogonDate)
+| eval DaysSince= ""
+| eval strLatestLogonDate = strptime(LatestLogonDate, "%m/%d/%Y %H:%M:%S %P")
+| stats max(LatestLogonDate) as LatestLogonDate values(host) as DomainControllers count by Name, Enabled, DaysSince
+| eval DaysSince=round((now()-strptime(LatestLogonDate, "%m/%d/%Y %H:%M:%S %P"))/86400,0)
+| where DaysSince >= 30
+| fields - count, DomainControllers
+| sort - DaysSince
+```
+
 
 ## Rex Magic
 
