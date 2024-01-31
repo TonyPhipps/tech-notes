@@ -1,6 +1,6 @@
 # Splunk
 
-## Saved Alerts
+## Saved Alert Guidance
 - Use Alert Type: Scheduled whenever possible to preserve resources. Set time frame to the largest acceptable window.
 - Set an Expires time that is 2-3 times how long the search should take for the given time frame (defined by schedule)
 - The "Suppress results with field value" field accepts comma-delimited lists of multiple items.
@@ -56,7 +56,123 @@ System Searches
 | Export all Saved Searches | `\| rest /servicesNS/-/-/saved/searches \| search eai:acl.app="*" \| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id` |
 | Investigate Parse Issues  | `index=_internal log_level="ERROR" source="*keyword*"`                                                                                                                                                                                                                                                                                                                                                                            |
 
-## Rex
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Lookups
+
+### Upload a Lookup
+- Navigate to the App that will use the lookup
+- Navigate to Settings > Lookups
+- Lookup Table Files > + Add New
+  - Select Destination App
+  - Locate the File
+  - Provide a CSV and name (with file extension .csv)
+- Navigate to Settings > Lookups
+- Lookup Definitions > + Add New
+  - Select Destination App
+  - Provide a name (typically matches the csv name without extension .csv)
+  - Save
+
+
+### Update a Lookup
+Lookup list files do not allow updating by default - manual recreation is required. Or... install Lookup List Editor
+- https://apps.splunk.com/apps/id/lookup_editor
+  - Navigate to Apps > Lookup Editor
+  - Find and edit the lookup
+  - Edit existing entries or...
+  - Import a new or updated version to merge with the selected lookup list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Macro
+Settings > Advanced Search > Search Macros > Add New
+- Allows storing a search string that can be referenced later using the macro name.
+- Can add arguments, which allows passing data into the macro search.
+  - Can use validation checks on arguments
+- Called using `macroname`
+
+
+## Workflow Actions
+Settings > Fields > Workflow Actions > Add New
+- Get/Post to pass information to external sources, or back to Splunk to perform secondary search
+- For example, a link that opens a browser to a WHOIS page, automatically looking up a given IP Address based on the src_ip field content via $src_ip$.
+
+
+## Data Models
+Settings > Data Models > New Data Model
+- Events, Searchs, Transactions
+- Allows mass normalization and subsequent correlation searches/reports/alerts
+- Allows more efficient reporting when used with Pivots
+- Root event/object > child object > childobject****
+- Root Search should be avoided, as they do not benefit from search speedup
+
+
+## Key Data Feed Alert
+
+Check the latest 7 days for logs, then review the last one day. If a log source has missing logs for an entire day, recent will equal zero and is worth firing an alert to the administrator.
+```
+| tstats latest(_time) as latest where index=* earliest=-7d by sourcetype, index
+| eval recent = if(latest > relative_time(now(),"-1d"),1,0)
+| eval latest = strftime(latest,"%c")
+| where recent = 0
+| table index sourcetype latest recent
+```
+
+## List All Saved Searches
+```
+| rest /servicesNS/-/-/saved/searches 
+| search eai:acl.app="*yourapp*"
+| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id
+```
+
+## Rex Magic
+
+### Derive the Application Logs within Linux:Messages
+
+<details>
+
+```
+index=ics-cpn-cbp-scada sourcetype="linux:messages"
+| rex field=_raw "^(<\d+>\s)?[^\s]+\s+[^\s]+\s+[^\s]+\s+[^\s]+\s(?<application>[^\d][^\s]+?)[\s:|\(|\[]"
+| chart count by application
+```
+
+</details>
+
+### Rex
 Test your regex on fake events
 ```
 | makeresults
@@ -64,7 +180,57 @@ Test your regex on fake events
 | rex = "your rex"
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Search Use Cases
+
+###
+Change a field's value based on its own contents
+```
+| eval sourcetype=case(
+  match(sourcetype, ".*Win.*"),"Windows", 
+  match(sourcetype, ".*mongod.*"),"mongod", 
+  match(sourcetype, ".*cisco.*"),"Cisco",
+  match(sourcetype, ".*pan\:.*"),"Panorama",
+  match(sourcetype, ".*linux\:.*"),"Linux",
+  match(sourcetype, ".*syslog.*"),"syslog",
+  match(sourcetype, "Perfmon.*"),"perfmon",
+  match(sourcetype, "Watchguard:.*"),"Watchguard",
+  match(sourcetype, "forescout.*"),"ForeScout",
+  match(sourcetype, ".*splunk.*"),"Splunk",
+  1=1, sourcetype
+)
+```
 
 ### Determine Standard Deviation
 <details>
@@ -199,73 +365,7 @@ or with tstats (when only dealing with indexed fields or data models)
 | table host, index, latest, latest_str
 ```
 
-## Lookups
-
-### Upload a Lookup
-- Navigate to the App that will use the lookup
-- Navigate to Settings > Lookups
-- Lookup Table Files > + Add New
-  - Select Destination App
-  - Locate the File
-  - Provide a CSV and name (with file extension .csv)
-- Navigate to Settings > Lookups
-- Lookup Definitions > + Add New
-  - Select Destination App
-  - Provide a name (typically matches the csv name without extension .csv)
-  - Save
-
-
-### Update a Lookup
-Lookup list files do not allow updating by default - manual recreation is required. Or... install Lookup List Editor
-- https://apps.splunk.com/apps/id/lookup_editor
-  - Navigate to Apps > Lookup Editor
-  - Find and edit the lookup
-  - Edit existing entries or...
-  - Import a new or updated version to merge with the selected lookup list
-
-
-## Macro
-Settings > Advanced Search > Search Macros > Add New
-- Allows storing a search string that can be referenced later using the macro name.
-- Can add arguments, which allows passing data into the macro search.
-  - Can use validation checks on arguments
-- Called using `macroname`
-
-
-## Workflow Actions
-Settings > Fields > Workflow Actions > Add New
-- Get/Post to pass information to external sources, or back to Splunk to perform secondary search
-- For example, a link that opens a browser to a WHOIS page, automatically looking up a given IP Address based on the src_ip field content via $src_ip$.
-
-
-## Data Models
-Settings > Data Models > New Data Model
-- Events, Searchs, Transactions
-- Allows mass normalization and subsequent correlation searches/reports/alerts
-- Allows more efficient reporting when used with Pivots
-- Root event/object > child object > childobject****
-- Root Search should be avoided, as they do not benefit from search speedup
-
-
-## Key Data Feed Alert
-
-Check the latest 7 days for logs, then review the last one day. If a log source has missing logs for an entire day, recent will equal zero and is worth firing an alert to the administrator.
-```
-| tstats latest(_time) as latest where index=* earliest=-7d by sourcetype, index
-| eval recent = if(latest > relative_time(now(),"-1d"),1,0)
-| eval latest = strftime(latest,"%c")
-| where recent = 0
-| table index sourcetype latest recent
-```
-
-## List All Saved Searches
-```
-| rest /servicesNS/-/-/saved/searches 
-| search eai:acl.app="*yourapp*"
-| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id
-```
-
-## Find Results Not in a Subsearch of Older Events
+### Find Results Not in a Subsearch of Older Events
 This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
 
 ```
@@ -285,7 +385,7 @@ index="something" therestofyoursearch
 ```
 
 
-## Find Unique Events
+### Find Unique Events
 ```
 index="something"
 | eventstats max(_time) as last_seen min(_time) as first_seen by host, ProcessName
@@ -293,7 +393,7 @@ index="something"
 |  where last_seen == first_seen
 ```
 
-## Find Latest Logon Date Among Accounts Appearing on Multiple DC's
+### Find Latest Logon Date Among Accounts Appearing on Multiple DC's
 
 - Two date fields are lastLogon and LastLogonDate
 - The same account may have different values for these two fields, and may different from DC to DC.
@@ -310,21 +410,6 @@ index="something"
 | fields - count, DomainControllers
 | sort - DaysSince
 ```
-
-
-## Rex Magic
-
-### Derive the Application Logs within Linux:Messages
-
-<details>
-
-```
-index=ics-cpn-cbp-scada sourcetype="linux:messages"
-| rex field=_raw "^(<\d+>\s)?[^\s]+\s+[^\s]+\s+[^\s]+\s+[^\s]+\s(?<application>[^\d][^\s]+?)[\s:|\(|\[]"
-| chart count by application
-```
-
-</details>
 
 ## Multivalue Fields
 Some fields are loaded with multiple values. For example, a Members field may contain a list of members, separated by a delimeter of ";" (semicolon).
