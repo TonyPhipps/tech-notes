@@ -14,3 +14,8 @@
 ```
 robocopy "d:" "c:\d" /MIR /COPYALL /ZB /TS /ETA /NP
 ```
+
+If it's preferred to not PURGE folders/files at destination, use /E rather than /MIR:
+```
+robocopy "c:\d" "d:" /E /COPYALL /ZB /TS /ETA /NP
+```

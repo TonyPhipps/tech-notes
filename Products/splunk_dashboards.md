@@ -22,6 +22,14 @@ At the applicable widget(s):
 </search>
 ```
 
+### Colorize a Table
+```
+<format type="color">
+          <colorPalette type="expression">case(value &lt; 2, "#A2CC3E", value &lt; 5, "#FFC300", value &gt; 4, "#FF5733", 1==1, "#555555")</colorPalette>
+        </format>
+```
+
+
 ### Sample Dashboard
 This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
 
