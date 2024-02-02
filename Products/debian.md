@@ -1,3 +1,11 @@
+# Minimum Specs
+- Memory: 2 GB
+- Disk: 10 GB
+
+# Live Disk
+- user: user
+- pass: live
+
 # Manual Partitioning
 - /boot/efi 300, boot flag
 - /swap/ 5120, swap flag
