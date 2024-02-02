@@ -18,6 +18,16 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 ```
 
+# install hyperv-daemons
+```
+apt-get install hyperv-daemons
+```
+
+reboot 
+```
+systemctl reboot
+ ```
+
 # Docker
 Install
 ```
