@@ -43,6 +43,8 @@ Good Reads
 
 
 # Volumes in Depth
+Stored by default on the docker server at ```/var/lib/docker/volumes```
+
 ```
 docker run -d \
   --name devtest \

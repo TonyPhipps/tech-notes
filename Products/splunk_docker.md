@@ -35,11 +35,11 @@ services:
     container_name: splunk
     hostname: splunk
     environment:
-      - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_PASSWORD
-      - SPLUNK_LICENSE_URI=Free
-      - SPLUNK_ENABLE_DEPLOY_SERVER='true'
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_ENABLE_DEPLOY_SERVER="true"
       - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_LICENSE_URI=Free
       # - SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
       # - DEBUG=true
       # - SPLUNK_UPGRADE=true
