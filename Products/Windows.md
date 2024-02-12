@@ -42,3 +42,11 @@ net start cryptsvc
 reset
 shutdown -r -t 0
 ```
+
+Attempt 4
+Download and run the MediaCreationTool###.exe
+```
+https://www.microsoft.com/en-us/software-download/windows10
+```
+
+Tell it to Update/Upgrade (to Windows 10). System components will be repaired/replaced.
