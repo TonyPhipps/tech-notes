@@ -7,10 +7,12 @@ Cumulative Updates
 
 # Repair Windows Store Apps
 ```
+wreset
 sfc /scannow
 Dism /Online /Cleanup-Image /ScanHealth
 Dism /Online /Cleanup-Image /CheckHealth
 Dism /Online /Cleanup-Image /RestoreHealth
 Get-ChildItem "C:\Windows\SoftwareDistribution\Download" | Remove-Item
 Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register “$($_.InstallLocation)AppXManifest.xml”}
+shutdown -r -t 0
 ```
