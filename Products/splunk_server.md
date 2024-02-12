@@ -42,9 +42,6 @@ chmod -R 700 $SPLUNK_HOME
 edit ```/etc/init.d/splunk```
 after ```RETVAL=0``` add ```USER=bob```
 
-
-
-
 ## Create Indexes
 Consider creating an index for each log pipeline
 - Settings > Indexes > New Index
@@ -91,6 +88,11 @@ Verify edits made it in to live inputs via
 $SPLUNK_HOME/bin/splunk btool inputs list --debug
 ```
 
+## Receive Linux Logs
+- Apps > Manage Apps > Browse More Apps
+- Search for "linux"
+- Splunk Add-on for Unix and Linux
+
 ## Syslog (UDP)
 Conf approach
 Edit ```$SPLUNK_HOME/etc/system/local/inputs.conf``` and add your input. After your inputs are added, Splunk will need to be restarted (or forced to reload inputs) to recognize these changes.
@@ -121,7 +123,7 @@ Not recommended, but here's how...
   - Add a line ```no_appending_timestamp = true``` to the udp stanza matching the one just created.
   - Reload inputs via ```./splunk _internal call /services/data/inputs/monitor/_reload -auth```
 
-# Monitor a Folder
+## Monitor a Folder
 inputs.conf snippet depicting ingestion from the server itself at path /ingest
 ```
 [monitor:///ingest]
@@ -134,7 +136,7 @@ whitelist = .*\.txt
 
 See https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf
 
-# Manually Provide Logs
+## Manually Provide Logs
 - Add an Uploader Role
 - Navigate to Settings > Access Controls > Roles
 - Add an "Uploader" role with the "input_file" capability.

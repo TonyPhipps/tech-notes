@@ -11,6 +11,35 @@
   - The configuration file will be \etc\system\local\outputs.conf
   - NOTE: A server must be configured to receive on this port in order to actually receive the data sent by this client.
 
+# Linux Installation
+Download: https://www.splunk.com/en_us/download/universal-forwarder.html
+```
+sudo $SPLUNK_HOME/bin/splunk start --accept-license
+```
+Then provide a local user/pass.
+
+```
+/opt/splunkforwarder/bin/splunk set deploy-poll localhost:8089
+```
+Supply the user/pass made earlier.
+
+Restart Splunk
+```
+/opt/splunkforwarder/bin/splunk restart
+```
+
+Setup data to forward to Splunk
+```
+/opt/splunkforwarder/bin/splunk add forward-server localhost:9997
+/opt/splunkforwarder/bin/splunk add monitor /var/log
+/opt/splunkforwarder/bin/splunk restart
+```
+
+Ref:
+- https://docs.splunk.com/Documentation/Forwarder/latest/Forwarder/Installanixuniversalforwarder
+- https://docs.splunk.com/Documentation/Forwarder/latest/Forwarder/Enableareceiver
+- https://docs.splunk.com/Documentation/Forwarder/9.2.0/Forwarder/Configuretheuniversalforwarder
+
 # Input Status Page
 localhost:8089/services/admin/inputstatus
 
