@@ -17,6 +17,14 @@ List sourcetypes available
 index=something | fields index,sourcetype | stats count by index,sourcetype
 ```
 
+## Ingestion Stats
+```
+index=_internal source=*license_usage.log* type=Usage idx=yourindex
+| eval GB=b/1024/1024/1024 
+| stats sum(GB) by idx, st 
+| rename idx as index, st as sourcetype
+```
+
 ## Search Quick Reference
 
 | Goal                                                                                                  | Example                                                                                                                                            |
