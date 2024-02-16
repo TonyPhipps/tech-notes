@@ -31,7 +31,6 @@ Start-Job {
 ```
 
 
-
 # Arrays
 Add a property to each item in arrray
 ```
@@ -43,6 +42,11 @@ foreach ($Item in $Array) {
 Deduplicate An Array of Objects By Selecting Only the Latest Date
 ```
 $UniqueList = $completelist | Group-Object -Property ID | ForEach-Object{$_.Group | Sort-Object -Property StartTime -Descending | Select-Object -First 1}
+```
+
+Merge Two Arrays
+```
+$MergedArray = $Array1 + $Array2
 ```
 
 Group On Multiple Fields, then Restore Those Field Values
