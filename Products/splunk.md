@@ -25,6 +25,8 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 | rename idx as index, st as sourcetype
 ```
 
+
+
 ## Search Quick Reference
 
 | Goal                                                                                                  | Example                                                                                                                                            |
@@ -166,7 +168,9 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 | table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id
 ```
 
-## Rex Magic
+## Regular Expression / Regex / Rex
+- If \t doesn't work, remember you can fall back to \s
+
 
 ### Derive the Application Logs within Linux:Messages
 
