@@ -31,12 +31,13 @@ Cones of Calibration, by Tabletop Foundry
 ## Prepare
 - Select the model
 - Layout
-  - Rotate back 40deg so face is on looking up
+  - Rotate back 10-40deg so face is on looking up
 - Prepare
   - Click Light
   - Click Auto
     - Change Supports density to Ultra
-    - Generate Automatic Supports
+    - Change Serach for Ground to the maximum
+    - Dropdown by Generate Automatic Supports > Supports On Gorund Only
   - Click Island
     - Set Accuracy to Real
     - Click Search Selected
@@ -44,6 +45,7 @@ Cones of Calibration, by Tabletop Foundry
       - If any spots fail, add new "Light" or "Mini Supports" where the red dots show up
   - REMOVE supports as needed.
     - Most supports on areas NOT marked as an overhand.
+    - NOTE that if removing a support causes the overhang highlighting to disappear, you've just removed a support on an island. Just use the Island button to readd it.
   - Add supports as needed
     - Try to attach to existing bases if able (hold ALT on the model, then the support base)
     - Only make a support "mini" if

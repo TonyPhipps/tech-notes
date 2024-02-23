@@ -43,42 +43,6 @@ Should not require major adjustments between different filaments.
   - Smushed to the point its causing peaks between lines is too low of a Z offset
   - Repeat until satisfied
 
-
-# Changing Nozzle
-Reference 
-https://help.prusa3d.com/article/changing-replacing-the-nozzle-mini_134235
-
-## Prep
-
-- 16mm wrench/spanner, or an adjustable wrench to secure the heater block
-  - A very large spanner or an adjustable wrench can quickly drain heat from the heater block and may cause a Thermal runaway error, depending on how it grips the block.
-- A pair of pliers or a 7mm socket to unscrew the nozzle
-- Non-flammable surface to place the used hot nozzle on (i.e. plate or aluminum foil).
-- Unload the filament. Optionally, do a coldpull.
-
-## Steps
-- Preheat to 230c
-- Clean the heat block and nozzle as necessary (brass brush)
-- Preheat to 270-280c
-- Move Z axis up to max
-- Hold Heat Block with wrench to prevent twisting
-- Use 7mm socket to unscrew the HOT nozzle and place in tray
-- Insert new nozzle and screw until it stops moving (not excessive)
-- Ensure a small gap between nozzle top and heat block after installing (~.5mm)
-- Clean the print bed
-- Perform first layer calibration
-
-## Adjust Bed Temp
-Should not require major adjustments between different filaments.
-- Go up 1-5deg if pieces lift off on edges
-- Slightly higher temp for first layers (usually 5deg higher).
-- Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
-
-## E-Steps
-- https://teachingtechyt.github.io/calibration.html#esteps
-- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
-
-
 # Filament Calibration
 Assuming your printer is already calibrated, it's recommended some settings be tuned specifically to each filament vendor/type/feature/color variation. Details are provided after this quick summary.
 
@@ -112,6 +76,7 @@ Print a [cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-me
 - https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
 - https://teachingtechyt.github.io/calibration.html#linadv
 - This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
+- M221 is the Marlin firmware code for extrusion multiplier, if needed
 
 ## Temperature
 - Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
@@ -124,11 +89,13 @@ Print this and adjust settings
  - https://www.printables.com/model/105989-fast-stringing-retraction-tests/
  
 ### Retraction Distance / Length
+- PETG - best to retract slower (30 mm/s) and re-prime even slower (15 mm/s)
 - PETG - Direct Drive: 2 - 4mm
 - PETG - Bowden: 5-7mm. Print a retraction tower at 5, 6, and 7. If you like, go down to .5 increments to find the best length/distance.
 - It's too low if stringing occurs.
 - If you get blobs, but minimal stringing, move on to Retraction Speed.
 - DO NOT exceed the overall length of the nozzle (from the tip to the big opening the filament enters at) or you may cause jams
+
 
 ### Retraction Z-Lift
 
@@ -188,6 +155,41 @@ Great calibration guide alternatives that may provide useful tips/clarifications
 Layer height should not exceed 80% of the width of hte nozzle
 - .25mm nozzle max layer height = .2mm
 - .40mm nozzle max layer height = .32mm
+
+
+# Changing Nozzle
+Reference 
+https://help.prusa3d.com/article/changing-replacing-the-nozzle-mini_134235
+
+## Prep
+
+- 16mm wrench/spanner, or an adjustable wrench to secure the heater block
+  - A very large spanner or an adjustable wrench can quickly drain heat from the heater block and may cause a Thermal runaway error, depending on how it grips the block.
+- A pair of pliers or a 7mm socket to unscrew the nozzle
+- Non-flammable surface to place the used hot nozzle on (i.e. plate or aluminum foil).
+- Unload the filament. Optionally, do a coldpull.
+
+## Steps
+- Preheat to 230c
+- Clean the heat block and nozzle as necessary (brass brush)
+- Preheat to 270-280c
+- Move Z axis up to max
+- Hold Heat Block with wrench to prevent twisting
+- Use 7mm socket to unscrew the HOT nozzle and place in tray
+- Insert new nozzle and screw until it stops moving (not excessive)
+- Ensure a small gap between nozzle top and heat block after installing (~.5mm)
+- Clean the print bed
+- Perform first layer calibration
+
+## Adjust Bed Temp
+Should not require major adjustments between different filaments.
+- Go up 1-5deg if pieces lift off on edges
+- Slightly higher temp for first layers (usually 5deg higher).
+- Consider using a glue like Elmer's purple gluestick if maximum temp doesn't help
+
+## E-Steps
+- https://teachingtechyt.github.io/calibration.html#esteps
+- Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
 
 # Troubleshooting
 
