@@ -25,7 +25,6 @@ https://www.mpcfill.com/
 - Put the cards.xml file in the same directory as autofill-windows.exe
 - Rename cards.xml to something else. The project will automatically be named after this on your MakePlayingCards account
 - Run autofill-windows.exe
-- Say NO to post-processing images
 - When automation begins, it will navigate to https://www.makeplayingcards.com/ and request that you log in
 - After logging in, the software will create a new project and begin downloading/inserting files into the project
 - This can easily take 5-10 seconds PER CARD.
