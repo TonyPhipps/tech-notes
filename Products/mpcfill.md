@@ -4,7 +4,7 @@
 - Go to https://github.com/chilli-axe/mpc-autofill/releases/
 - Download autofill-windows.exe
 - Create a list of cards. MakePlayingCards charges per 100 cards, so keep your count near one of those increments.
-- You can expect to pay 20c - 25c per card. Obviously some cards you may as well just buy.
+- You can expect to pay 20c - 30c per card. Obviously some cards you may as well just buy.
 
 # Create the XML 
 https://www.mpcfill.com/
