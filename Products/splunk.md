@@ -364,14 +364,16 @@ Version 2
 ### Find Newly Observed Events
 This specific example basically says "show me EventCodes that were not observed in the last 6h.
 ```
-source=WinEventLog:System NOT ([| search source=WinEventLog:System earliest=-6h | table EventCode]) | stats count by EventCode
+source=WinEventLog:System NOT ([
+  | search source=WinEventLog:System earliest=-6h | table EventCode]) 
+| stats count by EventCode
 ```
 
 or with tstats (when only dealing with indexed fields or data models)
 
 ```
 | tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
-    [| tstats latest(_time) where index=something sourcetype=this earliest=-7d latest=-1d by index, host 
+    [| tstats latest(_time) where index=something sourcetype=this earliest=-8d latest=-1d by index, host 
     | table index, host]) by index, host 
 | eval latest_str = strftime(latest,"%c")
 | table host, index, latest, latest_str
@@ -381,16 +383,16 @@ or with tstats (when only dealing with indexed fields or data models)
 This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
 
 ```
-index="something" therestofyoursearch
+index="something" TheResOfYourSearch
 | stats count by _time, host, field1, field2
 | fields - count 
 | search 
-    [ search index="something" therestofyoursearch earliest=-7d latest=-1d 
+    [ search index="something" TheResOfYourSearch earliest=-8d latest=-1d 
     | stats count by host
     | fields - count
         ]
 | search NOT
-    [ search index="something" therestofyoursearch earliest=-7d latest=-1d 
+    [ search index="something" TheResOfYourSearch earliest=-8d latest=-1d 
     | stats count by 'field1'
     | fields - count
         ]
