@@ -3,15 +3,19 @@
 Uses a 1.8 degree stepper with a leadscrew with 4mm lead. This makes the distance corresponding to a full step 4/200 = 0.02mm. Your layer height should be a multiple of this.
 Source: https://github.com/prusa3d/Original-Prusa-MINI/blob/master/DOCUMENTATION/ELECTRONICS/mini-motor-kit.pdf
 
-# Beep When Done Printing
+# Wait 5 Min for Plate Cooling, then Beep When Done Printing
 Printer Settings > Custom G-code > End G-Code
 Add this to the end
 
 ```
-M300 S1000 P500 ;First beep
-M300 S0 P500 ;Wait
-M300 S1000 P1000 ;Second beep
-M300 S0 P500 ;Wait
+; Wait 5min for plate to cool
+G4 S300 ;Wait
+
+; Play DONE Beeps
+M300 S1000 P1500 ;First beep
+G4 P1 ;Wait
+M300 S750 P1000 ;Second beep
+G4 P1 ;Wait
 M300 S1000 P1500 ;Third beep
 ```
 
