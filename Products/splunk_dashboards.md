@@ -25,7 +25,8 @@ At the applicable widget(s):
 ### Auto Filter Special Characters when Assigning Dashboard Tokens
 When using the contents of a search to assign a variable to a value via click action, use ```$click.value|s$``` to get Splunk to parse as a string, rather than attempting to pick up characters like ```\``` as an escape character.
 
-NOT in the Drilldown definition, in the search string.
+- NOT in the Drilldown definition, in the search string.
+- Remove quotes, if they were used around the variable $'s.
 
 ### Colorize a Table
 ```
