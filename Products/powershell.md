@@ -125,8 +125,33 @@ $base64_string = "VABoAGkAcwAgAGkAcwAgAGEAIABzAGUAYwByAGUAdAAgAGEAbgBkACAAcwBoAG
 [System.Text.Encoding]::Default.GetString([System.Convert]::FromBase64String($base64_string))
 ```
 
-Resolve Shortened URL
+Fix $ScriptRoot so its the same whether in ISE or regular Powershell console.
 ```
-$URL = "http://tinyurl.com/KindleWireless"
-(Invoke-WebRequest -Uri $URL -MaximumRedirection 0 -ErrorAction Ignore).Headers.Location
+if ($psISE) {
+    $ScriptRoot = Split-Path -Path $psISE.CurrentFile.FullPath -Parent
+} else {
+    $ScriptRoot = $PSScriptRoot
+}
+```
+
+
+Opens Powershell ISE as administrator under alternate credentials. 
+*Window will show Administrator:, but with alternate administrative credentials. Often necessary where least privilege is desired, like logging in as user, then elevating to an administrator with Runas.*
+```
+$Account = "domain\service_account"
+$Credential = Get-Credential $Account
+Start-Process $PsHome\powershell.exe -Credential $Credential -ArgumentList "-Command Start-Process $PSHOME\powershell_ise.exe -Verb Runas" -Wait
+```
+
+Grant access to specific files in a privileged user profile relatively safely.
+```
+$path = "C:\Users\Administrator\Desktop"
+$path = "C:\Users\Administrator\Downloads"
+$path = "C:\Users\Administrator\Documents"
+
+$ACL = Get-ACL -Path $path
+$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone","Read","Allow")
+$ACL.SetAccessRule($AccessRule)
+$ACL | Set-Acl -Path $path
+(Get-ACL -Path $path).Access | Format-Table IdentityReference,FileSystemRights,AccessControlType,IsInherited,InheritanceFlags -AutoSize
 ```
