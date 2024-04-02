@@ -155,3 +155,20 @@ $ACL.SetAccessRule($AccessRule)
 $ACL | Set-Acl -Path $path
 (Get-ACL -Path $path).Access | Format-Table IdentityReference,FileSystemRights,AccessControlType,IsInherited,InheritanceFlags -AutoSize
 ```
+
+Try Catch Errors Template
+```
+try {
+
+} catch [Microsoft.Management.Infrastructure.CimException] {
+    if ($_.Exception.Message -match "Cannot create a file when that file already exists" ) {
+        Write-Host ("Explanation of the error for {0}." -f $Variable) -ForegroundColor Red
+        return 1
+    } elseif ($_.Exception.Message -match "No mapping between account names and security IDs was done" ) {
+        Write-Host ("Explanation of the other error for {0}." -f $Variable) -ForegroundColor Red
+        return 1
+    } else {
+        throw $_
+    }
+}
+```
