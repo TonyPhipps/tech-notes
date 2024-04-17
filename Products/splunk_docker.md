@@ -14,16 +14,6 @@ Run
 docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='<password>' splunk/splunk:latest
 ```
 
-Display container status
-```
-docker ps -a -f id=<container_id>
-```
-
-Open Splunk
-```
-localhost:8000
-```
-
 # Setup Option 2
 Create a docker-compose.yml  file:
 
@@ -80,6 +70,9 @@ To see a list of example commands and environment variables for running Splunk E
 To see a list of your running containers, run:
 
 ```docker ps```
+
+Display single container status
+```docker ps -a -f id=<container_id>```
 
 To stop your Splunk Enterprise container, run:
 
