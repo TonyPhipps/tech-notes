@@ -43,7 +43,9 @@ Good Reads
 
 
 # Volumes in Depth
-Stored by default on the docker server at ```/var/lib/docker/volumes```
+Defined as [sourceOnHost]:[destinationInContainer]
+
+If you define [sourceOnHost] as a full path, it will store in that folder. If you define it as a name only, it will store by default on the docker server at ```/var/lib/docker/volumes```
 
 ```
 docker run -d \

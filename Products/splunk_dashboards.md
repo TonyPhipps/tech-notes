@@ -1,3 +1,24 @@
+### Tokens
+
+```$env:user$``` 	          Current user's username
+```$env:user_realname$``` 	Current user full name.
+```$env:user_email$``` 	    Current user email address.
+```$env:user_timezone$``` 	Resolves the timezone to the user's preferred timezone. ```The token resolves to the default system timezone or the localized ```equivalent if the user doesn't specify a timezone.
+```$env:app$```           	Current app context
+```$env:locale$``` 	        Current locale
+```$env:page$``` 	          Currently open page
+```$env:product$``` 	      Current instance product type
+```$env:instance_type$``` 	Indicates whether the current instance is a Splunk Cloud Platform or Splunk Enterprise deployment
+```$env:is_cloud$``` 	      Indicates if the current instance is Splunk Cloud Platform. This token is only set when "true".
+```$env:is_enterprise$``` 	Indicates if the current instance is a Splunk Enterprise deployment. This token is only set when "true".
+```$env:is_hunk$``` 	      Indicates if the current instance is a Hunk deployment. This token is only set when "true".
+```$env:is_lite$``` 	      Indicates if the current instance is a Splunk Light deployment. This token is only set when "true".
+```$env:is_lite_free$``` 	  Indicates if the current instance is using a Splunk Light free license. This token is only set when "true".
+```$env:is_free$``` 	      Indicates if the current instance is using a Splunk Enterprise free license. This token is only set when "true".
+```$env:version$``` 	      Current instance product version 
+
+Reference: 
+
 ### Search Base
 At the top:
 ```
@@ -21,6 +42,24 @@ At the applicable widget(s):
   </query>
 </search>
 ```
+
+### Checkbox to Toggle Tokens
+```
+<input type="checkbox" token="Checked" searchWhenChanged="true">
+      <label></label>
+      <choice value="yes">Checkbox Text</choice>
+      <delimiter> </delimiter>
+      <change>
+        <condition value="yes">
+          <set token="TokenToChange">ValueWhenChecked</set>
+        </condition>
+        <condition>
+          <set token="TokenToChange">ValueWhenNotChecked</set>
+        </condition>
+      </change>
+    </input>
+```
+
 
 ### Auto Filter Special Characters when Assigning Dashboard Tokens
 When using the contents of a search to assign a variable to a value via click action, use ```$click.value|s$``` to get Splunk to parse as a string, rather than attempting to pick up characters like ```\``` as an escape character.
@@ -115,7 +154,7 @@ Add this as your first \<row\>
 ...
 ```
 
-Add this just after the <title> closes for the panel you'd like to be collapsible.
+Add this just after the \<title> closes for the panel you'd like to be collapsible.
 ```
 ...
 </title>
@@ -145,4 +184,23 @@ Add this just after the <title> closes for the panel you'd like to be collapsibl
         <search>
 		...
   ```
+
 </details>
+
+
+### Parse Data From Background Search to Token
+
+NOTE: Requires the "dispatch_rest_to_indexers" capability.
+
+```
+<search>
+  <query>| rest /servicesNS/-/-/data/ui/views search="eai:acl.app=$env:app$ label=$env:page$"
+| rex field="eai:data" "theme\=\"(?&lt;theme&gt;.+?)\""
+| stats values(theme) as theme</query>
+  <earliest>0</earliest>
+  <latest></latest>
+  <done>
+    <set token="theme_tok">$result.theme$</set>
+  </done>
+</search>
+```
