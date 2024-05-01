@@ -60,6 +60,54 @@ At the applicable widget(s):
     </input>
 ```
 
+### Dropdown to Toggle Tokens
+This sample provides a dropdown that dynamically builds its dropdown list (Display+Value) based on a search, then sets tokens accordingly.
+
+```
+<input type="dropdown">
+      <label>A vs B vs C</label>
+      <change>
+        <condition value="selection_a">
+          <set token="dropdownSelection">A</set>
+        </condition>
+        <condition value="selection_b">
+          <set token="dropdownSelection">B</set>
+        </condition>
+        <condition value="selection_c">
+          <set token="dropdownSelection">C</set>
+        </condition>
+      </change>
+      <fieldForLabel>MenuDisplayString</fieldForLabel>
+      <fieldForValue>MenuValueString</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+      <search>
+        <query>
+          | eventcount summarize=false index=ics-* 
+          | eval whichOne = case(
+            match(_raw,"term_a"),"result_a",
+            match(_raw,"term_b"),"result_b",
+            match(_raw,"term_c"),"result_c"
+            ) 
+          | stats sum(count) as count by whichOne
+          | eval MenuDisplayString = case(
+            match(whichOne,"result_a"),"Choose A",
+            match(whichOne,"result_b"),"Choose B",
+            match(whichOne,"result_c"),"Choose C"
+            )
+          | eval MenuValueString = case(
+            match(whichOne,"result_a"),"selection_a",
+            match(whichOne,"result_b"),"selection_b",
+            match(whichOne,"result_c"),"selection_c"
+            )
+          | fields whichOne MenuDisplayString MenuValueString
+          | sort whichOne
+      </query>
+        <earliest>-7d@d</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+```
+
 
 ### Auto Filter Special Characters when Assigning Dashboard Tokens
 When using the contents of a search to assign a variable to a value via click action, use ```$click.value|s$``` to get Splunk to parse as a string, rather than attempting to pick up characters like ```\``` as an escape character.
