@@ -11,7 +11,7 @@ After Layer Chang G-Code:
 
 ```
 ;AFTER_LAYER_CHANGE
-{if layer_num == 2} M300 S1000 P1500 ; beep {endif}
+{if layer_num == 1} M300 S1000 P1500 ; beep {endif}
 ;[layer_z]
 ```
 
@@ -22,7 +22,7 @@ Add this to the end
 
 ```
 ; Wait 5min for plate to cool
-G4 S300 ;Wait
+G4 S480 ;Wait
 
 ; Play DONE Beeps
 M300 S1000 P1500 ;First beep
