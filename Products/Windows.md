@@ -8,9 +8,10 @@ Cumulative Updates
 # Repair Windows Store Apps
 Attempt 1
 ```
-wsreset
+Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+wsreset.exe
+Library > "Get Updates"
 ```
-
 
 Attempt 2
 ```
