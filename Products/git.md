@@ -1,4 +1,4 @@
-First time setup
+First time setup (remove --global to set for just the current repository)
 ```
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
@@ -29,7 +29,13 @@ Remove SSL Certificate verification
 git config http.sslVerify false
 ```
 
+Fix the error "SSL certificate problem: unable to get local issuer certificate"
+```
+git config --global http.sslBackend schannel
+```
+
 Display recent Git Changes
 ```
 git --no-pager log --pretty=format:'\"%h\", \"%an\", \"%ci\", \"%s\", \"%b\"' --after "2023-11-30"
 ```
+
