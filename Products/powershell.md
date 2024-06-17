@@ -172,3 +172,41 @@ try {
     }
 }
 ```
+
+
+Assign a Variable via Switch
+```
+$day = 3
+
+$result = switch ( $day )
+{
+    0 { 'Sunday'    }
+    1 { 'Monday'    }
+    2 { 'Tuesday'   }
+    3 { 'Wednesday' }
+    4 { 'Thursday'  }
+    5 { 'Friday'    }
+    6 { 'Saturday'  }
+}
+
+$result
+$result.GetType() 
+```
+
+Assign a Variable an Array or String via Switch
+```
+$day = "Friday"
+
+$result = switch ( $day )
+{
+    "Monday"    { "Agenda Item 1", "Agenda Item 2" }
+    "Tuesday"   { "Agenda Item 3", "Agenda Item 4" }
+    "Wednesday" { "" }
+    "Thursday"  { "Agenda Item 5" }
+    "Friday"    { "Agenda Item 6", "Agenda Item 7" }
+    default     { "Weekend!" }
+}
+
+$result
+$result.GetType() 
+```
