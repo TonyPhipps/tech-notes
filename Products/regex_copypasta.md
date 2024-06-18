@@ -21,33 +21,32 @@ Logon\sType:\s+(?<LogonType>[^\n]+)
 
 ```
 (Subject:(?<Subject>
-    (\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?
-    (\s+Account\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?
-    (\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?
-    (\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?
-    (\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?
+    (\s\sSecurity\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?
+    (\s\sAccount\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?
+    (\s\sAccount\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?
+    (\s\sLogon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?
+    (\s\sLogon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?
     )?
 )?
 
-(Account\sFor\sWhich\sLogon\sFailed:(?<AccounLogonFailed>
-    (\s+Security\sID:\s+(?<AccounLogonFailed_SecurityID>.+?)(?:\n|$))?
-    (\s+Account\sName:\s+(?<AccounLogonFailed_AccountName>.+?)(?:\n|$))?
-    (\s+Account\sDomain:\s+(?<AccounLogonFailed_AccountDomain>.+?)(?:\n|$))?
-    )?
-)?
+Account\sFor\sWhich\sLogon\sFailed:(?<AccounLogonFailed>
+    \s+Security\sID:\s\s(?<AccounLogonFailed_SecurityID>[^\r\n]+)?$
+    \s+Account\sName:\s\s(?<AccounLogonFailed_AccountName>[^\r\n]+)?$
+    \s+Account\sDomain:\s\s(?<AccounLogonFailed_AccountDomain>[^\r\n]+?)?$
+)
 
 (Failure\sInformation:(?<FailureInformation>
-    (\s+Failure\sReason:\s+(?<FailureInfo_FailureReason>.+?)(?:\n|$))?
-    (\s+Status:\s+(?<FailureInfo_Status>.+?)(?:\n|$))?
-    (\s+Sub\sStatus:\s+(?<FailureInfo_SubStatus>.+?)(?:\n|$))?
+    (\s\sFailure\sReason:\s+(?<FailureInfo_FailureReason>.+?)(?:\n|$))?
+    (\s\sStatus:\s+(?<FailureInfo_Status>.+?)(?:\n|$))?
+    (\s\sSub\sStatus:\s+(?<FailureInfo_SubStatus>.+?)(?:\n|$))?
     )?
 )?
 
 (Creator\sSubject:(?<CreatorSubject>
-    (\s+Security\sID:\s+(?<CreatorSubject_SecurityID>.+?)(?:\n|$))?
-    (\s+Account\sName:\s+(?<CreatorSubject_AccountName>.+?)(?:\n|$))?
-    (\s+Account\sDomain:\s+(?<CreatorSubject_AccountDomain>.+?)(?:\n|$))?
-    (\s+Logon\sID:\s+(?<CreatorSubject_LogonID>.+?)(?:\n|$))?
+    (\s\sSecurity\sID:\s+(?<CreatorSubject_SecurityID>.+?)(?:\n|$))?
+    (\s\sAccount\sName:\s+(?<CreatorSubject_AccountName>.+?)(?:\n|$))?
+    (\s\sAccount\sDomain:\s+(?<CreatorSubject_AccountDomain>.+?)(?:\n|$))?
+    (\s\sLogon\sID:\s+(?<CreatorSubject_LogonID>.+?)(?:\n|$))?
     )?
 )?
 
