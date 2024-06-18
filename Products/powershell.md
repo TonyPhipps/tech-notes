@@ -161,16 +161,23 @@ Try Catch Errors Template
 - Use the value of ```$Error[0].Exception.GetType().FullName``` in the catch square brackets [] as shown below.
 - Use the value of ```$Error[0].Exception.Message``` to match on the first line of the error presented.
 ```
-try { NonsenseString }
-catch [System.Management.Automation.CommandNotFoundException] { 
-    if ($_.Exception.Message -match "is not recognize1d" ) {
+try { 
+    yourcode
+}
+catch [System.Management.Automation.CommandNotFoundException] { # an error you are aware of, and want to handle specifically
+    if ($_.Exception.Message -match "is not recognized" ) {
         Write-Information -InformationAction Continue -MessageData ("That's not a command.")
         return 1
     } else {
-        Write-Information -InformationAction Continue -MessageData ("Error: `n`t{0}" -f $_.Exception.GetType().FullName)
-        Write-Information -InformationAction Continue -MessageData ("Message: `n`t{0}" -f $_.Exception.Message)
+        Write-Information -InformationAction Continue -MessageData ("Error to catch: `n`t{0}" -f $_.Exception.GetType().FullName)
+        Write-Information -InformationAction Continue -MessageData ("Message to filter: `n`t{0}" -f $_.Exception.Message)
         throw $_
     }    
+}
+catch { # catch all remaining errors and provide info to capture them specifically
+    Write-Information -InformationAction Continue -MessageData ("Error to catch [] on: `n`t{0}" -f $_.Exception.GetType().FullName)
+    Write-Information -InformationAction Continue -MessageData ("Message to filter: `n`t{0}" -f $_.Exception.Message)
+    throw $_
 }
 ```
 
