@@ -157,19 +157,20 @@ $ACL | Set-Acl -Path $path
 ```
 
 Try Catch Errors Template
+- When debugging, you can use ```$Error[-1] | Select-Object *``` to see the details of the last error thrown.
+- Use the value of ```$Error[0].Exception.GetType().FullName``` in the catch square brackets [] as shown below.
+- Use the value of ```$Error[0].Exception.Message``` to match on the first line of the error presented.
 ```
-try {
-
-} catch [Microsoft.Management.Infrastructure.CimException] {
-    if ($_.Exception.Message -match "Cannot create a file when that file already exists" ) {
-        Write-Host ("Explanation of the error for {0}." -f $Variable) -ForegroundColor Red
-        return 1
-    } elseif ($_.Exception.Message -match "No mapping between account names and security IDs was done" ) {
-        Write-Host ("Explanation of the other error for {0}." -f $Variable) -ForegroundColor Red
+try { NonsenseString }
+catch [System.Management.Automation.CommandNotFoundException] { 
+    if ($_.Exception.Message -match "is not recognize1d" ) {
+        Write-Information -InformationAction Continue -MessageData ("That's not a command.")
         return 1
     } else {
+        Write-Information -InformationAction Continue -MessageData ("Error: `n`t{0}" -f $_.Exception.GetType().FullName)
+        Write-Information -InformationAction Continue -MessageData ("Message: `n`t{0}" -f $_.Exception.Message)
         throw $_
-    }
+    }    
 }
 ```
 
