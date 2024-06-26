@@ -89,10 +89,12 @@ Edit Mode
 - 2               Edge Select
 - 3               Face Select
 - ALT+Z           Toggle x-ray
+- P               Separate the meshes within an object into separate objects
 
 Tools
 - W               Select Tool (press again to toggle between tool subtypes)
 - C               Circle selection tool
+- G               Grab an object to MOVE it
 
 Selection Tool
 - SHIFT           Inrease selection
@@ -106,6 +108,33 @@ Selection Tool
 - Z               (or X or Z) Constrain object movement to the specificed axis
 - SHIFT + Z       (or X or Z) Constrain object movement to the remaining two axis (X,Y in this case)
 - F9              Popup original creation quick menu
+
+# Snap One Object to Another
+- Determine corner/face that will snap to another object, then set it as the first object's Origin
+  - Object mode > Select object
+  - Set the origin 
+  - SHIFT + Right Click to set 3d Cursor (hold control to snap to vertex/face)
+  - Right click > Set Origin > Origin to 3d Cursor
+- Determine the corner/face that the first object should snap/move its Origin to, then set the 3d Cursor there, then snap
+  - SHIFT + Right Click to set 3d Cursor (hold control to snap to vertex/face)
+  - SHIFT + S > Selection to Cursor
+
+# Split Two Meshes to Two Objects
+
+
+# Merge Two Objects
+- Select both via SHIFT + Click
+- CONTROL + J
+
+
+# Change Dimensions (Safely) Of an Object
+- Object Mode
+- Select the object
+- Press N > Item tab
+- Set Dimensions
+- CONTROL + A to bring up Apply menu
+- Select Scale
+
 
 # Make Text 3d
 - Enter Object Mode
