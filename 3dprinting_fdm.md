@@ -76,8 +76,11 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 ## Extrusion Multiplier / Flow
 
 ### Precise Method
-Download the 40mm [cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip).
-- Slice it using the Vase Mode and your most-often used layer height and print it. You can find Vase mode (Print Settings →  Layers and perimeters →  Spiral vase).
+- Get or make a model of a cube, at least 30mm
+- Layers and perimeters > Vertical Shells > Perimeters > 2
+- Layers and perimeters > Horizontal Shells > Solid Layers > Top > 0
+- Infill > Fill density > 0%
+- Advanced > Extrusion Width > Perimeters > Set External Perimeters and Perimeters to the same value. Note the value, you will use it to measure accuracy after printing.
 - Make three or more measurements in the middle of each wall and calculate the overall average thickness.
 - Calculate the extrusion multiplier using the following formula: Extrusion multiplier = (Current Extrusion width (0.45) / Average measured wall thickness).
 - Adjust the Extrusion Multiplier in Filament Settings → Filament
