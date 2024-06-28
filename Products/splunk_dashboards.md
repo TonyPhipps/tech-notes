@@ -1,3 +1,9 @@
+# Theme
+Set theme to light/dark via URL
+```
+https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
+```
+
 ### Tokens
 
 ```$env:user$``` 	          Current user's username
