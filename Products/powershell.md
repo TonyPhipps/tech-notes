@@ -60,6 +60,10 @@ ForEach ($Result in $GroupedStuff) {
 }
 ```
 
+Compare two arrays to determine if equal
+```
+[Collections.Generic.SortedSet[String]]::CreateSetComparer().Equals($FirstArray,$SecondArray)
+```
 
 # Hashtables
 Sort A Hashtable by Key Name
@@ -89,8 +93,44 @@ Merge CSV files
 Get-ChildItem *.csv | Select-Object name -ExpandProperty name | Import-Csv | export-csv -NoTypeInformation merged.csv
 ```
 
+# Script Meta
+## Parameters
+Validate the provided path
+```
+...
+[Parameter()]
+[ValidateScript({Test-Path $_})]
+[String]$Path,
+...
+```
+
+A nicer, fuller version
+```
+...
+[ValidateScript({
+    try {
+        $Folder = Get-Item $_ -ErrorAction Stop
+    } catch [System.Management.Automation.ItemNotFoundException] {
+        Throw [System.Management.Automation.ItemNotFoundException] "${_} Maybe there are network issues?"
+    }
+    if ($Folder.PSIsContainer) {
+        $True
+    } else {
+        Throw [System.Management.Automation.ValidationMetadataException] "The path '${_}' is not a container."
+    }
+})]
+...
+```
 
 
+Make a parameter mandatory
+```
+...
+[Parameter(mandatory=$true)]
+[ValidateScript({Test-Path $_})]
+[String]$Path,
+...
+```
 
 
 # Misc
