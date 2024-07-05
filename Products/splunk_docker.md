@@ -73,7 +73,7 @@ apt install docker.io
 ```
 su
 cd /path/to/Splunk4DFIR-main
-sudo DOCKER_BUILDKIT=1 docker build -t splunk4dfir .
+sudo DOCKER_BUILDKIT=1 docker build -t splunk4dfir . --network="host"
 ```
 
 - Change splunk4DFIR-main/artifacts permissions to allow ingestion
