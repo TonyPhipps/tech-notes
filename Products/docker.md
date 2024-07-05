@@ -66,3 +66,9 @@ volumes:
   app_data:
     external: true  
 ```
+
+Check a container's applied volumes
+```
+docker container ls
+docker inspect containerid | jq .[].Mounts
+```
