@@ -59,19 +59,36 @@ SPLUNK_PASSWORD=<password> docker compose up -d
 ```
 
 # Setup Option 3 - Splunk4DFIR
-Build a VM with at least 50GB
+- Build a VM with at least 50GB
 
-Download and extract
+- Install Docker
+```
+apt install docker
+apt install docker.io
+```
+
+- Download and extract Splunk4DFIR
+
+- Prepare the image
 ```
 su
 cd /path/to/Splunk4DFIR-main
-apt install docker
-apt install docker.io
 sudo DOCKER_BUILDKIT=1 docker build -t splunk4dfir .
-sudo docker run --name splunk4dfir -e SPLUNK_START_ARGS=--accept-license -e SPLUNK_PASSWORD=changeme -e SPLUNK_APPS_URL="/mnt/resources/sankey-diagram-custom-visualization_130.tgz" -p 8000:8000 -p 8089:8089 -v ${PWD}/artifacts:/mnt/artifacts -v ${PWD}/resources:/mnt/resources splunk4dfir:latest start
 ```
 
-The container will fail to stay started due to a check for the web interface, which is slow to start. Just start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000```
+Start the container
+```
+sudo docker run --name splunk4dfir \
+-e SPLUNK_START_ARGS=--accept-license \
+-e SPLUNK_PASSWORD=changeme \
+-e SPLUNK_APPS_URL="/mnt/resources/sankey-diagram-custom-visualization_130.tgz" \
+-p 8000:8000 \
+-p 8089:8089 \
+-v ${PWD}/artifacts:/mnt/artifacts \
+-v ${PWD}/resources:/mnt/resources splunk4dfir:latest start
+```
+
+The container may fail to stay started due to a check for the web interface, which is slow to start. If this happens, start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000```
 ```
 Docker container start splunk4dfir
 ```
@@ -87,7 +104,11 @@ setfacl -Rm o::rx artifacts
 To cleanup/restart
 ```
 docker container ls --all
+docker container stop splunk4dfir
 docker container rm splunk4dfir
+
+docker image ls
+docker image rm splunk4dfir
 ```
 
 # Admin
