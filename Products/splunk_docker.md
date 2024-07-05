@@ -76,7 +76,14 @@ cd /path/to/Splunk4DFIR-main
 sudo DOCKER_BUILDKIT=1 docker build -t splunk4dfir .
 ```
 
-Start the container
+- Change splunk4DFIR-main/artifacts permissions to allow ingestion
+```
+cd /path/to/splunk4DFIR-main
+setfacl -Rdm o::rx artifacts
+setfacl -Rm o::rx artifacts
+```
+
+- Start the container
 ```
 sudo docker run --name splunk4dfir \
 -e SPLUNK_START_ARGS=--accept-license \
@@ -90,16 +97,9 @@ sudo docker run --name splunk4dfir \
 
 The container may fail to stay started due to a check for the web interface, which is slow to start. If this happens, start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000```
 ```
-Docker container start splunk4dfir
+docker container start splunk4dfir
 ```
 The default credentials are admin:changeme
-
-Change splunk4DFIR-main/artifacts permissions to allow ingestion
-```
-cd /path/to/splunk4DFIR-main
-setfacl -Rdm o::rx artifacts
-setfacl -Rm o::rx artifacts
-```
 
 To cleanup/restart
 ```
