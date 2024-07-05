@@ -63,10 +63,11 @@ Should not require major adjustments between different filaments.
 # Filament Calibration
 Assuming your printer is already calibrated, it's recommended some settings be tuned specifically to each filament vendor/type/feature/color variation. Details are provided after this quick summary.
 
-- Extrusion Multiplier / Flow ([Visual Cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip) or [Precision Cube](https://help.prusa3d.com/wp-content/uploads/2021/04/cube-40-40-40.zip))
-- Linear Advance / Pressure Advance ([model](https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe))
+- Linear Advance / Pressure Advance
   - Adjust Extrusion Multiplier in G-code file first
   - Set final result in Filament's "Custom G-code"
+- Extrusion Multiplier / Flow
+  - Print 30x30x3 cubes, adjusting EM in small increments until the top is smooth
 - Temperature ([model](https://www.printables.com/model/514058-5-tier-temp-tower))
 - Retraction ([model](https://www.printables.com/model/408609-prusa-mini-retraction-tower-pla-petg))
   - Set M900 to Linear Advancce in G-Code
@@ -74,29 +75,16 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 - Max Volumetric speed ([model](https://www.printables.com/model/342075-extrusion-test-structure))
 
 ## Extrusion Multiplier / Flow
-
-### Precise Method
-- Get or make a model of a cube, at least 30mm
-- Layers and perimeters > Vertical Shells > Perimeters > 2
-- Layers and perimeters > Horizontal Shells > Solid Layers > Top > 0
-- Infill > Fill density > 0%
-- Advanced > Extrusion Width > Perimeters > Set External Perimeters and Perimeters to the same value. Note the value, you will use it to measure accuracy after printing.
-- Make three or more measurements in the middle of each wall and calculate the overall average thickness.
-- Calculate the extrusion multiplier using the following formula: Extrusion multiplier = (Current Extrusion width (0.45) / Average measured wall thickness).
-- Adjust the Extrusion Multiplier in Filament Settings → Filament
-- Re-print the cube with new settings and repeat these steps if necessary.
-
-### Imprecise Method
-Print a [cube](https://cdn.help.prusa3d.com/wp-content/uploads/2021/04/visual-method-cube.zip).
-- Adjust the Extrusion Multiplier accordingly by 1-2%:
-  - If there is too much material near the perimeters, decrease the Extrusion Multiplier value.
-  - If there are visible gaps between layer lines, increase the Extrusion Multiplier value. (Microscopic gaps near the perimeters are OK.)
+- This should be set per filament manufacturer+color.
+- See https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html
+- Print a series of cubes 30x30x3 increasing Extrusion Multiplier by 1-2% until the gaps in between infll and perimeters go away.
+- Print a series of cubes 30x30x3 decreasing Extrusion Multiplier by .5% until the gaps in between infll and perimeters show up again, then pick the one without gaps.
 
 ## Linear Advance/Pressure Advance 
-- https://www.printables.com/model/90640-prusa-mini-linear-advance-for-prusament-pla-and-pe
-- https://teachingtechyt.github.io/calibration.html#linadv
-- This should be set per filament. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
+- This should be set per filament manufacturer+color. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 - M221 is the Marlin firmware code for extrusion multiplier, if needed
+- I like to keep multiple files, all with the same settings except the extrusion multiplier value, for quicker testing
+- https://ellis3dp.com/Pressure_Linear_Advance_Tool/
 
 ## Temperature
 - Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
