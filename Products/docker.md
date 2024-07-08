@@ -23,12 +23,14 @@ Good Reads
 | docker image ls --digests         | Adds column displaying digests                                |
 | docker image rm ####              | remove an image                                               |
 | docker image rm #### ####         | remove two images                                             |
+| docker image prune                | Removes all unused images                                     |
 | docker container ls               | list running containers                                       |
 | docker container ls --all         | list all containers                                           |
 | docker container ls --size        | Adds column displaying total file sizes                       |
 | docker container start ####       | start a container                                             |
 | docker container stop ####        | stop a container                                              |
 | docker container rm ####          | Remove a container                                            |
+| docker container prune            | Removes all stopped containers                                |
 | docker exec -it #### bash         | open a bash prompt in a container                             |
 | docker run -v demo_volume:/data   | Run an image as a container with a volume mapped              |
 | docker volume create demo_volume  | Create a volume apart from any image/container, for later use |
