@@ -15,7 +15,9 @@ docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PAS
 ```
 
 # Setup Option 2
-Create a docker-compose.yml  file:
+Create a new directory.
+Create a opt-splunk-etc and opt-splunk-var inside that directory.
+Create a docker-compose.yml file next to the folders:
 
 ```
 version: "3.6"
@@ -34,6 +36,7 @@ services:
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_ENABLE_DEPLOY_SERVER="true"
       - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_ADD="tcp 1514"
       - SPLUNK_LICENSE_URI=Free
       # - SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
       # - DEBUG=true
@@ -51,8 +54,16 @@ services:
       # - ./splunk.lic:/tmp/license/splunk.lic
 ```
 
+Instead of "image: ###" you can refer to a dockerfile via
+```
+build:
+  context: .
+  dockerfile: ./Dockerfile
+```
+
 Run with:
 ```
+sudo apt install docker-compose
 set +o histexpand
 cd /path/to/docker-compose.yml
 SPLUNK_PASSWORD=<password> docker compose up -d
@@ -92,10 +103,12 @@ sudo docker run --name splunk4dfir \
 -p 8000:8000 \
 -p 8089:8089 \
 -v ${PWD}/artifacts:/mnt/artifacts \
--v ${PWD}/resources:/mnt/resources splunk4dfir:latest start
+-v ${PWD}/resources:/mnt/resources \
+splunk4dfir:latest start
 ```
 
-The container may fail to stay started due to a check for the web interface, which is slow to start. If this happens, start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000```
+  - The container may fail to stay started due to a check for the web interface, which is slow to start. If this happens, start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000``` 
+  - If the container seemingly hangs and never starts, you may need to restart the container and maybe the host OS.
 ```
 docker container start splunk4dfir
 ```
@@ -105,11 +118,51 @@ To cleanup/restart
 ```
 docker container ls --all
 docker container stop splunk4dfir
-docker container rm splunk4dfir
-
-docker image ls
-docker image rm splunk4dfir
+docker container prune
+docker image prune
 ```
+
+## Setup Option 3.1 Splunk4DFIR via Docker-Compose
+Note: Add apps by downloading the .tgz, copying to ./resources, and adding the filename to SPLUNK_APPS_URL with a comma separator.
+Note: If you comment out items in the middle of a section, Docker may skip. For example, commenting the ```./artifacts:/mnt/artifacts``` will cause Docker to also skip subsequent volumes in testing.
+```
+version: "3.6"
+
+volumes:
+  artifacts:
+  resources:
+
+services:
+  splunk:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: splunk4dfir
+    hostname: splunk4dfir
+    environment:
+      - SPLUNK_PASSWORD=changeme
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_ENABLE_DEPLOY_SERVER="true"
+      - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_ADD="tcp 1514"
+      - SPLUNK_LICENSE_URI=Free
+      - SPLUNK_APPS_URL=/mnt/resources/sankey-diagram-custom-visualization_130.tgz,/mnt/resources/config-explorer_1716.tgz
+      #- SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
+      #- DEBUG=true
+      #- SPLUNK_UPGRADE=true
+    ports:
+      - "1514:1514"
+      - "8000:8000"
+      - "8088:8088"
+      - "8089:8089"
+      - "9997:9997"
+
+    volumes:
+      - ./artifacts:/mnt/artifacts
+      - ./resources:/mnt/resources
+```
+
+
 
 # Admin
 
