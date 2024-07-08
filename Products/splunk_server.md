@@ -159,6 +159,12 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
  match_type = WILDCARD(VariableL)
 ```
 
+# Recommended Apps
+- Config Explorer
+  - https://splunkbase.splunk.com/app/4353
+  - https://github.com/ChrisYounger/config_explorer
+- 
+
 # Troubleshoot
 Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
 ```
