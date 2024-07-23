@@ -116,10 +116,11 @@ The default credentials are admin:changeme
 
 To cleanup/restart
 ```
-docker container ls --all
 docker container stop splunk4dfir
 docker container prune
-docker image prune
+docker image rm splunk4dfir-main-splunk
+docker system prune
+docker compose up
 ```
 
 ## Setup Option 3.1 Splunk4DFIR via Docker-Compose
@@ -160,6 +161,12 @@ services:
     volumes:
       - ./artifacts:/mnt/artifacts
       - ./resources:/mnt/resources
+```
+Then
+```
+sudo bash
+cd Splunk4DFIR-main
+docker compose up &
 ```
 
 
@@ -222,3 +229,4 @@ Resources
 - https://docs.splunk.com/Documentation/Splunk/latest/Installation/DeployandrunSplunkEnterpriseinsideDockercontainers
 - docs.splunk.com/Documentation/Splunk/latest/Installation/RunSplunkasadifferentornon-rootuser
 - https://github.com/dennybritz/docker-splunk/tree/master/light
+- 

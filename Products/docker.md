@@ -37,8 +37,9 @@ Good Reads
 | docker volume ls                  | List volumes                                                  |
 | docker volume inspect demo_volume | Inspect an existing volume                                    |
 | docker volume rm demo_volume      | Remove an existing volume                                     |
+| docker system prune | removes unused containers, networks, images, cache |
 | docker volume prune               | Remove volumes not mounted to at least one container          |
-
+| docker buildx prune -f            | remove the Docker build cache                                 |
 
 # Docker Compose
 Create one or more docker containers based on images

@@ -61,3 +61,14 @@ Install Docker-Compose
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
+
+# Free up Space
+```
+sudo apt-get autoremove
+sudo apt-get clean
+sudo journalctl --vacuum-size=10M
+sudo find /tmp -type f -exec du -h {} \; | sort -n
+sudo logrotate /etc/logrotate.conf
+sudo rm -rf /var/cache/*
+sudo rm -rf /var/log/*
+```
