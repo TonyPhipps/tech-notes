@@ -16,7 +16,11 @@ docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PAS
 
 # Setup Option 2
 Create a new directory.
-Create a opt-splunk-etc and opt-splunk-var inside that directory.
+Create folders:
+- opt-splunk-etc
+- opt-splunk-var-log
+- var-log-splunk
+
 Create a docker-compose.yml file next to the folders:
 
 ```
@@ -69,8 +73,8 @@ cd /path/to/docker-compose.yml
 SPLUNK_PASSWORD=<password> docker compose up -d
 ```
 
-# Setup Option 3 - Splunk4DFIR
-- Build a VM with at least 50GB
+# Setup Option 3 - Splunk4DFIR via Docker-Compose
+- Build a VM with at least 75GB Disk, 8GB Memory
 
 - Install Docker
 ```
@@ -79,13 +83,13 @@ apt install docker.io
 ```
 
 - Download and extract Splunk4DFIR
+```
+sudo apt install wget
+wget https://github.com/mf1d3l/Splunk4DFIR/archive/refs/heads/main.zip
+unzip main.zip
+```
 
-- Prepare the image
-```
-su
-cd /path/to/Splunk4DFIR-main
-sudo DOCKER_BUILDKIT=1 docker build -t splunk4dfir . --network="host"
-```
+Past any artifacts you wish to ingest into subfolder of /path/to/splunk4DFIR-main/artifacts
 
 - Change splunk4DFIR-main/artifacts permissions to allow ingestion
 ```
@@ -94,44 +98,21 @@ setfacl -Rdm o::rx artifacts
 setfacl -Rm o::rx artifacts
 ```
 
-- Start the container
-```
-sudo docker run --name splunk4dfir \
--e SPLUNK_START_ARGS=--accept-license \
--e SPLUNK_PASSWORD=changeme \
--e SPLUNK_APPS_URL="/mnt/resources/sankey-diagram-custom-visualization_130.tgz" \
--p 8000:8000 \
--p 8089:8089 \
--v ${PWD}/artifacts:/mnt/artifacts \
--v ${PWD}/resources:/mnt/resources \
-splunk4dfir:latest start
-```
-
-  - The container may fail to stay started due to a check for the web interface, which is slow to start. If this happens, start the container manually via the command below and wait a few minutes before visiting ```127.0.0.1:8000``` 
-  - If the container seemingly hangs and never starts, you may need to restart the container and maybe the host OS.
-```
-docker container start splunk4dfir
-```
-The default credentials are admin:changeme
-
-To cleanup/restart
-```
-docker container stop splunk4dfir
-docker container prune
-docker image rm splunk4dfir-main-splunk
-docker system prune
-docker compose up
-```
-
-## Setup Option 3.1 Splunk4DFIR via Docker-Compose
 Note: Add apps by downloading the .tgz, copying to ./resources, and adding the filename to SPLUNK_APPS_URL with a comma separator.
 Note: If you comment out items in the middle of a section, Docker may skip. For example, commenting the ```./artifacts:/mnt/artifacts``` will cause Docker to also skip subsequent volumes in testing.
+
+Create a directory to use as a log volume
+```
+mkdir opt-splunk-var-log
+```
+
 ```
 version: "3.6"
 
 volumes:
   artifacts:
   resources:
+  opt-splunk-var-log:
 
 services:
   splunk:
@@ -161,12 +142,27 @@ services:
     volumes:
       - ./artifacts:/mnt/artifacts
       - ./resources:/mnt/resources
+      - ./TA-REC:/opt/splunk/etc/apps/TA-REC
+      - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
 ```
-Then
+
+Navigate to 127.0.0.1:8000
+
+The default credentials are admin:changeme
+
+To cleanup/restart
+```
+sudo docker container stop splunk4dfir
+sudo docker system prune
+sudo docker volume prune
+sudo docker compose up
+```
+
+After reboots
 ```
 sudo bash
 cd Splunk4DFIR-main
-docker compose up &
+docker compose up
 ```
 
 

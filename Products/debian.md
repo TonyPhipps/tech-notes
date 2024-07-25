@@ -26,7 +26,7 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 ```
 
-# install hyperv-daemons
+# Hyper-V Setup
 ```
 apt-get install hyperv-daemons
 ```
@@ -36,7 +36,16 @@ reboot
 systemctl reboot
  ```
 
+# VMWare Setup
+```
+apt-get update
+apt-get install open-vm-tools
+apt-get install open-vm-tools-desktop
+```
+
 # Docker
+https://docs.docker.com/engine/install/debian/
+
 Install
 ```
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -57,6 +66,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 
 Install Docker-Compose
+https://docs.docker.com/desktop/install/debian/
+
 ```
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
