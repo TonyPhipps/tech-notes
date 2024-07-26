@@ -7,14 +7,14 @@
 
 
 ## Discovery
-List indices available
+List indexes available
 ```
 | eventcount summarize=false index=* | fields index | dedup index
 ```
 
-List sourcetypes available
+List indexes available, including sourcetype
 ```
-index=something | fields index,sourcetype | stats count by index,sourcetype
+| tstats values(sourcetype) where (index=* OR index=_*) by index
 ```
 
 ## Ingestion Stats

@@ -27,8 +27,10 @@ Create a docker-compose.yml file next to the folders:
 version: "3.6"
 
 volumes:
-  opt-splunk-etc:
-  opt-splunk-var:
+  artifacts:
+  resources:
+  log:
+  TA-REC:
 
 services:
   splunk:
@@ -36,15 +38,16 @@ services:
     container_name: splunk
     hostname: splunk
     environment:
-      - SPLUNK_PASSWORD
+      - SPLUNK_PASSWORD=changeme
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_ENABLE_DEPLOY_SERVER="true"
       - SPLUNK_ENABLE_LISTEN=9997
       - SPLUNK_ADD="tcp 1514"
       - SPLUNK_LICENSE_URI=Free
-      # - SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
-      # - DEBUG=true
-      # - SPLUNK_UPGRADE=true
+      #- SPLUNK_APPS_URL=/mnt/resources/sankey-diagram-custom-visualization_130.tgz,/mnt/resources/config-explorer_1716.tgz
+      #- SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
+      #- DEBUG=true
+      #- SPLUNK_UPGRADE=true
     ports:
       - "1514:1514"
       - "8000:8000"
@@ -53,9 +56,10 @@ services:
       - "9997:9997"
 
     volumes:
-      - ./opt-splunk-etc:/opt/splunk/etc
-      - ./opt-splunk-var:/opt/splunk/var
-      # - ./splunk.lic:/tmp/license/splunk.lic
+      - ./artifacts:/mnt/addons
+      - ./resources:/mnt/resources
+      - ./TA-REC:/opt/splunk/etc/apps/TA-REC
+      - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
 ```
 
 Instead of "image: ###" you can refer to a dockerfile via
@@ -112,7 +116,8 @@ version: "3.6"
 volumes:
   artifacts:
   resources:
-  opt-splunk-var-log:
+  log:
+  TA-REC:
 
 services:
   splunk:
@@ -144,6 +149,7 @@ services:
       - ./resources:/mnt/resources
       - ./TA-REC:/opt/splunk/etc/apps/TA-REC
       - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
+
 ```
 
 Navigate to 127.0.0.1:8000
