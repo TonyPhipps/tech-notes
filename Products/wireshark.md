@@ -1,4 +1,8 @@
-# Common Fields
+# Profiles
+
+
+## Common Fields
+- Time delta from previous displayed frame
 - tcp.dstport
 - tcp.port
 - tcp.srcport
@@ -39,8 +43,7 @@ frame matches "(?i)google"
 - Analyze > Show Packet Bytes
 - Change Start to the offset (offset = number of "dots" before the base64 string in the ASCII view)
 
-# References and Resources
-- https://packetlife.net/library/cheat-sheets/
+
 
 # Columns
 HTTP
@@ -91,3 +94,9 @@ SMB
 | SWF                  | 43 57 53 -or- 46 57 53                        | FWD -or- CWS |
 | Chrome Extension crx | 43 72 32 34                                   | Cr24         |
 
+
+
+# References and Resources
+- https://packetlife.net/library/cheat-sheets/
+- https://github.com/DhaeyerWolf/ICS-OT_wireshark_profiles
+- https://github.com/amwalding/wireshark_profiles
