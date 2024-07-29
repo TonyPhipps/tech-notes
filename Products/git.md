@@ -39,3 +39,41 @@ Display recent Git Changes
 git --no-pager log --pretty=format:'\"%h\", \"%an\", \"%ci\", \"%s\", \"%b\"' --after "2023-11-30"
 ```
 
+
+
+# Setup SSH Key
+Generate a key pair
+```
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+Start the ssh-agent in the background (as admin)
+```
+Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+Start-Service ssh-agent
+```
+
+Add the SSH key to the ssh-agent (as non-admin)
+```
+sh-add c:/Users/YOU/.ssh/id_ed25519
+```
+
+Add the SSH key to the Github account
+- Name > Settings > SSH and GPG Keys
+- New SSH Key
+- Copy contents of publickey.pub
+- Paste into text block and provide a name
+
+Attempt a Clone
+- At the main repo page, click <> Code
+- Go to Local > SSH tab
+- Copy the Git address for SSH and use it to clone via VSCode
+
+
+# Migrate a Repo
+```
+git remote add remoterepo https://yourLogin@github.com/yourLogin/yourRepoName.git
+git push --mirror remoterepo
+```
+
+Then go in and set the default branch and remove the old default as needed.
