@@ -71,9 +71,11 @@ Attempt a Clone
 
 
 # Migrate a Repo
+
+- Open the source repo in terminal
+- Issue these commands
 ```
 git remote add remoterepo https://yourLogin@github.com/yourLogin/yourRepoName.git
 git push --mirror remoterepo
 ```
-
-Then go in and set the default branch and remove the old default as needed.
+- Then go in and set the default branch and remove the old default as needed.
