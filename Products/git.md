@@ -22,10 +22,22 @@ Great for removing accidentally huge files.
 - First, ensure the repo is not protected
 ```
 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch path/to/file.ext' --prune-empty --tag-name-filter cat -- --all
+git gc
+git repack
 git push origin --force --all
+
 ```
 - Schedule or wait for housekeeping to take place
 
+# Use BFG To Remove a Single File
+```
+cd /path/to/bfg.jar
+java -jar bfg-1.14.0.jar -b 100M D:\gitlab\ics-secops-scripts\
+cd /path/to/gitrepo
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
+```
 
 # Remove SSL Certificate verification 
 (add --global to apply to all). WARNING: For troubleshooting only. Disables certification verification entirely, allowing MITM.
