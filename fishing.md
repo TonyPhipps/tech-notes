@@ -65,6 +65,7 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 
 # Rigs
 - Texas rig
+- Carolina rig
 
 # Casting Techniques
 - Dragging Retrieve
