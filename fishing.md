@@ -47,6 +47,10 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 # Line
 ## Braided vs Non-Braided
 ## Color
+- Camoflage line reduces ability of fourth to spot it.
+  - Water depth affects line visibilty to fish.
+- Brighter colors are best to improve the fisherman's sight, in order to spot bites. However, a lead of camo line is recommended to hide the last bit (up to 10ft) from the fish.
+- Fluorocarbon is the line that is most invisible underwater, while the braided line is the strongest, yet most visible above water.
 
 # Knots
 
