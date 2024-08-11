@@ -27,6 +27,9 @@ A spinner is among the easiest lures to use. Just cast and retrieve, you don’t
 
 ## Spoon
 Great for predators typically found on deep structure. Let the spoon freefall down. When it hits bottom, take up slack line until the rod tip is a foot above the water, then work the spoon with short jerks up and down. Usually, strikes occur when the spoon is falling, so be ready.
+- Try a red, yellow, or orange spoon if the water and light are clear and bright.
+- If the water is murky, or the light is low, use a blue, indigo, or violet spoon.
+- Use a silver spoon on a cloudless day. The reflected sun on the spoon will make attractive bait.
 
 ## Topwater
 To use a topwater lure you have to make an accurate cast near cattails, willows, lily pads, or overhanging brush. Often you’ll get a strike as soon as the lure hits the water, but jerking the popper a few feet, reeling in line, then jerking again extends the attraction on each cast. This is a fabulous bass lure.
