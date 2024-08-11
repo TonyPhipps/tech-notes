@@ -46,6 +46,10 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 
 # Line
 ## Braided vs Non-Braided
+- Braided is stronger.
+- Mon-braided fluorocarbon is less visible.
+- Both can be used by usimg braid with a fluoro lead.
+
 ## Color
 - Camoflage line reduces ability of fourth to spot it.
   - Water depth affects line visibilty to fish.
