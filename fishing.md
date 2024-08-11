@@ -60,5 +60,7 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 - Fluorocarbon is the line that is most invisible underwater, while the braided line is the strongest, yet most visible above water.
 
 # Knots
+- Albright for tying two lines together.
+- Improved Clinch for tying to hook.
 
 # Rigs
