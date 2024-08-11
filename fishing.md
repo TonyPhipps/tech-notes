@@ -42,3 +42,12 @@ To use a soft plastic bait, cast it into open water and let it sink for a few se
 
 ## Blade
 This is an easy lure to fish since it only requires a constant retrieval rate. You can jerk and pop ta blade bait for more action, but the retrieve is often enough. These are painted to match minnows, sunfish fry, or bluegill fry, matching these popular baitfish.
+
+
+# Line
+## Braided vs Non-Braided
+## Color
+
+# Knots
+
+# Rigs
