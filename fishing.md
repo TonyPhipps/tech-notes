@@ -64,3 +64,16 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 - Improved Clinch for tying to hook.
 
 # Rigs
+- Texas rig
+
+# Casting Techniques
+- Dragging Retrieve
+  - Cast out and allow to sink to the bottom. Drag the lure across the bottom 2 to 3 feet by slowly raising the tip of the rod. Reel up the slack, and repeat. Ideal for fishing rock bars, gravel, and steep banks, and when fish are bottom feeding on crayfish.
+- Flip and Pitch
+  - A simple technique where you hold the rig in one hand and then swing it in a pendulum motion to a target location on the water. This technique is used in tight quarters. Effective for fishing docks, bushes and weed cover where space is limited.
+- Lift and Drop
+  - Cast the bait to target location and let it sink to the bottom. Lift the bait a foot off the bottom and allow it to fall back to the bottom. Shake the rod tip occassionally to elicit bites. Use when bass are actively feeding during the summer.
+- Simple Swim
+  - Cast the bait out and retrieve it at various speeds. Jerk the rod tip occassionally to create erratic movement and trigger strikes. This technique is used to target feeding bass in weed flats, vegetation and around large structure. Best baits are soft plastic grubs, finesse worms, and swimbaits.
+- Weightless Twitching
+  - Use a Texas rig without a weight. Cast the weightless rig into weed flats or vegetation at a shallow to mid depth. Allow the rig to sink to the desired depth, then twitch it in place using short lifts of the rod tip. A twitch followed by a very brief pause is most effective. Ideal setup includes a 3/0 EWG hook with a shad jerkbait or stick worm.
