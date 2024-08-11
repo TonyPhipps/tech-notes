@@ -44,7 +44,7 @@ To use a soft plastic bait, cast it into open water and let it sink for a few se
 This is an easy lure to fish since it only requires a constant retrieval rate. You can jerk and pop ta blade bait for more action, but the retrieve is often enough. These are painted to match minnows, sunfish fry, or bluegill fry, matching these popular baitfish.
 
 
-# Line
+# Line Type
 ## Braided vs Non-Braided
 - Braided is stronger.
 - Non-braided fluorocarbon is less visible.
@@ -53,7 +53,7 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
   - Some knots that can be used to tie braided line to fluorocarbon include the Alberto knot, blood knot, and Albright knot.
  
 
-## Color
+## Line Color
 - Camoflage line reduces ability of fourth to spot it.
   - Water depth affects line visibilty to fish.
 - Brighter colors are best to improve the fisherman's sight, in order to spot bites. However, a lead of camo line is recommended to hide the last bit (up to 10ft) from the fish.
