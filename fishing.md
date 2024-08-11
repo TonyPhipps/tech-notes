@@ -47,7 +47,7 @@ This is an easy lure to fish since it only requires a constant retrieval rate. Y
 # Line
 ## Braided vs Non-Braided
 - Braided is stronger.
-- Mon-braided fluorocarbon is less visible.
+- Non-braided fluorocarbon is less visible.
 - Both can be used by usimg braid with a fluoro lead.
   - Select a fluro leader line that's one to two times the breaking strength of the braided line.
   - Some knots that can be used to tie braided line to fluorocarbon include the Alberto knot, blood knot, and Albright knot.
