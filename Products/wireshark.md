@@ -94,7 +94,10 @@ SMB
 | SWF                  | 43 57 53 -or- 46 57 53                        | FWD -or- CWS |
 | Chrome Extension crx | 43 72 32 34                                   | Cr24         |
 
-
+# Monitor USB on Linux
+``` 
+sudo modprobe usbmon
+```
 
 # References and Resources
 - https://packetlife.net/library/cheat-sheets/
