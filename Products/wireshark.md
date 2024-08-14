@@ -1,5 +1,15 @@
-# Profiles
+# Common Initial Analysis
+## Protocol Hierarchy
+- Go to Statistics > Protocol Hierarchy
+- Determine which protocols are in use and to what degree
 
+## Conversations
+- Statistics > Conversations
+- Consider checking "Limit to Display Filter" to apply the filter used in the prior Wireshark window.
+
+When doing incident response or security assessments, this window will greatly help you build a baseline for normal traffic in your network and help you determine at any point if there is something unusual going on with the traffic.
+
+# Profiles
 
 ## Common Fields
 - Time delta from previous displayed frame
