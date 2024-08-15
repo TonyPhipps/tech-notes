@@ -16,7 +16,7 @@ Open WSUS (Windows Server Update Services)
 
 # Products and Classifications
 - Carefully select which products and features to include, as the download size can easily go above 500GB in total updates stored.
-- Rcommended
+- Recommended
   - Active Directory
   - Microsoft Server Operating System 23H2
   - Windows > Microsoft Edge
@@ -31,7 +31,7 @@ Open WSUS (Windows Server Update Services)
 # Approvals
 Approve updates under WSUS Console > Updates
 
-Enable Automatic Approvals to ensure the WSUS server pulls down future updates locally. Do this before the first synchronoization
+Enable Automatic Approvals to ensure the WSUS server pulls down future updates locally. Do this before the first synchronization
 - open WSUS Console
 - Options > Automatic Approvals
 - Check Default Automatic Approval Rule
@@ -54,13 +54,13 @@ Enable Automatic Approvals to ensure the WSUS server pulls down future updates l
 # WSUS Group Policy
 - Microsoft recommends creating a new GPO that contains only WSUS settings. Link this WSUS GPO to an Active Directory container that's appropriate for the environment.
 - ```Computer Configuration > Administrative Templates > Windows Components > Windows Update```
-  - (Setttings here are recommended for lab)
-  -  Configure Autoamtic Updates
+  - (Settings here are recommended for lab)
+  -  Configure Automatic Updates
     - Enabled
     - Configure Automatic Updating: 4 - Auto download and schedule the install
     - Check Install During Automatic Maintenance
     - Schedule Install Day: 0 - Every day
-    - Schedule Insatll Time: 03:00
+    - Schedule Install Time: 03:00
     - Check Every Week
   - Specify Internet Microsoft Update Service Location
     - Enabled
@@ -143,7 +143,7 @@ trap {
 }
 ```
 
-- After the reboot, reselect Products and Clasifications (better this time)
+- After the reboot, reselect Products and Classifications (better this time)
 - Run the Automatic Approval Rule(s) you set up.
 - Start a sync manually.
 - You may see sqlserv.exe taking up a lot of cpu/memory. It could take 30-60min to complete.
