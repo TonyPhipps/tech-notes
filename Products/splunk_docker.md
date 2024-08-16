@@ -14,7 +14,7 @@ Run
 docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='<password>' splunk/splunk:latest
 ```
 
-# Setup Option 2
+# Setup Option 2 - via docker-compose
 Create a new directory.
 Create folders:
 - opt-splunk-etc
@@ -77,7 +77,7 @@ cd /path/to/docker-compose.yml
 SPLUNK_PASSWORD=<password> docker compose up -d
 ```
 
-# Setup Option 3 - Splunk4DFIR via Docker-Compose
+# Setup Option 3 - Splunk4DFIR via docker-compose
 - Build a VM with at least 75GB Disk, 8GB Memory
 
 - Install Docker
@@ -117,7 +117,6 @@ volumes:
   artifacts:
   resources:
   log:
-  TA-REC:
 
 services:
   splunk:
@@ -147,7 +146,6 @@ services:
     volumes:
       - ./artifacts:/mnt/artifacts
       - ./resources:/mnt/resources
-      - ./TA-REC:/opt/splunk/etc/apps/TA-REC
       - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
 
 ```
