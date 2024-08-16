@@ -114,6 +114,52 @@ cat ~/.bash_history
 lspci -nn | egrep -i "3d|display|vga"
 ```
 
+# General Baseline
+## User Accounts
+```
+cat /etc/passwd
+ls /home
+```
+
+## Installed Software
+```
+dkpg -l
+rpm -qa
+yum list included
+dnf list installed
+sudo debsums | grep -v OK
+ls /opt
+ls /usr/local/share
+```
+
+## System Settings
+```
+cat /etc/apt/sources.list
+cat /etc/apt/sources.list.d/*
+```
+
+## Network Settings
+```
+ip link
+ip -s link
+ip address
+ip neighbor
+ip route
+ss
+ss -ltu
+ss -ltunp
+```
+
+## Firewall
+```
+sudo iptables -L
+```
+
+## Full-Scanning Tool
+```
+sudo lynis audit system
+```
+
 # Misc
 ### Get IP address and send it through curl to an API
 ```
