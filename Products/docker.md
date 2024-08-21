@@ -75,3 +75,8 @@ Check a container's applied volumes
 docker container ls
 docker inspect containerid | jq .[].Mounts
 ```
+
+List all volumes for a container
+```
+sudo docker volume inspect MyContainer_var --format='{{.Mountpoint}}'
+```

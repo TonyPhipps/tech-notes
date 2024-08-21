@@ -14,70 +14,19 @@ Run
 docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='<password>' splunk/splunk:latest
 ```
 
-# Setup Option 2 - via docker-compose
-Create a new directory.
-Create folders:
-- opt-splunk-etc
-- opt-splunk-var-log
-- var-log-splunk
 
-Create a docker-compose.yml file next to the folders:
+# Setup Option 2 - Splunk4DFIR via docker-compose
+
+NOTE: The steps below use Splunk4DFIR, but can be easily reused to produce a vanilla build:
+
+Instead of the entire build: section, use 
 
 ```
-version: "3.6"
-
-volumes:
-  artifacts:
-  resources:
-  log:
-  TA-REC:
-
-services:
-  splunk:
-    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
-    container_name: splunk
-    hostname: splunk
-    environment:
-      - SPLUNK_PASSWORD=changeme
-      - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_ENABLE_DEPLOY_SERVER="true"
-      - SPLUNK_ENABLE_LISTEN=9997
-      - SPLUNK_ADD="tcp 1514"
-      - SPLUNK_LICENSE_URI=Free
-      #- SPLUNK_APPS_URL=/mnt/resources/sankey-diagram-custom-visualization_130.tgz,/mnt/resources/config-explorer_1716.tgz
-      #- SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
-      #- DEBUG=true
-      #- SPLUNK_UPGRADE=true
-    ports:
-      - "1514:1514"
-      - "8000:8000"
-      - "8088:8088"
-      - "8089:8089"
-      - "9997:9997"
-
-    volumes:
-      - ./artifacts:/mnt/addons
-      - ./resources:/mnt/resources
-      - ./TA-REC:/opt/splunk/etc/apps/TA-REC
-      - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
+image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
 ```
 
-Instead of "image: ###" you can refer to a dockerfile via
-```
-build:
-  context: .
-  dockerfile: ./Dockerfile
-```
+-------------------------------------------------------
 
-Run with:
-```
-sudo apt install docker-compose
-set +o histexpand
-cd /path/to/docker-compose.yml
-SPLUNK_PASSWORD=<password> docker compose up -d
-```
-
-# Setup Option 3 - Splunk4DFIR via docker-compose
 - Build a VM with at least 75GB Disk, 8GB Memory
 
 - Install Docker
@@ -105,18 +54,25 @@ setfacl -Rm o::rx artifacts
 Note: Add apps by downloading the .tgz, copying to ./resources, and adding the filename to SPLUNK_APPS_URL with a comma separator.
 Note: If you comment out items in the middle of a section, Docker may skip. For example, commenting the ```./artifacts:/mnt/artifacts``` will cause Docker to also skip subsequent volumes in testing.
 
-Create a directory to use as a log volume
-```
-mkdir opt-splunk-var-log
-```
+
+Create a docker-compose.yml file next to the folders:
 
 ```
-version: "3.6"
-
 volumes:
   artifacts:
+    driver: local
+    driver_opts:
+      type: local
+      o: bind
+      device: ./artifacts
   resources:
-  log:
+    driver: local
+    driver_opts:
+        type: local
+        o: bind
+        device: ./resources
+  var:
+  etc:
 
 services:
   splunk:
@@ -126,17 +82,19 @@ services:
     container_name: splunk4dfir
     hostname: splunk4dfir
     environment:
-      - SPLUNK_PASSWORD=changeme
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_ENABLE_DEPLOY_SERVER="true"
       - SPLUNK_ENABLE_LISTEN=9997
-      - SPLUNK_ADD="tcp 1514"
-      - SPLUNK_LICENSE_URI=Free
+      - SPLUNK_ADD=tcp 1514,udp 514
+      - SPLUNK_LICENSE_URI=/tmp/license/Splunk.License
       - SPLUNK_APPS_URL=/mnt/resources/sankey-diagram-custom-visualization_130.tgz,/mnt/resources/config-explorer_1716.tgz
-      #- SPLUNK_LICENSE_URI=/tmp/license/splunk.lic
+      #- SPLUNK_PASSWORD=changeme
+      #- SPLUNK_LICENSE_URI=Free
       #- DEBUG=true
       #- SPLUNK_UPGRADE=true
+
     ports:
+      - "514:514"
       - "1514:1514"
       - "8000:8000"
       - "8088:8088"
@@ -144,15 +102,77 @@ services:
       - "9997:9997"
 
     volumes:
-      - ./artifacts:/mnt/artifacts
-      - ./resources:/mnt/resources
-      - ./opt-splunk-var-log:/opt/splunk/var/log/splunk
+      - artifacts:/mnt/artifacts
+      - resources:/mnt/resources
+      - var:/opt/splunk/var
+      - etc:/opt/splunk/etc
+      - ./Splunk.License:/tmp/license/Splunk.License
+      - ./default.yml:/tmp/defaults/default.yml
+```
 
+- Create a default.yml file, which will specify additional configurations for the Splunk Ansible setup process:
+```
+  splunk:
+      conf:
+        - key: ui-tour
+          value:
+            directory: /opt/splunk/etc/system/local
+            content:
+              default:
+                useTour: false
+              search-tour:
+                viewed: 1
+              dark-tour:
+                viewed: 1
+        - key: web
+          value:
+            directory: /opt/splunk/etc/system/local
+            content:
+              settings:
+                updateCheckerBaseURL: 0
+        - key: user-prefs
+          value:
+            directory: /opt/splunk/etc/system/local
+            content:
+              general:
+                render_version_messages: 0
+                hideInstrumentationOptInModal: 1
+                dismissedInstrumentationOptInVersion: 4
+              general_default:
+                hideInstrumentationOptInModal: 1
+                showWhatsNew: 0
+        - key: telemetry
+          value:
+            directory: /opt/splunk/etc/apps/splunk_instrumentation/local
+            content:
+              general:
+                precheckSendLicenseUsage: false
+                precheckSendSupportUsage: false
+                precheckSendAnonymizedUsage: false
+                sendLicenseUsage: false
+                sendSupportUsage: false
+                sendAnonymizedUsage: false
+                sendAnonymizedWebAnalytics: false
+                optInVersionAcknowledged: 4
+```
+
+Run with:
+```
+sudo apt install docker-compose
+set +o histexpand
+cd /path/to/docker-compose.yml
+SPLUNK_PASSWORD=<password> docker compose up -d
+```
+
+NOTE: If you encounter a Permission Denied error, it may be necessary to set the Splunk4DFIR-main permissions such that the user running the docker container can access the files:
+```
+cd path/to/Splunk4DFIR-main/parent
+sudo chmod -R +r Splunk4DFIR-main
 ```
 
 Navigate to 127.0.0.1:8000
 
-The default credentials are admin:changeme
+The default credentials are admin:changeme, if you didn't specify in the run command
 
 To cleanup/restart
 ```
