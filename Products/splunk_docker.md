@@ -167,7 +167,8 @@ SPLUNK_PASSWORD=<password> docker compose up -d
 NOTE: If you encounter a Permission Denied error, it may be necessary to set the Splunk4DFIR-main permissions such that the user running the docker container can access the files:
 ```
 cd path/to/Splunk4DFIR-main/parent
-sudo chmod -R +r Splunk4DFIR-main
+sudo setfacl -Rdm o::rx Splunk4DFIR-main
+sudo setfacl -Rm o::rx Splunk4DFIR-main
 ```
 
 Navigate to 127.0.0.1:8000
