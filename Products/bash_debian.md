@@ -69,3 +69,29 @@ Nftables should be installed by default, but just in case...
 ```# nft list ruleset```
 
 
+# Create a Samba Fileshare
+```
+sudo apt update
+sudo apt install samba
+sudo useradd -m user1
+sudo smbpasswd -a user1
+mkdir /media/share1
+chown user1 /media/share1
+sudo nano /etc/samba/smb.conf
+```
+
+Add this stanza
+```
+[share1]
+   path = /media/share1
+   read only = no
+   guest ok = no
+   valid users = user1
+```
+
+Then restart Samba daemon
+```
+sudo systemctl restart smbd.service
+```
+
+If Enterprise GPO's are blocking you from accessing from a Windows host, o remove/comment out any map to guest line in your smb.conf, then restart Samba again.
