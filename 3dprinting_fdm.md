@@ -84,7 +84,7 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 - This should be set per filament manufacturer+color. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 - M221 is the Marlin firmware code for extrusion multiplier, if needed
 - I like to keep multiple files, all with the same settings except the extrusion multiplier value, for quicker testing
-- https://ellis3dp.com/Pressure_Linear_Advance_Tool/
+- https: /ellis3dp.com/Pressure_Linear_Advance_Tool/
 
 ## Temperature
 - Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
