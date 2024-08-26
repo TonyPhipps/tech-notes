@@ -35,6 +35,12 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
+## Prepare as a Splunk App Package
+```
+cd /path/to/addonName/
+tar -zcf addonName.tgz addonName
+```
+
 # Config Files
 
 ## inputs.conf
