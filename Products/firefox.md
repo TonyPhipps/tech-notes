@@ -24,6 +24,7 @@ Hide tab (X) buttons
 ```
 
 ## Set tabs to hide when Sideberry is open
+```
 /*
 - Install Sideberry addon
 - Sideberry Settings > Preface Value:
@@ -44,3 +45,4 @@ Hide tab (X) buttons
 #main-window[titlepreface*="​"] #titlebar { height: 0 !important; }
 /* Hidden state: Fix z-index of active pinned tabs */
 #main-window[titlepreface*="​"] #tabbrowser-tabs { z-index: 0 !important; }
+```
