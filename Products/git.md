@@ -4,6 +4,12 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```
 
+# Set Global AutoCRLF
+```
+git config --global core.autocrlf true
+```
+
+
 # Edit global configs
 (can set/blank credential manager manually)
 ```

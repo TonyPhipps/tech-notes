@@ -16,6 +16,10 @@ $SPLUNK_HOME/etc/apps/appname/
     inputs.conf
     props.conf
     transforms.conf
+    indexes.conf (if you want to prestage indexes)
+    macros.conf (if you want to prestage macros)
+    savedsearches.conf (if you wanted to preconfigure saved searches)
+    web.conf (if you want to set defaults for the web interface)
     /data
       /ui
         /nav
@@ -31,14 +35,15 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
+# Config Files
 
-# Inputs.conf
+## inputs.conf
 
 Create/edit the file at ```.../myapp/local/inputs.conf``` and add a [\[stanza\]](https://docs.splunk.com/Splexicon:Stanza) for each input desired ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
 - Editing this requires a restart the SplunkForwarder service
 - Note: you may not receive logs immediately depending on the stanza's checkpointInterval setting
 
-## Monitor Output of PowerShell Scripts
+### Monitor Output of PowerShell Scripts
 Put script in ```$SplunkHome\etc\apps\myapp\bin\something.ps1```
 ```
 [powershell://Meerkat:Get-ARP]
@@ -48,7 +53,7 @@ script = Import-Module "$SplunkHome\etc\apps\Meerkat\bin\Modules\Get-ARP.psm1"; 
 sourcetype = Meerkat:Get-ARP
 ```
 
-## Monitor Files or Folders
+### Monitor Files or Folders
 
 ```
 [monitor:///var/log/kiwi]
@@ -80,7 +85,113 @@ See for more
 - https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf
 - https://docs.splunk.com/Documentation/Splunk/latest/Data/Specifyinputpathswithwildcards
 
-### Monitor CSV Files
+## indexes.conf
+This optional file lets you prestage one or more indexes.
+
+Add an index named NewIndexName. Note the $_index_name does not need to be changed, as it references the index name.
+
+```
+[newIndexName]
+homePath=$SPLUNK_DB/$_index_name/db
+coldPath=$SPLUNK_DB/$_index_name/colddb
+thawedPath=$SPLUNK_DB/$_index_name/thaweddb
+```
+
+## macros.conf
+This optional file lets you prestage one or more search macros.
+
+```
+[windows_log_search_base]
+definition = index="evtx" OR index="wineventlog" earliest=1 AND latest=now()
+iseval = 0
+```
+
+## props.conf
+Lets you
+
+### Map Splunk Classic to XML
+```
+[WinEventLog]
+# Splunk UF Classic to XML
+FIELDALIAS-RecordNumber = RecordNumber as EventRecordID
+FIELDALIAS-EventCode = EventCode as EventID
+FIELDALIAS-Severity = Severity as Level
+FIELDALIAS-LogName = LogName as Channel
+FIELDALIAS-ComputerName = ComputerName as Computer
+FIELDALIAS-src_user = src_user as SubjectUserName
+FIELDALIAS-Logon_ID = Logon_ID as TargetLogonID
+FIELDALIAS-SessionID = SessionID as TargetLogonID
+FIELDALIAS-user = user as TargetUserName
+FIELDALIAS-dest_nt_domain = dest_nt_domain as TargetDomainName
+FIELDALIAS-Logon_Type = Logon_Type as LogonType
+FIELDALIAS-Creator_Process_Name = Creator_Process_Name as ParentProcessName
+FIELDALIAS-Process_Command_Line = Process_Command_Line as CommandLine
+FIELDALIAS-Sid = Sid as SubjectUserSid
+FIELDALIAS-src_ip = src_ip as IpAddress
+FIELDALIAS-event_id = event_id as EventRecordID
+FIELDALIAS-id = id as EventRecordID
+FIELDALIAS-Logon_Process = Logon_Process as LogonProcessName
+FIELDALIAS-Authentication_Package = Authentication_Package as AuthenticationPackageName
+FIELDALIAS-Source_Port = Source_Port as IpPort
+FIELDALIAS-Logon_GUID = Logon_GUID as LogonGuid
+FIELDALIAS-New_Process_Name = New_Process_Name as NewProcessName
+FIELDALIAS-New_Process_ID = New_Process_ID as NewProcessID
+FIELDALIAS-Workstation_Name = Workstation_Name as WorkstationName
+```
+
+
+## transforms.conf
+Field Extraction During Ingest
+Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
+
+```...myapp/local/props.conf```  ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
+Example
+```
+[syslog]
+EXTRACT-syslogISOtab = ^(?<DateTime>.+?)\t(?<Priority>.+?)\t(?<Host>.+?)\t(?<Message>.+)
+```
+
+```...myapp/local/transforms.conf``` ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
+
+### Parse Fields that May or May Not be Present
+Note that every "sub field" is optional under Subject, and that Subject captures the entire fieldset for review.
+
+```
+(Subject:(?<Subject>
+    (\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?
+    (\s+Account\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?
+    (\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?
+    (\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?
+    (\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?
+    )?
+)?
+```
+
+That regular expression must be used without whitespace in Splunk transforms.conf, like this
+```
+[extract-security-xml]
+REGEX = (Subject:(?<Subject>(\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?(\s+Account\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?(\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?(\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?(\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?)?)?
+SOURCE_KEY = EventXML
+````
+
+
+## savedsearches.conf
+Change default schedule for this app
+```
+[default]
+cron_schedule = 0 12 * * *
+dispatch.earliest_time = 0
+dispatch.latest_time = now
+```
+
+## web.conf
+Increase web timeout to allow exporting larger result sets
+```
+[settings]
+export_timeout = 7200
+```
+
+## Monitor CSV Files
 
 inputs.conf
 ```
@@ -103,24 +214,13 @@ TIME_FORMAT = %Y-%m-%d %H:%M:%SZ
 ALWAYSOPENFILE = 1
 ```
 
-# Field Extraction During Ingest
-Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
+## Split One Input into Multiple Sourcetypes
 
-```...myapp/local/props.conf```  ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
-Example
-```
-[syslog]
-EXTRACT-syslogISOtab = ^(?<DateTime>.+?)\t(?<Priority>.+?)\t(?<Host>.+?)\t(?<Message>.+)
-```
-
-```...myapp/local/transforms.conf``` ([syntax](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Transformsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configureadvancedextractionswithfieldtransforms))
-
-# Split One Input into Multiple Sourcetypes
 This sample will walk through splitting an input log stream into multiple sourcetypes by triggering on keywords (via regex) within those logs that define their sourcetype. For example, most endpoints that record/forward logs in syslog format send multiple major groupings of event types.
 
 Create/edit 3 files and add the following content to each.
 
-##### .../etc/apps/search/local/inputs.conf
+### .../etc/apps/search/local/inputs.conf
 ```
 [monitor:///ingest]
 disabled = false
@@ -130,7 +230,7 @@ sourcetype = kiwisyslog
 whitelist = *.txt
 ```
 
-##### .../etc/apps/search/local/props.conf
+### .../etc/apps/search/local/props.conf
 ```
 [kiwisyslog]
 NO_BINARY_CHECK = true
@@ -138,7 +238,7 @@ TRANSFORMS-sourcetye_routing = security-set-sourcetype, application-set-sourcety
 ```
 
 
-##### .../etc/apps/search/local/transforms.conf
+### .../etc/apps/search/local/transforms.conf
 ```
 [security-set-sourcetype]
 DEST_KEY = MetaData:Sourcetype
@@ -165,28 +265,6 @@ DEST_KEY = MetaData:Sourcetype
 REGEX = (\sMSWinEventLog\s\d\sMicrosoft-Windows-PowerShell/Operational\s)
 FORMAT = sourcetype::WinEventLog:Microsoft-Windows-PowerShell/Operational
 ```
-
-
-# Parse Fields that May or May Not be Present
-Note that every "sub field" is optional under Subject, and that Subject captures the entire fieldset for review.
-
-```
-(Subject:(?<Subject>
-    (\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?
-    (\s+Account\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?
-    (\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?
-    (\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?
-    (\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?
-    )?
-)?
-```
-
-That regular expression must be used without whitespace in Splunk transforms.conf, like this
-```
-[extract-security-xml]
-REGEX = (Subject:(?<Subject>(\s+Security\sID:\s+(?<Subject_SecurityID>.+?)(?:\n|$))?(\s+Account\sName:\s+(?<Subject_AccountName>.+?)(?:\n|$))?(\s+Account\sDomain:\s+(?<Subject_AccountDomain>.+?)(?:\n|$))?(\s+Logon\sID:\s+(?<Subject_LogonID>.+?)(?:\n|$))?(\s+Logon\sType:\s+(?<Subject_LogonType>.+?)(?:\n|$))?)?)?
-SOURCE_KEY = EventXML
-````
 
 ## See for more info
 - https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Advancedsourcetypeoverrides
