@@ -14,6 +14,10 @@ Run
 docker run -d -p 8000:8000 -e SPLUNK_START_ARGS='--accept-license' -e SPLUNK_PASSWORD='<password>' splunk/splunk:latest
 ```
 
+See for more:
+- https://splunk.github.io/docker-splunk/
+- https://splunk.github.io/docker-splunk/ADVANCED.html
+
 
 # Setup Option 2 - Splunk4DFIR via docker-compose
 
