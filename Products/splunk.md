@@ -178,7 +178,7 @@ Check the latest 7 days for logs, then review the last one day. If a log source 
 <details>
 
 ```
-index=ics-cpn-cbp-scada sourcetype="linux:messages"
+index=something sourcetype="linux:messages"
 | rex field=_raw "^(<\d+>\s)?[^\s]+\s+[^\s]+\s+[^\s]+\s+[^\s]+\s(?<application>[^\d][^\s]+?)[\s:|\(|\[]"
 | chart count by application
 ```
