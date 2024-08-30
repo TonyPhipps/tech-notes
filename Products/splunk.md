@@ -330,7 +330,7 @@ index="windows" d_host="*" ip="*"
 <details>
 
 ```
-index="windows" cribl=yes sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,10,11,12,13)
+index="windows" sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,10,11,12,13)
 | stats max(_time) AS Last_Login BY Account_Name
 | search NOT Account_Name IN ("*$", DWM-*, UMFD-*)
 | convert ctime(Last_Login)	
