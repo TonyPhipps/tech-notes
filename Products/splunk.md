@@ -39,7 +39,7 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 | Find Events Without a Specific Field/Column                                                           | `... NOT Message=*`                                                                                                                                |
 | Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency.       | `\| fieldformat "First Event"=strftime('First Event', "%c")`                                                                                       |
 | Remove duplicate fields                                                                               | `... \| dedup host`                                                                                                                                |
-| Createa choropleth map visualizations                                                                 | `geom`                                                                                                                                             |
+| Create a choropleth map visualizations                                                                | `geom`                                                                                                                                             |
 | Determine String Length                                                                               | `\| eval PathLength=len(Path)`                                                                                                                     |
 | Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines              | `\| rex field=sourcefieldname "(?<newfieldname>regex)"`                                                                                            |
 | Extract Fields via Rex (regex) using a switch/case scenario                                           | `\| eval NewFileName = case(match(host, "192.168.1.1"), "Router", match(host, "192.168.1.2"), "Server", 1=1, "Other")`                             |
@@ -61,11 +61,11 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 
 Rest API Searches
 
-| Goal                                  | Example                                                                                                                                       |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Get Current Username                  | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields username`                              |
-| Get Current User Rights               | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields capabilities \| mvexpand capabilities` |
-| Get Current User Autehtnication Sytem | `\| rest /services/authentication/users \| fields title, type \| stats count by type`                                                         |
+| Goal                                   | Example                                                                                                                                       |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Get Current Username                   | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields username`                              |
+| Get Current User Rights                | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields capabilities \| mvexpand capabilities` |
+| Get Current User Authentication System | `\| rest /services/authentication/users \| fields title, type \| stats count by type`                                                         |
 
 System Searches
 | Goal                      | Example                                                                                                                                                                                                                                                                                                                                                                                                                           |
