@@ -434,3 +434,21 @@ Jim; Sally; Bob
 ```
 | makemv delim=; Members
 ```
+
+
+# Apps
+
+## PSTree
+- https://splunkbase.splunk.com/app/5721
+
+Modify to work with Windows Event ID 4688
+```
+index IN (evtx, wineventlog) (sourcetype=*WinEventLog:* OR source=*WinEventLog:* OR source="*.json") EventCode=4688 host IN (*testhost*)
+| eval process_id = tonumber(process_id, 16)
+| eval parent_process_id = tonumber(parent_process_id, 16)
+| eval child=NewProcessName." (".process_id.")"
+| eval parent=NewProcessName." (".parent_process_id.")"
+| eval detail=strftime(_time, "%Y-%m-%d %H:%M:%S")." ".CommandLine
+| pstree child=child parent=parent detail=detail spaces=50
+| table tree
+```
