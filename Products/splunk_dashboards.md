@@ -1,5 +1,5 @@
 # Strange Notes
-- If you want to share URLs that set tokens automatically, every Input must have an Initial Value set in the dashboard configuration XML.
+- If you want to share URLs that sets Inputs automatically, every Input must NOT set their input in <init>. Use of <init> to set tokens ignores the URL bar. Note that other, non-Input tokens are never stored in the URL, and are therefore not shareable.
 - If you want to disable auto-searching entirely, Inputs that have a <change> defined in XML may end up still auto-searching.
 
 
