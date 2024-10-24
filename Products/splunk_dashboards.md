@@ -1,3 +1,8 @@
+# Strange Notes
+- If you want to share URLs that set tokens automatically, every Input must have an Initial Value set in the dashboard configuration XML.
+- If you want to disable auto-searching entirely, Inputs that have a <change> defined in XML may end up still auto-searching.
+
+
 # Theme
 Set theme to light/dark via URL
 ```
