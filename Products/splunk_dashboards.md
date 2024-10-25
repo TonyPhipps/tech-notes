@@ -17,7 +17,7 @@ https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 
 ```$env:user_email$``` 	    Current user email address.
 
-```$env:user_timezone$``` 	Resolves the timezone to the user's preferred timezone. ```The token resolves to the default system timezone or the localized ```equivalent if the user doesn't specify a timezone.
+```$env:user_timezone$``` 	Resolves the timezone to the user's preferred timezone. The token resolves to the default system timezone or the localized equivalent if the user doesn't specify a timezone.
 
 ```$env:app$```           	Current app context
 
@@ -43,8 +43,6 @@ https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 
 ```$env:version$``` 	      Current instance product version 
 
-
-Reference: 
 
 ### Search Base
 At the top:
