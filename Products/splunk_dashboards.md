@@ -71,7 +71,7 @@ At the applicable widget(s):
     </input>
 ```
 
-### Dropdown to Toggle Tokens
+### Dynamic Dropdown to Toggle Tokens
 This sample provides a dropdown that dynamically builds its dropdown list (Display+Value) based on a search, then sets tokens accordingly.
 
 ```
@@ -93,7 +93,7 @@ This sample provides a dropdown that dynamically builds its dropdown list (Displ
       <selectFirstChoice>true</selectFirstChoice>
       <search>
         <query>
-          | eventcount summarize=false index=ics-* 
+          | eventcount summarize=false index=something 
           | eval whichOne = case(
             match(_raw,"term_a"),"result_a",
             match(_raw,"term_b"),"result_b",
@@ -124,7 +124,7 @@ This sample provides a dropdown that dynamically builds its dropdown list (Displ
 When using the contents of a search to assign a variable to a value via click action, use ```$tokenname|s$``` to get Splunk to parse as a string, rather than attempting to pick up characters like ```\``` as an escape character.
 
 - NOT in the Drilldown definition, in the search string.
-- Remove quotes, if they were used around the variable $'s.
+- Do not use quotes around the variable $'s.
 
 ### Colorize a Table
 ```
@@ -132,25 +132,6 @@ When using the contents of a search to assign a variable to a value via click ac
           <colorPalette type="expression">case(value &lt; 2, "#A2CC3E", value &lt; 5, "#FFC300", value &gt; 4, "#FF5733", 1==1, "#555555")</colorPalette>
         </format>
 ```
-
-
-### Sample Dashboard
-This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
-
-- Presents filters for time and key fields at the top
-- Leverages radio buttons to reset filters
-- Multiple widgets used to aggregate key fields
-- Widgets leverage tokens to allow cross-widget filtering (based on clicking a cell containing a value)
-- Shows all relevant fields for matching events
-
-<details>
-
-```
-```
-
-</details>
-
-
 
 
 ### Add Expand/Collapse Buttons to Panels
@@ -249,7 +230,7 @@ Add this just after the \<title> closes for the panel you'd like to be collapsib
 
 ### Parse Data From Background Search to Token
 
-NOTE: Requires the "dispatch_rest_to_indexers" capability.
+NOTE: Requires the "dispatch_rest_to_indexers" capability/permission.
 
 ```
 <search>
@@ -263,3 +244,20 @@ NOTE: Requires the "dispatch_rest_to_indexers" capability.
   </done>
 </search>
 ```
+
+
+### Sample Dashboard
+This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
+
+- Presents filters for time and key fields at the top
+- Leverages radio buttons to reset filters
+- Multiple widgets used to aggregate key fields
+- Widgets leverage tokens to allow cross-widget filtering (based on clicking a cell containing a value)
+- Shows all relevant fields for matching events
+
+<details>
+
+```
+```
+
+</details>
