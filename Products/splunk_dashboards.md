@@ -260,6 +260,49 @@ NOTE: Requires the "dispatch_rest_to_indexers" capability/permission.
 ```
 
 
+### Add Hidden Tokens to URL for Full Dashboard Sharing
+Only Input tokens are stored on the URL line and are included when you copy/paste a URL to another person. The way to include non-input tokens in the URL is to migrate them into hidden inputs.
+
+First, remove any <init>'s for the tokens to be migrated.
+
+```
+<input type="text" token="myToken" depends="$hidden$" searchWhenChanged="true">
+      <label>myToken</label>
+      <initialValue>*</initialValue>
+    </input>
+```
+
+ Ensuring searchWhenChanged is set to true causes the URL to be updated as the token (and therefore Input value) is updated by things like a Drilldown definition in a Widget. To set up a widget to do this, use this code.
+
+ ```
+<drilldown>
+          <set token="myToken">$click.value$</set>
+          <set token="form.myToken">$click.value$</set>
+        </drilldown>
+ ```
+
+### Reset All of a Dashboard's Tokens
+This code will add a thin vertical HTML widget with a Reset Dashboard link on it. This link simply sends the user to "naked" version of the dashboard with no tokens defined within the URL.
+
+```
+<row>
+    <panel>
+      <html>
+        <div style="float:left">
+          <a href="/app/$env:app$/$env:page$" style="display:flex">
+            <i class="icon-rotate"/>
+            <div style="padding-left:5px;">Reset Dashboard</div>
+          </a>
+        </div>
+      </html>
+    </panel>
+  </row>
+  <row>
+```
+
+
+
+
 ### Sample Dashboard
 This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
 
