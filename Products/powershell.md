@@ -258,3 +258,18 @@ $result = switch ( $day )
 $result
 $result.GetType() 
 ```
+
+
+Add a Hashtable as Properties to an Existing Object
+```
+# Create a hashtable of properties
+$newProperties = @{
+    City = "New York"
+    Country = "USA"
+}
+
+# Add the properties from the hashtable to the object
+foreach ($key in $newProperties.Keys) {
+    $myObject | Add-Member -MemberType NoteProperty -Name $key -Value $newProperties[$key]
+}
+```
