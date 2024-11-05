@@ -263,6 +263,14 @@ To avoid warping with PLA...
 ## Second Layer Peels Away Like "Gills"
 - Reduce Z Offset a bit. It may be too smashed, causing layer 2 to not reach and stick very well.
 
+## Z-Banding and under-extrusion in areas that have lots of quick switching between printing and retracting
+- Replace bowden tube
+
+
+## The outer layer of a 3D print is Delaminating
+- Decrease the linear advance setting on your printer. 
+
+
 ## Something's Just Off
 - Consider toggling the following
   - Print Settings > Layers and Perimeters > Detect Thin Walls
