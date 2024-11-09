@@ -79,13 +79,15 @@ List directories in top level of your drive
 rclone lsd remote:
 ```
 
-To copy a local directory to a drive directory called backup
+- To SYNC a local directory to a drive directory called backup
+  - This works better if you rename/move files, as --track-renames prevents re-uploading.
 ```
-rclone sync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --verbose
+rclone sync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --track-renames --verbose
 ```
 
-Sync Two Locations BOTH WAYS
-Run without --resync after initial run
+- Sync Two Locations BOTH WAYS
+  - Run without --resync after initial run
+  - Note this is not great for when files get renamed/moved around, as it will re-upload the whole file. Use SYNC for this use case.
 ```
 rclone bisync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --verbose --resync
 ```
