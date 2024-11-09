@@ -4,6 +4,15 @@ Cumulative Updates
 - Search for something like "Cumulative Update for Windows Server 2019"
 - Download the latest cumulative update that applies
 
+# Change a User's ProfileImagePath
+- Log off the target user.
+- Open RegEdit as admin
+- Navigate to Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\
+- Open the Key that matches the user's SID (or really, find it by opening each)
+- Change the ProfileImagePath as needed.
+- Copy the files from the old folder to the new.
+- Log back in as the user.
+
 
 # Repair Windows Store Apps
 Attempt 1
