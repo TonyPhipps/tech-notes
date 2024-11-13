@@ -132,6 +132,25 @@ Make a parameter mandatory
 ...
 ```
 
+# Certificates
+
+Skip certificate validation checks (use only for known-good self-signed certs)
+```ps
+# Trust all certificates (use if self-signed cert is being used
+add-type @"
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+public class TrustAllCertsPolicy : ICertificatePolicy {
+    public bool CheckValidationResult(
+        ServicePoint srvPoint, X509Certificate certificate,
+        WebRequest request, int certificateProblem) {
+        return true;
+    }
+}
+"@
+[System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+```
+
 
 # Misc
 Convert .json file to PowerShell objects
@@ -272,22 +291,4 @@ $newProperties = @{
 foreach ($key in $newProperties.Keys) {
     $myObject | Add-Member -MemberType NoteProperty -Name $key -Value $newProperties[$key]
 }
-```
-
-
-Skip certificate validation checks (use only for known-good self-signed certs)
-```ps
-# Trust all certificates (use if self-signed cert is being used
-add-type @"
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-public class TrustAllCertsPolicy : ICertificatePolicy {
-    public bool CheckValidationResult(
-        ServicePoint srvPoint, X509Certificate certificate,
-        WebRequest request, int certificateProblem) {
-        return true;
-    }
-}
-"@
-[System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 ```
