@@ -76,14 +76,34 @@ y/e/d> y
 
 List directories in top level of your drive
 ```
-rclone lsd remote:
+rclone lsd googledrive:
 ```
+
+# rclone MOUNT
+- Requires winfsp to be installed
+
+```
+rclone mount googledrive:TEST R:
+```
+
+Enable at startup
+
+
+# rclone SYNC
 
 - To SYNC a local directory to a drive directory called backup
   - This works better if you rename/move files, as --track-renames prevents re-uploading.
 ```
-rclone sync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --track-renames --verbose
+.\rclone.exe sync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --track-renames --verbose
 ```
+
+Sync Local to Remote
+Remove --dry-run after confirming it looks good
+```
+rclone sync SOURCE remote:DESTINATION --dry-run
+```
+
+# rclone BISYNC
 
 - Sync Two Locations BOTH WAYS
   - Run without --resync after initial run
@@ -93,8 +113,3 @@ rclone bisync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --driv
 ```
 
 
-Sync Local to Remote
-Remove --dry-run after confirming it looks good
-```
-rclone sync SOURCE remote:DESTINATION --dry-run
-```
