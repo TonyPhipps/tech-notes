@@ -13,22 +13,22 @@ Cumulative Updates
 - Copy the files from the old folder to the new.
 - Log back in as the user.
 
-
 # Repair Windows Store Apps
 Attempt 1
-```
-Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-wsreset.exe
-Library > "Get Updates"
+```ps
+Get-AppxPackage -allusers *WindowsStore* | Remove-AppxPackage
+Get-AppxPackage -allusers *WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+wsreset
+Updates & Downloads > "Get Updates"
 ```
 
 Attempt 2
-```
-Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register “$($_.InstallLocation)AppXManifest.xml”}
+```ps
+Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
 ```
 
 Attempt 3
-```
+```ps
 sfc /scannow
 Dism /Online /Cleanup-Image /ScanHealth
 Dism /Online /Cleanup-Image /CheckHealth
