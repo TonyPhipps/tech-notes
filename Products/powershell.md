@@ -186,11 +186,12 @@ $base64_string = "VABoAGkAcwAgAGkAcwAgAGEAIABzAGUAYwByAGUAdAAgAGEAbgBkACAAcwBoAG
 
 Fix $ScriptRoot so its the same whether in ISE or regular Powershell console.
 ```ps
-if ($psISE) {
+if (($psISE) -and (Test-Path -Path $psISE.CurrentFile.FullPath)) {
     $ScriptRoot = Split-Path -Path $psISE.CurrentFile.FullPath -Parent
 } else {
     $ScriptRoot = $PSScriptRoot
 }
+$ModuleRoot = Split-Path -Path $ScriptRoot -Parent
 ```
 
 
