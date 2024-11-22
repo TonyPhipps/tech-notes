@@ -57,7 +57,7 @@ Should not require major adjustments between different filaments.
 - Live-adjust Nozzle Distance until you can no longer see gaps between the lines
   - Hold the print up to light and inpect it. It should have no gaps
   - Peeling apart is too high of a Z offset
-  - Smushed to the point its causing peaks between lines is too low of a Z offset
+  - Smushed to the point its causing peaks between lines is too low of a Z offset
   - Repeat until satisfied
 
 # Filament Calibration
@@ -84,10 +84,10 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 - This should be set per filament manufacturer+color. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 - M221 is the Marlin firmware code for extrusion multiplier, if needed
 - I like to keep multiple files, all with the same settings except the extrusion multiplier value, for quicker testing
-- https: /ellis3dp.com/Pressure_Linear_Advance_Tool/
+- https://ellis3dp.com/Pressure_Linear_Advance_Tool/
 
 ## Temperature
-- Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
+- Go up by 1-5deg if Extruder block is clicking, indicating the filament is too solid to advance
 - Consider using a temp tower (https://www.printables.com/model/39810-improved-all-in-one-temperature-and-bridging-tower)
 
 ## Retraction Settings
