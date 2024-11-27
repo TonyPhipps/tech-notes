@@ -57,7 +57,7 @@ Should not require major adjustments between different filaments.
 - Live-adjust Nozzle Distance until you can no longer see gaps between the lines
   - Hold the print up to light and inpect it. It should have no gaps
   - Peeling apart is too high of a Z offset
-  - Smushed to the point its causing peaks between lines is too low of a Z offset
+  - Smushed to the point its causing peaks between lines is too low of a Z offset
   - Repeat until satisfied
 
 # Filament Calibration
@@ -84,10 +84,10 @@ Assuming your printer is already calibrated, it's recommended some settings be t
 - This should be set per filament manufacturer+color. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 - M221 is the Marlin firmware code for extrusion multiplier, if needed
 - I like to keep multiple files, all with the same settings except the extrusion multiplier value, for quicker testing
-- https: /ellis3dp.com/Pressure_Linear_Advance_Tool/
+- https://ellis3dp.com/Pressure_Linear_Advance_Tool/
 
 ## Temperature
-- Go up by 1-5deg if extruder block is clicking, indicating the filament is too solid to advance
+- Go up by 1-5deg if Extruder block is clicking, indicating the filament is too solid to advance
 - Consider using a temp tower (https://www.printables.com/model/39810-improved-all-in-one-temperature-and-bridging-tower)
 
 ## Retraction Settings
@@ -289,6 +289,7 @@ You can typically print the same normal/satin filament as matte by reducing the 
 - ```M107```  Disables fan
 - ```M220 S100``` - Sets speed to 100%
 - ```M220 S50``` - Sets speed to 50%
+<<<<<<< HEAD
 
 
 ## Temp Tower Customization
@@ -302,3 +303,5 @@ Before Layer Change G-Code
 {if layer_num==155}M104 S235{endif} ; Layer 4
 {if layer_num==205}M104 S230{endif} ; Layer 5
 ```
+=======
+>>>>>>> 279dbc5592a2ad2625c8891d79567087d0dbbf62
