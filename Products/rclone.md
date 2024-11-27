@@ -106,10 +106,38 @@ rclone sync SOURCE remote:DESTINATION --dry-run
 # rclone BISYNC
 
 - Sync Two Locations BOTH WAYS
-  - Run without --resync after initial run
+  - First run with --resync --dry-run params to see outputs, but not change anything on your system so you can verify it works correctly.
+  - Second run with --resync which triggers the initial redownload of the data from Google Drive
+  - Third run without these params to check that the "normal operation" works.
+
   - Note this is not great for when files get renamed/moved around, as it will re-upload the whole file. Use SYNC for this use case.
+
 ```
-rclone bisync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --verbose --resync
+$params = @(
+"bisync",
+"F:\GoogleDrive\Tony",
+"googledrive:/Tony",
+"--conflict-resolve", "newer",
+"--conflict-loser", "delete",
+"--conflict-suffix", "sync-conflict-{DateOnly}-",
+"--compare", "size,modtime,checksum",
+"--create-empty-src-dirs",
+"--drive-skip-shortcuts",
+"--drive-acknowledge-abuse",
+"--drive-skip-gdocs",
+"--drive-skip-dangling-shortcuts",
+"--fast-list",
+"--fix-case",
+"--no-slow-hash",
+"--suffix-keep-extension",
+"--resilient",
+"--recover",
+"--verbose",
+"--resync",
+"--dry-run"
+)
+
+c:\path\to\rclone.exe $params
 ```
 
-
+https://stacker.news/items/576670
