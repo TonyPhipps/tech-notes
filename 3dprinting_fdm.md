@@ -289,7 +289,6 @@ You can typically print the same normal/satin filament as matte by reducing the 
 - ```M107```  Disables fan
 - ```M220 S100``` - Sets speed to 100%
 - ```M220 S50``` - Sets speed to 50%
-<<<<<<< HEAD
 
 
 ## Temp Tower Customization
@@ -303,5 +302,3 @@ Before Layer Change G-Code
 {if layer_num==155}M104 S235{endif} ; Layer 4
 {if layer_num==205}M104 S230{endif} ; Layer 5
 ```
-=======
->>>>>>> 279dbc5592a2ad2625c8891d79567087d0dbbf62
