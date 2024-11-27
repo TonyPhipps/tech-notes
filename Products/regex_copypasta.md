@@ -3,6 +3,11 @@
 (?<Filepath>.+\\)(?<Filename>.+)
 ```
 
+#### Just Filename
+```
+[^\\]+$
+```
+
 #### Pull Specific Field from Windows Events
 ```
 (?ms)Subject:.+?Account\sName:\s+(?<Subject_AccountName>[^\n]+)

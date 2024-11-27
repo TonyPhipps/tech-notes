@@ -1,4 +1,20 @@
-Internal Gitlab
+My Favorite VSCode Extensions
+- Code Spell Checker (streetsidesoftware.code-spell-checker)
+- Docker (ms-azuretools.vscode-docker)
+- Git Graph (mhutchie.git-graph)
+- indent-rainbow (oderwat.indent-rainbow)
+- Markdown All in One (yzhang.markdown-all-in-one)
+- PowerShell (ms-vscode.powershell)
+- Rainbow CSV (mechatroner.rainbow-csv)
+- XML Tools (DotJoshJohnson.xml)
+
+Git Graph
+- Summarize between commits
+  - Open Git Graph by clicking it on the bottom bar toward the left.
+  - click on the first commit you want to compare
+  - Ctrl/Cmd + Click on a second commit. Both lines will be highlighted. The commit details will now display all differences between A and commit B, allowing you to compare any two commits across branches or from the same branch.
+
+User Preferences to work with an Internal Gitlab
 
 ```
 "gitlab.cert": "",
