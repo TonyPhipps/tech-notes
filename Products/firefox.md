@@ -29,7 +29,7 @@ Hide tab (X) buttons
 - Install Sideberry addon
 - Sideberry Settings > Preface Value:
 ​
-- Go to about:config
+- Go to about:profiles
 - Click Restart Normally...
 */
 
