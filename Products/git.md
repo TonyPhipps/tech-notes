@@ -4,9 +4,9 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```
 
-# Set Global AutoCRLF
+# Set Global AutoCRLF so EOL's are not changed
 ```
-git config --global core.autocrlf true
+git config --global core.autocrlf false
 ```
 
 
