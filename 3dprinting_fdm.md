@@ -233,6 +233,9 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Minimum Travel after Retraction: Set to 2mm or reduce down to lowest 0.5
 - Retract amount before wipe: 70%
 
+## Filament Sticks to Nozzle Better than Last Layer
+- Typical with under-temp PETG. Increase by 5deg celcius and try again.
+
 ## Gaps after Retraction
 - Slow down Deretraction/Restart Speed. Often this is half as much as Retraction Speed
 - Add Extra Length on Restart
