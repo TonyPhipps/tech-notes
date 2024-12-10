@@ -300,6 +300,42 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
   <row>
 ```
 
+### Hide a Panel Until a Token is Set via Drilldown
+```
+<form version="1.1">
+  <label>Your Label</label>
+  <description>Your Description</description>
+  <init>
+    <unset token="show_this_panel"></unset>
+  </init>
+
+  ....
+  <row>
+    <panel>
+        <table>
+          <title>Panel that Shows the Hidden Panel via Drilldown</title>
+          <search>
+            <query>
+              | search stuff
+            </query>
+            <drilldown>
+              <set token="show_this_panel">true</set>
+              <set token="my_token">$click.value$</set>
+          </drilldown>
+          </search>
+    </panel>
+    
+    <panel depends="$show_this_panel$">
+      <table>
+          <title>Hidden Panel</title>
+            <query>
+              | search stuff $my_token$
+            </query>
+    </panel>
+  </row>
+```
+
+
 
 
 

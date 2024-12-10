@@ -16,6 +16,13 @@ git config --global core.autocrlf false
 git config --global --edit
 ```
 
+# Store Current Changes and Rebase
+```
+git stash
+git pull origin master (or main)
+git stash pop
+```
+
 # Purge any line containing "word"
 ... in all file histories in the repository.
 
