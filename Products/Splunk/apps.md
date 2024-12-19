@@ -301,3 +301,9 @@ index IN (evtx, wineventlog) (sourcetype=*WinEventLog:* OR source=*WinEventLog:*
 | pstree child=child parent=parent detail=detail spaces=50
 | table tree
 ```
+
+## AssetDB
+AssetDB is a Splunk application that allows merging distinct data sources into an asset data base
+
+- https://splunkbase.splunk.com/app/6115
+- https://github.com/alatif113/assetdb

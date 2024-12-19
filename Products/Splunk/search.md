@@ -27,9 +27,6 @@
 | Aggregate Results                                                                                     | `\| stats count by Path, CommandLine, PathLength, CommandLineLength`                                                                               |
 | Aggregate Results by specific fields - show a list of values for those fields across events           | `\|  stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                                                     |
 | Exclude a list of items                                                                               | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]`                                                                          |
-| List contents of a lookup                                                                             | `\| inputlookup mylookup`                                                                                                                          |
-| Determine if the contents of a field are in a lookup                                                  | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip]`                                                                      |
-| Determine if the contents of one of two fields are in a lookup                                        | `\| search ([\| inputlookup ioc_ip.csv \| fields IP \| rename IP as dest_ip] OR [ \| inputlookup ioc_ip.csv \| fields IP \| rename IP as src_ip])` |
 | Convert numbers to date                                                                               | `\| convert ctime(DateField)`                                                                                                                      |
 | Search for a list of values in one field                                                              | `Logon_Type IN (2,10,11,12,13)`                                                                                                                    |
 | Merge multiple column names into one                                                                  | `\| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`                                                                                |
@@ -73,6 +70,25 @@ Error Hunting / Troubleshooting
 
 
 ## Lookups
+
+## Review a Lookup Table
+```
+| inputlookup mylookup
+```
+
+## Determine if the contents of a field are in a lookup
+Note: I have found it more helpful to rename the fields from the INPUTLOOKUP rather than the search, as this approach avoids editing the active search fields with this exclusion is placed where it's needed in the larger saerch.
+
+- Where the inputlookup has a field named dest_ip and the search has a field named IP
+
+```
+[| inputlookup ioc_ip.csv | fields IP | rename dest_ip as IP ]
+```
+
+## Determine if the contents of one of two fields are in a lookup
+```
+
+```
 
 ### Save Output to a Lookup
 Create initial lookup table in user context to allow permissions to be set
