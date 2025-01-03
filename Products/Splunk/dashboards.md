@@ -300,6 +300,24 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
   <row>
 ```
 
+### Reset SOME Of a Dashboard's Tokens
+```
+<input type="radio" token="resetTokens" searchWhenChanged="true">
+  <label></label>
+  <choice value="reset">Reset Inputs</choice>
+  <choice value="retain">Retain</choice>
+  <default>retain</default>
+  <change>
+    <condition value="reset">
+      <unset token="token1"></unset>
+      <unset token="token2"></unset>
+      <unset token="token3"></unset>
+      <set token="resetTokens">retain</set>
+    </condition>
+  </change>
+</input>
+```
+
 ### Hide a Panel Until a Token is Set via Drilldown
 ```
 <form version="1.1">
