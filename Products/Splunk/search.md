@@ -9,31 +9,31 @@
 
 ## Search Quick Reference
 
-| Goal                                                                                                  | Example                                                                                                                                            |
-| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| To Lower                                                                                              | `\| eval hostL=lower(host)`                                                                                                                        |
-| To Upper                                                                                              | `\| eval hostU=upper(host)`                                                                                                                        |
-| Fill Null values with empty string                                                                    | `\| fillnull value=NULL`                                                                                                                           |
-| Fill all empty field values in the "host" and "kbps" fields with the string "unknown"                 | `\| fillnull value=unknown host kbps`                                                                                                              |
-| Include Events with or Without a Specific Field/Column (This may be needed if fillnull did not work.) | `\| eval field1=if(isnull(field1),"missing",field1))`                                                                                              |
-| Find Events Without a Specific Field/Column                                                           | `... NOT Message=*`                                                                                                                                |
-| Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency.       | `\| fieldformat "First Event"=strftime('First Event', "%c")`                                                                                       |
-| Remove duplicate fields                                                                               | `... \| dedup host`                                                                                                                                |
-| Create a choropleth map visualizations                                                                | `geom`                                                                                                                                             |
-| Determine String Length                                                                               | `\| eval PathLength=len(Path)`                                                                                                                     |
-| Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines              | `\| rex field=sourcefieldname "(?<newfieldname>regex)"`                                                                                            |
-| Extract Fields via Rex (regex) using a switch/case scenario                                           | `\| eval NewFileName = case(match(host, "192.168.1.1"), "Router", match(host, "192.168.1.2"), "Server", 1=1, "Other")`                             |
-| Sort Results                                                                                          | `\| sort + PathLength`                                                                                                                             |
-| Aggregate Results                                                                                     | `\| stats count by Path, CommandLine, PathLength, CommandLineLength`                                                                               |
-| Aggregate Results by specific fields - show a list of values for those fields across events           | `\|  stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                                                     |
-| Exclude a list of items                                                                               | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]`                                                                          |
-| Convert numbers to date                                                                               | `\| convert ctime(DateField)`                                                                                                                      |
-| Search for a list of values in one field                                                              | `Logon_Type IN (2,10,11,12,13)`                                                                                                                    |
-| Merge multiple column names into one                                                                  | `\| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`                                                                                |
-| Replace one backslash with two                                                                        | `\| eval Path=replace(Path, "\\\\", "\\\\\\")`                                                                                                     |
-| Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)`                       |
-| Days since Date                                                                                       | `\| eval DateParsed=strptime('DateScanned', "%Y-%m-%d %H:%M:%SZ") \| eval DaysSince = round((now()-DateParsed)/86400)`                             |
-| Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                                                  |
+| Goal                                                                                                  | Example                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| To Lower                                                                                              | `\| eval hostL=lower(host)`                                                                                                  |
+| To Upper                                                                                              | `\| eval hostU=upper(host)`                                                                                                  |
+| Fill Null values with empty string                                                                    | `\| fillnull value=NULL`                                                                                                     |
+| Fill all empty field values in the "host" and "kbps" fields with the string "unknown"                 | `\| fillnull value=unknown host kbps`                                                                                        |
+| Include Events with or Without a Specific Field/Column (This may be needed if fillnull did not work.) | `\| eval field1=if(isnull(field1),"missing",field1))`                                                                        |
+| Find Events Without a Specific Field/Column                                                           | `... NOT Message=*`                                                                                                          |
+| Change the value as displayed, but not in data. Useful to maintain sorting by numbers/currency.       | `\| fieldformat "First Event"=strftime('First Event', "%c")`                                                                 |
+| Remove duplicate fields                                                                               | `... \| dedup host`                                                                                                          |
+| Create a choropleth map visualizations                                                                | `geom`                                                                                                                       |
+| Determine String Length                                                                               | `\| eval PathLength=len(Path)`                                                                                               |
+| Extract Fields via Rex (regex). Use of greedy wildcards (\*) starts and ends at newlines              | `\| rex field=sourcefieldname "(?<newfieldname>regex)"`                                                                      |
+| Extract Fields via Rex (regex) using a switch/case scenario                                           | `\| eval NewFileName = case(match(host, "192.168.1.1"), "Router", match(host, "192.168.1.2"), "Server", 1=1, "Other")`       |
+| Sort Results                                                                                          | `\| sort + PathLength`                                                                                                       |
+| Aggregate Results                                                                                     | `\| stats count by Path, CommandLine, PathLength, CommandLineLength`                                                         |
+| Aggregate Results by specific fields - show a list of values for those fields across events           | `\|  stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                               |
+| Exclude a list of items                                                                               | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]`                                                    |
+| Convert numbers to date                                                                               | `\| convert ctime(DateField)`                                                                                                |
+| Search for a list of values in one field                                                              | `Logon_Type IN (2,10,11,12,13)`                                                                                              |
+| Merge multiple column names into one                                                                  | `\| eval SerialNumber=coalesce(SerialNumber,EnclosureSerialNumber)`                                                          |
+| Replace one backslash with two                                                                        | `\| eval Path=replace(Path, "\\\\", "\\\\\\")`                                                                               |
+| Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)` |
+| Days since Date                                                                                       | `\| eval DateParsed=strptime('DateScanned', "%Y-%m-%d %H:%M:%SZ") \| eval DaysSince = round((now()-DateParsed)/86400)`       |
+| Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
 
 
 Rest API Searches
@@ -50,91 +50,12 @@ System Searches
 | Review Triggered Alerts   | `index=_audit action="alert_fired"`                                                                                                                                                                                                                                                                                                                                                                                               |
 | Review Notables           | `index=notable`                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Export all Saved Searches | `\| rest /servicesNS/-/-/saved/searches \| search eai:acl.app="*" \| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id` |
-
+| Review existing Indexes   | `\| eventcount summarize=false index=ics-* \| stats count by index`                                                                                                                                                                                                                                                                                                                                                               |
 
 Error Hunting / Troubleshooting
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Lookups
-
-## Review a Lookup Table
-```
-| inputlookup mylookup
-```
-
-## Determine if the contents of a field are in a lookup
-Note: I have found it more helpful to rename the fields from the INPUTLOOKUP rather than the search, as this approach avoids editing the active search fields with this exclusion is placed where it's needed in the larger saerch.
-
-- Where the inputlookup has a field named dest_ip and the search has a field named IP
-
-```
-[| inputlookup ioc_ip.csv | fields IP | rename dest_ip as IP ]
-```
-
-## Determine if the contents of one of two fields are in a lookup
-```
-
-```
-
-### Save Output to a Lookup
-Create initial lookup table in user context to allow permissions to be set
-```
- | outputlookup "your_lookup.csv" create_context=user
-```
-
-A saved search can then be created with this at the end, which will overwrite the lookup when the search executes on a schedule.
-```
-| `output_adb_lookup("your_lookup.csv")`
-```
-
-### Upload a Lookup
-- Navigate to the App that will use the lookup
-- Navigate to Settings > Lookups
-- Lookup Table Files > + Add New
-  - Select Destination App
-  - Locate the File
-  - Provide a CSV and name (with file extension .csv)
-- Navigate to Settings > Lookups
-- Lookup Definitions > + Add New
-  - Select Destination App
-  - Provide a name (typically matches the csv name without extension .csv)
-  - Save
-
-
-### Update a Lookup
-Lookup list files do not allow updating by default - manual recreation is required. Or... install Lookup List Editor
-- https://apps.splunk.com/apps/id/lookup_editor
-  - Navigate to Apps > Lookup Editor
-  - Find and edit the lookup
-  - Edit existing entries or...
-  - Import a new or updated version to merge with the selected lookup list
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
