@@ -18,11 +18,13 @@ Steps
   - Alternatively, cut and pull off the meat from the hide by hand with a sharp knife.
   - Consider cutting off the edges if meat is stuck in the hair to may it far less likely to smell in those areas and be stiff.
 - Pour salt liberally over the flesh side of the hide until it's completely covered.
-- Grab the 5g bucket. Fold the hide, flesh side together, and roll it up. Put it in the bucket. The bucket is crucial as it will help catch any moisture that leaks out of the hide.
+- Grab the 5g bucket. Put a rock or something in the bucket to keep the hide out of its own drippings.
+- Fold the hide, flesh side together, and roll it up. Put it in the bucket, folded-fur end UP (so it drains out fluid). The bucket is crucial as it will help catch any moisture that leaks out of the hide.
 - Leave the hide for 24 hours.
 - Shake the old salt off, and reapply fresh salt in the same way.
 - Fold flesh sides together again, roll and place in the five-gallon bucket.
 - Leave it for 24 hours (again).
+- Knock the old salt off it (again).
 - Mix a salt bath in a separate bucket with enough water to immerse the hide. Use 1/2 lb of table salt per gallon of water and extremely hot water to dissolve the salt. Mix thoroughly until salt is dissolved.
 - Let the water cool.
 - Immerse the hide in the brine solution and leave for six to eight hours. If left too long, the hair will start falling off the hide.

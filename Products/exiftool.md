@@ -28,3 +28,6 @@ e:\exiftool.exe -time:all -G1 -a -s $pic
 # Apply a date to all date fields
 $pic="path\to\pic.jpg"
 e:\exiftool.exe -AllDates="2001-01-01 12:01:00" $pic -overwrite_original
+
+# Blank a Field Out
+.\exiftool.exe -overwrite_original -datetimeoriginal=  E:\temp\pics\test\20211201_131233_01.jpg
