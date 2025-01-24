@@ -31,7 +31,7 @@ Steps
 - Remove the hide and make sure there are no remaining pieces of flesh. If there are, simply scrape them off with a sharp knife. This is an important last step as any remaining bits of flesh will eventually make the hide smell if not removed.
 - Wash the hide in water and dish soap to remove all excess grease and salt. You can reuse your five-gallon bucket and use your hands to wash and move the hide around. 
 - Rinse the hide off with a hose or in the tub until there are no remaining soap bubbles.
-- Drape it over a railing or clothesline (hair side down), and let it drip dry until the hide is only slightly damp and still pliable. Might take a day or two.
+- Drape it over a railing or clothesline (hair side down), and let it drip dry until the hide is only slightly damp and still pliable. This will take a couple days. Ensure it's not stiff as a board, you want it malleable for the tanning solution.
 - Warm the tanning solution for 30min in hot tap water in a pot.
 - Lay the hide open, flesh side up.
 - Wearing gloves, apply the solution directly from the bottle to the hide. Pour small amounts at a time onto the hide and use a large paintbrush or gloved hands to spread it around. It's important to make sure you cover every bit of the flesh with the solution.
