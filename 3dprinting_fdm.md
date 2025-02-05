@@ -237,10 +237,14 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Typical with under-temp PETG. Increase by 5deg celcius and try again.
 
 ## Gaps after Retraction
-- Lower Linear Advance (LA) value in increments of .5.
+- Visible as under-extrusion at the start of a line.
+- Raise Linear Advance (LA) value in increments of .5.
+- Consider also whether the extrusion multiplier may be too high.
 
 ## Gaps after Deretraction
-- Raise Linear Advance (LA) value in increments of .5.
+- Visible as under-extrusion at the start of a line.
+- Lower Linear Advance (LA) value in increments of .5.
+- Consider also whether the extrusion multiplier may be too low.
 
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
