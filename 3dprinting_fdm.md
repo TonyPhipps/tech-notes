@@ -237,13 +237,14 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Typical with under-temp PETG. Increase by 5deg celcius and try again.
 
 ## Gaps after Retraction
-- Slow down Deretraction/Restart Speed. Often this is half as much as Retraction Speed
-- Add Extra Length on Restart
-- Retract on Layer Change - Toggle
+- Visible as under-extrusion at the start of a line.
+- Raise Linear Advance (LA) value in increments of .5.
+- Consider also whether the extrusion multiplier may be too high.
 
 ## Gaps after Deretraction
-- Likely due to loss of pressure. Add "Extra Length on Restart" in .2mm increments.
-- See "Clicking Extruder"
+- Visible as under-extrusion at the start of a line.
+- Lower Linear Advance (LA) value in increments of .5.
+- Consider also whether the extrusion multiplier may be too low.
 
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
