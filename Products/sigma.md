@@ -97,6 +97,8 @@ deactivate
 
 # Create Rules
 
+Rules describe what is being looked for within events.
+
 Sample
 ```yaml
 # ./rules/cloud/okta/okta_user_account_locked_out.yml
@@ -135,6 +137,8 @@ level: medium
 
 ## Filters
 
+Filters are applied to rules to add exlcusions to them. Intended to keep the signature generic while still allowing for environment-specific tuning.
+
 Sample
 - Rule
 ```yaml
@@ -172,8 +176,6 @@ filter:
   condition: not selection
 ```
 
-NOTE: You can leverage condition: to INCLUDE items as well.
-
 - Command
 ```bash
 sigma convert -t splunk --pipeline splunk_windows \
@@ -191,14 +193,19 @@ $ sigma convert -t splunk -p splunk_windows \
 
 - https://sigmahq.io/docs/meta/filters.html
 
-## Pipelines
+# Pipelines
 
 - Pipelines are executed from lowest priority number to highest, 0-100. Generally it goes:
   - Starting at 10 - Generic log sources are translated into specific log sources
   - Starting at 30 - Transformation of the log signatures into the taxonomy used by a backend.
   - High Numbers - Environment-specific transformations.
 
-### Rule Pre-Processing Transformations
+Types of changes include
+- Rule Pre-Processing Transformations
+- Query Post-Processing Transformations
+- Output Finalization Transformations
+
+## Rule Pre-Processing Transformations
 Includes
 - **field_name_mapping** - *Maps a field name to one or multiple different.*
 - **field_name_prefix_mapping** - *Maps a field name prefix to one or multiple different prefixes.*
@@ -208,22 +215,22 @@ Includes
 - **field_name_prefix** - *Adds a field name prefix.*
 - **wildcard_placeholders** - *Replaces placeholders with wildcards. Useful if remaining placeholders should be replaced with something meaningful to make conversion of rules possible without defining the placeholders content.*
 - **value_placeholders** - *Replaces placeholders with values contained in variables defined in the configuration.*
-- **query_expression_placeholders** - 
-- **add_condition** - 
-- **change_logsource** - 
-- **add_field** - 
-- **remove_field** - 
-- **set_field** - 
-- **replace_string** - 
-- **map_string** - 
-- **set_state** - 
-- **regex** - 
-- **set_value** - 
-- **convert_type** - 
-- **rule_failure** - 
-- **detection_item_failure** - 
-- **set_custom_attribute** - 
-- **nest** - 
+- **query_expression_placeholders** - *Replaces a placeholder with a plain query containing the placeholder or an identifier mapped from the placeholder name. The main purpose is the generation of arbitrary list lookup expressions which are passed to the resulting query.*
+- **add_condition** - *Adds a condition expression to rule conditions.*
+- **change_logsource** - *Replaces log source as defined in transformation parameters.*
+- **add_field** - *Adds one or multiple fields to the Sigma rule. The field is added to the fields list of the rule:*
+- **remove_field** - *Removes one or multiple fields from the Sigma rules field list. If a given field is not in the rules list, it is ignored.*
+- **set_field** - *Sets fields to the Sigma rule. The fields are set to the fields list of the transformation.*
+- **replace_string** - *Replaces string part matched by regular expresssion with replacement string that can reference capture groups.*
+- **map_string** - *Maps static string value to one or multiple other strings.*
+- **set_state** - *Sets pipeline state key to value.*
+- **regex** - *Transforms a string value to a case insensitive regular expression.*
+- **set_value** - *Sets value to a fixed value. The type of the value can be enforced to str or num with the force_type parameter.*
+- **convert_type** - *Converts type of value. The conversion into strings and numbers is currently supported.*
+- **rule_failure** - *This is a rule transformation. Detection item and field name conditions are not evaluated if this is used.*
+- **detection_item_failure** - *Raises a SigmaTransformationError with the provided message. This enables transformation pipelines to signalize that a certain situation can't be handled, e.g. only a subset of values is allowed because the target data model does't offers all possibilities.*
+- **set_custom_attribute** - *Sets an arbitrary custom attribute on a rule, that can be used by a backend during processing.*
+- **nest** - *Executes a nested processing pipeline as transformation. Main purpose is to apply a whole set of transformations that match the given conditions of the enclosng processing item.*
 
 Sample add_condition transformation
 NOTE: Multiple transformations can be gropuped within the same name/priority by starting over at ```-id```
@@ -244,12 +251,12 @@ postprocessing: # ontains a list of transformation items for the query post-proc
 finalizers: # contains a list of transformation items for the output finalization stage.
 ``` 
 
-#### Transformation Type: field_name_mapping
+**Transformation Type: field_name_mapping**
 
 Sample transformation type of field_name_mapping
 ```yml
 name: My Field Mapping
-priority: 30
+priority: 10
 transformations:
 - id: field_mapping
   type: field_name_mapping
@@ -259,7 +266,7 @@ transformations:
     - evtid # Another field name to LOOK FOR
 ```
 
-#### Transformation Type: field_name_prefix
+**Transformation Type: field_name_prefix**
 
 Sample transformation that prepends a value toa  field name
 ```yml
@@ -270,11 +277,104 @@ priority: 30
   prefix: "win."
 ```
 
-#### Postprocessing
+**Transformation Type: add_condition**
+
+```yml
+name: My Added Conditions
+priority: 10
+  - id: condition_system_channel
+    type: add_condition
+    conditions:
+      Channel: System
+    rule_conditions:
+      - type: logsource
+        product: windows
+        service: system
+
+  - id: condition_windows_create_remote_thread
+    type: add_condition
+    conditions:
+      Channel: "Microsoft-Windows-Sysmon/Operational"
+      EventID: 8
+    rule_conditions:
+      - type: logsource
+        product: windows
+        category: create_remote_thread
+```
+
+**Transformation Type: query_expression_placeholders**
+
+```yml
+name: My Query Expression Placeholders
+priority: 10
+  - id: Windows Placeholders Management
+    type: query_expression_placeholders
+    include:
+      - "domain_admin"
+      - "Administrator"
+    expression: "`placeholder_{id}({field})`"
+    rule_conditions:
+      - type: logsource
+        product: windows
+```
 
 
+### Query Post-Processing Transformations
 
-#### Finalizers
+Includes
+- **embed** - *Embeds a query between a given prefix and suffix. Only applicable to string queries.*
+- **simple_template** - *Replaces query with template that can refer to the following placeholders:*
+  - ***query**: the postprocessed query.*
+  - ***rule**: the Sigma rule including all its attributes like rule.title.*
+  - ***pipeline**: the Sigma processing pipeline where this transformation is applied including all current state information in pipeline.state.*
+- **template** - *Applies Jinja2 template provided as template object variable to a query. The following variables are available in the context:*
+  - ***query**: the postprocessed query.*
+  - ***rule**: the Sigma rule including all its attributes like rule.title.*
+  - ***pipeline**: the Sigma processing pipeline where this transformation is applied including all current state information in pipeline.state.*
+- **json** - *Embeds a query into a JSON structure defined as string. the placeholder value %QUERY% is replaced with the query.*
+- **replace** - *Replaces query part specified by regular expression with a given string.*
+- **nest** - *Applies a list of query postprocessing transformations to the query in a nested manner.*
+
+**Query Post Processing Transformation Type: template**
+
+```yml
+name: Splunk Alert stanza Windows
+priority: 20
+postprocessing:
+- type: template
+  template: |+
+    [{{ rule.title }}]
+    description = {{ rule.description | replace('\n', ' ') }}
+    search = index=evtx _index_earliest=-1h@h {{ query | replace('\n', '\\\n')}} | fields - _raw | collect index=notable_events source="{{ rule.title }}" marker="guid={{ rule.id }},{% for t in rule.tags %}tags={{ t }},{% endfor %}"
+  rule_conditions:
+    - type: logsource
+      product: windows
+```
+
+### Output Finalization Transformations
+Includes
+- **concat** - *Concatenates queries with a given separator and embed result within a prefix or suffix string.*
+- **template** - *Applies Jinja2 template provided as template object variable to the queries. The following variables are available in the context:*
+  - ***queries**: all post-processed queries generated by the backend.*
+  - ***pipeline**: the Sigma processing pipeline where this transformation is applied including all current state information in pipeline.state.*
+- **json** - 
+- **yaml** - 
+- **nested** - *Applies a list of finalizers to the queries in a nested fashion.*
+
+**Output Finalization Transformation type: template**
+
+```yml
+finalizers:
+- type: template
+  template: |
+    [default]
+    cron_schedule = */30 * * * *
+    dispatch.earliest_time = 0
+    dispatch.latest_time = now
+    enableSched = 0
+    schedule_window = auto
+    {{ queries | join('\n') }}
+```
 
 
 Eaxmples with sigma-cli. Note TWO pipelines can be specified.
