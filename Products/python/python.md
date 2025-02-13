@@ -9,8 +9,6 @@
 
 # venv
 "Virtual Environment"
-- https://virtualenv.pypa.io/en/latest/
-- https://mothergeo-py.readthedocs.io/en/latest/development/how-to/venv-win.html
 
 - It is recommended to build a 'venv' folder nearby the script/folder the venv is for to help track/maintian smoothly.
 
