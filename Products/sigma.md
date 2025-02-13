@@ -9,6 +9,12 @@ sigma plugin list
 sigma plugin install splunk
 ```
 
+# Overview
+- Create rules in generic format that are convertable to multiple supported formats.
+- Use **Pipelines** and/or custom pipelines to effectively find/replace in rules during conversion to match infrastructure environment while maintaining agnostic base rules.
+- Use **Filters** to include exceptions in rules during conversion to match operations environment while maintaining agnostic base rules.
+
+
 # Convert Rules
 
 - Assuming you are in a directory with a 'sigma' folder and inside it is the git repository 'sigma-master'.
@@ -209,7 +215,6 @@ Types of changes include
 Includes
 - **field_name_mapping** - *Maps a field name to one or multiple different.*
 - **field_name_prefix_mapping** - *Maps a field name prefix to one or multiple different prefixes.*
-- **field_name_transform** - *Maps a field name to another using provided transformation function. Can overwrite transformation by providing explicit mapping for a field.*
 - **drop_detection_item** - *Deletes detection items. This should only used in combination with a detection item condition.*
 - **field_name_suffix** - *Adds a field name suffix.*
 - **field_name_prefix** - *Adds a field name prefix.*
@@ -218,22 +223,16 @@ Includes
 - **query_expression_placeholders** - *Replaces a placeholder with a plain query containing the placeholder or an identifier mapped from the placeholder name. The main purpose is the generation of arbitrary list lookup expressions which are passed to the resulting query.*
 - **add_condition** - *Adds a condition expression to rule conditions.*
 - **change_logsource** - *Replaces log source as defined in transformation parameters.*
-- **add_field** - *Adds one or multiple fields to the Sigma rule. The field is added to the fields list of the rule:*
-- **remove_field** - *Removes one or multiple fields from the Sigma rules field list. If a given field is not in the rules list, it is ignored.*
-- **set_field** - *Sets fields to the Sigma rule. The fields are set to the fields list of the transformation.*
 - **replace_string** - *Replaces string part matched by regular expresssion with replacement string that can reference capture groups.*
-- **map_string** - *Maps static string value to one or multiple other strings.*
 - **set_state** - *Sets pipeline state key to value.*
-- **regex** - *Transforms a string value to a case insensitive regular expression.*
-- **set_value** - *Sets value to a fixed value. The type of the value can be enforced to str or num with the force_type parameter.*
-- **convert_type** - *Converts type of value. The conversion into strings and numbers is currently supported.*
 - **rule_failure** - *This is a rule transformation. Detection item and field name conditions are not evaluated if this is used.*
 - **detection_item_failure** - *Raises a SigmaTransformationError with the provided message. This enables transformation pipelines to signalize that a certain situation can't be handled, e.g. only a subset of values is allowed because the target data model does't offers all possibilities.*
-- **set_custom_attribute** - *Sets an arbitrary custom attribute on a rule, that can be used by a backend during processing.*
-- **nest** - *Executes a nested processing pipeline as transformation. Main purpose is to apply a whole set of transformations that match the given conditions of the enclosng processing item.*
+
+- Transformations are prepended from top to bottom
+- Multiple transformations can be grouped within the same name/priority by starting over at ```-id```
 
 Sample add_condition transformation
-NOTE: Multiple transformations can be gropuped within the same name/priority by starting over at ```-id```
+
 ```yml
 name: Your Name # Name the pipeline
 priority: 30 # specifies the ordering of the pipeline in case multiple pipelines are concatenated. Lower priorities are used first.
@@ -242,7 +241,7 @@ transformations: # contains a list of transformation items for the rule pre-proc
   type: add_condition # the type of the transformation as specified in the identifier to class mappings below: Transformations
   conditions: # what to ADD to the matched rules.
     index: some_new_index # Arbitrary fields: values to ADD TO rules AFTER they have been matched.
-  rule_conditions: # Finds rules with matching conditions of the type corresponding to the name.
+  rule_conditions: # how to identify the rule(s) on which to perform actions
     - type: # defines the condition type. It must be one of the identifiers that are defined in Conditions
       product: windows # Arbitrary fields: values to LOOK FOR in ingested rules to achieve a match.
   detection_item_conditions: # Finds rules with matching conditions of the type corresponding to the name.
@@ -268,11 +267,11 @@ transformations:
 
 **Transformation Type: field_name_prefix**
 
-Sample transformation that prepends a value toa  field name
+Sample transformation that prepends a value to all field NAMES
 ```yml
-name: My Field Prefix
+name: My Field Prefix # arbitrary
 priority: 30
-- id: windows_field_prefix
+- id: windows_field_prefix # arbitrary
   type: field_name_prefix
   prefix: "win."
 ```
@@ -280,13 +279,13 @@ priority: 30
 **Transformation Type: add_condition**
 
 ```yml
-name: My Added Conditions
+name: My Added Conditions # arbitrary
 priority: 10
-  - id: condition_system_channel
+  - id: condition_system_channel # arbitrary
     type: add_condition
-    conditions:
-      Channel: System
-    rule_conditions:
+    conditions: # what to add
+      Channel: System # add this field and value to the search string
+    rule_conditions: # how to identify the rule(s) on which to perform actions
       - type: logsource
         product: windows
         service: system
@@ -302,22 +301,58 @@ priority: 10
         category: create_remote_thread
 ```
 
+**Transformation Type: change_logsource**
+
+```yml
+name: transformation_demo
+priority: 100
+transformations:
+  - id: change_logsource
+    type: change_logsource
+    category: security
+    rule_conditions: # how to identify the rule(s) on which to perform actions
+      - type: logsource
+        category: process_creation
+```
+
+**Transformation Type: value_placeholders**
+
+```yml
+name: Placeholder example
+priority: 10
+allowed_backends:
+- splunk
+transformations:
+- id: value_placeholders
+  type: value_placeholders
+  include:
+  - client
+- id: generic_query_excpression_placeholders
+  type: query_expression_placeholders
+  include:
+  - client_operations
+  expression: "[ inputlookup {id} | rename dest as {field} ]"
+vars:
+  client:
+  - "DESKTOP-*"
+  - "NOTEBOOK-*"
+```
+
+
 **Transformation Type: query_expression_placeholders**
 
 ```yml
-name: My Query Expression Placeholders
-priority: 10
-  - id: Windows Placeholders Management
+Sample to find a string assumed to be a placeholder in original Sigma rule and replace with business operations values.
+```yml
+name: transformation_demo
+priority: 100
+transformations:
+  - id: Admins_Workstations_query_expression_placeholder
     type: query_expression_placeholders
-    include:
-      - "domain_admin"
-      - "Administrator"
-    expression: "`placeholder_{id}({field})`"
-    rule_conditions:
-      - type: logsource
-        product: windows
+    include: # identify the string(s) on which to perform replacement
+      - Admins_Workstations
+    expression: "[| inputlookup {id} | rename user as {field}]" # string to replace the identified string with
 ```
-
 
 ### Query Post-Processing Transformations
 
@@ -335,8 +370,12 @@ Includes
 - **replace** - *Replaces query part specified by regular expression with a given string.*
 - **nest** - *Applies a list of query postprocessing transformations to the query in a nested manner.*
 
+
+
+
 **Query Post Processing Transformation Type: template**
 
+Sample to create a Splunk Alert Stanza for use in savedsearches.conf
 ```yml
 name: Splunk Alert stanza Windows
 priority: 20
@@ -346,7 +385,7 @@ postprocessing:
     [{{ rule.title }}]
     description = {{ rule.description | replace('\n', ' ') }}
     search = index=evtx _index_earliest=-1h@h {{ query | replace('\n', '\\\n')}} | fields - _raw | collect index=notable_events source="{{ rule.title }}" marker="guid={{ rule.id }},{% for t in rule.tags %}tags={{ t }},{% endfor %}"
-  rule_conditions:
+  rule_conditions: # how to identify the rule(s) on which to perform actions
     - type: logsource
       product: windows
 ```
