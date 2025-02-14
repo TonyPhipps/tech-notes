@@ -184,17 +184,28 @@ filter:
 
 - Command
 ```bash
-sigma convert -t splunk --pipeline splunk_windows \
-  --filter ./filters/win_filter_admins.yml \
-  ./rules/windows/process_creation/proc_creation_win_sc_create_service.yml
+sigma convert -t splunk --pipeline splunk_windows --filter ./filters/win_filter_admins.yml ./rules/windows/process_creation/proc_creation_win_sc_create_service.yml
 ```
 
 - Bulk command
 
 ```bash
-$ sigma convert -t splunk -p splunk_windows \
-    --filter ./filters/windows \
-    ./rules/windows
+$ sigma convert -t splunk -p splunk_windows --filter ./filters/windows ./rules/windows
+```
+
+```bat
+cd path\to\your\venv
+.\Scripts\activate.bat
+sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters C:\path\to\sigma\rules
+```
+
+```ps1
+$venv = "C:\path\to\python\sigmavenv"
+& "$venv\Scripts\Activate.ps1"
+
+sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters C:\path\to\sigma\test-rules
+
+deactivate
 ```
 
 - https://sigmahq.io/docs/meta/filters.html
@@ -205,6 +216,11 @@ $ sigma convert -t splunk -p splunk_windows \
   - Starting at 10 - Generic log sources are translated into specific log sources
   - Starting at 30 - Transformation of the log signatures into the taxonomy used by a backend.
   - High Numbers - Environment-specific transformations.
+  - Pipelines are processed in the order listed in the sigma-cli commandline (left to right)
+      - For each --pipeline, files are merged into a single pipeline
+        - Stanza's are executed in priority order, lowest to highest
+          - When priorities match, actually priority is less predictable (by filename?)
+            - Best to be explicit with priority, carefully considering all files being pulled in and priorities in each
 
 Types of changes include
 - Rule Pre-Processing Transformations
