@@ -182,9 +182,25 @@ filter:
   condition: not selection
 ```
 
-- Command
+- Command to process a single rule
 ```bash
 sigma convert -t splunk --pipeline splunk_windows --filter ./filters/win_filter_admins.yml ./rules/windows/process_creation/proc_creation_win_sc_create_service.yml
+```
+
+```ps1
+$venv = "C:\path\to\python\sigmavenv"
+$inputFile = "C:\path\to\sigma\rules\some\thing.yml"
+$pipelineDir = "C:\path\to\sigma\pipelines"
+$filterDir = "C:\path\to\sigma\filters"
+$outputFile = "C:\path\to\sigma\output\thing.txt"
+
+cd $venv
+
+& "$venv\Scripts\Activate.ps1"
+
+sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputFile
+
+deactivate
 ```
 
 - Bulk command
@@ -196,14 +212,49 @@ $ sigma convert -t splunk -p splunk_windows --filter ./filters/windows ./rules/w
 ```bat
 cd path\to\your\venv
 .\Scripts\activate.bat
-sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters C:\path\to\sigma\rules
+sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters --output c:\path\to\sigma\output C:\path\to\sigma\rules
 ```
 
+
+Create a single output rule file per input rule
 ```ps1
 $venv = "C:\path\to\python\sigmavenv"
+$inputDir = "C:\path\to\sigma\rules"
+$pipelineDir = "C:\path\to\sigma\pipelines"
+$filterDir = "C:\path\to\sigma\filters"
+$outputDir = "C:\path\to\sigma\output"
+
+cd $venv
+
 & "$venv\Scripts\Activate.ps1"
 
-sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters C:\path\to\sigma\test-rules
+# Loop through each YAML rule file
+Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
+    $ruleName = $_.BaseName  # Extracts the filename without extension
+    $outputFile = "$outputDir\$ruleName.txt"
+    
+    Write-Host "Converting: $($_.FullName) -> $outputFile"
+
+    
+    sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $_.FullName
+    
+}
+deactivate
+```
+
+Create one savedsearches.conf style output with all input rules included
+```ps1
+$venv = "C:\path\to\python\sigmavenv"
+$inputDir = "C:\path\to\sigma\rules"
+$pipelineDir = "C:\path\to\sigma\pipelines"
+$filterDir = "C:\path\to\sigma\filters"
+$outputFile = "C:\path\to\sigma\output\savedsearches.conf"
+
+cd $venv
+
+& "$venv\Scripts\Activate.ps1"
+
+sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputDir
 
 deactivate
 ```
