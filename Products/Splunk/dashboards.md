@@ -68,6 +68,23 @@ At the applicable widget(s):
 </search>
 ```
 
+#### Search Base WITH Export Button
+This approach allows using a base job while retaining the "export results" option in each widget.
+Base Search
+```
+<done>
+  <condition>
+    <set token="[basename]_sid">$job.sid$</set>
+  </condition>
+</done>
+```
+
+Widget Search
+```
+<search depends="[basename]_sid">
+  <query>| loadjob "[basename]_sid"
+```
+
 ### Checkbox to Toggle Tokens
 ```
 <input type="checkbox" token="Checked" searchWhenChanged="true">
