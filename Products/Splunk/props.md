@@ -1,4 +1,9 @@
-﻿# Splunk UF Classic to XML
+﻿# Create a Field Alias
+```
+FIELDALIAS-<class> = <orig_field_name> AS <new_field_name>
+```
+
+# Splunk UF Classic to XML
 FIELDALIAS-RecordNumber = RecordNumber as EventRecordID
 FIELDALIAS-EventCode = EventCode as EventID
 FIELDALIAS-Severity = Severity as Level
