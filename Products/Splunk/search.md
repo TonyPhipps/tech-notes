@@ -45,6 +45,7 @@ Rest API Searches
 | Get Current User Authentication System | `\| rest /services/authentication/users \| fields title, type \| stats count by type`                                                         |
 
 System Searches
+
 | Goal                      | Example                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Review Triggered Alerts   | `index=_audit action="alert_fired"`                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -53,6 +54,7 @@ System Searches
 | Review existing Indexes   | `\| eventcount summarize=false index=ics-* \| stats count by index`                                                                                                                                                                                                                                                                                                                                                               |
 
 Error Hunting / Troubleshooting
+
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
@@ -177,6 +179,13 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 | eval GB=b/1024/1024/1024 
 | stats sum(GB) by idx, st 
 | rename idx as index, st as sourcetype
+```
+
+### List Indexed Fields for a Specified Index
+```
+| walklex index="<index-name>" type=field
+| search NOT field=" *"
+| stats list(distinct_values) by field
 ```
 
 ## Change a field's value based on its own contents
