@@ -71,7 +71,7 @@ sigma convert ^
     --target splunk ^
     --pipeline splunk_windows ^
     --output ./sigma/output/{rule}.txt ^
-    ./sigma/sigma-master/rules
+    ./sigma/rules
 ```
 
 ## Mass-Convert via Powershell
