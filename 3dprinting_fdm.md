@@ -247,9 +247,11 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Consider also whether the extrusion multiplier may be too low.
 
 ## Walls are Thicker/Thinner at the Start/End of an Extrusion Move
-LA Too Low: If the Linear Advance K-factor is too low, the extruder doesn’t reduce pressure enough during speed changes (e.g., at the start of a perimeter). This can cause under-extrusion early on, especially in lower layers where print speeds might differ (e.g., slower first layers). As the print stabilizes at a consistent speed higher up, the effect lessens, thinning the walls.
+A too-low K-factor could cause slight over-extrusion at the end of external perimeter lines, creating a micro-bulge or misalignment that prevents proper bonding with internal perimeters.
 
-LA Too High: If the K-factor is too high, it might under-extrude as the print progresses, especially if acceleration or speed increases with height, leading to thinner walls later.
+A too-high K-factor could cause under-extrusion at the start or end of the external perimeter, reducing filament flow and weakening the bond with internal perimeters.
+
+Adjust K-factor: Reduce by 0.05 and print a single-wall test cube or calibration model to check if results improve.
 
 
 ## Small Parts Detaching Mid-Print
