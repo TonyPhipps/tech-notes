@@ -246,7 +246,7 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Lower Linear Advance (LA) value in increments of .5.
 - Consider also whether the extrusion multiplier may be too low.
 
-## Walls are Thicker/Thinner at the Start of a Printing Move vs End
+## Walls are Thicker/Thinner at the Start/End of an Extrusion Move
 LA Too Low: If the Linear Advance K-factor is too low, the extruder doesn’t reduce pressure enough during speed changes (e.g., at the start of a perimeter). This can cause under-extrusion early on, especially in lower layers where print speeds might differ (e.g., slower first layers). As the print stabilizes at a consistent speed higher up, the effect lessens, thinning the walls.
 
 LA Too High: If the K-factor is too high, it might under-extrude as the print progresses, especially if acceleration or speed increases with height, leading to thinner walls later.
