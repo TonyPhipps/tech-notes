@@ -246,6 +246,14 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Lower Linear Advance (LA) value in increments of .5.
 - Consider also whether the extrusion multiplier may be too low.
 
+## Walls are Thicker/Thinner at the Start/End of an Extrusion Move
+A too-low K-factor could cause slight over-extrusion at the end of external perimeter lines, creating a micro-bulge or misalignment that prevents proper bonding with internal perimeters.
+
+A too-high K-factor could cause under-extrusion at the start or end of the external perimeter, reducing filament flow and weakening the bond with internal perimeters.
+
+Adjust K-factor: Reduce by 0.05 and print a single-wall test cube or calibration model to check if results improve.
+
+
 ## Small Parts Detaching Mid-Print
 Like miniature figures with small surface area touching the bed... going 
 - Ensure bed is clean. Initial adhesion could have been poor due to dust.
