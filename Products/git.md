@@ -16,6 +16,19 @@ git config --global core.autocrlf false
 git config --global --edit
 ```
 
+# Cancel Pending Changes
+```
+git merge --abort
+git rebase --abort
+git restore .
+```
+
+# Delete Local Branch
+Replace 'dev' with branch name
+```
+git branch -D dev
+```
+
 # Store Current Changes and Rebase
 ```
 git stash
