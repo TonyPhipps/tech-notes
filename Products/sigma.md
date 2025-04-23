@@ -74,7 +74,26 @@ sigma convert ^
     ./sigma/rules
 ```
 
-## Mass-Convert via Powershell
+## Mass Covert via PowerSehll to a Single Splunk Savedsearches file
+```powershell
+$venv = "path\to\python\venv\sigma"
+$inputDir = "path\to\selected_rules"
+$outputDir = "path\to\output"
+$pipelineDir = "path\to\sigma\pipelines"
+$filterDir = "path\to\sigma\filters"
+
+# Ensure output directory exists
+New-Item -ItemType Directory -Path $outputDir -Force
+
+& "$venv\Scripts\Activate.ps1"
+
+sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputDir\selected_rules.conf $inputDir
+
+deactivate
+```
+
+
+## Mass-Convert via Powershell to Separate Files
 - Assumes a python venv named "sigma" resides in user home directory.
 
 ```powershell
