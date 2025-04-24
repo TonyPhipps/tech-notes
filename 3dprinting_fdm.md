@@ -246,8 +246,8 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Lower Linear Advance (LA) value in increments of .5.
 - Consider also whether the extrusion multiplier may be too low.
 
-## Walls are Thicker/Thinner at the Start/End of an Extrusion Move
-A too-low K-factor could cause slight over-extrusion at the end of external perimeter lines, creating a micro-bulge or misalignment that prevents proper bonding with internal perimeters.
+## Gaps or Poor Layer Adhesion at the End of Long Extrusion Moves
+Likely cause: The extruder isn't pushing enough filament at the end of the move, possibly because the linear advance value is too high, causing the extruder to retract too much or not extrude enough during deceleration.
 
 A too-high K-factor could cause under-extrusion at the start or end of the external perimeter, reducing filament flow and weakening the bond with internal perimeters.
 
