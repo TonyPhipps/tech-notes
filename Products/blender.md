@@ -1,13 +1,18 @@
 # Setup for 3D Print Modeling
 
+
 ## Edit > Preferences
+
+
 ### Interface
 - Resolution Scale: 1.25
 - Line Width: Thick
 
+
 ### Themes
 - 3d Viewport > Wire Edit: [a bright blue]
 - 3d Viewport > Vertex Size: 4px
+
 
 ### Addons
 - Edit > Preferences > Addons
@@ -23,8 +28,10 @@
 - Object: Bool Tool
 - Interface: Modifier Tools
 
+
 ### Keymap
 - Preferences > Spacebar Action: Search
+
 
 ### System
 - Undo Steps: 256
@@ -33,43 +40,64 @@ Hamburger Icon > Save Preferences
 
 
 ## Scene (bottom right)
+
+
 ### Units
 - Unit Scale: 0.001
 - Length: Millimeters
 
-## Overlays Buttom (Top Right)
+
+## Viewport Overlays Button (Top Right in Viewport)
 - Scale: 0.001
 - Statistics: Check
+
 
 ## Status Bar > (Right Click)
 - Scene Statistics: Check
 - System Memory: Check
 - Video Memory: Check
 
+
 ## Side Menu (n key)
+
+
 ### View
 - Clip Start: 0.1
 - End: 100000
+
+
 ### Tool Tab
 - Click the tab so we can save it as the default tab.
+
 
 ## Clear Scene
 - Select all objects in the scene and delete
 
+
 ## Save Startup File
 File > Defaults > Save Startup File
 
-## External Addons
+
+# External Addons
+Recommended
 - CAD Transform for blender
-  - https://bit.ly/CADmoveBlender
+  - https://blender-archipack.gumroad.com/l/nQVcS
+- Outline to SVG
+  - https://makertales.gumroad.com/l/O2SVG
+- Create ISOCam
+  - https://makertales.gumroad.com/l/iqfad
+Install
+Edit > Preferences > Add-Ons > Install...
+
 
 # Hotkeys and Shortcuts
 Camera
-- Numpad .	    	Camera to Object
-- Numpad 1-9	  	Snap Camera
-- Control+Middle	Zoom
-- SHIFT+Middle  	Pan Camera
-- SHIFT+C			    Center Scene and cursor
+- Numpad .	    	  Camera to Object
+- Numpad 1-9	  	  Snap Camera
+- Control + Middle	Zoom
+- SHIFT + Middle  	Pan Camera
+- SHIFT + C			    Center Scene and cursor
+
 
 Interface
 - N               Open side bar
@@ -81,8 +109,10 @@ Interface
 - SHIFT + RCLICK  Snap onto an object
 - SHIFT + RCLICK  (and hold) Drag cursor around
 
+
 Modes
 - TAB             Toggles EDIT mode, when an object is selected
+
 
 Edit Mode
 - 1               Vertex Select
@@ -91,10 +121,12 @@ Edit Mode
 - ALT+Z           Toggle x-ray
 - P               Separate the meshes within an object into separate objects
 
+
 Tools
 - W               Select Tool (press again to toggle between tool subtypes)
 - C               Circle selection tool
 - G               Grab an object to MOVE it
+
 
 Selection Tool
 - SHIFT           Inrease selection
@@ -109,6 +141,7 @@ Selection Tool
 - SHIFT + Z       (or X or Z) Constrain object movement to the remaining two axis (X,Y in this case)
 - F9              Popup original creation quick menu
 
+
 # Snap One Object to Another
 - Determine corner/face that will snap to another object, then set it as the first object's Origin
   - Object mode > Select object
@@ -118,6 +151,7 @@ Selection Tool
 - Determine the corner/face that the first object should snap/move its Origin to, then set the 3d Cursor there, then snap
   - SHIFT + Right Click to set 3d Cursor (hold control to snap to vertex/face)
   - SHIFT + S > Selection to Cursor
+
 
 # Split Two Meshes to Two Objects
 
