@@ -1,6 +1,6 @@
 # Setup
-- Install Chrome
-- Make an account at https://www.makeplayingcards.com/
+- Make/have an account at https://www.makeplayingcards.com/
+- Install/have Chrome
 - Go to https://github.com/chilli-axe/mpc-autofill/releases/
 - Download autofill-windows.exe
 - Create a list of cards. MakePlayingCards charges per 100 cards, so keep your count near one of those increments.
@@ -27,7 +27,7 @@ https://www.mpcfill.com/
 - Put the cards.xml file in the same directory as autofill-windows.exe
 - Rename cards.xml to something else. The project will automatically be named after this on your MakePlayingCards account
 - Run autofill-windows.exe
-- When automation begins, it will navigate to https://www.makeplayingcards.com/and request that you log in
+- When automation begins, it will navigate to https://www.makeplayingcards.com/ and request that you log in
 - After logging in, the software will create a new project and begin downloading/inserting files into the project
 - This can easily take 5-10 seconds PER CARD.
 
