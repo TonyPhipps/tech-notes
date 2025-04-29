@@ -233,8 +233,16 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 - Minimum Travel after Retraction: Set to 2mm or reduce down to lowest 0.5
 - Retract amount before wipe: 70%
 
-## Filament Sticks to Nozzle Better than Last Layer
-- Typical with under-temp PETG. Increase by 5deg celcius and try again.
+## Filament Sticks to Nozzle and Eventually Globs Fall Back on Object
+- PETG printed too hot can ooze excessively. Try lowering the nozzle temperature by 5°C to reduce stringing and blobbing. Check the filament’s recommended range (usually 220-250°C).
+  - Be sure to check and clean the nozzle before printing (best with nozzle heated).
+  - Consider enabling Wiping when retracting.
+  - Consider increasing retraction distance.
+  - Consider using Seam Position: Nearest to minimize movement.
+  - Consider enabling "Avoid Crossing Perimeters" with a Max Detour Length of 0.
+  - Consider increasing infill percentage, and a simpler infill or 100% infill with Rectilinear.
+  - Consider increasing non-print travel moves.
+  - Consider increasing cooling fan percentage; ensure ducts running and are properly directing airflow.
 
 ## Gaps after Retraction
 - Visible as under-extrusion at the start of a line.
