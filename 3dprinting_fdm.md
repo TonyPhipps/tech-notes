@@ -228,9 +228,10 @@ to fix...
 
 ## Stringing/Pulling Tweaks
 Sometimes the next layer or neighboring line sticks, causing stringing, pulling, or sticking to the nozzle and wreaking havoc. These settings may help.
+- If printing smaller/skinnier parts, the infill may need to be increased or changed
 - Lift Z or Z Hop - lower or disable
 - Wipe While Retracting - Toggle
-- Minimum Travel after Retraction: Set to 2mm or reduce down to lowest 0.5
+- Minimum Travel after Retraction: Set to 2mm or reduce down (to a lowest of 0.5)
 - Retract amount before wipe: 70%
 
 ## Filament Sticks to Nozzle and Eventually Globs Fall Back on Object
