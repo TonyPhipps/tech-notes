@@ -1,14 +1,20 @@
+# Notes
+- You can expect to pay 20c - 30c per card. Obviously some cards you may as well just buy.
+- There is a step that can be lengthy and require a few minutes if you have a lot of cards to order.
+- MakePlayingCards charges per 100 cards, so keep your count near one of those increments.
+- MakePlayingCards will truncate your order to 612 if you go above that.
+
 # Setup
 - Make/have an account at https://www.makeplayingcards.com/
 - Install/have Chrome
 - Go to https://github.com/chilli-axe/mpc-autofill/releases/
 - Download autofill-windows.exe
-- Create a list of cards. MakePlayingCards charges per 100 cards, so keep your count near one of those increments.
-- You can expect to pay 20c - 30c per card. Obviously some cards you may as well just buy.
+
 
 # Create the XML 
 https://www.mpcfill.com/
 
+- I like to Add Cards > From Text and import the MTGO Export from a Moxfield Package
 - Search Settings
   -  Click Disable All Drives
   - Enable RustyShackleford (for close-to-original and MDFC)
@@ -17,7 +23,7 @@ https://www.mpcfill.com/
   - Click Save Changes
 - Upload card list as text (or whatever)
 - Set Cardback
-  - 26/424 is an textless version the standard Magic cardback
+  - 24/424 is an textless version the standard Magic cardback
 
 - Click Select All
 - Click Download > XML 
