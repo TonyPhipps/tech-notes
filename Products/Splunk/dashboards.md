@@ -102,6 +102,16 @@ Widget Search
     </input>
 ```
 
+
+### Provide a Field for Tokens, but do Not Display to User
+Right after the widget's closing search, you can define a <fields> tag to hide some of the | fields chosen within the search.
+```
+...
+</search>
+<fields>col1, col2</fields>
+```
+
+
 ### Dynamic Dropdown to Toggle Tokens
 This sample provides a dropdown that dynamically builds its dropdown list (Display+Value) based on a search, then sets tokens accordingly.
 
