@@ -105,13 +105,21 @@ Interface
 
 3d Cursor
 - SHIFT + S       Origin Menu popup
-- SHIFT + A       Add Menu popup
 - SHIFT + RCLICK  Snap onto an object
 - SHIFT + RCLICK  (and hold) Drag cursor around
-
+- SHIFT + C       Center 3d cursor to original point in center of scene
 
 Modes
 - TAB             Toggles EDIT mode, when an object is selected
+
+
+Object Mode
+- SHIFT + A       Add Menu popup
+- SHIFT + D       Duplicate selected object
+  - XYZ           Constrain to # Axis
+  - SHIFT + XYZ   Constrain to the OTHER two axes\
+  - \# (a Number) Snap to that number on the selected plane
+  - ENTER         Confirm final placement of duplicate
 
 
 Edit Mode
