@@ -28,6 +28,13 @@ Basic Sample
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
 sigma convert ^
     --target splunk ^
     --pipeline splunk_windows ^
@@ -38,6 +45,13 @@ Use a Custom pipeline
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
     --pipeline my_pipeline.yml ^
 ```
 
@@ -45,6 +59,13 @@ Generate a savedsearches.conf file for splunk
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
     -f savedsearches ^
     --output ./sigma/output/output.txt ^
 ```
@@ -53,6 +74,13 @@ Output rules to a folder
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
     --output ./sigma/output/{rule}.txt ^
 ```
 
@@ -60,6 +88,13 @@ Review any  errors
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
 --verbose ^
 ```
 
@@ -67,6 +102,13 @@ Stuffed example
 ```bat
 cd C:\Users\username\python\sigma
 .\env\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
 sigma convert ^
     --target splunk ^
     --pipeline splunk_windows ^
@@ -86,8 +128,14 @@ $filterDir = "path\to\sigma\filters"
 New-Item -ItemType Directory -Path $outputDir -Force
 
 & "$venv\Scripts\Activate.ps1"
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
 
-sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputDir\selected_rules.conf $inputDir
+sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputDir\selected_rules.conf $inputDir
 
 deactivate
 ```
@@ -105,6 +153,12 @@ $outputDir = "./output"
 New-Item -ItemType Directory -Path $outputDir -Force
 
 & "$venv\Scripts\Activate.ps1"
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
 
 # Loop through each YAML rule file
 Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
@@ -216,6 +270,12 @@ $outputFile = "C:\path\to\sigma\output\thing.txt"
 cd $venv
 
 & "$venv\Scripts\Activate.ps1"
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
 
 sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputFile
 
@@ -231,7 +291,14 @@ $ sigma convert -t splunk -p splunk_windows --filter ./filters/windows ./rules/w
 ```bat
 cd path\to\your\venv
 .\Scripts\activate.bat
-sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters --output c:\path\to\sigma\output C:\path\to\sigma\rules
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
+
+sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters --output c:\path\to\sigma\output C:\path\to\sigma\rules
 ```
 
 
@@ -246,6 +313,12 @@ $outputDir = "C:\path\to\sigma\output"
 cd $venv
 
 & "$venv\Scripts\Activate.ps1"
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
 
 # Loop through each YAML rule file
 Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
@@ -255,7 +328,7 @@ Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
     Write-Host "Converting: $($_.FullName) -> $outputFile"
 
     
-    sigma convert --target splunk -f savedsearches --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $_.FullName
+    sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $_.FullName
     
 }
 deactivate
@@ -272,6 +345,12 @@ $outputFile = "C:\path\to\sigma\output\savedsearches.conf"
 cd $venv
 
 & "$venv\Scripts\Activate.ps1"
+python -m pip install --upgrade pip
+python -m pip install --upgrade sigma-cli
+git clone --branch master https://github.com/SigmaHQ/sigma.git
+cd sigma
+git fetch origin
+git pull origin master
 
 sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputDir
 
