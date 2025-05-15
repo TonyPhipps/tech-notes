@@ -247,7 +247,7 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 
 ## Seams Have Small Gap
 - A divot at the seam indicates the seam gap is too large, causing under-extrusion where the nozzle starts/stops the perimeter loop. The Seam Gap Distance leaves too much space, preventing enough filament from filling the seam.
-- Lower Seam Gap Distance to 10-12% to reduce the gap, allowing more filament to be extruded at the seam, filling the divot and improving seam strength.
+- Lower Seam Gap Distance to to reduce the gap, allowing more filament to be extruded at the seam, filling the divot and improving seam strength. You can go into the negative values if needed (like -5%).
 - Location: In PrusaSlicer 2.9.2, adjust this in Print Settings > Layers and Perimeters > Advanced > External Perimeters Seam Gap. Ensure it’s set as a percentage (not mm).
 
 ## Gaps after Retraction
