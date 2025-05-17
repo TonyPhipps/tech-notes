@@ -103,11 +103,13 @@ Interface
 - N               Open side bar
 
 
-3d Cursor
+3d Cursor (the red and white circle with crosshair)
 - SHIFT + S       Origin Menu popup
 - SHIFT + RCLICK  Snap onto an object
 - SHIFT + RCLICK  (and hold) Drag cursor around
+  - Swap to CTRL  While still holding mouse click to snap to selected "Snap to"
 - SHIFT + C       Center 3d cursor to original point in center of scene
+
 
 Modes
 - TAB             Toggles EDIT mode, when an object is selected
@@ -120,7 +122,16 @@ Object Mode
   - SHIFT + XYZ   Constrain to the OTHER two axes\
   - \# (a Number) Snap to that number on the selected plane
   - ENTER         Confirm final placement of duplicate
-
+- G               Grab an object
+  - R             Begin rotating the grabbed object
+    - XYZ         Constrain rotation to the selected axis
+    - R (again)   Rotate on Local Axes
+  - S             Start scaling the grabbed object
+    - S (again)   Scale on Local Axes
+    - XYZ         Constrain scaling to the selected axis
+  - XYZ           Start dragging the grabbed object on the chosen axis
+    - XYZ (again) Move on Local Axes
+  - /#            Used after any of the above modes to perform that action by the number(s) pressed
 
 Edit Mode
 - 1               Vertex Select
@@ -128,6 +139,7 @@ Edit Mode
 - 3               Face Select
 - ALT+Z           Toggle x-ray
 - P               Separate the meshes within an object into separate objects
+- F2              Rename selected object
 
 
 Tools
@@ -141,7 +153,7 @@ Selection Tool
 - CONTROL         Decrease selection
 - A               Select everything in the scene
 - CONTROL + NUM+  Grow selection
-- CONTROL + L     Select entire mesh linked to selection
+- CONTROL + L     Select entire mesh linked to current selection
 - CONTROL + I     Invert selection
 - CONTROL + D     Duplicate selection
 - X               Popup the delete menu based on selection and mode
@@ -162,10 +174,16 @@ Selection Tool
 
 
 # Split Two Meshes to Two Objects
+- Enter Edit mode
+- Select one object's random vertex
+- Push L to extend to all linked vertices
+- Push P to split
+- By Selection
 
 
 # Merge Two Objects
 - Select both via SHIFT + Click
+  - Select the PRIMARY object last, as this will be the object whose details are retained
 - CONTROL + J
 
 
