@@ -212,5 +212,35 @@ Selection Tool
 - Set Max Angle to 0.1 or similar
 
 
+# CAD Transforms Addon
+- Right click icon, set hotkey to ALT + C
+- G to grab and go into "move" mode
+  - XYZ to set axis
+    - click any other point to set the plane of rotation
+      - XYZ (same one again) to go to Global
+  - Spacebar to clear snaps. You can then use the below on both initial click and 2nd click
+    - E to snap to edges
+    - F to snap to faces
+    - V to snap to vertices
+    - Shift and any of the above to use CENTER of that edge/face/vertice
+    - A to move to the halfway point between the first and 2nd points
+  - R to go into rotate mode
+    - XYZ to set axis
+    - click any other point to set the plane of rotation
+      - - XYZ (same one again) to go to Global
+  - S to go into scaling mode
+    - XYZ to set axis
+    - click any other point to set the plane of rotation
+      - XYZ (same one again) to go to Global
+    - Click "from"
+    - Click "to" and scaling begins in the direction between those two points
+    - Tab to enable two-dimensional scaling
+      - Tab to enable three-dimensional scaling
+
+
+# Backup Your Settings
+
+
+
 ## Resources
 - https://blenderartists.org
