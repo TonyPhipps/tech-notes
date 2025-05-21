@@ -27,3 +27,5 @@ tcpdump -s 0 -i eth0 -w capture.pcap -C 10240
 tcpdump -r capture.pcap -n -X 'icmp[0]=8 and not icmp[8:4]=0x61626364'
 ```
 
+### Quick Check of Traffic on a Specific Port
+tcpdump -vvv -i any port [####]
