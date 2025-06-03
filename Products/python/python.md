@@ -30,3 +30,9 @@ matches = re.search(regex, string)
 print(matches.group(0)) # full match, including subgroups
 print(matches.group(1)) # first group matched
 ```
+
+
+Quick HTTP Server
+```
+python -m http.server --directory D:\wwwroot 8000
+```
