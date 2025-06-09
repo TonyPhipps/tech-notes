@@ -11,6 +11,13 @@
   - The configuration file will be \etc\system\local\outputs.conf
   - NOTE: A server must be configured to receive on this port in order to actually receive the data sent by this client.
 
+Fast option after all things are set up...
+- Download splunkforwarder-9.3.1-<build>-x64-release.msi
+- Run it as a script
+```
+ msiexec.exe /i .\splunkforwarder-9.3.1-<build>-x64-release.msi DEPLOYMENT_SERVER=localhost:8089 RECEIVING_INDEXER=localhost:9997 AGREETOLICENSE=Yes /quiet
+```
+
 # Linux Installation
 Download: https://www.splunk.com/en_us/download/universal-forwarder.html
 ```

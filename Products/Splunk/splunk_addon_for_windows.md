@@ -1,7 +1,8 @@
 ﻿https://splunkbase.splunk.com/app/742
 
-Sigma
-- Fields seen in rules targeting Application
+Splunk App for Windows fields seen in Sigma rules targeting ...
+
+### Application
   - source="WinEventLog"
   - sourcetype="WinEventLog:Application"
   Channel="Application"
@@ -10,10 +11,10 @@ Sigma
   - AppName
   - ExceptionCode
   - _raw
-- Fields seen in rules targeting System
+
+### System
   - AccountName
   - Binary
-  - Channel="System"
   - EventCode
   - HiveName
   - ImagePath
@@ -23,7 +24,8 @@ Sigma
   - ServiceName
   - source="WinEventLog"
   - sourcetype="WinEventLog:System"
-- Fields seen in rules targeting Security
+
+### Security
   - AccessMask
   - Application
   - AttributeLDAPDisplayName
