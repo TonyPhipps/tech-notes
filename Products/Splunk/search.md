@@ -4,9 +4,6 @@
 - The "Suppress results with field value" field accepts comma-delimited lists of multiple items.
 
 
-
-
-
 ## Search Quick Reference
 
 | Goal                                                                                                  | Example                                                                                                                      |
@@ -58,9 +55,6 @@ Error Hunting / Troubleshooting
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
-
-
-
 
 
 ## Macro
@@ -120,6 +114,7 @@ index=something sourcetype="linux:messages"
 
 </details>
 
+
 ### Rex
 Test your regex on fake events
 ```
@@ -162,7 +157,10 @@ Test your regex on fake events
 
 # Search Use Cases
 
+
 ## Initial Discovery
+
+
 ### List indexes available
 ```
 | eventcount summarize=false index=* | fields index | dedup index
@@ -173,6 +171,7 @@ List indexes available, including sourcetype
 | tstats values(sourcetype) where (index=* OR index=_*) by index
 ```
 
+
 ### Ingestion Stats
 ```
 index=_internal source=*license_usage.log* type=Usage idx=yourindex
@@ -181,12 +180,14 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 | rename idx as index, st as sourcetype
 ```
 
+
 ### List Indexed Fields for a Specified Index
 ```
 | walklex index="<index-name>" type=field
 | search NOT field=" *"
 | stats list(distinct_values) by field
 ```
+
 
 ## Change a field's value based on its own contents
 ```
@@ -205,6 +206,7 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 )
 ```
 
+
 ## Determine Standard Deviation
 <details>
 	
@@ -216,6 +218,7 @@ index="processes"
   | where maxlen>4*stdevperhost+avgperhost
 ```
 </details>	
+
 
 ## Identify High Entropy Occurrences
 <details>
@@ -232,7 +235,8 @@ index="processes" Computer=$asset$ UserName=$user$ (ProcessName=$keyword$ OR Pat
   | sort - entropy
 ```
 </details>	
-	
+
+
 ## Determine Levenshtein Scores
 <details>
 
@@ -254,7 +258,8 @@ index="processes" Path=*\System\*
   | fields filename lowest_levenshtein_score suspect_files Images num_hosts percentage_of_hosts_affected
 ```
 </details>
-	
+
+
 ## For Each Source IP Show Statistics Per Destination IP
 <details>
 
@@ -264,6 +269,7 @@ index="processes" Path=*\System\*
 | where UniqueDestinations >= 10
  ```
  </details>
+
 
 ##  Given one search, get additional fields from another search based on a matching field
 <details>
@@ -284,6 +290,7 @@ index="windows" d_host="*" ip="*"
 [ search index"firewall" | stats values(dest_ip) by src_ip]
 ```
 </details>
+
 
 ## List Only Last Occurring Events by Another_Field
 
@@ -321,6 +328,7 @@ Version 2
 | eventstats max(_time) as latest by host
 | where _time=latest
 ```
+
 
 ## Find Newly Observed Events
 This specific example basically says "show me hosts that were not observed in the last 7d."
