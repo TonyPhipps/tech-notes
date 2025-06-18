@@ -332,6 +332,30 @@ Version 2
 
 ## Find Newly Observed Events
 This specific example basically says "show me hosts that were not observed in the last 7d."
+
+Most efficient in larger datasets using lookup tables
+```
+| inputlookup historical_hosts.csv 
+| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
+| stats count by host 
+| where count=1 
+| fields host
+```
+
+Lookup table setup (saved search, ran nightly)
+```
+index=* earliest=-30d@d latest=-1d@d | stats count by host | outputlookup historical_hosts.csv
+```
+
+
+Non "join" Version, more efficient in larger datasets
+```
+index=* earliest=-1d@d latest=now | stats count by host 
+| search NOT [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
+| fields host
+```
+
+Version with "join," typically fastest in smaller datasets
 ```
 index=* earliest=-1d@d latest=now | stats count by host 
 | join type=left host 
@@ -340,16 +364,7 @@ index=* earliest=-1d@d latest=now | stats count by host
 | fields host
 ```
 
-
-or without "join"
-```
-index=* earliest=-1d@d latest=now | stats count by host 
-| search NOT [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
-| fields host
-```
-
-or with tstats (when only dealing with indexed fields or data models)
-
+Version with tstats (when only dealing with indexed fields or data models)
 ```
 | tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
     [| tstats latest(_time) where index=something sourcetype=this earliest=-8d latest=-1d by index, host 
