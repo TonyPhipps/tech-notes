@@ -323,11 +323,21 @@ Version 2
 ```
 
 ## Find Newly Observed Events
-This specific example basically says "show me EventCodes that were not observed in the last 6h.
+This specific example basically says "show me hosts that were not observed in the last 7d."
 ```
-source=WinEventLog:System NOT ([
-  | search source=WinEventLog:System earliest=-6h | table EventCode]) 
-| stats count by EventCode
+index=* earliest=-1d@d latest=now | stats count by host 
+| join type=left host 
+    [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
+| where isnull(count) 
+| fields host
+```
+
+
+or without "join"
+```
+index=* earliest=-1d@d latest=now | stats count by host 
+| search NOT [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
+| fields host
 ```
 
 or with tstats (when only dealing with indexed fields or data models)

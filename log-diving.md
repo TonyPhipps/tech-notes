@@ -1,0 +1,11 @@
+﻿Keywords to look for when diving into logs
+- Block*
+- Error*
+- Fail*
+- Pause*
+- Reconnect*
+- Refuse*
+- Restart*
+- Shutdown or "Shut down" or "shutting down"
+- "time out" or "timed out" or "timing out"
+- warning

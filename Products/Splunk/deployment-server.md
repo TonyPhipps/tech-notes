@@ -16,3 +16,8 @@ restartSp2unkWeb = 0
 restartSp2unkd = 1
 stateOnClient = enabled
 ```
+
+Restart the deployment server to acknowledge changes to stuff in deployment-apps (or wait the 30min check)
+```
+splunk.exe reload deploy-server
+```
