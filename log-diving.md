@@ -8,4 +8,5 @@
 - Restart*
 - Shutdown or "Shut down" or "shutting down"
 - "time out" or "timed out" or "timing out"
+- unexpected
 - warning
