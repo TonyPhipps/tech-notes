@@ -1,3 +1,7 @@
+# Hotkeys
+CTRL + E - Show Expanded Search String
+CTRL + \ - Auto format the current search
+
 # Alerts
 - Use Alert Type: Scheduled whenever possible to preserve resources. Set time frame to the largest acceptable window.
 - Set an Expires time that is 2-3 times how long the search should take for the given time frame (defined by schedule)
