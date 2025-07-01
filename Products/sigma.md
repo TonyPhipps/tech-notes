@@ -587,6 +587,7 @@ Eaxmples with sigma-cli. Note TWO pipelines can be specified.
 ```
 sigma convert --skip-unsupported -t splunk -p sysmon rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
 sigma convert --skip-unsupported -t splunk -p sysmon -p /mnt/pipelines/evtx2splunk.yml rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
+sigma convert --skip-unsupported -t splunk -p splunk_windows D:\github\sigma\rules\windows\builtin\windefend\win_defender_antimalware_platform_expired.yml
 ```
 
 Batch
