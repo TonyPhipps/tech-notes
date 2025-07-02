@@ -35,6 +35,22 @@ $SPLUNK_HOME/etc/apps/appname/
 - /default/data/ui/nav and /local/data/ui/nav folders contain settings for the navigation bar at the top of your app in the default.xml file.
 - /default/data/ui/views and /local/data/ui/views folders contain the .xml files that define dashboards in your app
 
+## Splunk's Data Pipeline
+- Splunk processes data in stages: input, parsing, indexing, and search.
+- Index-time transformations (e.g., TRANSFORMS-<class>) are applied during the parsing or indexing phase.
+- Search-time transformations (e.g., REPORT-<class> or LOOKUP-<class>) are applied when a search is executed.
+- The loading and application of props.conf and transforms.conf depend on the pipeline stage (index-time vs. search-time).
+
+
+## Load Order
+- Splunk loads all .conf files, including props.conf and transforms.conf, during startup or when configurations are reloaded (e.g., via a Splunk restart or a | reload command).
+- The files are processed in alphabetical order within a folder (e.g., props.conf before transforms.conf in an app's default or local folder), as discussed previously.
+- Settings are merged based on the precedence hierarchy (system default, app default, system local, app local, user local).
+- .conf files are processed in alphabetical order (inputs.conf > props.conf > transforms.conf)
+- If multiple .conf files define the same stanza (e.g., [my_stanza]) or attribute, the file processed later in the alphabetical order takes precedence for that specific setting
+- Stanzas within are loaded in order of appearance in the file, top to botom (NOT alphabetically)
+
+
 ## Prepare as a Splunk App Package
 ```
 cd /path/to/addonName/
@@ -44,6 +60,7 @@ tar -zcf addonName.tgz addonName
 # Config Files
 
 ## inputs.conf
+For data inputs
 
 Create/edit the file at ```.../myapp/local/inputs.conf``` and add a [\[stanza\]](https://docs.splunk.com/Splexicon:Stanza) for each input desired ([reference](https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectorieswithinputs.conf))
 - Editing this requires a restart the SplunkForwarder service
@@ -113,7 +130,16 @@ iseval = 0
 ```
 
 ## props.conf
-Lets you
+Defines properties for data parsing and processing, such as sourcetype configurations, field extractions, and references to transformations. It can include settings like TRANSFORMS-<class> or REPORT-<class> to invoke stanzas in transforms.conf.
+
+n props.conf, stanzas for a sourcetype, source, or host (e.g., [my_sourcetype]) can include attributes like:
+TRANSFORMS-<class> = <transform_stanza_name>: Used for index-time transformations (e.g., routing, filtering, or masking data before indexing).
+
+REPORT-<class> = <transform_stanza_name>: Used for search-time field extractions (e.g., extracting fields using regex).
+
+LOOKUP-<class> = <lookup_stanza_name>: Used for search-time lookups defined in transforms.conf.
+
+These attributes point to specific stanzas in transforms.conf
 
 ### Map Splunk Classic to XML
 ```
@@ -147,8 +173,7 @@ FIELDALIAS-Workstation_Name = Workstation_Name as WorkstationName
 
 
 ## transforms.conf
-Field Extraction During Ingest
-Use transforms.conf for reusable field extraction, or props.conf for one-time field extraction.
+Defines transformations, such as regex-based field extractions, lookups, or data routing, that are referenced by props.conf. Each transformation is defined in a stanza (e.g., [my_transform]).
 
 ```...myapp/local/props.conf```  ([syntax](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Propsconf), [KB](https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Configurecalculatedfieldswithprops.conf))
 Example
@@ -271,6 +296,12 @@ DEST_KEY = MetaData:Sourcetype
 REGEX = (\sMSWinEventLog\s\d\sMicrosoft-Windows-PowerShell/Operational\s)
 FORMAT = sourcetype::WinEventLog:Microsoft-Windows-PowerShell/Operational
 ```
+
+## Analyze an App
+Determine final names of all fields
+- Look in props.conf and transforms.conf for ```EVAL-```, ```FIELDALIAS-```, ```EXTRACT-``` and ```LOOKUP-``` classes
+- Look in datamodels.conf file as ```"fieldname"``` JSON attributes.
+- Look in savedsearches.conf for ```| eval``` and ```| rex```
 
 ## See for more info
 - https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Advancedsourcetypeoverrides

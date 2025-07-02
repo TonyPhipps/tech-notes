@@ -36,6 +36,7 @@ git fetch origin
 git pull origin master
 
 sigma convert ^
+     --skip-unsupported ^
     --target splunk ^
     --pipeline splunk_windows ^
     ./sigma/sigma-master/rules
@@ -110,6 +111,7 @@ git fetch origin
 git pull origin master
 
 sigma convert ^
+     --skip-unsupported ^
     --target splunk ^
     --pipeline splunk_windows ^
     --output ./sigma/output/{rule}.txt ^
@@ -135,7 +137,7 @@ cd sigma
 git fetch origin
 git pull origin master
 
-sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputDir\selected_rules.conf $inputDir
+sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputDir\selected_rules.conf $inputDir
 
 deactivate
 ```
@@ -167,7 +169,7 @@ Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
     
     Write-Host "Converting: $($_.FullName) -> $outputFile"
 
-    sigma convert --target splunk --pipeline splunk_windows --output $outputFile $_.FullName
+    sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --output $outputFile $_.FullName
     
 }
 
@@ -257,7 +259,7 @@ filter:
 
 - Command to process a single rule
 ```bash
-sigma convert -t splunk --pipeline splunk_windows --filter ./filters/win_filter_admins.yml ./rules/windows/process_creation/proc_creation_win_sc_create_service.yml
+sigma convert --skip-unsupported -t splunk --pipeline splunk_windows --filter ./filters/win_filter_admins.yml ./rules/windows/process_creation/proc_creation_win_sc_create_service.yml
 ```
 
 ```ps1
@@ -277,7 +279,7 @@ cd sigma
 git fetch origin
 git pull origin master
 
-sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputFile
+sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputFile
 
 deactivate
 ```
@@ -285,7 +287,7 @@ deactivate
 - Bulk command
 
 ```bash
-$ sigma convert -t splunk -p splunk_windows --filter ./filters/windows ./rules/windows
+$ sigma convert --skip-unsupported -t splunk -p splunk_windows --filter ./filters/windows ./rules/windows
 ```
 
 ```bat
@@ -298,7 +300,7 @@ cd sigma
 git fetch origin
 git pull origin master
 
-sigma convert --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters --output c:\path\to\sigma\output C:\path\to\sigma\rules
+sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --pipeline C:\path\to\sigma\pipelines --filter C:\path\to\sigma\filters --output c:\path\to\sigma\output C:\path\to\sigma\rules
 ```
 
 
@@ -328,7 +330,7 @@ Get-ChildItem -Path $inputDir -Recurse -Filter "*.yml" | ForEach-Object {
     Write-Host "Converting: $($_.FullName) -> $outputFile"
 
     
-    sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $_.FullName
+    sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $_.FullName
     
 }
 deactivate
@@ -352,7 +354,7 @@ cd sigma
 git fetch origin
 git pull origin master
 
-sigma convert --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputDir
+sigma convert --skip-unsupported --target splunk --pipeline splunk_windows --pipeline $pipelineDir --filter $filterDir --output $outputFile $inputDir
 
 deactivate
 ```
@@ -583,13 +585,14 @@ finalizers:
 
 Eaxmples with sigma-cli. Note TWO pipelines can be specified.
 ```
-sigma convert -t splunk -p sysmon rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
-sigma convert -t splunk -p sysmon -p /mnt/pipelines/evtx2splunk.yml rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
+sigma convert --skip-unsupported -t splunk -p sysmon rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
+sigma convert --skip-unsupported -t splunk -p sysmon -p /mnt/pipelines/evtx2splunk.yml rules/windows/process_creation/proc_creation_win_sysinternals_procdump.yml
+sigma convert --skip-unsupported -t splunk -p splunk_windows D:\github\sigma\rules\windows\builtin\windefend\win_defender_antimalware_platform_expired.yml
 ```
 
 Batch
 ```
-sigma convert -t splunk -p /mnt/pipelines/evtx2splunk.yml rules/windows
+sigma convert --skip-unsupported -t splunk -p /mnt/pipelines/evtx2splunk.yml rules/windows
 ```
 
 - https://sigmahq.io/docs/digging-deeper/pipelines.html

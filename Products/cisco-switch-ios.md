@@ -14,6 +14,24 @@ show logging
 show logging onboard
 ```
 
+### Log Configuration Commands
+```
+configure terminal
+    archive
+    log config
+        logging enable
+        hidekeys
+        notify syslog
+        exit
+    exit
+    logging buffered informational
+    service timestamps log datetime
+    logging host <syslog-server-IP>
+exit
+copy running-config startup-config
+```
+
+
 ### SPAN one VLAN to one Port
 ```
 enable
@@ -36,7 +54,7 @@ no monitor session all
 
 ### Save Config to NVRAM
 ```
-copy running-config startup-config 
+copy running-config startup-config
 ```
 
 ### Show ARP Table

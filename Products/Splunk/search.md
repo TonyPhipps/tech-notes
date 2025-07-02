@@ -1,10 +1,11 @@
+# Hotkeys
+CTRL + E - Show Expanded Search String
+CTRL + \ - Auto format the current search
+
 # Alerts
 - Use Alert Type: Scheduled whenever possible to preserve resources. Set time frame to the largest acceptable window.
 - Set an Expires time that is 2-3 times how long the search should take for the given time frame (defined by schedule)
 - The "Suppress results with field value" field accepts comma-delimited lists of multiple items.
-
-
-
 
 
 ## Search Quick Reference
@@ -58,9 +59,6 @@ Error Hunting / Troubleshooting
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
-
-
-
 
 
 ## Macro
@@ -120,6 +118,7 @@ index=something sourcetype="linux:messages"
 
 </details>
 
+
 ### Rex
 Test your regex on fake events
 ```
@@ -162,7 +161,10 @@ Test your regex on fake events
 
 # Search Use Cases
 
+
 ## Initial Discovery
+
+
 ### List indexes available
 ```
 | eventcount summarize=false index=* | fields index | dedup index
@@ -173,6 +175,7 @@ List indexes available, including sourcetype
 | tstats values(sourcetype) where (index=* OR index=_*) by index
 ```
 
+
 ### Ingestion Stats
 ```
 index=_internal source=*license_usage.log* type=Usage idx=yourindex
@@ -181,12 +184,14 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 | rename idx as index, st as sourcetype
 ```
 
+
 ### List Indexed Fields for a Specified Index
 ```
 | walklex index="<index-name>" type=field
 | search NOT field=" *"
 | stats list(distinct_values) by field
 ```
+
 
 ## Change a field's value based on its own contents
 ```
@@ -205,6 +210,7 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 )
 ```
 
+
 ## Determine Standard Deviation
 <details>
 	
@@ -216,6 +222,7 @@ index="processes"
   | where maxlen>4*stdevperhost+avgperhost
 ```
 </details>	
+
 
 ## Identify High Entropy Occurrences
 <details>
@@ -232,7 +239,8 @@ index="processes" Computer=$asset$ UserName=$user$ (ProcessName=$keyword$ OR Pat
   | sort - entropy
 ```
 </details>	
-	
+
+
 ## Determine Levenshtein Scores
 <details>
 
@@ -254,7 +262,8 @@ index="processes" Path=*\System\*
   | fields filename lowest_levenshtein_score suspect_files Images num_hosts percentage_of_hosts_affected
 ```
 </details>
-	
+
+
 ## For Each Source IP Show Statistics Per Destination IP
 <details>
 
@@ -264,6 +273,7 @@ index="processes" Path=*\System\*
 | where UniqueDestinations >= 10
  ```
  </details>
+
 
 ##  Given one search, get additional fields from another search based on a matching field
 <details>
@@ -284,6 +294,7 @@ index="windows" d_host="*" ip="*"
 [ search index"firewall" | stats values(dest_ip) by src_ip]
 ```
 </details>
+
 
 ## List Only Last Occurring Events by Another_Field
 
@@ -322,16 +333,42 @@ Version 2
 | where _time=latest
 ```
 
+
 ## Find Newly Observed Events
-This specific example basically says "show me EventCodes that were not observed in the last 6h.
+This specific example basically says "show me hosts that were not observed in the last 7d."
+
+Most efficient in larger datasets using lookup tables
 ```
-source=WinEventLog:System NOT ([
-  | search source=WinEventLog:System earliest=-6h | table EventCode]) 
-| stats count by EventCode
+| inputlookup historical_hosts.csv 
+| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
+| stats count by host 
+| where count=1 
+| fields host
 ```
 
-or with tstats (when only dealing with indexed fields or data models)
+Lookup table setup (saved search, ran nightly)
+```
+index=* earliest=-30d@d latest=-1d@d | stats count by host | outputlookup historical_hosts.csv
+```
 
+
+Non "join" Version, more efficient in larger datasets
+```
+index=* earliest=-1d@d latest=now | stats count by host 
+| search NOT [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
+| fields host
+```
+
+Version with "join," typically fastest in smaller datasets
+```
+index=* earliest=-1d@d latest=now | stats count by host 
+| join type=left host 
+    [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
+| where isnull(count) 
+| fields host
+```
+
+Version with tstats (when only dealing with indexed fields or data models)
 ```
 | tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
     [| tstats latest(_time) where index=something sourcetype=this earliest=-8d latest=-1d by index, host 
