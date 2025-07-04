@@ -147,8 +147,9 @@ $params = @(
 "--suffix-keep-extension",
 "--resilient",
 "--recover",
-"--resync",
-"--dry-run",
+#"--resync",
+#"--resync-mode path1",
+#"--dry-run",
 "--verbose"
 )
 
