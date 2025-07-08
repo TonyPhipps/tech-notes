@@ -94,7 +94,22 @@ Enable at startup
 - To SYNC a local directory to a Google Drive directory called test_Tony
   - This works better if you rename/move files, as --track-renames prevents re-uploading.
 ```
-.\rclone.exe sync F:\GoogleDrive\test_Tony googledrive:/test_Tony --fast-list --drive-skip-shortcuts --drive-acknowledge-abuse --drive-skip-gdocs --drive-skip-dangling-shortcuts --track-renames --verbose --delete-excluded #--dry-run
+$params = @(
+"sync",
+"F:\GoogleDrive\Tony",
+"googledrive:/Tony",
+"--drive-skip-shortcuts",
+"--drive-acknowledge-abuse",
+"--drive-skip-gdocs",
+"--drive-skip-dangling-shortcuts",
+"--fast-list",
+"--suffix-keep-extension",
+"--track-renames",
+#"--dry-run",
+"--verbose"
+)
+
+X:\Users\Tony\Downloads\rclone-v1.70.2-windows-amd64\rclone.exe $params
 ```
 
 Sync Local to Remote
@@ -132,12 +147,13 @@ $params = @(
 "--suffix-keep-extension",
 "--resilient",
 "--recover",
-"--verbose",
-"--resync",
-"--dry-run"
+#"--resync",
+#"--resync-mode path1",
+#"--dry-run",
+"--verbose"
 )
 
-c:\path\to\rclone.exe $params
+X:\Users\Tony\Downloads\rclone-v1.70.2-windows-amd64\rclone.exe $params
 ```
 
 https://stacker.news/items/576670
