@@ -368,6 +368,17 @@ index=* earliest=-1d@d latest=now | stats count by host
 | fields host
 ```
 
+Version with Half-stats and Half-tstats
+```
+index=something earliest=-1d sourcetype=this host=$host$ "*$Keyword$*"
+| stats count by _time, host, Key, Value, Data
+| fields - count 
+| search NOT 
+    [| tstats count where index=something sourcetype=this earliest=-$baseline$d latest=-$latest$d by Value, Data
+      | fields - count
+    ]
+```
+
 Version with tstats (when only dealing with indexed fields or data models)
 ```
 | tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
