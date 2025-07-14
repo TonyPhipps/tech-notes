@@ -31,6 +31,28 @@ Start-Job {
 ```
 
 
+# Debugging
+```
+Import-Module -Name .\Path\To\YourModule.psm1
+Set-PSBreakpoint -Script .\Path\To\YourModule.psm1 -Line 10
+```
+
+#### DEBUGGING COMMAND
+Once paused, use debugging commands to control execution:
+- s (Step Into): Step into the next statement.
+- v (Step Over): Step over the next statement.
+- o (Step Out): Step out of the current function.
+- c (Continue): Continue execution until the next breakpoint.
+- q (Quit): Exit debugging.
+- Get-PSCallStack: View the call stack.
+- Write-Debug or $PSDebugContext: Inspect variables and context.
+
+Remove Breakpoints
+```
+Get-PSBreakpoint | Remove-PSBreakpoint
+```
+
+
 # Arrays
 Add a property to each item in arrray
 ```ps
