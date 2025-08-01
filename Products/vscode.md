@@ -6,6 +6,8 @@ My Favorite VSCode Extensions
 - Markdown All in One (yzhang.markdown-all-in-one)
 - PowerShell (ms-vscode.powershell)
 - Rainbow CSV (mechatroner.rainbow-csv)
+- Render Special Characters
+- Sigma
 - XML Tools (DotJoshJohnson.xml)
 
 Git Graph
