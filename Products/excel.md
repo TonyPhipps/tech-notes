@@ -1,3 +1,13 @@
+Compare Column E in this sheet to Column A in the other sheet. If the E cell matches, highlight it green. Ignores "null" cells.
+```
+=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A$1:$A$1000, E1)>0)
+```
+
+Inverted version (to highlight red):
+```
+=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A$1:$A$1000, E1)=0)
+```
+
 Compare Cell A1 to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's 4th column
 ```
 =VLOOKUP(A1,LookupSheet!A:B,4,FALSE)

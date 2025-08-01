@@ -54,6 +54,15 @@ Get-PSBreakpoint | Remove-PSBreakpoint
 
 
 # Arrays
+Add to an array cleanly
+NOTE: you actually use a list instead if you need to add new lines/build to it, especially with larger "arrays"
+```ps
+$myArray = [System.Collections.Generic.List[PSObject]]::new() # Replace array with List
+foreach ($thing in $things){
+    $CSV.Add((whatever you want to add)) # Use Add method instead of +=
+}
+```
+
 Add a property to each item in arrray
 ```ps
 foreach ($Item in $Array) {

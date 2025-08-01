@@ -19,5 +19,9 @@ stateOnClient = enabled
 
 Restart the deployment server to acknowledge changes to stuff in deployment-apps (or wait the 30min check)
 ```
-splunk.exe reload deploy-server
+& "C:\Program Files\Splunk\bin\splunk.exe" reload deploy-server
+```
+If this fails, you can restart splunk via
+```
+& "C:\Program Files\Splunk\bin\splunk.exe" restart
 ```
