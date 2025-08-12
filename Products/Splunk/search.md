@@ -1,5 +1,6 @@
 # Hotkeys
 CTRL + E - Show Expanded Search String
+SHIFT + Windows + E - Alternative to above
 CTRL + \ - Auto format the current search
 
 # Alerts
@@ -59,6 +60,24 @@ Error Hunting / Troubleshooting
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
+
+## Eval fields for Risk Analysis
+
+Calculate Base Risk Score based on a non-numerical field
+```
+eval base_risk_score = case(
+  match(risk_rule_level, "informational"), 1,
+  match(risk_rule_level, "low"), 2,
+  match(risk_rule_level, "medium"), 4,
+  match(risk_rule_level, "high"), 8,
+  match(risk_rule_level, "critical"), 16
+)
+  ```
+
+Calculate Risk Object Type based the existence of a host/user
+```
+
+```
 
 
 ## Macro
