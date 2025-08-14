@@ -31,7 +31,7 @@ First Login: admin/admin
 
 
 # Cribl Data Flow
-Sources > Pre-Processing Pipelines (Optional) > Route Filters > Processing Pipelines > Post-Processing Pipelines (Optional) > Destinations
+Sources > Custom Commands > Event Breakers > Fields (metadata) > Pre-Processing Pipelines (Optional) > Route Filters > Processing Pipelines > Post-Processing Pipelines (Optional) > Destinations
 
 # Processing Functions
 - Eval, Lookup
@@ -60,3 +60,13 @@ Sources > Pre-Processing Pipelines (Optional) > Route Filters > Processing Pipel
   - Aggregate events in real-time (i.e., statistical aggregations)
 - Publish Metrics
   - Convert events in metric format
+
+# Regular Expression
+
+
+
+## Replace Expression
+- ``` ` ``` - Start or end use of regular expression
+- ```${g1}``` - Reference a group from Match Regex
+- ```${C.Mask.md5(g2)}``` - Replace using an MD5 of the group referenced
+
