@@ -14,7 +14,7 @@ This section explores the fundamentals of searching data and introduces Cribl Se
 
 
 ## Cribl Search: A New Approach
-Cribl Search helps you search, explore, and analyze machine data – logs, instrumentation data, application data, metrics, etc. – in place without first moving it to specialized storage.
+Cribl Search helps you search, explore, and analyze machine data - logs, instrumentation data, application data, metrics, etc. - in place without first moving it to specialized storage.
 
 - Search-at-Rest: Cribl Search retrieves data directly from its location (host, container, VM, or data lake).
 - Ergonomic Interface: Utilizes a hybrid Kusto query language, easy to learn and use for quick searches.

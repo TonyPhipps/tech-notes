@@ -264,7 +264,7 @@ Packs encapsulate everything between a source and a destination, including:
 - Routes: define data flow paths.
 - Pipelines: handle data transformation.
 - Functions: perform specific actions on events.
--  Sample Data: provide examples for testing purposes.
+- Sample Data: provide examples for testing purposes.
 - Knowledge Objects: additional data elements for context.
 
 Think of Packs as pre-made modules you can use to build complex data processing workflows quickly and easily. Cribl Stream also offers a Packs Dispensary, a repository where users can share and download Packs for various use cases.
