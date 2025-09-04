@@ -1,3 +1,15 @@
+# Count
+Add as Column. Good for "total entries count" single number displays.
+```
+Count = 1
+```
+
+# CountRows_...
+Add as Measure. Good for inline "match count"  columns.
+```
+CountRows_this_table = COALESCE(COUNTROWS(this_table), 0)
+```
+
 # Return the cell value for the record that matches the search conditions.
 ```
 LOOKUPVALUE(
