@@ -27,7 +27,7 @@ CTRL + \ - Auto format the current search
 | Extract Fields via Rex (regex) using a switch/case scenario                                           | `\| eval NewFileName = case(match(host, "192.168.1.1"), "Router", match(host, "192.168.1.2"), "Server", 1=1, "Other")`       |
 | Sort Results                                                                                          | `\| sort + PathLength`                                                                                                       |
 | Aggregate Results                                                                                     | `\| stats count by Path, CommandLine, PathLength, CommandLineLength`                                                         |
-| Aggregate Results by specific fields - show a list of values for those fields across events           | `\| stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                               |
+| Aggregate Results by specific fields - show a list of values for those fields across events           | `\| stats values(Share_Permissions) as Share_Permissions by host, Name, Path`                                                |
 | Exclude a list of items                                                                               | ` Type=Error NOT [ inputlookup safecodes.csv \| return 10000 EventCode ]`                                                    |
 | Convert numbers to date                                                                               | `\| convert ctime(DateField)`                                                                                                |
 | Search for a list of values in one field                                                              | `Logon_Type IN (2,10,11,12,13)`                                                                                              |
@@ -36,6 +36,12 @@ CTRL + \ - Auto format the current search
 | Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)` |
 | Days since Date                                                                                       | `\| eval DateParsed=strptime('DateScanned', "%Y-%m-%d %H:%M:%SZ") \| eval DaysSince = round((now()-DateParsed)/86400)`       |
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
+
+
+Performance-Related Searches
+| Goal                          | Example                                                                                                                                        |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Review memory usage over time | `... \| stats count, sum(MemoryMB) as MemoryUsedMB by host, index, _time \| timechart sum(MemoryUsedMB) by index span=1d` |
 
 
 Rest API Searches
