@@ -21,6 +21,7 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```
 
+
 # Set Global AutoCRLF so EOL's are not changed
 ```
 git config --global core.autocrlf false
@@ -33,6 +34,7 @@ git config --global core.autocrlf false
 git config --global --edit
 ```
 
+
 # Cancel Pending Changes
 ```
 git merge --abort
@@ -40,11 +42,13 @@ git rebase --abort
 git restore .
 ```
 
+
 # Delete Local Branch
 Replace 'dev' with branch name
 ```
 git branch -D dev
 ```
+
 
 # Store Current Changes and Rebase
 ```
@@ -53,12 +57,14 @@ git pull origin master (or main)
 git stash pop
 ```
 
+
 # Purge any line containing "word"
 ... in all file histories in the repository.
 
 ```
 git filter-branch --tree-filter "find . -type f -exec sed -i -e '/$*word/d' {} \;" -f
 ```
+
 
 # Remove a single file from Git commit history
 Great for removing accidentally huge files.
@@ -72,6 +78,7 @@ git push origin --force --all
 ```
 - Schedule or wait for housekeeping to take place
 
+
 # Use BFG To Remove a Single File
 ```
 cd /path/to/bfg.jar
@@ -82,22 +89,24 @@ git gc --prune=now --aggressive
 
 ```
 
+
 # Remove SSL Certificate verification 
 (add --global to apply to all). WARNING: For troubleshooting only. Disables certification verification entirely, allowing MITM.
 ```
 git config http.sslVerify false
 ```
 
+
 # Fix the error "SSL certificate problem: unable to get local issuer certificate"
 ```
 git config --global http.sslBackend schannel
 ```
 
+
 # Display recent Git Changes
 ```
 git --no-pager log --pretty=format:'\"%h\", \"%an\", \"%ci\", \"%s\", \"%b\"' --after "2023-11-30"
 ```
-
 
 
 # Setup SSH Key
@@ -128,11 +137,12 @@ Attempt a Clone
 - Go to Local > SSH tab
 - Copy the Git address for SSH and use it to clone via VSCode
 
+
 # Using Two GitHub Accounts with SSH on Windows
 Explains how to configure **two separate GitHub accounts** (e.g. `work` and `personal`) on a single Windows machine using SSH.
 
-### Generate separate SSH keys for each account
 
+### Generate separate SSH keys for each account
 Work account
 ```powershell
 ssh-keygen -t ed25519 -C "work-email@example.com" -f $HOME\.ssh\id_ed25519_work
@@ -153,14 +163,14 @@ ssh-keygen -t ed25519 -C "personal-email@example.com" -f $HOME\.ssh\id_ed25519_p
 - The **private key** (`id_ed25519_*`) stays only on your computer.  
 - The **public key** (`*.pub`) is uploaded to GitHub.  
 
-### Add each public key to the right GitHub account
 
+### Add each public key to the right GitHub account
 Copy the contents of each **public key** (`.pub`) file to the clipboard and add it in GitHub:
 - Go to **GitHub → Settings → SSH and GPG keys → New SSH key**.  
 - Paste the correct public key into the matching GitHub account.  
 
-### Configure SSH to tell accounts apart
 
+### Configure SSH to tell accounts apart
 Edit (or create) the file ```C:\Users\<You>\.ssh\config```
 
 Add:
@@ -182,7 +192,6 @@ Host github-personal
 ```
 
 ### Start the SSH agent and load both private keys
-
 ```powershell
 # Enable and start ssh-agent
 Get-Service ssh-agent | Set-Service -StartupType Automatic
@@ -199,8 +208,8 @@ ssh-add c:\Users\YOU\.ssh\id_ed25519_personal
 ssh-add -l
 ```
 
-### Test authentication
 
+### Test authentication
 ```powershell
 ssh -T git@github-work
 ssh -T git@github-personal
@@ -212,9 +221,10 @@ Hi WorkUser! You've successfully authenticated...
 Hi PersonalUser! You've successfully authenticated...
 ```
 
-### Use the correct account per repo
 
+### Use the correct account per repo
 When cloning or updating remotes, use the alias defined in `~/.ssh/config`.
+
 
 #### Work repo
 ```powershell
@@ -223,6 +233,7 @@ git clone git@github-work:WorkUser/RepoName.git
 # Or if repo already exists
 git remote set-url origin git@github-work:WorkUser/RepoName.git
 ```
+
 
 #### Personal repo
 ```powershell
@@ -233,9 +244,7 @@ git remote set-url origin git@github-personal:PersonalUser/RepoName.git
 ```
 
 
-
 # Migrate a Repo
-
 - Open the source repo in terminal
 - Issue these commands
 ```
