@@ -1,4 +1,11 @@
-﻿# Install via pip
+﻿# Virtual Env
+As always, it is recommended to do this inside a Python Virtual Env
+```bat
+python -m venv python\sigma
+.\python\sigma\Scripts\activate.bat
+```
+
+# Install via pip
 ```bat
 pip install sigma-cli
 ```
