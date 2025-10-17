@@ -5,6 +5,7 @@
 - Recent burns. Toggle the “Historic Wildfires” layer — target areas 1–5 years post-burn.
 - Transition zones. Deer like edges between thick timber (cover) and open feed (visibility trade-off). Trace where dark forest meets lighter open slope. Look for finger ridges and benches that have mixed vegetation.
 
+
 # Bedding Areas
 - North- and east-facing slopes. Cooler, shaded, less wind — ideal for daytime bedding.
 - On the topo view, these slopes are opposite your south-facing feed zones.
@@ -14,6 +15,7 @@
 - Trace finger ridges that branch from main ridgelines — deer bed along sides just below the crest.
 - Track thermal & wind advantage. Midday, air rises up-slope; evening, it falls down-slope. Bucks bed where they can smell both up and down the hill.
 - Place bedding guesses on slopes where prevailing winds cross thermals — e.g., north-facing benches near ridges or just below saddles.
+
 
 # Water Sources
 - Creeks & springs. Water becomes sparse at higher elevations late in summer.
