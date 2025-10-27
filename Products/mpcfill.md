@@ -1,8 +1,6 @@
 # Notes
 - You can expect to pay 20c - 30c per card. Obviously some cards you may as well just buy.
 - There is a step that can be lengthy and require a few minutes if you have a lot of cards to order.
-- MakePlayingCards charges per 100 cards, so keep your count near one of those increments.
-- MakePlayingCards will truncate your order to 612 if you go above that.
 
 # Setup
 - Make/have an account at https://www.makeplayingcards.com/
