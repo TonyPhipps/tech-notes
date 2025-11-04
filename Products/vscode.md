@@ -2,6 +2,7 @@ My Favorite VSCode Extensions
 - Code Spell Checker (streetsidesoftware.code-spell-checker)
 - Docker (ms-azuretools.vscode-docker)
 - Git Graph (mhutchie.git-graph)
+- Git History (Don Jayamanne)
 - indent-rainbow (oderwat.indent-rainbow)
 - Markdown All in One (yzhang.markdown-all-in-one)
 - PowerShell (ms-vscode.powershell)
@@ -9,6 +10,9 @@ My Favorite VSCode Extensions
 - Render Special Characters
 - Sigma
 - XML Tools (DotJoshJohnson.xml)
+
+Git History
+- Right click a file to Git: View File History
 
 Git Graph
 - Summarize between commits
