@@ -1,9 +1,9 @@
 - [Hotkeys](#hotkeys)
 - [Alerts](#alerts)
-- [Search Quick Reference](#search-quick-reference)
 - [Macro](#macro)
 - [Workflow Actions](#workflow-actions)
 - [Data Models](#data-models)
+- [Search Quick Reference](#search-quick-reference)
 - [Regular Expression / Regex / Rex](#regular-expression--regex--rex)
 - [Search Use Cases](#search-use-cases)
   - [Initial Discovery](#initial-discovery)
@@ -16,10 +16,34 @@ CTRL + E - Show Expanded Search String
 SHIFT + Windows + E - Alternative to above
 CTRL + \ - Auto format the current search
 
+
 # Alerts
 - Use Alert Type: Scheduled whenever possible to preserve resources. Set time frame to the largest acceptable window.
 - Set an Expires time that is 2-3 times how long the search should take for the given time frame (defined by schedule)
 - The "Suppress results with field value" field accepts comma-delimited lists of multiple items.
+
+
+# Macro
+Settings > Advanced Search > Search Macros > Add New
+- Allows storing a search string that can be referenced later using the macro name.
+- Can add arguments, which allows passing data into the macro search.
+  - Can use validation checks on arguments
+- Called using `macroname`
+
+
+# Workflow Actions
+Settings > Fields > Workflow Actions > Add New
+- Get/Post to pass information to external sources, or back to Splunk to perform secondary search
+- For example, a link that opens a browser to a WHOIS page, automatically looking up a given IP Address based on the src_ip field content via $src_ip$.
+
+
+# Data Models
+Settings > Data Models > New Data Model
+- Events, Searchs, Transactions
+- Allows mass normalization and subsequent correlation searches/reports/alerts
+- Allows more efficient reporting when used with Pivots
+- Root event/object > child object > childobject****
+- Root Search should be avoided, as they do not benefit from search speedup
 
 
 # Search Quick Reference
@@ -51,17 +75,15 @@ CTRL + \ - Auto format the current search
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
 
 
-
 Rest API Searches
-
 | Goal                                   | Example                                                                                                                                       |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Get Current Username                   | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields username`                              |
 | Get Current User Rights                | `\| rest /services/authentication/current-context \| where NOT username="splunk-system-user" \| fields capabilities \| mvexpand capabilities` |
 | Get Current User Authentication System | `\| rest /services/authentication/users \| fields title, type \| stats count by type`                                                         |
 
-System Searches
 
+System Searches
 | Goal                      | Example                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Review Triggered Alerts   | `index=_audit action="alert_fired"`                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -69,8 +91,8 @@ System Searches
 | Export all Saved Searches | `\| rest /servicesNS/-/-/saved/searches \| search eai:acl.app="*" \| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id` |
 | Review existing Indexes   | `\| eventcount summarize=false index=ics-* \| stats count by index`                                                                                                                                                                                                                                                                                                                                                               |
 
-Error Hunting / Troubleshooting
 
+Error Hunting / Troubleshooting
 | Goal                     | Example                             |
 | ------------------------ | ----------------------------------- |
 | Investigate Parse Issues | `index=_internal log_level="ERROR"` |
@@ -83,29 +105,6 @@ index=risk
 | table _time, search_name, risk_object, risk_object_type, risk_score, risk_message, src, dest, user
 | sort - _time
   ```
-
-
-# Macro
-Settings > Advanced Search > Search Macros > Add New
-- Allows storing a search string that can be referenced later using the macro name.
-- Can add arguments, which allows passing data into the macro search.
-  - Can use validation checks on arguments
-- Called using `macroname`
-
-
-# Workflow Actions
-Settings > Fields > Workflow Actions > Add New
-- Get/Post to pass information to external sources, or back to Splunk to perform secondary search
-- For example, a link that opens a browser to a WHOIS page, automatically looking up a given IP Address based on the src_ip field content via $src_ip$.
-
-
-# Data Models
-Settings > Data Models > New Data Model
-- Events, Searchs, Transactions
-- Allows mass normalization and subsequent correlation searches/reports/alerts
-- Allows more efficient reporting when used with Pivots
-- Root event/object > child object > childobject****
-- Root Search should be avoided, as they do not benefit from search speedup
 
 
 # Regular Expression / Regex / Rex
