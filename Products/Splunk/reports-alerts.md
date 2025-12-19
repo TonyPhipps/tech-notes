@@ -116,23 +116,23 @@ index IN ("indexes-*") source="index:Risk" earliest=-1d@d latest=@d
     - "Throttles" and "Suppresses" to ensure it didnt already fire this day.
     - Schedule hourly at minute 5 (5 * * * *)
 ```sql
-index IN ("indexes-*") source="index:Risk" _index_earliest=-62m@m _index_latest=-2m@m
-| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, user, host, index
+index IN ("index-*") source="index:Risk" _index_earliest=-62m@m _index_latest=-2m@m
+| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
 
 ``` HISTORY CHECK ```
-| lookup observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
+| lookup index_observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
 | where isnull(historic_first_seen)
 
 ``` THROTTLE ```
 | search NOT 
-    [ search index IN ("indexes-*") source="index:Risk:Alert" earliest=-24h
+    [ search index IN ("index-*") source="index:Risk:Alert" earliest=-24h
     | fields risk_rule_guid, index
     | dedup risk_rule_guid, index ]
 
 ``` MAKE EVENT ```
 ``` Stash to remove headers```
-| map maxsearches=50 search="| makeresults 
-    | eval _time=now(), index=\"$index$\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", user=\"$user$\", host=\"$host$\", first_seen_time=\"$first_seen_new$\"
+| map maxsearches=500 search="| makeresults 
+    | eval _time=now(), index=\"$index$\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
     | collect index=\"$index$\" source=\"index:Risk:Alert\" sourcetype=\"stash\""
 ```
 
@@ -149,7 +149,7 @@ index IN ("indexes-*") source="index:Risk" _index_earliest=-62m@m _index_latest=
    - Suppress results containing field value risk_rule_guid
    - Suppress triggering for 24 hours
    - Trigger Action: Log Event
-     - Event: ```timestamp=now() original_index="$index$" risk_rule_title="$result.risk_rule_title$" risk_rule_guid="$result.risk_rule_guid$" user="$result.user$" host="$result.host$" first_seen_time="$result.first_seen_new$"```
+     - Event: ```timestamp=now() original_index="$index$" risk_rule_title="$result.risk_rule_title$" risk_rule_guid="$result.risk_rule_guid$" risk_rule_user="$result.risk_rule_user$" risk_rule_host="$result.risk_rule_host$" first_seen_time="$result.first_seen_new$"```
      - Source: index:Risk:Alert
      - Sourcetype: index:Risk:Alert
      - Host: $result.host$
@@ -163,11 +163,11 @@ index IN ("indexes-*") source="index:Risk" _index_earliest=-62m@m _index_latest=
 
 
 5. Force the Alert to Fire
-    - Backdates the risk by 1h to show that the next alert would trigger
+    - Backdates the risk by 3m to get an immedate alert search to trigger
 ```sql
 | makeresults 
-| eval _time = relative_time(now(), "-1h")
-| eval risk_rule_guid="TEST-REAL-TRIGGER-001", risk_rule_title="Test Alert Trigger", user="admin_test", host="workstation_test"
-| eval _raw = "timestamp=" . _time . " risk_rule_guid=" . risk_rule_guid . " risk_rule_title=\"" . risk_rule_title . "\" user=" . user . " host=" . host
-| collect index="index-1" source="index:Risk" sourcetype="risk:test"
+| eval _time = relative_time(now(), "-3m")
+| eval risk_rule_guid="TEST-REAL-TRIGGER-1555", risk_rule_title="Test Alert Trigger", risk_rule_user="admin_test", risk_rule_host="workstation_test"
+| eval _raw = "timestamp=" . _time . " risk_rule_guid=" . risk_rule_guid . " risk_rule_title=\"" . risk_rule_title . "\" risk_rule_user=" . risk_rule_user . " risk_rule_host=" . risk_rule_host
+| collect index="index-test" source="index:Risk" sourcetype="risk:Risk"
 ```
