@@ -3,6 +3,7 @@
 | inputlookup mylookup
 ```
 
+
 # Determine if the contents of a field are in a lookup
 Note: I have found it more helpful to rename the fields from the INPUTLOOKUP rather than the search, as this approach avoids editing the active search fields with this exclusion is placed where it's needed in the larger saerch.
 
@@ -23,6 +24,7 @@ A saved search can then be created with this at the end, which will overwrite th
 ```
 | `output_adb_lookup("your_lookup.csv")`
 ```
+
 
 ### Upload a Lookup
 - Navigate to the App that will use the lookup
@@ -45,6 +47,7 @@ Lookup list files do not allow updating by default - manual recreation is requir
   - Find and edit the lookup
   - Edit existing entries or...
   - Import a new or updated version to merge with the selected lookup list
+
 
 # Create a Trusted Networks List to Filter Out Events
 - Upload Lookup File

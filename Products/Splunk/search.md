@@ -9,6 +9,7 @@
   - [Initial Discovery](#initial-discovery)
   - [Performance](#performance)
   - [Other](#other)
+- [Find Results Not in a Subsearch of Older Events](#find-results-not-in-a-subsearch-of-older-events)
 
 
 # Hotkeys
@@ -89,7 +90,7 @@ System Searches
 | Review Triggered Alerts   | `index=_audit action="alert_fired"`                                                                                                                                                                                                                                                                                                                                                                                               |
 | Review Notables           | `index=notable`                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Export all Saved Searches | `\| rest /servicesNS/-/-/saved/searches \| search eai:acl.app="*" \| table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id` |
-| Review existing Indexes   | `\| eventcount summarize=false index=ics-* \| stats count by index`                                                                                                                                                                                                                                                                                                                                                               |
+| Review existing Indexes   | `\| eventcount summarize=false index=* \| stats count by index`                                                                                                                                                                                                                                                                                                                                                               |
 
 
 Error Hunting / Troubleshooting
@@ -274,9 +275,9 @@ index="windows" sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,
 
 **Using Foreach for Evals**
 - If you have multiple eval statements, it may be worth using a foreach to apply the same formula to multiple fields. This can signficantly reduce code repetition in your search string.
-- The exmaple below will check if a list of fields exist, and if not, make the field with the value "missing"
+- The exmaple below will check if a list of fields exist, and if not, make the field with the value "-"
 ```sql
-| foreach field1 field2 field3 field4 [ eval <<FIELD>> = if (isnull(trim(<<FIELD>>)) OR trim(<<FIELD>>)="", "Missing", <<FIELD>>) ]
+| foreach field1 field2 field3 field4 [ eval <<FIELD>> = if (isnull(trim(<<FIELD>>)) OR trim(<<FIELD>>)="", "-", <<FIELD>>) ]
 ```
 
 
@@ -293,60 +294,7 @@ index="windows" sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,
 ```
 
 
-**Find Newly Observed Events**
-- This specific example basically says "show me hosts that were not observed in the last 7d."
-- Most efficient in larger datasets using lookup tables
-```sql
-| inputlookup historical_hosts.csv 
-| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
-| stats count by host 
-| where count=1 
-| fields host
-```
-
-**Lookup table setup (saved search, ran nightly)**
-```sql
-index=* earliest=-30d@d latest=-1d@d | stats count by host | outputlookup historical_hosts.csv
-```
-
-
-- Non "join" Version, more efficient in larger datasets
-```sql
-index=* earliest=-1d@d latest=now | stats count by host 
-| search NOT [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
-| fields host
-```
-
-- Version with "join," typically fastest in smaller datasets
-```sql
-index=* earliest=-1d@d latest=now | stats count by host 
-| join type=left host 
-    [ search index=* earliest=-30d@d latest=-1d@d | stats count by host | fields host ] 
-| where isnull(count) 
-| fields host
-```
-
-- Version with Half-stats and Half-tstats
-```sql
-index=something earliest=-1d sourcetype=this host=$host$ "*$Keyword$*"
-| stats count by _time, host, Key, Value, Data
-| fields - count 
-| search NOT 
-    [| tstats count where index=something sourcetype=this earliest=-$baseline$d latest=-$latest$d by Value, Data
-      | fields - count
-    ]
-```
-
-- Version with tstats (when only dealing with indexed fields or data models)
-```sql
-| tstats latest(_time) as latest where earliest=-1d index=something sourcetype=this NOT ( 
-    [| tstats latest(_time) where index=something sourcetype=this earliest=-8d latest=-1d by index, host 
-    | table index, host]) by index, host 
-| eval latest_str = strftime(latest,"%c")
-| table host, index, latest, latest_str
-```
-
-**Find Results Not in a Subsearch of Older Events**
+# Find Results Not in a Subsearch of Older Events
 - This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
 ```sql
 index="something" TheResOfYourSearch
@@ -408,10 +356,23 @@ index="something"
 | table index sourcetype latest recent
 ```
 
+
 **List All Saved Searches**
+Good for export/backup/etc.
 ```sql
 | rest /servicesNS/-/-/saved/searches 
 | search eai:acl.app="*yourapp*"
 | table title description disabled is_scheduled search cron_schedule actions action.email action.email.to action.email.message.alert alert.expires alert.severity alert.suppress alert.suppress.period alert_comparator alert_condition alert_threshold alert_type allow_skew display.events.fields eai:acl.sharing eai:acl.perms.read eai:acl.perms.write id
 ```
 
+
+### Makeresults to test things
+```
+| makeresults count=4
+| streamstats count
+| eval index       = case(count=1, "index1", count=2, "index1", count=3, "host2", count=4, "host2")
+| eval hostname    = case(count=1, "host1", count=2, "MadeUpManualHost", count=3, "labesxi1", count=4, "labesxi2")
+| eval ip          = case(count=1, "192.168.1.1", count=2, "192.168.1.101", count=3, "192.168.1.72", count=4, "192.168.1.73")
+| eval Description = case(count=1, "PA-850 Firewall", count=2, "Made Up Test Host" , count=3, "Test VLANS", count=4, "Test VLANS")
+| eval IgnoreEntry = case(count=1, null(), count=2, "true", count=3, null(), count=4, null())
+```
