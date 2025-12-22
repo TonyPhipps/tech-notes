@@ -115,7 +115,7 @@ index IN ("indexes-*") source="index:Risk" earliest=-1d@d latest=@d
     - "Triggers" for each result
     - "Throttles" and "Suppresses" to ensure it didnt already fire this day.
     - Schedule hourly at minute 5 (5 * * * *)
-    - Search Earliest Time = -1h
+    - Search Earliest Time = -24h
 ```sql
 index IN ("index-*") source="index:Risk" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
