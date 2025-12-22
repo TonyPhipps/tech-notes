@@ -115,6 +115,7 @@ index IN ("indexes-*") source="index:Risk" earliest=-1d@d latest=@d
     - "Triggers" for each result
     - "Throttles" and "Suppresses" to ensure it didnt already fire this day.
     - Schedule hourly at minute 5 (5 * * * *)
+    - Search Earliest Time = -1h
 ```sql
 index IN ("index-*") source="index:Risk" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
@@ -132,7 +133,7 @@ index IN ("index-*") source="index:Risk" _index_earliest=-62m@m _index_latest=-2
 ``` MAKE EVENT ```
 ``` Stash to remove headers```
 | map maxsearches=500 search="| makeresults 
-    | eval _time=now(), index=\"$index$\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
+    | eval _time=now(), index=\"$index$\", name=\"RIR - Newly Observed Risk Rule\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
     | collect index=\"$index$\" source=\"index:Risk:Alert\" sourcetype=\"stash\""
 ```
 
@@ -170,4 +171,66 @@ index IN ("indexes-*") source="index:Risk" _index_earliest=-62m@m _index_latest=
 | eval risk_rule_guid="TEST-REAL-TRIGGER-1555", risk_rule_title="Test Alert Trigger", risk_rule_user="admin_test", risk_rule_host="workstation_test"
 | eval _raw = "timestamp=" . _time . " risk_rule_guid=" . risk_rule_guid . " risk_rule_title=\"" . risk_rule_title . "\" risk_rule_user=" . risk_rule_user . " risk_rule_host=" . risk_rule_host
 | collect index="index-test" source="index:Risk" sourcetype="risk:Risk"
+```
+
+
+# Find Risk_Score Spikes from Hourly Baseline
+1. The Baseline Generator (Scheduled Report)
+  - Schedule: Daily (e.g., 01:00 AM) Time Range: Last 30 days (-30d@d to -1d@d) Action: Save results to a CSV Lookup.
+  - This search handles the heavy JSON parsing and statistical crunching offline.
+
+```sql
+index IN ("indexes-*") source="index:Risk*" earliest=-30d@d latest=-1d@d
+| fromjson risk_info
+| fields host sourcetype _time risk_score
+
+```Calculate Risk per Hour, per Day```
+| bin _time span=1h
+| stats sum(risk_score) as hourly_risk by host _time
+
+```Extract Hour of Day (00-23) for profiling```
+| eval hour_of_day = strftime(_time, "%H")
+
+```Calculate Median (Center) per Host/Hour```
+| eventstats median(hourly_risk) as median by host hour_of_day
+
+```Calculate MAD (Spread)```
+| eval abs_dev = abs(hourly_risk - median)
+| stats values(median) as median median(abs_dev) as mad by host hour_of_day
+
+```Safety Handling for MAD=0```
+| fillnull value=0 median mad
+| eval mad = if(mad=0, 1, mad)
+
+```Output to Lookup```
+| outputlookup risk_baseline_hourly_host.csv
+```
+
+2. The Detection / Dashboard Widget
+  - Schedule: Hourly (e.g., */60 * * * * or specifically at minute 5) Time Range: Last 1 hour (-1h@h to @h)
+  - This search is incredibly fast because it only processes 60 minutes of data.
+
+```sql
+index IN ("index-*") source="index:Risk*" earliest=-1h@h latest=@h
+| fromjson risk_info
+| fields host sourcetype _time risk_score
+
+```Calculate Current Hour's Risk```
+| stats sum(risk_score) as current_hourly_risk by host
+
+```Determine Current Hour context```
+| eval hour_of_day = strftime(relative_time(now(), "-1h@h"), "%H")
+
+```Enrich with Baseline Stats```
+| lookup risk_hourly_baseline.csv host hour_of_day OUTPUT median mad
+
+```Calculate Robust Z-Score```
+| fillnull value=0 median mad
+| eval percent_difference = round((current_hourly_risk - median)/median*100, 2)
+| eval robust_z = round((current_hourly_risk - median)/(1.4826*mad), 2)
+
+```Alert Logic (Outliers)```
+| where robust_z > 3 AND current_hourly_risk > 50
+| table host hour_of_day current_hourly_risk median mad percent_difference robust_z
+| sort - robust_z
 ```
