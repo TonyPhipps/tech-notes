@@ -182,36 +182,33 @@ index IN ("indexes-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m
 
 ```sql
 index IN ("myindex") source="My:Risk*" earliest=-30d@h latest=-1d@h
-| fromjson risk_info
-| fields host _time risk_score
+``` Parse fields before discarding _raw ```
+| rex field=_raw "risk_score=(?<risk_score>\d+)"
+| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
 
-``` FORCE ZERO-FILLING: Use timechart to generate the matrix ```
-``` fixedrange=t: Forces coverage of the full 30 days ```
-``` limit=0: Critical to ensure NO hosts are dropped or grouped into 'OTHER' ```
-| timechart span=1h fixedrange=t sum(risk_score) as hourly_risk by host limit=0
+``` Pre-aggregate to save memory ```
+| bin _time span=1h
+| stats sum(risk_score) as raw_hourly_risk by host _time
 
-``` CRITICAL FIX: Fill Nulls to prevent untable from dropping rows. This forces empty buckets to become '0' so they are counted in the median ```
+``` Zero-Filling Logic ```
+| timechart span=1h fixedrange=t sum(raw_hourly_risk) as hourly_risk by host limit=0
+
+``` Force empty buckets to 0 ```
+``` This ensures quiet hours are counted as '0' rather than 'null' ```
 | fillnull value=0
 
-``` FLIP BACK: Turn the matrix back into rows (Host + Time + Risk) ```
+``` Convert matrix back to rows ```
 | untable _time host hourly_risk
 
-``` Extract Hour Context ```
+``` Calculate Median and MAD ```
 | eval hour_of_day = strftime(_time, "%H")
-
-``` Calculate Center (Median) with Zeros included ```
 | eventstats median(hourly_risk) as median by host hour_of_day
-
-``` Calculate Spread (MAD) with Zeros included ```
 | eval abs_dev = abs(hourly_risk - median)
 | stats values(median) as median median(abs_dev) as mad by host hour_of_day
 
-``` Sanitize Logic (Safety Floor) ```
+``` Santize with a Safety Floor ```
 | fillnull value=0 median mad
 | eval mad = if(mad=0, 1, mad)
-``` Note: We intentionally leave Median as 0 if the host is truly quiet. ```
-
-``` Output to Lookup ```
 | outputlookup risk_baseline_hourly_host.csv
 ```
 
@@ -220,33 +217,36 @@ index IN ("myindex") source="My:Risk*" earliest=-30d@h latest=-1d@h
   - This search is incredibly fast because it only processes 60 minutes of data.
   - Earliest = -24h
 ```sql
-index IN ("myindex") source="My:Risk*" earliest=-1h@h latest=@h
-| fromjson risk_info
-| fields host _time risk_score
+index IN ("indexes-*") source="My:Risk*" earliest=-1h@h latest=@h
+``` MEMORY OPTIMIZATION: Keep only necessary fields first ```
+| fields _raw
+| rex field=_raw "risk_score=(?<risk_score>\d+)"
+| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
 
-``` Aggregate Current Risk ```
-``` No need to split by index, just group by Host ```
+``` Aggregate current risk, grouping by Host ```
 | stats sum(risk_score) as current_hourly_risk by host
 
-``` Determine Context ```
+``` Determine which hour are we looking at? ```
 | eval hour_of_day = strftime(relative_time(now(), "-1h@h"), "%H")
 
-``` Lookup against the Single-Tenant Baseline ```
-``` Match only on Host + Hour ```
+``` Lookup baseline match on Host + Hour ```
 | lookup risk_baseline_hourly_host.csv host hour_of_day OUTPUT median mad
 
-``` Safety Net for New Hosts / Silent Hours ```
-``` If lookup fails (no history), fill with 0 to force a high-sensitivity check ```
+``` Handle New Hosts or Silent Baselines ```
+``` If lookup returns null (no history), default to 0 to force high sensitivity ```
 | fillnull value=0 median mad
 
-``` Calculate Z-Score (With Division Protection) ```
-``` Denominator: Ensure we never divide by zero using max(..., 1) ```
+``` Calculate Z-Score Math with Safety Floors ```
+``` percent_difference: (Current - Median) / Median ```
+``` robust_z: (Current - Median) / (1.48 * MAD) ```
+``` max(x, 1) ensures we NEVER divide by zero ```
 | eval percent_difference = round((current_hourly_risk - median) / max(median, 1) * 100, 2)
 | eval robust_z = round((current_hourly_risk - median) / (1.4826 * max(mad, 1)), 2)
 
-``` Alert Logic ```
 ``` Threshold: Z > 3 (Statistical Outlier) AND Risk > 50 (Material Impact) ```
 | where robust_z > 3 AND current_hourly_risk > 50
+
+``` Prettify ```
 | table host hour_of_day current_hourly_risk median mad robust_z percent_difference
 | sort - robust_z
 ```
@@ -291,36 +291,40 @@ Run the "The Detection / Dashboard Widget" search above to ensure a result exist
   - This search handles the heavy JSON parsing and statistical crunching offline.
 
 ```sql
-index IN ("indexes-*") source="My:Risk:*" earliest=-30d@h latest=-1d@h
-| fromjson risk_info
-| fields index host _time risk_score
+index IN ("indexes-*") source="My:Risk*" earliest=-30d@h latest=-1d@h
+``` Parse fields before discarding _raw ```
+| rex field=_raw "risk_score=(?<risk_score>\d+)"
+| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
 
-``` COMPOSITE KEY ```
+``` Combine Index and Host as a composite key for Multi-Tenancy ```
+``` This ensures Client A's 'HMI-01' is treated differently than Client B's 'HMI-01' ```
 | eval composite_key = index . "::" . host
 
-``` TIMECHART (Generates the Matrix) ```
-| timechart span=1h fixedrange=t sum(risk_score) as hourly_risk by composite_key limit=0
+``` Pre-aggregate to save memory ```
+``` Group by the composite key and time immediately ```
+| bin _time span=1h
+| stats sum(risk_score) as raw_hourly_risk by composite_key _time
 
-``` Fill Nulls to prevent untable from dropping rows. This ensures that empty hours become '0' instead of 'null' ```
+``` Zero-Filling Logic ```
+``` timechart now handles the composite key correctly ```
+| timechart span=1h fixedrange=t sum(raw_hourly_risk) as hourly_risk by composite_key limit=0
+
+``` Force empty buckets to 0 ```
 | fillnull value=0
 
-``` FLIP BACK (Now guarantees 720 rows per host) ```
+``` Convert matrix back to rows ```
 | untable _time composite_key hourly_risk
 
-``` RESTORE FIELDS ```
+``` Split Index and Host back apart ```
 | rex field=composite_key "(?<index>.*?)::(?<host>.*)"
 
-``` Extract Hour Context ```
+``` Calculate Median and MAD ```
 | eval hour_of_day = strftime(_time, "%H")
-
-``` Calculate Center (Median) ```
 | eventstats median(hourly_risk) as median by index host hour_of_day
-
-``` Calculate Spread (MAD) ```
 | eval abs_dev = abs(hourly_risk - median)
 | stats values(median) as median median(abs_dev) as mad by index host hour_of_day
 
-``` Sanitize and Output ```
+``` Sanitize with a Safety Floor ```
 | fillnull value=0 median mad
 | eval mad = if(mad=0, 1, mad)
 | outputlookup risk_baseline_hourly_host.csv
@@ -333,32 +337,36 @@ index IN ("indexes-*") source="My:Risk:*" earliest=-30d@h latest=-1d@h
 
 ```sql
 index IN ("indexes-*") source="My:Risk*" earliest=-1h@h latest=@h
-| fromjson risk_info
-| fields index host _time risk_score
+| fields _raw index
+| rex field=_raw "risk_score=(?<risk_score>\d+)"
+| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
 
-``` Aggregate Current Risk (Preserve Index) ```
-``` We group by BOTH index and host to maintain tenant isolation ```
+``` Aggregate current risk, separated by tenant (index) ```
 | stats sum(risk_score) as current_hourly_risk by index host
 
-``` Determine Context ```
+``` Determine CONTEXT: Look at previous full hour of day ```
 | eval hour_of_day = strftime(relative_time(now(), "-1h@h"), "%H")
 
-``` Lookup against the Multi-Tenant Baseline ```
-``` Match on Index + Host + Hour ```
+``` Baseline lookup match on index + host + hour to find the correct baseline row ```
 | lookup risk_baseline_hourly_host.csv index host hour_of_day OUTPUT median mad
 
-``` Safety Net for New Hosts / Silent Hours ```
-``` If lookup fails (no history), fill with 0 to force a high-sensitivity check ```
+``` Safety net handling new hosts or silent baselines ```
+``` If lookup returns null (no history), default to 0 to force high sensitivity ```
 | fillnull value=0 median mad
 
-``` Calculate Z-Score (With Division Protection) ```
-``` Denominator: Ensure we never divide by zero using max(..., 1) ```
+``` Calculate Z-Score Math with Safety Floors ```
+``` percent_difference: (Current - Median) / Median ```
+``` robust_z: (Current - Median) / (1.48 * MAD) ```
+``` max(x, 1) ensures we NEVER divide by zero, preventing calculation errors ```
 | eval percent_difference = round((current_hourly_risk - median) / max(median, 1) * 100, 2)
 | eval robust_z = round((current_hourly_risk - median) / (1.4826 * max(mad, 1)), 2)
 
-``` Alert Logic ```
-``` Threshold: Z > 3 (Statistical Outlier) AND Risk > 50 (Material Impact) ```
+``` Define the Thresholds ```
+``` robust_z > 3: The statistical outlier (approx 3 standard deviations) ```
+``` risk > 50: The operational noise floor (ignore tiny blips) ```
 | where robust_z > 3 AND current_hourly_risk > 50
+
+``` Prettify ```
 | table index host hour_of_day current_hourly_risk median mad robust_z percent_difference
 | sort - robust_z
 ```
