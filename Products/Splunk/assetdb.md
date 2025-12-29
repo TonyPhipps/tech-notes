@@ -19,8 +19,8 @@
 # A Saved Seach to Generate a Lookup Per Data Feed
 
 Domain Computers
-```
-index IN (`assetdb_indexes`) source="*_DomainComputers.csv" sourcetype=ICS:REC:Output:CSV dataset=DomainComputers Enabled=True 
+```sql
+index IN (`assetdb_indexes`) source="*_DomainComputers.csv" sourcetype=REC:Output:CSV dataset=DomainComputers Enabled=True 
 | eventstats max(_time) as latest by host,index
 | where _time=latest 
 | dedup CanonicalName 
@@ -40,7 +40,7 @@ index IN (`assetdb_indexes`) source="*_DomainComputers.csv" sourcetype=ICS:REC:O
 ```
 
 Forescout
-```
+```sql
 index IN (`assetdb_indexes`) sourcetype="forescout:OTSM:REST:hosts" 
 | dedup index, id, host sortby -_time 
 | rename main_name as hostname, host_mac_addresses{}.mac_address as "mac", firmware_version as "OperatingSystemVersion", os_version as "OperatingSystem", serial_number as "Serial", main_vendor_model as "Model", learnt_host as learned_host 
@@ -100,8 +100,8 @@ index IN (`assetdb_indexes`) sourcetype="forescout:OTSM:REST:hosts"
 ```
 
 REC NetAdapters
-```
-index IN (`assetdb_indexes`) source="*_NetAdapters.csv" sourcetype=ICS:REC:Output:CSV dataset=NetAdapters IPAddress=* 
+```sql
+index IN (`assetdb_indexes`) source="*_NetAdapters.csv" sourcetype=REC:Output:CSV dataset=NetAdapters IPAddress=* 
 | eventstats max(_time) as latest by host,index 
 | where _time=latest 
 | eval hostname = SystemName 
@@ -121,7 +121,7 @@ index IN (`assetdb_indexes`) source="*_NetAdapters.csv" sourcetype=ICS:REC:Outpu
 ```
 
 REC (tstats)
-```
+```sql
 | tstats count where index IN (`assetdb_indexes`) sourcetype=REC:Output:CSV by _time,index,host span=d@d ``` _time is required for assetdb to merge using "latest" method ```
 | dedup index, host sortby -_time 
 | rename host as hostname 
@@ -134,7 +134,7 @@ REC (tstats)
 ```
 
 Syslog
-```
+```sql
 | tstats count WHERE index IN (`assetdb_indexes`) sourcetype IN ("syslog","vmw-syslog","pan_log","pan:traffic","linux:*","cisco:ios","PAN_XML")  by _time,index,host span=d@d ``` _time is required for assetdb to merge using "latest" method ```
 | where host!="127.0.0.1"
 | dedup index, host sortby -_time 
@@ -152,7 +152,7 @@ Syslog
 
 # A Include Manual Entries (To override all)
 
-```
+```sql
 | inputlookup assetdb_-ManualEntries.csv
 | table index, _time, Hostname, OS_family, OS_Name, OS_Version, Ip_address, Mac_Address, Equipment_Class, Manufacturer, Model, Serial_No, Visual_ID, Description, Function, Physical_Location
 | rename Hostname as hostname, OS_family as OperatingSystemFamily, OS_Name as OperatingSystem, OS_Version as OperatingSystemVersion, Ip_address as ip, Mac_Address as mac, Serial_No as Serial
@@ -174,7 +174,7 @@ Syslog
 # A Saved Search To Pull All Inventories into one Lookup
 
 LOOKUPGEN - assetdb
-```
+```sql
 | eventcount summarize=false index=* 
 | stats sum(count) as IndexEventCount by index 
 | search index IN (`assetdb_indexes`)
@@ -249,7 +249,7 @@ LOOKUPGEN - assetdb
 
 
 Base Search
-```
+```sql
 |inputlookup assetdb.csv
 | foreach Hostname, Ip_address, Mac_Address, Description, source, asset
 [eval &lt;&lt;FIELD&gt;&gt;=split(&lt;&lt;FIELD&gt;&gt;, "|")]
@@ -258,6 +258,6 @@ Base Search
 
 System Inventory
 <search base="Inventory">
-```
+```sql
 | sort -KeyFieldCount, -SourceCount, Hostname
 ```

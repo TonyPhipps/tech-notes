@@ -4,13 +4,13 @@ Recommended **Lab** Specs
 
 
 ## Ensure curl package is installed
-```
+```bash
 apt install curl
 ```
 
 
 ## Install Splunk
-```
+```bash
 dpkg -i splunk_package_name.deb
 dpkg --status splunk
 ```
@@ -18,7 +18,7 @@ dpkg --status splunk
 
 ## Start
 For the first time, best to run as root just to test things out.
-```
+```bash
 su -
 /opt/splunk/bin/splunk start
 ```
@@ -37,7 +37,7 @@ Run this
 ```/opt/splunk/bin/splunk enable boot-start```
 
 Give the target account rights to the installation folder
-```
+```bash
 chown -R bob $SPLUNK_HOME
 chmod -R 700 $SPLUNK_HOME
 ```
@@ -183,21 +183,21 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
 
 # Troubleshoot
 Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
-```
+```bash
 ps -ef | grep splunk
 ```
 
 
 ## Ingestion
 Review the settings for a conf file and see where the settings are merged from
-```
+```bash
 splunk btool inputs list --debug
 ```
 
 
 ## Reload Inputs.conf
 While in the Splunk dir (/opt/splunk/bin)
-```
+```bash
 ./splunk _internal call /services/data/inputs/monitor/_reload -auth
 ```
 
@@ -245,7 +245,7 @@ index=_internal source="*splunkd.log" log_level=ERROR (component=IndexProcessor 
 ```
 
 To check if queues are blocked post-reboot:
-```
+```sql
 index=_internal source="*metrics.log" group=queue blocked=true
 | timechart span=10min max(max_size_kb) by name
 ```

@@ -1,5 +1,5 @@
 ﻿# Review a Lookup Table
-```
+```sql
 | inputlookup mylookup
 ```
 
@@ -9,19 +9,19 @@ Note: I have found it more helpful to rename the fields from the INPUTLOOKUP rat
 
 - Where the inputlookup has a field named dest_ip and the search has a field named IP
 
-```
+```sql
 [| inputlookup ioc_ip.csv | fields IP | rename dest_ip as IP ]
 ```
 
 
 # Save Output to a Lookup
 Create initial lookup table in user context to allow permissions to be set
-```
+```sql
  | outputlookup "your_lookup.csv" create_context=user
 ```
 
 A saved search can then be created with this at the end, which will overwrite the lookup when the search executes on a schedule.
-```
+```sql
 | `output_adb_lookup("your_lookup.csv")`
 ```
 
@@ -56,7 +56,7 @@ Lookup list files do not allow updating by default - manual recreation is requir
 - Create Lookup Definition
   - Advanced Options > Match Type: "CIDR(subnet)"
 - Add to search to find NON matches (assuming label is ALWAYS provided)
-````
+````sql
 | lookup net_trusted subnet AS src_ip index AS index OUTPUT subnet_label AS subnet_label_src
 | lookup net_trusted subnet AS dst_ip index AS index OUTPUT subnet_label AS subnet_label_dst
 | eval Subnet = case(

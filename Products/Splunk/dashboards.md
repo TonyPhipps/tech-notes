@@ -46,7 +46,7 @@ https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 
 ### Search Base
 At the top:
-```
+```xml
 <search id="base1">
   <query>
     index="index_name" (ProductName=#1# OR ProductName=#2# OR ProductName=#3# OR etc.) 
@@ -59,7 +59,7 @@ At the top:
 ```
 
 At the applicable widget(s):
-```
+```xml
 <search base="base1">
   <query>
     search ProductName="Skype"
@@ -71,7 +71,7 @@ At the applicable widget(s):
 #### Search Base WITH Export Button
 This approach allows using a base job while retaining the "export results" option in each widget.
 Base Search
-```
+```xml
 <done>
   <condition>
     <set token="[basename]_sid">$job.sid$</set>
@@ -86,7 +86,7 @@ Widget Search
 ```
 
 ### Checkbox to Toggle Tokens
-```
+```xml
 <input type="checkbox" token="Checked" searchWhenChanged="true">
       <label></label>
       <choice value="yes">Checkbox Text</choice>
@@ -105,7 +105,7 @@ Widget Search
 
 ### Provide a Field for Tokens, but do Not Display to User
 Right after the widget's closing search, you can define a <fields> tag to hide some of the | fields chosen within the search.
-```
+```xml
 ...
 </search>
 <fields>col1, col2</fields>
@@ -115,7 +115,7 @@ Right after the widget's closing search, you can define a <fields> tag to hide s
 ### Dynamic Dropdown to Toggle Tokens
 This sample provides a dropdown that dynamically builds its dropdown list (Display+Value) based on a search, then sets tokens accordingly.
 
-```
+```xml
 <input type="dropdown">
       <label>A vs B vs C</label>
       <change>
@@ -180,7 +180,7 @@ When using the contents of a search to assign a variable to a value via click ac
 <details>
 
 Add this to your init section
-```
+```xml
 ...
 <init>
     <set token="showExpandLink1">true</set>
@@ -198,7 +198,7 @@ Add this to your init section
 ```
 
 Add this as your first \<row\>
-```
+```xml
 ...
   <row depends="$alwaysHideCSSStyleOverride$">
     <panel>
@@ -236,7 +236,7 @@ Add this as your first \<row\>
 ```
 
 Add this just after the \<title> closes for the panel you'd like to be collapsible.
-```
+```xml
 ...
 </title>
       <input id="linkCollapse1" type="link" token="tokLinkCollapse1" searchWhenChanged="true" depends="$showCollapseLink1$">
@@ -273,7 +273,7 @@ Add this just after the \<title> closes for the panel you'd like to be collapsib
 
 NOTE: Requires the "dispatch_rest_to_indexers" capability/permission.
 
-```
+```xml
 <search>
   <query>| rest /servicesNS/-/-/data/ui/views search="eai:acl.app=$env:app$ label=$env:page$"
 | rex field="eai:data" "theme\=\"(?&lt;theme&gt;.+?)\""
@@ -292,7 +292,7 @@ Only Input tokens are stored on the URL line and are included when you copy/past
 
 First, remove any <init>'s for the tokens to be migrated.
 
-```
+```xml
 <input type="text" token="myToken" depends="$hidden$" searchWhenChanged="true">
       <label>myToken</label>
       <initialValue>*</initialValue>
@@ -301,7 +301,7 @@ First, remove any <init>'s for the tokens to be migrated.
 
  Ensuring searchWhenChanged is set to true causes the URL to be updated as the token (and therefore Input value) is updated by things like a Drilldown definition in a Widget. To set up a widget to do this, use this code.
 
- ```
+ ```xml
 <drilldown>
           <set token="myToken">$click.value$</set>
           <set token="form.myToken">$click.value$</set>
@@ -311,7 +311,7 @@ First, remove any <init>'s for the tokens to be migrated.
 ### Reset All of a Dashboard's Tokens
 This code will add a thin vertical HTML widget with a Reset Dashboard link on it. This link simply sends the user to "naked" version of the dashboard with no tokens defined within the URL.
 
-```
+```xml
 <row>
     <panel>
       <html>
@@ -328,7 +328,7 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
 ```
 
 ### Reset SOME Of a Dashboard's Tokens
-```
+```xml
 <input type="radio" token="resetTokens" searchWhenChanged="true">
   <label></label>
   <choice value="reset">Reset Inputs</choice>
@@ -346,7 +346,7 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
 ```
 
 ### Hide a Panel Until a Token is Set via Drilldown
-```
+```xml
 <form version="1.1">
   <label>Your Label</label>
   <description>Your Description</description>

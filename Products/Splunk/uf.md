@@ -20,23 +20,23 @@ Fast option after all things are set up...
 
 # Linux Installation
 Download: https://www.splunk.com/en_us/download/universal-forwarder.html
-```
+```bash
 sudo $SPLUNK_HOME/bin/splunk start --accept-license
 ```
 Then provide a local user/pass.
 
-```
+```bash
 /opt/splunkforwarder/bin/splunk set deploy-poll localhost:8089
 ```
 Supply the user/pass made earlier.
 
 Restart Splunk
-```
+```bash
 /opt/splunkforwarder/bin/splunk restart
 ```
 
 Setup data to forward to Splunk
-```
+```bash
 /opt/splunkforwarder/bin/splunk add forward-server localhost:9997
 /opt/splunkforwarder/bin/splunk add monitor /var/log
 /opt/splunkforwarder/bin/splunk restart
@@ -75,19 +75,19 @@ sourcetype = syslog
 # Troubleshooting
 
 ### Verify service is running
-```
+```bat
 .\bin\splunk.exe status
 ```
 
 ### Verify expected inputs config
-```
+```bat
 $SPLUNK_HOME = "C:\Program Files\SplunkUniversalForwarder"
 cd $SPLUNK_HOME
 .\bin\splunk.exe btool inputs list --debug
 ```
 
 ### Verify Splunk Forwarder ports open
-```
+```bat
 netstat -abno | findstr 9997
 ```
 
@@ -100,14 +100,14 @@ ping 192.168.0.xxx
 Any of these commands may be helpful.
 
 Nix
-```
+```ps1
 Get-Content ./var/log/splunk/splunkd.log | Select-Object -Last 1000 | Select-String "stanzaname"
 Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait
 Get-Content ./var/log/splunk/splunkd.log -Tail 5 -Wait | Select-String "stanzaname"
 ```
 
 Win
-```
+```ps1
 Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" | Select-Object -Last 1000 | Select-String "stanzaname"
 Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" -Tail 5 -Wait
 Get-Content "C:\Program Files\SplunkUniversalForwarder\var\log\splunk\splunkd.log" -Tail 5 -Wait | Select-String "stanzaname"

@@ -6,13 +6,13 @@
 
 # Generate Risk Rule Events in Orignial Index
 Create a macro named something like 'risk-rule'. Add that macro to the end of a saved search
-```
+```sql
 yoursearch
 | `risk-rule("RR - The Alert Name", "the-alert-guid", "the-alert-severity-level")`
 ```
 Arguments: risk_rule_title,risk_rule_guid,risk_rule_level
 Definition:
-```
+```sql
 fields - punct, date_hour, date_mday, date_minute, date_month, date_second, date_wday, date_year, date_zone, linecount, timeendpos, timestartpos, _bkt, _cd, _serial, _si, _pre_msg, _sourcetype, _subsecond, ForwardedRaw, message, Message, body
 
 | tojson include_internal=true output_field=risk_info auto(*) 
@@ -58,7 +58,7 @@ With arguments: ```risk_rule_title_arg,risk_rule_guid_arg,risk_rule_level_arg```
 
 
 Parse the Risk Rule event generated from the previous macro. This allows building dashboards on it, investigating, etc.
-```
+```sql
 | eval risk_rule_fire_time = _time
 | fieldformat risk_rule_fire_time = strftime(risk_rule_fire_time,"%Y-%m-%d %H:%M:%S %Z%:z")
 | fromjson risk_info
@@ -84,7 +84,7 @@ Parse the Risk Rule event generated from the previous macro. This allows buildin
 1. Generate the lookup list
     - a lookup of 30d of events, including first seen, last seen dates, etc.
 ```sql
-index IN ("indexes-*") source="My:Risk" earliest=-30d@d latest=-1d@d
+index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
 | stats count min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
 | outputlookup observed_risk_rules.csv
 ```
@@ -98,7 +98,7 @@ index IN ("indexes-*") source="My:Risk" earliest=-30d@d latest=-1d@d
    - Overwrites the CSV with the updated, merged data.
    - Schedule daily at 00:30 (30 0 * * *)
 ```sql
-index IN ("indexes-*") source="My:Risk" earliest=-1d@d latest=@d
+index IN ("indexes-*") source="My:Risk*" earliest=-1d@d latest=@d
 | stats count as hits min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
 | inputlookup append=t observed_risk_rules.csv
 | stats sum(hits) as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
@@ -117,7 +117,7 @@ index IN ("indexes-*") source="My:Risk" earliest=-1d@d latest=@d
     - Schedule hourly at minute 5 (5 * * * *)
     - Search Earliest Time = -24h
 ```sql
-index IN ("index-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m@m
+index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
 
 ``` HISTORY CHECK ```
@@ -156,7 +156,7 @@ index IN ("index-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m@m
      - Host: $result.host$
      - Index: MyIndex
 ```sql
-index IN ("indexes-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m@m
+index IN ("indexes-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, user, host, index
 | lookup observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
 | where isnull(historic_first_seen)

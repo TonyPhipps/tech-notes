@@ -344,6 +344,8 @@ deactivate
 ```
 
 Create one savedsearches.conf style output with all input rules included
+Note: When using a pipeline with type: rule_failure to "skip" over rules will actually cancel the rest of the entire command/pipeline. As such, it seems best to just build a new command+pipeline.yml for each product/category combination to be used (essentially one pipepline+"sigma convert" command per data feed).
+
 ```ps1
 $venv = "C:\path\to\python\sigmavenv"
 $inputDir = "C:\path\to\sigma\rules"
