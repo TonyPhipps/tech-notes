@@ -13,7 +13,7 @@ yoursearch
 Arguments: risk_rule_title,risk_rule_guid,risk_rule_level
 Definition:
 ```sql
-fields - punct, date_hour, date_mday, date_minute, date_month, date_second, date_wday, date_year, date_zone, linecount, timeendpos, timestartpos, _bkt, _cd, _serial, _si, _pre_msg, _sourcetype, _subsecond, ForwardedRaw, message, Message, body
+fields - punct, cribl_*, date_hour, date_mday, date_minute, date_month, date_second, date_wday, date_year, date_zone, linecount, timeendpos, timestartpos, _bkt, _cd, _serial, _si, _pre_msg, _sourcetype, _subsecond, ForwardedRaw, snare_DataString, message, Message, body
 
 | tojson include_internal=true output_field=risk_info auto(*) 
 | eval risk_rule_title = "$risk_rule_title_arg$"
@@ -22,7 +22,12 @@ fields - punct, date_hour, date_mday, date_minute, date_month, date_second, date
 | eval risk_info_time = _time
 | eval risk_info_sourcetype = sourcetype
 | eval risk_info_source = source
-| eval sourcetype="ORG:Risk"
+| eval sourcetype="My:Risk"
+| eval risk_rule_source= case( 
+    match(risk_rule_title,"^RR -"), "My:Risk:Internal",
+    match(risk_rule_title,"^RR -"), "My:Risk:Sigma",
+    1==1, "My:Risk"
+)
 | eval risk_rule_level = lower(risk_rule_level)
 | eval risk_score = case(
     isnum(risk_score), risk_score,
@@ -35,15 +40,15 @@ fields - punct, date_hour, date_mday, date_minute, date_month, date_second, date
     1==1, "-"
 )
 
-| eval host = coalesce(srcHostName, host)
+| eval host = if(risk_info_sourcetype="forescout*", coalesce(srcHostName, host), host)
 | eval host_coalesce = coalesce(src_host,dst_host,host)
-| rex field=host_coalesce "^(?i)(?<risk_rule_host>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|[^\.]+)"
-| eval risk_rule_host = upper(risk_rule_host)
+| rex field=host_coalesce "^(?i)(?<risk_rule_host>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|[^\.]+)" 
+| eval risk_rule_host = upper(risk_rule_host) 
 
-| eval User = if(User IN ("NOT_TRANSLATED", "-"), null(), User)
-| eval user = if(user IN ("NOT_TRANSLATED", "-"), null(), user)
+| eval User = if(User IN ("NOT_TRANSLATED","-"), null(), User)
+| eval user = if(user IN ("NOT_TRANSLATED","-"), null(), user)
 | eval Account_Name = if(like(Account_Name, "%$"), null(), Account_Name)
-| eval user_coalesce = coalesce(src_user,dst_user,user,Account_Name)
+| eval user_coalesce = coalesce(src_user,dst_user,user,User,Account_Name, "-")
 | rex field=user_coalesce "(.+\\\)?(?<risk_rule_user>[^@]+)(@[\w\.-]+)?" 
 | eval risk_rule_user=case(
     risk_rule_user="SYSTEM" OR risk_rule_user="NETWORK SERVICE", lower(risk_rule_host."$"),
@@ -51,7 +56,7 @@ fields - punct, date_hour, date_mday, date_minute, date_month, date_second, date
 ) 
 
 | table _time, index, risk_rule_source, sourcetype, risk_rule_title, risk_rule_guid, risk_rule_level, risk_score, risk_rule_host, risk_rule_user, risk_info_source, risk_info_sourcetype, risk_info_time, risk_info
-| map maxsearches=5000 search=" | makeresults | eval _time=$_time$, risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_level=\"$risk_rule_level$\", risk_score=\"$risk_score$\", risk_rule_host=\"$risk_rule_host$\", risk_rule_user=\"$risk_rule_user$\", risk_info_source=\"$risk_info_source$\", risk_info_sourcetype=\"$risk_info_sourcetype$\", risk_info_time=\"$risk_info_time$\", risk_info=\"$risk_info$\" | collect index=$index$ sourcetype=\"$sourcetype$\" source=\"$risk_rule_source$\""
+| map maxsearches=5000 search=" | makeresults | eval _time=$_time$, risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\",  risk_rule_level=\"$risk_rule_level$\", risk_score=\"$risk_score$\", risk_rule_host=\"$risk_rule_host$\", risk_rule_user=\"$risk_rule_user$\", risk_info_source=\"$risk_info_source$\", risk_info_sourcetype=\"$risk_info_sourcetype$\", risk_info_time=\"$risk_info_time$\", risk_info=\"$risk_info$\" | collect index=$index$ sourcetype=\"$sourcetype$\" source=\"$risk_rule_source$\""
 ```
 
 With arguments: ```risk_rule_title_arg,risk_rule_guid_arg,risk_rule_level_arg```
@@ -85,7 +90,7 @@ Parse the Risk Rule event generated from the previous macro. This allows buildin
     - a lookup of 30d of events, including first seen, last seen dates, etc.
 ```sql
 index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
-| stats count min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
+| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
 | outputlookup observed_risk_rules.csv
 ```
 
@@ -97,11 +102,14 @@ index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
    - The final stats command combines the old rows with the new rows (summing the counts and updating the max timestamp).
    - Overwrites the CSV with the updated, merged data.
    - Schedule daily at 00:30 (30 0 * * *)
+   - Schedule Window: Auto
 ```sql
-index IN ("indexes-*") source="My:Risk*" earliest=-1d@d latest=@d
-| stats count as hits min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
+index IN ("indexes-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
+| stats delim="|" count as hits min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
 | inputlookup append=t observed_risk_rules.csv
-| stats sum(hits) as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title by risk_rule_guid
+| eval risk_rule_title = split(risk_rule_title,"|")
+| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
+| mvcombine risk_rule_title
 | where last_seen > relative_time(now(), "-30d")
 | outputlookup observed_risk_rules.csv
 ```
@@ -116,6 +124,7 @@ index IN ("indexes-*") source="My:Risk*" earliest=-1d@d latest=@d
     - "Throttles" and "Suppresses" to ensure it didnt already fire this day.
     - Schedule hourly at minute 5 (5 * * * *)
     - Search Earliest Time = -24h
+    - Schedule Window: Auto
 ```sql
 index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
@@ -145,6 +154,7 @@ index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@
    - Checks the CSV. If the GUID exists, it pulls the historic_first_seen timestamp. If the GUID does not exist, this field remains null.
    - Keeps only the rows where the lookup failed to find a match (meaning it's a new rule).
    - Schedule hourly at minute 5 (5 * * * *)
+   - Schedule Window: Auto
    - "Triggers" for each result
    - Throttle checked
    - Suppress results containing field value risk_rule_guid
@@ -178,6 +188,7 @@ index IN ("indexes-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2
 # Find Risk_Score Spikes from Hourly Baseline (Single-Tenant Version)
 1. The Baseline Generator (Scheduled Report) (consider also making one for the field 'user')
   - Schedule: Daily (e.g., 01:00 AM) Time Range: Last 30 days (-30d@d to -1d@d) Action: Save results to a CSV Lookup.
+  - Schedule Window: Auto
   - This search handles the heavy JSON parsing and statistical crunching offline.
 
 ```sql
@@ -214,6 +225,7 @@ index IN ("myindex") source="My:Risk*" earliest=-30d@h latest=-1d@h
 
 2. The Detection / Dashboard Widget
   - Schedule: Hourly (e.g., */60 * * * * or specifically at minute 5) Time Range: Last 24 hours
+  - Schedule Window: Auto
   - This search is incredibly fast because it only processes 60 minutes of data.
   - Earliest = -24h
 ```sql
@@ -288,43 +300,42 @@ Run the "The Detection / Dashboard Widget" search above to ensure a result exist
 # Find Risk_Score Spikes from Hourly Baseline (Multi-Tenant Version)
 1. The Baseline Generator (Scheduled Report) (consider also making one for the field 'user')
   - Schedule: Daily (e.g., 01:00 AM) Time Range: Last 30 days (-30d@d to -1d@d) Action: Save results to a CSV Lookup.
+  - Schedule Window: Auto
   - This search handles the heavy JSON parsing and statistical crunching offline.
 
 ```sql
-index IN ("indexes-*") source="My:Risk*" earliest=-30d@h latest=-1d@h
-``` Parse fields before discarding _raw ```
-| rex field=_raw "risk_score=(?<risk_score>\d+)"
-| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
+index IN ("indexes-*") sourcetype="My:Risk" earliest=-30d@h latest=-1d@h
+| eval host=risk_rule_host
 
-``` Combine Index and Host as a composite key for Multi-Tenancy ```
+``` COMPOSITE KEY: Combine Index and Host for Multi-Tenancy ```
 ``` This ensures Client A's 'HMI-01' is treated differently than Client B's 'HMI-01' ```
 | eval composite_key = index . "::" . host
 
-``` Pre-aggregate to save memory ```
+``` COMPRESS ON INDEXERS: Pre-aggregate to save memory ```
 ``` Group by the composite key and time immediately ```
 | bin _time span=1h
 | stats sum(risk_score) as raw_hourly_risk by composite_key _time
 
-``` Zero-Filling Logic ```
+``` SEARCH HEAD PROCESSING: Zero-Filling Logic ```
 ``` timechart now handles the composite key correctly ```
 | timechart span=1h fixedrange=t sum(raw_hourly_risk) as hourly_risk by composite_key limit=0
 
-``` Force empty buckets to 0 ```
+``` ZERO-FILLING: Force empty buckets to 0 ```
 | fillnull value=0
 
-``` Convert matrix back to rows ```
+``` FLATTEN: Convert matrix back to rows ```
 | untable _time composite_key hourly_risk
 
-``` Split Index and Host back apart ```
+``` RESTORE KEYS: Split Index and Host back apart ```
 | rex field=composite_key "(?<index>.*?)::(?<host>.*)"
 
-``` Calculate Median and MAD ```
+``` STATISTICS: Calculate Median and MAD ```
 | eval hour_of_day = strftime(_time, "%H")
 | eventstats median(hourly_risk) as median by index host hour_of_day
 | eval abs_dev = abs(hourly_risk - median)
 | stats values(median) as median median(abs_dev) as mad by index host hour_of_day
 
-``` Sanitize with a Safety Floor ```
+``` SANITIZE: Safety Floor ```
 | fillnull value=0 median mad
 | eval mad = if(mad=0, 1, mad)
 | outputlookup risk_baseline_hourly_host.csv
@@ -332,42 +343,33 @@ index IN ("indexes-*") source="My:Risk*" earliest=-30d@h latest=-1d@h
 
 2. The Detection / Dashboard Widget
   - Schedule: Hourly (e.g., */60 * * * * or specifically at minute 5) Time Range: Last 24 hours
+  - Schedule Window: Auto
   - This search is incredibly fast because it only processes 60 minutes of data.
   - Earliest = -24h
 
 ```sql
-index IN ("indexes-*") source="My:Risk*" earliest=-1h@h latest=@h
-| fields _raw index
-| rex field=_raw "risk_score=(?<risk_score>\d+)"
-| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
+index IN ("indexes-*") * sourcetype="My:Risk" *** earliest=-30d@h _index_earliest=-62m@m _index_latest=-2m@m
+| fromjson risk_info
+| eval host=risk_rule_host
+| fields index host sourcetype _time risk_score
 
-``` Aggregate current risk, separated by tenant (index) ```
-| stats sum(risk_score) as current_hourly_risk by index host
+```Calculate Current Hour's Risk```
+| stats sum(risk_score) as current_hourly_risk by host, index
 
-``` Determine CONTEXT: Look at previous full hour of day ```
+```Determine Current Hour context```
 | eval hour_of_day = strftime(relative_time(now(), "-1h@h"), "%H")
 
-``` Baseline lookup match on index + host + hour to find the correct baseline row ```
-| lookup risk_baseline_hourly_host.csv index host hour_of_day OUTPUT median mad
+```Enrich with Baseline Stats```
+| lookup risk_baseline_hourly_host.csv index host as host hour_of_day OUTPUT median mad
 
-``` Safety net handling new hosts or silent baselines ```
-``` If lookup returns null (no history), default to 0 to force high sensitivity ```
+```Calculate Robust Z-Score```
 | fillnull value=0 median mad
-
-``` Calculate Z-Score Math with Safety Floors ```
-``` percent_difference: (Current - Median) / Median ```
-``` robust_z: (Current - Median) / (1.48 * MAD) ```
-``` max(x, 1) ensures we NEVER divide by zero, preventing calculation errors ```
 | eval percent_difference = round((current_hourly_risk - median) / max(median, 1) * 100, 2)
 | eval robust_z = round((current_hourly_risk - median) / (1.4826 * max(mad, 1)), 2)
 
-``` Define the Thresholds ```
-``` robust_z > 3: The statistical outlier (approx 3 standard deviations) ```
-``` risk > 50: The operational noise floor (ignore tiny blips) ```
+```Alert Logic (Outliers)```
 | where robust_z > 3 AND current_hourly_risk > 50
-
-``` Prettify ```
-| table index host hour_of_day current_hourly_risk median mad robust_z percent_difference
+| table index host hour_of_day current_hourly_risk median mad percent_difference robust_z
 | sort - robust_z
 ```
 
