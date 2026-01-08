@@ -74,6 +74,7 @@ Settings > Data Models > New Data Model
 | Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)` |
 | Days since Date                                                                                       | `\| eval DateParsed=strptime('DateScanned', "%Y-%m-%d %H:%M:%SZ") \| eval DaysSince = round((now()-DateParsed)/86400)`       |
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
+| Truncate hostname to remove FQDN portion.                                                             | `\| eval host=mvindex(split(host, "."), 0)`                                                                                  |
 
 
 Rest API Searches
