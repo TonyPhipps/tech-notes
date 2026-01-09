@@ -363,11 +363,11 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
             <query>
               | search stuff
             </query>
+            </search>
             <drilldown>
               <set token="show_this_panel">true</set>
               <set token="my_token">$click.value$</set>
           </drilldown>
-          </search>
     </panel>
     
     <panel depends="$show_this_panel$">
@@ -380,7 +380,7 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
   </row>
 ```
 
-
+NOTE: Alternatively, specify a column's value regardless of where they click in the row via ```$row.fieldname$```
 
 
 
