@@ -253,13 +253,14 @@ index IN ("indexes-*") source="My:Risk*" earliest=-1h@h latest=@h
 ``` robust_z: (Current - Median) / (1.48 * MAD) ```
 ``` max(x, 1) ensures we NEVER divide by zero ```
 | eval percent_difference = round((current_hourly_risk - median) / max(median, 1) * 100, 2)
+| eval abs_diff = current_hourly_risk - median
 | eval robust_z = round((current_hourly_risk - median) / (1.4826 * max(mad, 1)), 2)
 
 ``` Threshold: Z > 3 (Statistical Outlier) AND Risk > 50 (Material Impact) ```
-| where robust_z > 3 AND current_hourly_risk > 50
+| where (robust_z > 3 AND current_hourly_risk > 50) OR (abs_diff > 100)
 
 ``` Prettify ```
-| table host hour_of_day current_hourly_risk median mad robust_z percent_difference
+| table host hour_of_day current_hourly_risk median mad percent_difference abs_diff robust_z
 | sort - robust_z
 ```
 
@@ -353,8 +354,8 @@ index IN ("indexes-*") * sourcetype="My:Risk" *** earliest=-30d@h _index_earlies
 | eval host=risk_rule_host
 | fields index host sourcetype _time risk_score
 
-```Calculate Current Hour's Risk```
-| stats sum(risk_score) as current_hourly_risk by host, index
+``` Aggregate current risk, separated by tenant (index) ```
+| stats sum(risk_score) as current_hourly_risk by index host
 
 ```Determine Current Hour context```
 | eval hour_of_day = strftime(relative_time(now(), "-1h@h"), "%H")
@@ -362,14 +363,15 @@ index IN ("indexes-*") * sourcetype="My:Risk" *** earliest=-30d@h _index_earlies
 ```Enrich with Baseline Stats```
 | lookup risk_baseline_hourly_host.csv index host as host hour_of_day OUTPUT median mad
 
-```Calculate Robust Z-Score```
+``` Calculate Statistics ```
 | fillnull value=0 median mad
 | eval percent_difference = round((current_hourly_risk - median) / max(median, 1) * 100, 2)
+| eval abs_diff = current_hourly_risk - median
 | eval robust_z = round((current_hourly_risk - median) / (1.4826 * max(mad, 1)), 2)
 
 ```Alert Logic (Outliers)```
-| where robust_z > 3 AND current_hourly_risk > 50
-| table index host hour_of_day current_hourly_risk median mad percent_difference robust_z
+| where (robust_z > 3 AND current_hourly_risk > 50) OR (abs_diff > 100)
+| table index host hour_of_day current_hourly_risk median mad percent_difference abs_diff robust_z
 | sort - robust_z
 ```
 
