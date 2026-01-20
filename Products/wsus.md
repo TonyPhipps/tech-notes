@@ -78,9 +78,15 @@ Enable Automatic Approvals to ensure the WSUS server pulls down future updates l
    - Or all in one go ```gpupdate /force && gpresult /r && wuauclt /detectnow && wuauclt /reportnow```
 
 # Synchronize software updates from a disconnected software update point
-- On the export server, navigate to the folder where software updates and the license terms for software updates are stored. 
-  - By default, the WSUS server stores the files at ```<WSUSInstallationDrive>\WSUS\WSUSContent\```, where WSUSInstallationDrive is the drive on which WSUS is installed.
-- Copy all files and folders from this location to the WSUSContent folder on the disconnected software update point server.
+- On the Connected Server
+  - Run ```wsusutil.exe export export.xml export.cab```
+  - Copy the ```export.xml``` and ```export.cab``` files to the external drive.
+  - Copy ```<WSUSInstallationDrive>\WSUS\WSUSContent\``` to an external drive.
+- On the Disconnected Server
+  - Copy ```WSUSContent``` from the external drive to the appropriate path on this server.
+  - Run ```wsusutil.exe import export.xml export.cab``` pointing to the files from the external drive.
+  - Run ```wsusutil.exe reset```
+  - Open the WSUS Management Console. Navigate to Updates > All Updates, filter by Needed, and verify if the updates are now marked as Ready for installation.
 
 ## Cleanup
 As needed...
