@@ -82,8 +82,8 @@ Enable Automatic Approvals to ensure the WSUS server pulls down future updates l
   - By default, the WSUS server stores the files at ```<WSUSInstallationDrive>\WSUS\WSUSContent\```, where WSUSInstallationDrive is the drive on which WSUS is installed.
 - Copy all files and folders from this location to the WSUSContent folder on the disconnected software update point server.
 
-# Cleanup
-If you screwed up and selected too many things or too many automatic updates, you need to clean up.
+## Cleanup
+As needed...
 
 ### Run this in Command Prompt (not powershell)
 ```
