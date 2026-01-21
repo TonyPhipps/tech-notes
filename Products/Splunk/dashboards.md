@@ -1,3 +1,22 @@
+- [Strange Notes](#strange-notes)
+- [Theme](#theme)
+- [Tokens](#tokens)
+  - [Checkbox to Toggle Tokens](#checkbox-to-toggle-tokens)
+  - [Provide a Field for Tokens, but do Not Display to User](#provide-a-field-for-tokens-but-do-not-display-to-user)
+  - [Dynamic Dropdown to Toggle Tokens](#dynamic-dropdown-to-toggle-tokens)
+  - [Auto Filter Special Characters when Assigning Dashboard Tokens](#auto-filter-special-characters-when-assigning-dashboard-tokens)
+  - [Parse Data From Background Search to Token](#parse-data-from-background-search-to-token)
+  - [Add Hidden Tokens to URL for Full Dashboard Sharing](#add-hidden-tokens-to-url-for-full-dashboard-sharing)
+  - [Reset All of a Dashboard's Tokens](#reset-all-of-a-dashboards-tokens)
+  - [Reset SOME Of a Dashboard's Tokens](#reset-some-of-a-dashboards-tokens)
+  - [Hide a Panel Until a Token is Set via Drilldown](#hide-a-panel-until-a-token-is-set-via-drilldown)
+- [Search Base](#search-base)
+  - [Search Base WITH Export Button](#search-base-with-export-button)
+- [Include a Keyword search bar](#include-a-keyword-search-bar)
+- [Colorize a Table](#colorize-a-table)
+- [Add Expand/Collapse Buttons to Panels](#add-expandcollapse-buttons-to-panels)
+
+
 # Strange Notes
 - If you want to share URLs that sets Inputs automatically, every Input must NOT set their input in <init>. Use of <init> to set tokens ignores the URL bar. Note that other, non-Input tokens are never stored in the URL, and are therefore not shareable.
 - If you want to disable auto-searching entirely, Inputs that have a <change> defined in XML may end up still auto-searching.
@@ -9,7 +28,7 @@ Set theme to light/dark via URL
 https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 ```
 
-### Tokens
+# Tokens
 
 ```$env:user$``` 	          Current user's username
 
@@ -44,48 +63,7 @@ https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 ```$env:version$``` 	      Current instance product version 
 
 
-### Search Base
-At the top:
-```xml
-<search id="base1">
-  <query>
-    index="index_name" (ProductName=#1# OR ProductName=#2# OR ProductName=#3# OR etc.) 
-    | stats count by host ProductName
-  </query>
-  <earliest>$TimeRange.earliest$</earliest>
-  <latest>$TimeRange.latest$</latest>
-  <sampleRatio>1</sampleRatio>
-</search>
-```
-
-At the applicable widget(s):
-```xml
-<search base="base1">
-  <query>
-    search ProductName="Skype"
-    | stats count
-  </query>
-</search>
-```
-
-#### Search Base WITH Export Button
-This approach allows using a base job while retaining the "export results" option in each widget.
-Base Search
-```xml
-<done>
-  <condition>
-    <set token="[basename]_sid">$job.sid$</set>
-  </condition>
-</done>
-```
-
-Widget Search
-```
-<search depends="[basename]_sid">
-  <query>| loadjob "[basename]_sid"
-```
-
-### Checkbox to Toggle Tokens
+## Checkbox to Toggle Tokens
 ```xml
 <input type="checkbox" token="Checked" searchWhenChanged="true">
       <label></label>
@@ -103,7 +81,7 @@ Widget Search
 ```
 
 
-### Provide a Field for Tokens, but do Not Display to User
+## Provide a Field for Tokens, but do Not Display to User
 Right after the widget's closing search, you can define a <fields> tag to hide some of the | fields chosen within the search.
 ```xml
 ...
@@ -112,7 +90,7 @@ Right after the widget's closing search, you can define a <fields> tag to hide s
 ```
 
 
-### Dynamic Dropdown to Toggle Tokens
+## Dynamic Dropdown to Toggle Tokens
 This sample provides a dropdown that dynamically builds its dropdown list (Display+Value) based on a search, then sets tokens accordingly.
 
 ```xml
@@ -161,13 +139,193 @@ This sample provides a dropdown that dynamically builds its dropdown list (Displ
 ```
 
 
-### Auto Filter Special Characters when Assigning Dashboard Tokens
+## Auto Filter Special Characters when Assigning Dashboard Tokens
 When using the contents of a search to assign a variable to a value via click action, use ```$tokenname|s$``` to get Splunk to parse as a string, rather than attempting to pick up characters like ```\``` as an escape character.
 
 - NOT in the Drilldown definition, in the search string.
 - Do not use quotes around the variable $'s.
 
-### Colorize a Table
+
+## Parse Data From Background Search to Token
+
+NOTE: Requires the "dispatch_rest_to_indexers" capability/permission.
+
+```xml
+<search>
+  <query>| rest /servicesNS/-/-/data/ui/views search="eai:acl.app=$env:app$ label=$env:page$"
+| rex field="eai:data" "theme\=\"(?&lt;theme&gt;.+?)\""
+| stats values(theme) as theme</query>
+  <earliest>0</earliest>
+  <latest></latest>
+  <done>
+    <set token="theme_tok">$result.theme$</set>
+  </done>
+</search>
+```
+
+
+## Add Hidden Tokens to URL for Full Dashboard Sharing
+Only Input tokens are stored on the URL line and are included when you copy/paste a URL to another person. The way to include non-input tokens in the URL is to migrate them into hidden inputs.
+
+First, remove any <init>'s for the tokens to be migrated.
+
+```xml
+<input type="text" token="myToken" depends="$hidden$" searchWhenChanged="true">
+      <label>myToken</label>
+      <initialValue>*</initialValue>
+    </input>
+```
+
+ Ensuring searchWhenChanged is set to true causes the URL to be updated as the token (and therefore Input value) is updated by things like a Drilldown definition in a Widget. To set up a widget to do this, use this code.
+
+ ```xml
+<drilldown>
+          <set token="myToken">$click.value$</set>
+          <set token="form.myToken">$click.value$</set>
+        </drilldown>
+ ```
+
+## Reset All of a Dashboard's Tokens
+This code will add a thin vertical HTML widget with a Reset Dashboard link on it. This link simply sends the user to "naked" version of the dashboard with no tokens defined within the URL.
+
+```xml
+<row>
+    <panel>
+      <html>
+        <div style="float:left">
+          <a href="/app/$env:app$/$env:page$" style="display:flex">
+            <i class="icon-rotate"/>
+            <div style="padding-left:5px;">Reset Dashboard</div>
+          </a>
+        </div>
+      </html>
+    </panel>
+  </row>
+  <row>
+```
+
+## Reset SOME Of a Dashboard's Tokens
+```xml
+<input type="radio" token="resetTokens" searchWhenChanged="true">
+  <label></label>
+  <choice value="reset">Reset Inputs</choice>
+  <choice value="retain">Retain</choice>
+  <default>retain</default>
+  <change>
+    <condition value="reset">
+      <unset token="token1"></unset>
+      <unset token="token2"></unset>
+      <unset token="token3"></unset>
+      <set token="resetTokens">retain</set>
+    </condition>
+  </change>
+</input>
+```
+
+## Hide a Panel Until a Token is Set via Drilldown
+```xml
+<form version="1.1">
+  <label>Your Label</label>
+  <description>Your Description</description>
+  <init>
+    <unset token="show_this_panel"></unset>
+  </init>
+
+  ....
+  <row>
+    <panel>
+        <table>
+          <title>Panel that Shows the Hidden Panel via Drilldown</title>
+          <search>
+            <query>
+              | search stuff
+            </query>
+            </search>
+            <drilldown>
+              <set token="show_this_panel">true</set>
+              <set token="my_token">$click.value$</set>
+          </drilldown>
+    </panel>
+    
+    <panel depends="$show_this_panel$">
+      <table>
+          <title>Hidden Panel</title>
+            <query>
+              | search stuff $my_token$
+            </query>
+    </panel>
+  </row>
+```
+
+NOTE: Alternatively, specify a column's value regardless of where they click in the row via ```$row.fieldname$```
+
+
+# Search Base
+At the top:
+```xml
+<search id="base1">
+  <query>
+    index="index_name" (ProductName=#1# OR ProductName=#2# OR ProductName=#3# OR etc.) 
+    | stats count by host ProductName
+  </query>
+  <earliest>$TimeRange.earliest$</earliest>
+  <latest>$TimeRange.latest$</latest>
+  <sampleRatio>1</sampleRatio>
+</search>
+```
+
+At the applicable widget(s):
+```xml
+<search base="base1">
+  <query>
+    search ProductName="Skype"
+    | stats count
+  </query>
+</search>
+```
+
+## Search Base WITH Export Button
+This approach allows using a base job while retaining the "export results" option in each widget.
+Base Search
+```xml
+<done>
+  <condition>
+    <set token="[basename]_sid">$job.sid$</set>
+  </condition>
+</done>
+```
+
+Widget Search
+```
+<search depends="[basename]_sid">
+  <query>| loadjob "[basename]_sid"
+```
+
+
+# Include a Keyword search bar
+```sql
+<input type="text" token="Keyword" searchWhenChanged="false">
+      <label>Keyword</label>
+      <default></default>
+      <change>
+    <condition match="len(value)=0">
+      <set token="Keyword"></set>
+    </condition>
+    <condition>
+      <set token="Keyword">*$value$*</set>
+    </condition>
+  </change>
+    </input>
+```
+
+in the search:
+```sql
+| search "$Keyword$"
+
+```
+
+
+# Colorize a Table
 ```
 <format type="color">
           <colorPalette type="expression">case(value &lt; 2, "#A2CC3E", value &lt; 5, "#FFC300", value &gt; 4, "#FF5733", 1==1, "#555555")</colorPalette>
@@ -175,7 +333,7 @@ When using the contents of a search to assign a variable to a value via click ac
 ```
 
 
-### Add Expand/Collapse Buttons to Panels
+# Add Expand/Collapse Buttons to Panels
 
 <details>
 
@@ -267,120 +425,6 @@ Add this just after the \<title> closes for the panel you'd like to be collapsib
   ```
 
 </details>
-
-
-### Parse Data From Background Search to Token
-
-NOTE: Requires the "dispatch_rest_to_indexers" capability/permission.
-
-```xml
-<search>
-  <query>| rest /servicesNS/-/-/data/ui/views search="eai:acl.app=$env:app$ label=$env:page$"
-| rex field="eai:data" "theme\=\"(?&lt;theme&gt;.+?)\""
-| stats values(theme) as theme</query>
-  <earliest>0</earliest>
-  <latest></latest>
-  <done>
-    <set token="theme_tok">$result.theme$</set>
-  </done>
-</search>
-```
-
-
-### Add Hidden Tokens to URL for Full Dashboard Sharing
-Only Input tokens are stored on the URL line and are included when you copy/paste a URL to another person. The way to include non-input tokens in the URL is to migrate them into hidden inputs.
-
-First, remove any <init>'s for the tokens to be migrated.
-
-```xml
-<input type="text" token="myToken" depends="$hidden$" searchWhenChanged="true">
-      <label>myToken</label>
-      <initialValue>*</initialValue>
-    </input>
-```
-
- Ensuring searchWhenChanged is set to true causes the URL to be updated as the token (and therefore Input value) is updated by things like a Drilldown definition in a Widget. To set up a widget to do this, use this code.
-
- ```xml
-<drilldown>
-          <set token="myToken">$click.value$</set>
-          <set token="form.myToken">$click.value$</set>
-        </drilldown>
- ```
-
-### Reset All of a Dashboard's Tokens
-This code will add a thin vertical HTML widget with a Reset Dashboard link on it. This link simply sends the user to "naked" version of the dashboard with no tokens defined within the URL.
-
-```xml
-<row>
-    <panel>
-      <html>
-        <div style="float:left">
-          <a href="/app/$env:app$/$env:page$" style="display:flex">
-            <i class="icon-rotate"/>
-            <div style="padding-left:5px;">Reset Dashboard</div>
-          </a>
-        </div>
-      </html>
-    </panel>
-  </row>
-  <row>
-```
-
-### Reset SOME Of a Dashboard's Tokens
-```xml
-<input type="radio" token="resetTokens" searchWhenChanged="true">
-  <label></label>
-  <choice value="reset">Reset Inputs</choice>
-  <choice value="retain">Retain</choice>
-  <default>retain</default>
-  <change>
-    <condition value="reset">
-      <unset token="token1"></unset>
-      <unset token="token2"></unset>
-      <unset token="token3"></unset>
-      <set token="resetTokens">retain</set>
-    </condition>
-  </change>
-</input>
-```
-
-### Hide a Panel Until a Token is Set via Drilldown
-```xml
-<form version="1.1">
-  <label>Your Label</label>
-  <description>Your Description</description>
-  <init>
-    <unset token="show_this_panel"></unset>
-  </init>
-
-  ....
-  <row>
-    <panel>
-        <table>
-          <title>Panel that Shows the Hidden Panel via Drilldown</title>
-          <search>
-            <query>
-              | search stuff
-            </query>
-            </search>
-            <drilldown>
-              <set token="show_this_panel">true</set>
-              <set token="my_token">$click.value$</set>
-          </drilldown>
-    </panel>
-    
-    <panel depends="$show_this_panel$">
-      <table>
-          <title>Hidden Panel</title>
-            <query>
-              | search stuff $my_token$
-            </query>
-    </panel>
-  </row>
-```
-
-NOTE: Alternatively, specify a column's value regardless of where they click in the row via ```$row.fieldname$```
 
 
 
