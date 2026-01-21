@@ -304,7 +304,7 @@ Widget Search
 
 # Include a Keyword search bar
 ```sql
-<input type="text" token="Keyword" searchWhenChanged="false">
+<input type="text" token="Keyword" searchWhenChanged="true">
       <label>Keyword</label>
       <default></default>
       <change>
