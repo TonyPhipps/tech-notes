@@ -312,7 +312,7 @@ Widget Search
       <set token="Keyword"></set>
     </condition>
     <condition>
-      <set token="Keyword">*$value$*</set>
+      <set token="Keyword">"*$value$*"</set>
     </condition>
   </change>
     </input>
@@ -320,7 +320,7 @@ Widget Search
 
 in the search:
 ```sql
-| search "$Keyword$"
+| search $Keyword$
 
 ```
 
