@@ -10,6 +10,7 @@
   - [Reset All of a Dashboard's Tokens](#reset-all-of-a-dashboards-tokens)
   - [Reset SOME Of a Dashboard's Tokens](#reset-some-of-a-dashboards-tokens)
   - [Hide a Panel Until a Token is Set via Drilldown](#hide-a-panel-until-a-token-is-set-via-drilldown)
+  - [Hide a Panel Until Results are Found](#hide-a-panel-until-results-are-found)
 - [Search Base](#search-base)
   - [Search Base WITH Export Button](#search-base-with-export-button)
 - [Include a Keyword search bar](#include-a-keyword-search-bar)
@@ -258,6 +259,26 @@ This code will add a thin vertical HTML widget with a Reset Dashboard link on it
 ```
 
 NOTE: Alternatively, specify a column's value regardless of where they click in the row via ```$row.fieldname$```
+
+
+## Hide a Panel Until Results are Found
+```
+<panel depends="$show_panel$">
+       <chart>
+         <search>
+           <query>...</query>
+           <progress>
+             <condition match="'job.resultCount'==0">
+               <unset token="show_panel"></unset>
+             </condition>
+             <condition>
+               <set token="show_panel">true</set>
+             </condition>
+           </progress>
+         </search>
+       </chart>
+     </panel>
+```
 
 
 # Search Base

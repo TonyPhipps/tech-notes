@@ -76,6 +76,11 @@ Settings > Data Models > New Data Model
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
 | Truncate hostname to remove FQDN portion.                                                             | `\| eval host=mvindex(split(host, "."), 0)`                                                                                  |
 
+Date String Parses
+| Date String           | Conversion to Date Eval                        |
+| --------------------- | ---------------------------------------------- |
+| 12/27/2018 3:53:31 PM | `= strptime(raw_date, "%m/%d/%Y %I:%M:%S %p")` |
+
 
 Rest API Searches
 | Goal                                   | Example                                                                                                                                       |
@@ -283,15 +288,40 @@ index="windows" sourcetype=WinEventLog:Security EventCode=4624 Logon_Type IN (2,
 
 
 **Get the Latest Only**
-- Some data, like from a vulnerability scanner, polls for the same data, but you may only want to see the latest results.
-```sql
-| stats latest(_time) as _time, values(field1) as field1, values(field2) as field2, by host
-```
-
-- Version 2
+- The Standard "Time-Anchor" Search (Best for most cases)
+This version assumes all rows for a single data set contain the same timestamp.
 ```sql
 | eventstats max(_time) as latest by host
 | where _time=latest
+```
+
+**Get the Latest Only (with all indexed fields)**
+- This is the "Atomic Row" strategy.
+NOTE: This breaks if any field values happen to be ```NULL```.
+```sql
+| tstats count 
+    WHERE index IN ($index$) sourcetype=this
+    BY host, DateScanned, field1, field2, field3, etc
+| search $Exclusions$ $Keyword$
+| eventstats max(_time) as latest by host
+| where _time=latest
+| fields - count, latest
+```
+
+
+**Get the Latest Only (with all indexed fields, safe for nulls)**
+```sql
+| tstats count 
+    values(field1) as field1
+    values(field2) as field2
+    values(field3) as field3
+    WHERE index IN ($index$) sourcetype=this source=that
+    BY host, _time
+| search $Exclusions$ "*$Keyword$*"
+| fillnull value="-"
+| eventstats max(_time) as latest by host
+| where _time=latest
+| fields - count, latest
 ```
 
 
