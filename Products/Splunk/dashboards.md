@@ -461,10 +461,10 @@ This dashboard approach allows an analyst to gain familiarity with an event sour
 
 ```
 <form theme="dark" version="1.1">
-  <label>REC - Autoruns</label>
+  <label>Meerkat - Autoruns</label>
   <search id="Autoruns">
     <query>
-        index IN ($index$) sourcetype=REC:Output:CSV dataset=Autoruns $Keyword$ NOT RecModuleErrorMessage IN ("Skipped", "No Results")
+        index IN ($index$) sourcetype=Meerkat:Output:CSV dataset=Autoruns $Keyword$ NOT ModuleErrorMessage IN ("Skipped", "No Results")
         | fields _time host DateScanned Caption Command Name User UserSID Location
         | eval _time = strptime(DateScanned, "%Y-%m-%d %T%Z")
         | eventstats max(_time) as latest by host
@@ -490,7 +490,7 @@ This dashboard approach allows an analyst to gain familiarity with an event sour
       <fieldForLabel>index</fieldForLabel>
       <fieldForValue>index</fieldForValue>
       <search>
-        <query>| tstats count where index=mystuff-* sourcetype=REC:Output:CSV by index</query>
+        <query>| tstats count where index=mystuff-* sourcetype=Meerkat:Output:CSV by index</query>
         <earliest>-7d@h</earliest>
         <latest>now</latest>
       </search>
