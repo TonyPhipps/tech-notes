@@ -450,17 +450,285 @@ Add this just after the \<title> closes for the panel you'd like to be collapsib
 
 
 ### Sample Dashboard
-This approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
+This dashboard approach allows an analyst to gain familiarity with an event source and quickly investigate any suspicious activity in those logs.
 
 - Presents filters for time and key fields at the top
-- Leverages radio buttons to reset filters
-- Multiple widgets used to aggregate key fields
-- Widgets leverage tokens to allow cross-widget filtering (based on clicking a cell containing a value)
-- Shows all relevant fields for matching events
+- Leverages html link button to reset filters by redirecting to the dashboard without tokens set
+- A widget to aggregate each  key field
+- Widgets that, when a row is clicked, sets tokens to allow cross-widget filtering
 
 <details>
 
 ```
+<form theme="dark" version="1.1">
+  <label>REC - Autoruns</label>
+  <search id="Autoruns">
+    <query>
+        index IN ($index$) sourcetype=REC:Output:CSV dataset=Autoruns $Keyword$ NOT RecModuleErrorMessage IN ("Skipped", "No Results")
+        | fields _time host DateScanned Caption Command Name User UserSID Location
+        | eval _time = strptime(DateScanned, "%Y-%m-%d %T%Z")
+        | eventstats max(_time) as latest by host
+        | where _time=latest
+        | foreach host Caption Command Name User UserSID Location [ eval &lt;&lt;FIELD&gt;&gt; = if( (len(&lt;&lt;FIELD&gt;&gt;)=0 OR (&lt;&lt;FIELD&gt;&gt;)="" OR isnull(&lt;&lt;FIELD&gt;&gt;)), "-", &lt;&lt;FIELD&gt;&gt;) ]
+        | search host=$host|s$ Caption=$Caption|s$ Command=$Command|s$ Name=$Name|s$ User=$User|s$ UserSID=$UserSID|s$ Location=$Location|s$
+      </query>
+    <earliest>$TimeRange.earliest$</earliest>
+    <latest>$TimeRange.latest$</latest>
+    <sampleRatio>1</sampleRatio>
+  </search>
+  <fieldset submitButton="true" autoRun="true">
+    <input type="time" token="TimeRange" searchWhenChanged="false">
+      <label>Time Range</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="index" searchWhenChanged="false">
+      <label>Index</label>
+      <choice value="mystuff-*">All</choice>
+      <fieldForLabel>index</fieldForLabel>
+      <fieldForValue>index</fieldForValue>
+      <search>
+        <query>| tstats count where index=mystuff-* sourcetype=REC:Output:CSV by index</query>
+        <earliest>-7d@h</earliest>
+        <latest>now</latest>
+      </search>
+      <delimiter>, </delimiter>
+      <valuePrefix>"</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="text" token="Keyword" searchWhenChanged="true">
+      <label>Keyword</label>
+	      <default></default>
+      <change>
+		    <condition match="len(value)=0">
+		      <set token="Keyword"></set>
+		    </condition>
+		    <condition>
+		      <set token="Keyword">"*$value$*"</set>
+		    </condition>
+		  </change>
+    </input>
+    <input type="text" token="host" depends="$show_host$" searchWhenChanged="true">
+      <label>host</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="Caption" depends="$show_Caption$" searchWhenChanged="true">
+      <label>Caption</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="Command" depends="$show_Command$" searchWhenChanged="true">
+      <label>Command</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="Name" depends="$show_Name$" searchWhenChanged="true">
+      <label>Name</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="User" depends="$show_User$" searchWhenChanged="true">
+      <label>User</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="UserSID" depends="$show_UserSID$" searchWhenChanged="true">
+      <label>UserSID</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="Location" depends="$show_Location$" searchWhenChanged="true">
+      <label>Location</label>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+          <div style="float:left">
+            <a href="/app/$env:app$/$env:page$" style="display:flex">
+            <i class="icon-rotate"/>
+            <div style="padding-left:5px;">Reset Dashboard</div>
+          </a>
+        </div>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Host</title>
+      <table>
+        <search base="Autoruns">
+          <query>
+| stats count by host
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="host">$row.host$</set>
+          <set token="form.host">$row.host$</set>
+          <set token="show_host">$row.host$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Name</title>
+      <table>
+        <search base="Autoruns">
+          <query>
+| stats count by Name
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="Name">$row.Name$</set>
+          <set token="form.Name">$row.Name$</set>
+          <set token="show_Name">$row.Name$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Caption</title>
+      <table>
+        <search base="Autoruns">
+          <query>| stats count by Caption
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="Caption">$row.Caption$</set>
+          <set token="form.Caption">$row.Caption$</set>
+          <set token="show_Caption">$row.Caption$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>User SID</title>
+      <table>
+        <search base="Autoruns">
+          <query>| stats count by UserSID
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="UserSID">$row.UserSID$</set>
+          <set token="form.UserSID">$row.UserSID$</set>
+          <set token="show_UserSID">$row.UserSID$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>User</title>
+      <table>
+        <search base="Autoruns">
+          <query>| stats count by User
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="User">$row.User$</set>
+          <set token="form.User">$row.User$</set>
+          <set token="show_User">$row.User$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Command</title>
+      <table>
+        <search base="Autoruns">
+          <query>| stats count by Command
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="Command">$row.Command$</set>
+          <set token="form.Command">$row.Command$</set>
+          <set token="show_Command">$row.Command$</set>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Location</title>
+      <table>
+        <search base="Autoruns">
+          <query>| stats count by Location
+| sort - count</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="Location">$row.Location$</set>
+          <set token="form.Location">$row.Location$</set>
+          <set token="show_Location">$row.Location$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Events</title>
+      <table>
+        <search base="Autoruns">
+          <query>
+| fields _time host Caption Command Name User UserSID Location _raw
+| sort - _time</query>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="wrap">false</option>
+      </table>
+    </panel>
+  </row>
+</form>
 ```
 
 </details>
