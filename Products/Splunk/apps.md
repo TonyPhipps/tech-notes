@@ -226,7 +226,7 @@ export_timeout = 7200
 
 inputs.conf
 ```
-[monitor://C:\REC\*files.csv]
+[monitor://C:\Meerkat\*files.csv]
 disabled = 0
 initCrcLength = 512
 index = my_csv_file
@@ -330,6 +330,27 @@ index IN (evtx, wineventlog) (sourcetype=*WinEventLog:* OR source=*WinEventLog:*
 | eval parent=NewProcessName." (".parent_process_id.")"
 | eval detail=strftime(_time, "%Y-%m-%d %H:%M:%S")." ".CommandLine
 | pstree child=child parent=parent detail=detail spaces=50
+| table tree
+```
+
+To work with Meerkat Processes
+```
+| tstats count
+    WHERE index IN ("meerkat") sourcetype=Meerkat:Output:CSV dataset=Processes host="testhost"
+    NOT ModuleErrorMessage IN ("Skipped", "No Results")
+    BY DateScanned host CommandLine Id ParentId Path ParentPath UserName 
+| eval DateScanned = strptime(DateScanned, "%Y-%m-%d %T%Z") 
+| eventstats max(DateScanned) as latest by host 
+| WHERE DateScanned=latest 
+| foreach DateScanned host CommandLine Id ParentId Path ParentPath UserName 
+    [ eval <<FIELD>> = if (isnull(<<FIELD>>) OR trim(<<FIELD>>)=="", "-", <<FIELD>>) ] 
+| eval DateScanned=strftime(DateScanned, "%Y-%m-%dT%H:%M:%S%z") 
+| eval process_id = tonumber(Id, 16) 
+| eval parent_process_id = tonumber(ParentId, 16) 
+| eval child=Path." (".process_id.")" 
+| eval parent=ParentPath." (".parent_process_id.")" 
+| eval detail=DateScanned." ".UserName." ".CommandLine 
+| pstree child=child parent=parent detail=detail spaces=50 
 | table tree
 ```
 
