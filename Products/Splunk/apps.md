@@ -347,8 +347,10 @@ To work with Meerkat Processes
 | eval DateScanned=strftime(DateScanned, "%Y-%m-%dT%H:%M:%S%z") 
 | eval process_id = tonumber(Id, 16) 
 | eval parent_process_id = tonumber(ParentId, 16) 
-| eval child=Path." (".process_id.")" 
-| eval parent=ParentPath." (".parent_process_id.")" 
+| rex field=Path "\\\\(?<ChildName>[^\\\\]+)$"
+| eval child=ChildName." (".process_id.")" 
+| rex field=ParentPath "\\\\(?<ParentName>[^\\\\]+)$"
+| eval parent=ParentName." (".parent_process_id.")" 
 | eval detail=DateScanned." ".UserName." ".CommandLine 
 | pstree child=child parent=parent detail=detail spaces=50 
 | table tree
