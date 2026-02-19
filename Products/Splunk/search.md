@@ -172,9 +172,26 @@ index=_internal source=*license_usage.log* type=Usage idx=yourindex
 ## Performance
 **Review memory usage over time**
 ```sql
+
+```
+or
+```sql
 ... 
+index=meerkat sourcetype=Meerkat:Output:CSV dataset=Processes NOT ModuleErrorMessage IN ("Skipped", "No Results")
+| eval _time = strptime(DateScanned, "%Y-%m-%d %T%Z")
 | stats count, sum(MemoryMB) as MemoryUsedMB by host, index, _time 
-| timechart sum(MemoryUsedMB) by index span=1d`
+| timechart sum(MemoryUsedMB) by host span=1d
+```
+or
+```sql
+| tstats count
+  WHERE index IN ($index$) sourcetype=Meerkat:Output:CSV dataset=Processes
+  NOT ModuleErrorMessage IN ("Skipped", "No Results")
+  BY _time DateScanned index host MemoryMB 
+| search host=$host|s$
+| eval _time = strptime(DateScanned, "%Y-%m-%d %T%Z")
+| stats count, sum(MemoryMB) as MemoryUsedMB by _time, index, host
+| timechart sum(MemoryUsedMB) by host span=1d useother=false
 ```
 
 

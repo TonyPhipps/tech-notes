@@ -1,3 +1,26 @@
+- [Creating an App](#creating-an-app)
+  - [Splunk's Data Pipeline](#splunks-data-pipeline)
+  - [Load Order](#load-order)
+  - [Prepare as a Splunk App Package](#prepare-as-a-splunk-app-package)
+- [Config Files](#config-files)
+  - [inputs.conf](#inputsconf)
+  - [indexes.conf](#indexesconf)
+  - [macros.conf](#macrosconf)
+  - [props.conf](#propsconf)
+  - [transforms.conf](#transformsconf)
+  - [savedsearches.conf](#savedsearchesconf)
+  - [web.conf](#webconf)
+  - [Monitor CSV Files](#monitor-csv-files)
+  - [Split One Input into Multiple Sourcetypes](#split-one-input-into-multiple-sourcetypes)
+  - [Analyze an App](#analyze-an-app)
+  - [See for more info](#see-for-more-info)
+- [Troubleshooting](#troubleshooting)
+- [Specific Apps](#specific-apps)
+  - [PSTree](#pstree)
+  - [AssetDB](#assetdb)
+
+
+
 # Creating an App
 - See https://dev.splunk.com/enterprise/docs/developapps
 - See https://dev.splunk.com/enterprise/tutorials/module_getstarted
@@ -322,7 +345,7 @@ Determine final names of all fields
 - https://splunkbase.splunk.com/app/5721
 
 Modify to work with Windows Event ID 4688
-```
+```sql
 index IN (evtx, wineventlog) (sourcetype=*WinEventLog:* OR source=*WinEventLog:* OR source="*.json") EventCode=4688 host IN (*testhost*)
 | eval process_id = tonumber(process_id, 16)
 | eval parent_process_id = tonumber(parent_process_id, 16)
@@ -334,7 +357,7 @@ index IN (evtx, wineventlog) (sourcetype=*WinEventLog:* OR source=*WinEventLog:*
 ```
 
 To work with Meerkat Processes
-```
+```sql
 | tstats count
     WHERE index IN ("meerkat") sourcetype=Meerkat:Output:CSV dataset=Processes host="testhost"
     NOT ModuleErrorMessage IN ("Skipped", "No Results")

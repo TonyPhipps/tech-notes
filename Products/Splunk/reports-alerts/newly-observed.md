@@ -1,0 +1,109 @@
+# Find Newly Observed Events
+- This specific example basically says "show me hosts that were not observed in the last 7d."
+- Most efficient in larger datasets using lookup tables
+```sql
+| inputlookup historical_hosts.csv 
+| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
+| stats count by host 
+| where count=1 
+| fields host
+```
+
+
+# Find Newly Observed Risk Rule Events, Split Approach
+1. Generate the lookup list
+    - a lookup of 30d of events, including first seen, last seen dates, etc.
+```sql
+index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
+| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
+| outputlookup observed_risk_rules.csv
+```
+
+
+2. Create the Lookup Maintenance Task 
+   - A saved search daily job to merge each day's stats with the historical csv
+   - Gets stats for the last 24 hours.
+   - Appends the existing CSV rows to the search results.
+   - The final stats command combines the old rows with the new rows (summing the counts and updating the max timestamp).
+   - Overwrites the CSV with the updated, merged data.
+   - Schedule daily at 00:30 (30 0 * * *)
+   - Schedule Window: Auto
+```sql
+index IN ("indexes-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
+| stats delim="|" count as hits min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
+| inputlookup append=t observed_risk_rules.csv
+| eval risk_rule_title = split(risk_rule_title,"|")
+| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
+| mvcombine risk_rule_title
+| where last_seen > relative_time(now(), "-30d")
+| outputlookup observed_risk_rules.csv
+```
+
+
+3. REPORT VERSION - Create the alert
+    - A saved search to alert on newly observed risk rules
+    - Aggregates the live data from the last 24 hours. We grab the user and host here so you have context for who triggered the new rule.
+    - Checks the CSV. If the GUID exists, it pulls the historic_first_seen timestamp. If the GUID does not exist, this field remains null.
+    - Keeps only the rows where the lookup failed to find a match (meaning it's a new rule).
+    - "Triggers" for each result
+    - "Throttles" and "Suppresses" to ensure it didnt already fire this day.
+    - Schedule hourly at minute 5 (5 * * * *)
+    - Search Earliest Time = -24h
+    - Schedule Window: Auto
+```sql
+index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
+| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
+
+``` HISTORY CHECK ```
+| lookup index_observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
+| where isnull(historic_first_seen)
+
+``` THROTTLE ```
+| search NOT 
+    [ search index IN ("index-*") source="My:Risk:Alert" earliest=-24h
+    | fields risk_rule_guid, index
+    | dedup risk_rule_guid, index ]
+
+``` MAKE EVENT ```
+``` Stash to remove headers```
+| map maxsearches=500 search="| makeresults 
+    | eval _time=now(), index=\"$index$\", name=\"RIR - Newly Observed Risk Rule\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
+    | collect index=\"$index$\" source=\"My:Risk:Alert\" sourcetype=\"stash\""
+```
+
+
+4. ALERT VERSION - Create the Alert
+   - IMPORATNT NOTE: You can't specify an index dynamically this way.
+   - A saved search to alert on newly observed risk rules
+   - Aggregates the live data from the last 24 hours. We grab the user and host here so you have context for who triggered the new rule.
+   - Checks the CSV. If the GUID exists, it pulls the historic_first_seen timestamp. If the GUID does not exist, this field remains null.
+   - Keeps only the rows where the lookup failed to find a match (meaning it's a new rule).
+   - Schedule hourly at minute 5 (5 * * * *)
+   - Schedule Window: Auto
+   - "Triggers" for each result
+   - Throttle checked
+   - Suppress results containing field value risk_rule_guid
+   - Suppress triggering for 24 hours
+   - Trigger Action: Log Event
+     - Event: ```timestamp=now() original_index="$index$" risk_rule_title="$result.risk_rule_title$" risk_rule_guid="$result.risk_rule_guid$" risk_rule_user="$result.risk_rule_user$" risk_rule_host="$result.risk_rule_host$" first_seen_time="$result.first_seen_new$"```
+     - Source: My:Risk:Alert
+     - Sourcetype: My:Risk:Alert
+     - Host: $result.host$
+     - Index: MyIndex
+```sql
+index IN ("indexes-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
+| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, user, host, index
+| lookup observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
+| where isnull(historic_first_seen)
+```
+
+
+5. Force the Alert to Fire
+    - Backdates the risk by 3m to get an immedate alert search to trigger
+```sql
+| makeresults 
+| eval _time = relative_time(now(), "-3m")
+| eval risk_rule_guid="TEST-REAL-TRIGGER-1555", risk_rule_title="Test Alert Trigger", risk_rule_user="admin_test", risk_rule_host="workstation_test"
+| eval _raw = "timestamp=" . _time . " risk_rule_guid=" . risk_rule_guid . " risk_rule_title=\"" . risk_rule_title . "\" risk_rule_user=" . risk_rule_user . " risk_rule_host=" . risk_rule_host
+| collect index="index-test" source="My:Risk" sourcetype="My:Risk"
+```
