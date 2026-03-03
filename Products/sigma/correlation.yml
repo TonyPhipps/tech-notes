@@ -1,0 +1,42 @@
+title: Windows Failed Logon Event
+name: failed_logon
+status: stable
+description: Detects failed logon events on Windows systems. Embedded for use in correlation below.
+logsource:
+  product: windows
+  service: security
+detection:
+    selection_4625:
+        EventID: 4625
+        LogonType: [2, 10, 11]
+    selection_4771:
+        EventID: 4771
+    filter_users:
+        Account_Domain:
+            - 'DWM-*'
+            - 'UMFD-*'
+            - '*$'
+    condition: (selection_4625 or selection_4771) and not filter_users
+---
+title: Windows Account with 3 Failed Logons within 15 Minutes
+id: 811e4535-9bb8-4963-b89e-8880ec22dffd
+description: Multiple failed logons for a single user (possible brute force attack)
+status: stable
+references:
+    - https://attack.mitre.org/techniques/T1110/
+author: Tony Phipps
+date: 2026-01-12
+modified: 2026-01-12
+tags:
+    - attack.t1110
+correlation:
+  type: event_count
+  rules:
+    - failed_logon
+  group-by:
+    - Account_Name
+    - Account_Domain
+  timespan: 1h
+  condition:
+    gte: 3
+level: medium
