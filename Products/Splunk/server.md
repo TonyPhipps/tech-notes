@@ -108,10 +108,11 @@ Edit ```$SPLUNK_HOME/etc/system/local/inputs.conf``` and add your input. After y
 Sample inputs.conf:
 ```
 [udp://515]
-connection_host = ip
-host = pfsense
+disabled = 0
 index = pfsense
 sourcetype = pfsense
+host = pfsense
+connection_host = none
 no_appending_timestamp = true
 ```
 
