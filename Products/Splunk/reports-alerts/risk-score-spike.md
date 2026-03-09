@@ -120,9 +120,7 @@ Run the "The Detection / Dashboard Widget" search above to ensure a result exist
 
 ```sql
 index IN ("indexes-*") sourcetype="My:Risk" earliest=-30d@h latest=-1d@h
-| fields _raw index
-| rex field=_raw "risk_score=(?<risk_score>\d+)"
-| rex field=_raw "risk_rule_host=\"(?<host>[^,]+)\""
+| eval user=risk_rule_user
 
 ``` COMPOSITE KEY: Combine Index and Host for Multi-Tenancy ```
 ``` This ensures Client A's 'HMI-01' is treated differently than Client B's 'HMI-01' ```
