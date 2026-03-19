@@ -25,3 +25,16 @@ If this fails, you can restart splunk via
 ```
 & "C:\Program Files\Splunk\bin\splunk.exe" restart
 ```
+Or use the web browser
+```
+https://your-ds-host:8089/services/deployment/server/config/_reload
+use your admin/pass
+```
+Or edit the app and change nothing
+```
+192.168.1.123:8000
+Setings > Forwarder Management
+Apps tab
+Find the app and click Edit.
+Clicking Save on usually forces the Deployment Server to checksum the folder and notice the manual changes.
+```
