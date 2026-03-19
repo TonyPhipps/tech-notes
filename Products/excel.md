@@ -8,9 +8,9 @@ Inverted version (to highlight red):
 =AND(E1<>"", COUNTIF('The_Other_Sheet'!$A$1:$A$1000, E1)=0)
 ```
 
-Compare Cell A1 to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's 4th column
+Compare Cell in column B to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's column A value
 ```
-=VLOOKUP(A1,LookupSheet!A:B,4,FALSE)
+=XLOOKUP(B2, 'LookupSheet'!C:C, 'LookupSheet'!A:A)
 ```
 
 Compare cell B2 to LookupSheet's column B and find a matching row, then populate this Cell with the LookupSheet's matching row's column A cell contents.
