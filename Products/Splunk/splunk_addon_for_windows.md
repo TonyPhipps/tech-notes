@@ -95,6 +95,10 @@ index = wineventlog
 disabled = 0
 index = wineventlog
 
+[WinEventLog://Microsoft-Windows-DriverFrameworks-UserMode/Operational]
+disabled = 0
+index = wineventlog
+
 ###### Windows Update Log ######
 ## WindowsUpdate.log for Windows 8, Windows 8.1, Server 2008R2, Server 2012 and Server 2012R2
 [monitor://$WINDIR\WindowsUpdate.log]
