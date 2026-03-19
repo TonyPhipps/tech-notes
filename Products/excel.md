@@ -1,11 +1,11 @@
 Compare Column E in this sheet to Column A in the other sheet. If the E cell matches, highlight it green. Ignores "null" cells.
 ```
-=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A$1:$A$1000, E1)>0)
+=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A:A, E1)>0)
 ```
 
 Inverted version (to highlight red):
 ```
-=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A$1:$A$1000, E1)=0)
+=AND(E1<>"", COUNTIF('The_Other_Sheet'!$A:A, E1)=0)
 ```
 
 Compare Cell in column B to LookupSheet and find a matching row, then populate this Cell with the LookupSheet's column A value
