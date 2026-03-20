@@ -1,7 +1,13 @@
-﻿https://splunkbase.splunk.com/app/742
+﻿- [Sample Config to Capture Logs Relevant to Monitoring, Incident Response, and Forensics](#sample-config-to-capture-logs-relevant-to-monitoring-incident-response-and-forensics)
+- [Splunk App for Windows fields seen in Sigma rules targeting ...](#splunk-app-for-windows-fields-seen-in-sigma-rules-targeting-)
+  - [Application](#application)
+  - [System](#system)
+  - [Security](#security)
 
+
+# Sample Config to Capture Logs Relevant to Monitoring, Incident Response, and Forensics
 ```properties
-# Stanzas Worth Adding/Customizing
+# https://splunkbase.splunk.com/app/742
 [WinEventLog://Application]
 disabled = 0
 index = wineventlog
@@ -212,7 +218,7 @@ index=perfmon
 ## Application
   - source="WinEventLog"
   - sourcetype="WinEventLog:Application"
-  Channel="Application"
+  - Channel="Application"
   - Provider_Name
   - EventCode
   - AppName
