@@ -99,6 +99,34 @@ index = wineventlog
 disabled = 0
 index = wineventlog
 
+[WinEventLog://Microsoft-Windows-Bits-Client/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CAPI2/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CodeIntegrity/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-NTLM/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-Windows Defender/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-WMI-Activity/Operational]
+disabled = 0
+index = wineventlog
+
 ###### Windows Update Log ######
 ## WindowsUpdate.log for Windows 8, Windows 8.1, Server 2008R2, Server 2012 and Server 2012R2
 [monitor://$WINDIR\WindowsUpdate.log]
