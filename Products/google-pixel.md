@@ -1,0 +1,14 @@
+# Monitor Kids RCS
+- Set these in Family Link prior to trying anything. They can be changed back afterward.
+  - Kids Account > Controls > Contacts, calls, & texts > Anyone
+  - Kids Account > Controls > Signed-In Devices > The Phone > enable Add/Remove User
+  - Kids Account > Controls > Account settings > Account Data settings > Web and App Activity > Turn On
+- Ensure Google Play is updated
+  - Settings > System > Software Updates > System Update > Check
+  - Settings > System > Software Updates > Google Play System Update > Check
+  - Settings > System > Software Updates > App updates > Check
+  - Reboot if needed
+- Fully close the Messages app and reopen it.
+- Open Settings > Device Pairing > Switch to Google Account pairing
+   - If you get an error "Can't Pair with Your Google Account right now." do this:
+     - <insert solution later or something>
