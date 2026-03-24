@@ -1,7 +1,13 @@
-﻿https://splunkbase.splunk.com/app/742
+﻿- [Sample Config to Capture Logs Relevant to Monitoring, Incident Response, and Forensics](#sample-config-to-capture-logs-relevant-to-monitoring-incident-response-and-forensics)
+- [Splunk App for Windows fields seen in Sigma rules targeting ...](#splunk-app-for-windows-fields-seen-in-sigma-rules-targeting-)
+  - [Application](#application)
+  - [System](#system)
+  - [Security](#security)
 
+
+# Sample Config to Capture Logs Relevant to Monitoring, Incident Response, and Forensics
 ```properties
-# Stanzas Worth Adding/Customizing
+# https://splunkbase.splunk.com/app/742
 [WinEventLog://Application]
 disabled = 0
 index = wineventlog
@@ -95,6 +101,38 @@ index = wineventlog
 disabled = 0
 index = wineventlog
 
+[WinEventLog://Microsoft-Windows-DriverFrameworks-UserMode/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-Bits-Client/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CAPI2/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-CodeIntegrity/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-NTLM/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-Windows Defender/Operational]
+disabled = 0
+index = wineventlog
+
+[WinEventLog://Microsoft-Windows-WMI-Activity/Operational]
+disabled = 0
+index = wineventlog
+
 ###### Windows Update Log ######
 ## WindowsUpdate.log for Windows 8, Windows 8.1, Server 2008R2, Server 2012 and Server 2012R2
 [monitor://$WINDIR\WindowsUpdate.log]
@@ -180,7 +218,7 @@ index=perfmon
 ## Application
   - source="WinEventLog"
   - sourcetype="WinEventLog:Application"
-  Channel="Application"
+  - Channel="Application"
   - Provider_Name
   - EventCode
   - AppName
