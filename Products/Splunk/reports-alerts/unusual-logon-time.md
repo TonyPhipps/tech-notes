@@ -1,5 +1,5 @@
 # Baseline Search
-
+- Build a lookup that stores the average logon times for each user.
 - Ran every week
 - NOTE: You may have to split the search into 4 different ones, one per week, to get the initial baseline established. If you do, here is an example of changes to likes 1 and an inserted line after line 4 (the first stats command). Worst case scenario, you may need to increment at a smaller window.
 ```sql
@@ -27,7 +27,7 @@ index=indexes-* sourcetype=*WinEventLog Channel=Security EventCode=4624 Logon_Ty
 
 
 # Detection Search
-
+- Every 30min, review all user logons and compare them to the lookup. Allow for logons to fall an hour before or after their average. Show anything outside the widened window.
 - Earliest time: 0
 - Latest Time: +1y
 - Run on Schedule:
