@@ -34,7 +34,7 @@ index=indexes-* sourcetype=*WinEventLog Channel=Security EventCode=4624 Logon_Ty
   - Cron Expression: */30 * * * *
   - Schedule Window: Auto
 ```sql
-index=indexes-* sourcetype=*WinEventLog EventCode=4624 Logon_Type=2 (Logon_Process="User32" OR Logon_Process="Winlogon") _index_earliest=-32m@m _index_latest=-2m@m
+index=indexes-* sourcetype=*WinEventLog EventCode=4624 Logon_Type=2 (Logon_Process="User32" OR Logon_Process="Winlogon") _index_earliest=-62m@m _index_latest=-2m@m
 | fields _time, user, index
 | eval 
     logon_sec = _time - relative_time(_time, "@d"),
@@ -55,6 +55,6 @@ index=indexes-* sourcetype=*WinEventLog EventCode=4624 Logon_Type=2 (Logon_Proce
     win_start = substr(tostring(max(0, earliest_sec), "duration"), 1, 5),
     win_end = substr(tostring(min(86399, latest_sec), "duration"), 1, 5),
     normal_window = win_start . " to " . win_end
-| stats list(logon_time) as logon_times count by index, user, normal_window
-| fields index, user, normal_window, logon_times
+| stats count by index, user, normal_window, logon_time
+| fields index, user, normal_window, logon_time
 ```
