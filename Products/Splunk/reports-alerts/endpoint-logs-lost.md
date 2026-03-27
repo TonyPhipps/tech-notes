@@ -2,12 +2,12 @@ This use case stores a log of last observed event for all hosts and alerts on th
 
 Run once:
 ```sql
-| tstats latest(_time) as last_seen where index=* BY index, host
+| tstats min(_time) as first_seen, max(_time) as last_seen where index=* BY index, host
 | outputlookup last_seen_inventory.csv create_context=user
 ```
 
 Run this detection/maintenance search daily:
-``sql
+```sql
 | tstats latest(_time) as latest_seen where index=* earliest=-24h BY index, host
 | inputlookup append=t last_seen_inventory.csv
 | stats max(latest_seen) as last_seen by index, host
