@@ -1,4 +1,9 @@
-﻿In Splunk, a deployment server determines which hosts (deployment clients) receive specific apps based on configurations defined in the serverclass.conf file. This file maps server classes to specific clients (hosts) and specifies which apps are deployed to those clients.
+﻿- [About](#about)
+- [Reload Apps](#reload-apps)
+
+
+# About
+In Splunk, a deployment server determines which hosts (deployment clients) receive specific apps based on configurations defined in the serverclass.conf file. This file maps server classes to specific clients (hosts) and specifies which apps are deployed to those clients.
 
 Apps intended to be deployed to clients should be stored under ```$SPLUNK_HOME/etc/deployment-apps```
 
@@ -17,6 +22,8 @@ restartSp2unkd = 1
 stateOnClient = enabled
 ```
 
+
+# Reload Apps
 Restart the deployment server to acknowledge changes to stuff in deployment-apps (or wait the 30min check)
 ```
 & "C:\Program Files\Splunk\bin\splunk.exe" reload deploy-server
