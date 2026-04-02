@@ -11,6 +11,7 @@
   - [Reset SOME Of a Dashboard's Tokens](#reset-some-of-a-dashboards-tokens)
   - [Hide a Panel Until a Token is Set via Drilldown](#hide-a-panel-until-a-token-is-set-via-drilldown)
   - [Hide a Panel Until Results are Found](#hide-a-panel-until-results-are-found)
+  - [Hide a Panel While a Token is Set, but Show it When Token is Unset](#hide-a-panel-while-a-token-is-set-but-show-it-when-token-is-unset)
 - [Search Base](#search-base)
   - [Search Base WITH Export Button](#search-base-with-export-button)
 - [Include a Keyword search bar](#include-a-keyword-search-bar)
@@ -262,7 +263,7 @@ NOTE: Alternatively, specify a column's value regardless of where they click in 
 
 
 ## Hide a Panel Until Results are Found
-```
+```xml
 <panel depends="$show_panel$">
        <chart>
          <search>
@@ -278,6 +279,54 @@ NOTE: Alternatively, specify a column's value regardless of where they click in 
          </search>
        </chart>
      </panel>
+```
+
+## Hide a Panel While a Token is Set, but Show it When Token is Unset
+```xml
+<input type="text" token="host" searchWhenChanged="true">
+      <label>host</label>
+      <default>*</default>
+      <prefix>*</prefix>
+      <suffix>*</suffix>
+      <change>
+        <condition match="value==&quot;*&quot; OR value==&quot;***&quot;">
+          <unset token="host_hasvalue"></unset>
+          <set token="host_novalue">true</set>
+        </condition>
+        <condition>
+          <set token="host_hasvalue">true</set>
+          <unset token="host_novalue"></unset>
+        </condition>
+      </change>
+    </input>
+
+....
+
+<panel depends="$host_novalue$" rejects="$host_hasvalue$">
+      <title>Select a Host or Input One Above</title>
+      <table>
+        <search>
+          <query>| tstats count 
+    WHERE index IN ($index$) 
+    BY host 
+| fields - count</query>
+          <earliest>$TimeRange.earliest$</earliest>
+          <latest>$TimeRange.latest$</latest>
+        </search>
+        <option name="count">15</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="host">$row.host$</set>
+          <set token="form.host">$row.host$</set>
+          <set token="show_host">$row.host$</set>
+        </drilldown>
+      </table>
+    </panel>
 ```
 
 
