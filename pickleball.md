@@ -19,7 +19,7 @@
 - If opponents paddle is low, consider raising yours in order to anticipate a more ready response. And vice versa.
 - Use "You" and "Me" to call claim or pass on incoming balls.
 - Be prepared to move, don't reach.
-- Aim low and at opponents feet and left/right of feet.
+- Aim low and at opponents shins.
 - Aim toward opponents offhand, forcing a backhand shot.
 - Aim toward where they are leaving from (if they are moving left responding to last hit, aim right).
 - Attempt to keep a flat trajectory on the ball, as low as possible but over the net.
@@ -28,7 +28,7 @@
 
 # Serving
 - Develop and keep a calming ritual before serving.
-- Contact ball upward, below waist, and below highest part of wrist.
+- Stay legal - Contact ball upward, below waist, and below highest part of wrist. 
 - Aim deep, like last 1 ft of service box.
 - Aim to opponents offhand, forcing a backhand swing.
 - Vary your aim location to keep opponent on their toes.
