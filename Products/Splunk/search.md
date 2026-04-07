@@ -9,7 +9,6 @@
   - [Initial Discovery](#initial-discovery)
   - [Performance](#performance)
   - [Other](#other)
-- [Find Results Not in a Subsearch of Older Events](#find-results-not-in-a-subsearch-of-older-events)
 
 
 # Hotkeys
@@ -343,7 +342,7 @@ NOTE: This breaks if any field values happen to be ```NULL```.
 ```
 
 
-# Find Results Not in a Subsearch of Older Events
+** Find Results Not in a Subsearch of Older Events **
 - This example looks for all instances across many systems, but shows the host info on outliers. Also ensures "new systems" found don't false positive.
 ```sql
 index="something" TheResOfYourSearch
@@ -415,7 +414,7 @@ Good for export/backup/etc.
 ```
 
 
-### Makeresults to test things
+**Makeresults to test things**
 ```
 | makeresults count=4
 | streamstats count
@@ -424,4 +423,13 @@ Good for export/backup/etc.
 | eval ip          = case(count=1, "192.168.1.1", count=2, "192.168.1.101", count=3, "192.168.1.72", count=4, "192.168.1.73")
 | eval Description = case(count=1, "PA-850 Firewall", count=2, "Made Up Test Host" , count=3, "Test VLANS", count=4, "Test VLANS")
 | eval IgnoreEntry = case(count=1, null(), count=2, "true", count=3, null(), count=4, null())
+```
+
+
+**Quickly transpose a table**
+- Best when expecting only one result. For example, an inventory lookup.
+```
+| head 1
+| transpose column_name="Property" 
+| rename "row 1" AS "Value"
 ```
