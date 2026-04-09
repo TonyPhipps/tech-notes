@@ -86,6 +86,15 @@ if ($PreparePackage) {
 }
 
 # --- 3. SCAN ENDPOINTS ---
+# --- Module Validation Check ---
+$InstallRequired = $Scan, $DownloadUpdates, $DeployUpdates
+if ($InstallRequired -contains $true) {
+    if (-not (Get-Module -ListAvailable -Name kbupdate)) {
+        Write-Error "CRITICAL: The 'kbupdate' module is not installed. Please run this script with the -Install flag first."
+        return # Stops execution of the script
+    }
+}
+
 if ($Scan) {
     Write-Host "--- Operation: Scan ---" -ForegroundColor Blue
     if (-not (Test-Path $ScanFolder)) { New-Item -ItemType Directory -Path $ScanFolder -Force | Out-Null }
