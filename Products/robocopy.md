@@ -13,10 +13,10 @@
   - /PURGE :: delete dest files/dirs that no longer exist in source.
 
 ```
-robocopy "d:" "c:\d" /COPYALL /ZB /TS /ETA /NP /R:3 /W:10 /MIR
+robocopy "D:\" "C:\d-drive" /MIR /XC /COPYALL /ZB /TS /ETA /NP /R:3 /W:10
 ```
 
 If it's preferred to not PURGE folders/files at destination, use /E rather than /MIR:
 ```
-robocopy "c:\d" "d:" /COPYALL /ZB /TS /ETA /NP /R:3 /W:10 /E
+robocopy "D:\" "C:\d-drive" /E /XC /COPYALL /ZB /TS /ETA /NP /R:3 /W:10
 ```
