@@ -182,80 +182,11 @@ Typical lookup table settings in %splunk%\etc\apps\search\local\transforms.conf
  
 
 
-# Troubleshoot
-Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
-```bash
-ps -ef | grep splunk
-```
-
-
-## Ingestion
-Review the settings for a conf file and see where the settings are merged from
-```bash
-splunk btool inputs list --debug
-```
-
-
-## Reload Inputs.conf
-While in the Splunk dir (/opt/splunk/bin)
-```bash
-./splunk _internal call /services/data/inputs/monitor/_reload -auth
-```
-
-
-## Determine Cause of Input Issue
-$SPLUNK_HOME defaults to /opt/splunk/
-Replace [stanzaname] with your stanza's name.
-
-```grep ERROR $SPLUNK_HOME/var/log/splunk/splunkd.log | grep [stanzaname]```
-
-
-## Refresh Most Things
-Like props.conf, transforms.conf, etc.
-```
-http://yourserver:8000/en-US/debug/refresh
-```
-
-## Power Failure Review
-
-Search ```$SPLUNK_HOME/var/log/splunk/splunkd.log``` for 
-- "unclean shutdown detected" (Confirms Splunk knows it crashed).
-- "fsck" (File System Consistency Check – Splunk might be silently repairing buckets in the background).
-- "Corrupt bucket" or "bucket header is corrupted".
-- "rebuild failed" (This is critical; it means a bucket is dead and needs manual intervention).
-
-Search ```$SPLUNK_HOME/var/log/splunk/mongod.log``` for
-- "WiredTiger metadata corruption detected" (This usually requires a manual wipe and resync of the KVStore).
-- "mongod exited abnormally" (Look for exit code 14, which often means a lock file issue).
-- "Detected unclean shutdown" (MongoDB will attempt recovery; watch this log to see if it succeeds).
-
-Search ```$SPLUNK_HOME/var/log/splunk/metrics.log``` for
-- "blocked=true" (Queues are filling up).
-- "evt_misc_pipe::write_errors" (Pipeline errors).
-
-Search ```$SPLUNK_HOME/var/log/splunk/web_service.log``` for
-- "CherryPy" errors.
-- "500 Internal Server Error" immediately upon login.
-
-### Perform Splunk Searches
-
-To find bucket corruption:
-```sql
-index=_internal source="*splunkd.log" log_level=ERROR (component=IndexProcessor OR component=BucketBuilder)
-| stats count by host, message, component
-```
-
-To check if queues are blocked post-reboot:
-```sql
-index=_internal source="*metrics.log" group=queue blocked=true
-| timechart span=10min max(max_size_kb) by name
-```
-
-
 # Apps
 ## Install App from File
 - Apps > Manage Apps
 - Install App From File
+
 
 ## Recommended Apps
 - Config Explorer - https://apps.splunk.com/apps/id/config_explorer
