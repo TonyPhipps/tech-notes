@@ -104,3 +104,42 @@ end
 copy running-config startup-config
 reload
 ```
+
+# MAC Security
+
+## Review Port Security Status
+```
+show port-security interface <interface_id>
+```
+
+## Clear MAC Port Shutdown Error
+For if MAC security is set to administratively disable
+```
+conf t
+interface <interface_id>
+ shutdown
+ no shutdown
+exit
+```
+
+## Update MAC Port Security with New MAC
+`clear port-security dynamic`
+
+OR
+
+```
+conf t
+interface <interface_id>
+ no switchport port-security
+ no switchport port-security mac-address sticky
+ switchport port-security mac-address sticky
+exit
+```
+
+## Bump Up MACs for a Port to 2
+```
+conf t
+interface <interface_id>
+ switchport port-security maximum 2
+exit
+```
