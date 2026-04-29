@@ -14,24 +14,6 @@ show logging
 show logging onboard
 ```
 
-### Log Configuration Commands
-```
-configure terminal
-    archive
-    log config
-        logging enable
-        hidekeys
-        notify syslog
-        exit
-    exit
-    logging buffered informational
-    service timestamps log datetime
-    logging host <syslog-server-IP>
-exit
-copy running-config startup-config
-```
-
-
 ### SPAN one VLAN to one Port
 ```
 enable
@@ -72,10 +54,30 @@ username admin privilege 15 secret PASSWORD
 enable
 configure terminal
 
+! --- Configuration Archiving & Local Backups ---
+archive
+ log config
+  logging enable
+  hidekeys
+  notify syslog
+ exit
+ path flash:/backup-config
+ maximum 14
+ write-memory
+exit
+
 ! --- Interface Setup ---
 interface Loopback0
- ip address 192.168.1.x 255.255.255.255
+ ip address 10.x.x.x 255.255.255.255
  no shutdown
+exit
+
+! --- Syslog Heartbeat (Hourly check) ---
+kron policy-list SyslogHeartBeat
+ cli send log 6 heartbeat
+exit
+kron occurrence SyslogHeartBeat in 1:0 recurring
+ policy-list SyslogHeartBeat
 exit
 
 ! --- Resiliency & Auto-Recovery ---
@@ -89,7 +91,7 @@ service timestamps log datetime show-timezone msec
 ! --- Logging Core Configuration ---
 logging origin-id hostname
 logging trap informational
-logging host 192.168.1.x
+logging host 192.168.1.1
 logging facility local7
 logging source-interface loopback0
 logging userinfo
@@ -104,7 +106,7 @@ logging on
 ! --- Verification & Save ---
 end
 show logging
-show ip interface brief | include Loopback0
+show archive
 copy running-config startup-config
 ```
 
