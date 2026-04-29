@@ -71,16 +71,40 @@ username admin privilege 15 secret PASSWORD
 ```
 enable
 configure terminal
+
+! --- Interface Setup ---
+interface Loopback0
+ ip address 192.168.1.x 255.255.255.255
+ no shutdown
+exit
+
+! --- Resiliency & Auto-Recovery ---
+errdisable recovery cause all
+errdisable recovery interval 300
+
+! --- Global Service Optimization ---
 service sequence-numbers
-service timestamps log datetime localtime show-timezone msec
+service timestamps log datetime show-timezone msec
+
+! --- Logging Core Configuration ---
+logging origin-id hostname
 logging trap informational
-logging 192.168.1.1
-logging facility local2
+logging host 192.168.1.x
+logging facility local7
 logging source-interface loopback0
 logging userinfo
+
+! --- Performance & CPU Protection ---
+logging buffered 512000
+logging rate-limit console 10
+logging rate-limit 100
+no logging console
 logging on
+
+! --- Verification & Save ---
 end
 show logging
+show ip interface brief | include Loopback0
 copy running-config startup-config
 ```
 
