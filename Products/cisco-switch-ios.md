@@ -1,20 +1,52 @@
-## Show basic device info
+- [Show basic device info](#show-basic-device-info)
+  - [Show configuration](#show-configuration)
+  - [Show logs and logging information](#show-logs-and-logging-information)
+  - [Review current "monitors"](#review-current-monitors)
+  - [Show ARP Table](#show-arp-table)
+- [SPANning](#spanning)
+  - [SPAN one VLAN to one Port](#span-one-vlan-to-one-port)
+  - [Clear SPAN / Monitoring](#clear-span--monitoring)
+- [Save Config to NVRAM](#save-config-to-nvram)
+- [Create Admin Account](#create-admin-account)
+- [Setup Logging and Event Forwarding to Syslog Server](#setup-logging-and-event-forwarding-to-syslog-server)
+- [Shutdown One or More Switchports](#shutdown-one-or-more-switchports)
+- [Set Jumbo Frame Support to 9000 Bytes](#set-jumbo-frame-support-to-9000-bytes)
+- [MAC Security](#mac-security)
+  - [Review Port Security Status](#review-port-security-status)
+  - [Clear MAC Port Shutdown Error](#clear-mac-port-shutdown-error)
+  - [Update MAC Port Security with New MAC](#update-mac-port-security-with-new-mac)
+  - [Bump Up MACs for a Port to 2](#bump-up-macs-for-a-port-to-2)
+
+
+# Show basic device info
 ```
 show version
 ```
 
-### Show configuration
+## Show configuration
 ```
 show running-config 
 ```
 
-### Show logs and logging information
+## Show logs and logging information
 ```
 show logging
 show logging onboard
 ```
 
-### SPAN one VLAN to one Port
+## Review current "monitors"
+```
+show monitor
+```
+
+## Show ARP Table
+```
+show arp
+```
+
+# SPANning
+
+## SPAN one VLAN to one Port
 ```
 enable
 configuration terminal
@@ -23,33 +55,23 @@ monitor session 1 destination interface gigabitethernet 1/0/24
 end
 ```
 
-### Review current "monitors"
-```
-show monitor
-```
-
-### Clear SPAN / Monitoring
+## Clear SPAN / Monitoring
 ```
 no monitor session 1
 no monitor session all
 ```
 
-### Save Config to NVRAM
+# Save Config to NVRAM
 ```
 copy running-config startup-config
 ```
 
-### Show ARP Table
-```
-show arp
-```
-
-### Create Admin Account
+# Create Admin Account
 ```
 username admin privilege 15 secret PASSWORD
 ```
 
-### Setup Event Forwarding to Syslog Server
+# Setup Logging and Event Forwarding to Syslog Server
 ```
 enable
 configure terminal
@@ -110,7 +132,7 @@ show archive
 copy running-config startup-config
 ```
 
-### Shutdown One or More Switchports
+# Shutdown One or More Switchports
 ```
 interface gigabitethernet0/2
 shutdown
@@ -120,7 +142,7 @@ interface range gigabitethernet0/2 - 24
 shutdown
 ```
 
-### Set Jumbo Frame Support to 9000 Bytes
+# Set Jumbo Frame Support to 9000 Bytes
 (9000 bytes plus 14 byte header)
 ```
 show system mtu
