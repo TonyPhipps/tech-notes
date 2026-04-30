@@ -8,6 +8,7 @@
   - [Clear SPAN / Monitoring](#clear-span--monitoring)
 - [Save Config to NVRAM](#save-config-to-nvram)
 - [Create Admin Account](#create-admin-account)
+- [Setup NTP](#setup-ntp)
 - [Setup Logging and Event Forwarding to Syslog Server](#setup-logging-and-event-forwarding-to-syslog-server)
 - [Shutdown One or More Switchports](#shutdown-one-or-more-switchports)
 - [Set Jumbo Frame Support to 9000 Bytes](#set-jumbo-frame-support-to-9000-bytes)
@@ -19,35 +20,35 @@
 
 
 # Show basic device info
-```
+```bash
 show version
 ```
 
 ## Show configuration
-```
+```bash
 show running-config 
 ```
 
 ## Show logs and logging information
-```
+```bash
 show logging
 show logging onboard
 ```
 
 ## Review current "monitors"
-```
+```bash
 show monitor
 ```
 
 ## Show ARP Table
-```
+```bash
 show arp
 ```
 
 # SPANning
 
 ## SPAN one VLAN to one Port
-```
+```bash
 enable
 configuration terminal
 monitor session 1 source vlan 100
@@ -56,23 +57,55 @@ end
 ```
 
 ## Clear SPAN / Monitoring
-```
+```bash
 no monitor session 1
 no monitor session all
 ```
 
 # Save Config to NVRAM
-```
+```bash
 copy running-config startup-config
 ```
 
 # Create Admin Account
-```
+```bash
 username admin privilege 15 secret PASSWORD
 ```
 
-# Setup Logging and Event Forwarding to Syslog Server
+# Setup NTP
+```bash
+enable
+configure terminal
+
+# Set local offset
+clock timezone EST -5 0
+clock summer-time EDT recurring
+
+# Define ntp sources
+ntp server 192.168.1.50 prefer
+ntp server 192.168.1.10
+
+# Stability and Hardware Sync
+ntp source loopback 0
+ntp update-calendar
+
+# Security: Only allow DC and Satellite to sync time
+ip access-list standard ACL-NTP
+ permit 192.168.1.50
+ permit 192.168.1.10
+ntp access-group peer ACL-NTP
+
+exit
+
+# Verification
+show ntp associations
+show ntp status
+show clock
 ```
+
+
+# Setup Logging and Event Forwarding to Syslog Server
+```bash
 enable
 configure terminal
 
@@ -127,13 +160,14 @@ logging on
 
 ! --- Verification & Save ---
 end
+show run | inc log
 show logging
 show archive
 copy running-config startup-config
 ```
 
 # Shutdown One or More Switchports
-```
+```bash
 interface gigabitethernet0/2
 shutdown
 
@@ -144,7 +178,7 @@ shutdown
 
 # Set Jumbo Frame Support to 9000 Bytes
 (9000 bytes plus 14 byte header)
-```
+```bash
 show system mtu
 config t
 system mtu jumbo bytes 9000
@@ -156,13 +190,13 @@ reload
 # MAC Security
 
 ## Review Port Security Status
-```
+```bash
 show port-security interface <interface_id>
 ```
 
 ## Clear MAC Port Shutdown Error
 For if MAC security is set to administratively disable
-```
+```bash
 conf t
 interface <interface_id>
  shutdown
@@ -175,7 +209,7 @@ exit
 
 OR
 
-```
+```bash
 conf t
 interface <interface_id>
  no switchport port-security
@@ -185,7 +219,7 @@ exit
 ```
 
 ## Bump Up MACs for a Port to 2
-```
+```bash
 conf t
 interface <interface_id>
  switchport port-security maximum 2
