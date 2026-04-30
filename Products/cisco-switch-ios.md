@@ -82,17 +82,15 @@ clock timezone EST -5 0
 clock summer-time EDT recurring
 
 # Define ntp sources
-ntp server 192.168.1.50 prefer
-ntp server 192.168.1.10
+ntp server 192.168.1.50
 
 # Stability and Hardware Sync
 ntp source loopback 0
 ntp update-calendar
 
-# Security: Only allow DC and Satellite to sync time
+# Security: Only allow satellite to sync time
 ip access-list standard ACL-NTP
  permit 192.168.1.50
- permit 192.168.1.10
 ntp access-group peer ACL-NTP
 
 exit
