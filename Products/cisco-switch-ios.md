@@ -100,7 +100,7 @@ exit
 # Verification
 show ntp associations detail
 show ntp status
-show clock
+show clock detail
 ```
 
 
