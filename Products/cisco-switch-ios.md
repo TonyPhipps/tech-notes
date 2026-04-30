@@ -98,7 +98,7 @@ ntp access-group peer ACL-NTP
 exit
 
 # Verification
-show ntp associations
+show ntp associations detail
 show ntp status
 show clock
 ```
