@@ -69,7 +69,7 @@ copy running-config startup-config
 
 # Create Admin Account
 ```bash
-username admin privilege 15 secret PASSWORD
+username admin privilege 15 algorithm type scrypt secret PASSWORD
 ```
 
 # Setup NTP
