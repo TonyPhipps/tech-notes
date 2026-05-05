@@ -14,8 +14,24 @@
 1. Generate the lookup list
     - a lookup of 30d of events, including first seen, last seen dates, etc.
 ```sql
-index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
-| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
+index IN ("indexes*") sourcetype="My:Risk" earliest=-30d@d latest=@d
+| eval risk_index = index
+| bin _time span=1d
+| stats 
+    count as date_observed_hits 
+    min(_time) as first_seen 
+    max(_time) as last_seen 
+    values(risk_rule_title) as risk_rule_title 
+    by risk_rule_guid, risk_index, _time
+| rename _time as date_observed
+| eventstats 
+    min(first_seen) as first_seen 
+    max(last_seen) as last_seen 
+    sum(date_observed_hits) as hits_30d 
+    by risk_rule_guid, risk_index
+| eval temp_24h = if(date_observed >= relative_time(now(), "-1d@d"), date_observed_hits, 0)
+| eventstats max(temp_24h) as hits_last_24h by risk_rule_guid, risk_index
+| fields - temp_24h
 | outputlookup observed_risk_rules.csv
 ```
 
@@ -29,13 +45,31 @@ index IN ("indexes-*") source="My:Risk*" earliest=-30d@d latest=-1d@d
    - Schedule daily at 00:30 (30 0 * * *)
    - Schedule Window: Auto
 ```sql
-index IN ("indexes-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
-| stats delim="|" count as hits min(_time) as first_seen max(_time) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
-| inputlookup append=t observed_risk_rules.csv
-| eval risk_rule_title = split(risk_rule_title,"|")
-| stats delim="|" count as hits min(first_seen) as first_seen max(last_seen) as last_seen values(risk_rule_title) as risk_rule_title dc(risk_rule_title) as risk_rule_title_count by risk_rule_guid, index
-| mvcombine risk_rule_title
-| where last_seen > relative_time(now(), "-30d")
+index IN ("indexes*") sourcetype="My:Risk" earliest=-1d@d latest=@d
+| eval risk_index = index, _time = relative_time(now(), "-1d@d")
+| stats 
+    count as date_observed_hits 
+    min(_time) as first_seen 
+    max(_time) as last_seen 
+    values(risk_rule_title) as risk_rule_title 
+    by risk_rule_guid, risk_index, _time
+| append [| inputlookup observed_risk_rules.csv | rename date_observed as _time]
+| where _time > relative_time(now(), "-30d")
+| stats 
+    sum(date_observed_hits) as date_observed_hits
+    min(first_seen) as first_seen
+    max(last_seen) as last_seen
+    values(risk_rule_title) as risk_rule_title
+    by risk_rule_guid, risk_index, _time
+| eventstats 
+    sum(date_observed_hits) as hits_30d 
+    min(first_seen) as first_seen 
+    max(last_seen) as last_seen 
+    by risk_rule_guid, risk_index
+| eval temp_24h = if(_time >= relative_time(now(), "-1d@d"), date_observed_hits, 0)
+| eventstats max(temp_24h) as hits_last_24h by risk_rule_guid, risk_index
+| fields - temp_24h
+| rename _time as date_observed
 | outputlookup observed_risk_rules.csv
 ```
 
@@ -52,10 +86,10 @@ index IN ("indexes-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
     - Schedule Window: Auto
 ```sql
 index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
-| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, index
+| stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, risk_rule_level, index
 
 ``` HISTORY CHECK ```
-| lookup index_observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
+| lookup observed_risk_rules.csv risk_index AS index risk_rule_guid OUTPUT first_seen as historic_first_seen
 | where isnull(historic_first_seen)
 
 ``` THROTTLE ```
@@ -67,8 +101,8 @@ index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@
 ``` MAKE EVENT ```
 ``` Stash to remove headers```
 | map maxsearches=500 search="| makeresults 
-    | eval _time=now(), index=\"$index$\", name=\"RIR - Newly Observed Risk Rule\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
-    | collect index=\"$index$\" source=\"My:Risk:Alert\" sourcetype=\"stash\""
+    | eval _time=now(), index=\"$index$\", name=\"RIR - Newly Observed Risk Rule\", risk_rule_level=\"$risk_rule_level$\", risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_user=\"$risk_rule_user$\", risk_rule_host=\"$risk_rule_host$\", first_seen_time=\"$first_seen_new$\"
+    | collect index=\"$index$\" source=\"Risk:Alert\" sourcetype=\"stash\""
 ```
 
 
@@ -106,4 +140,15 @@ index IN ("indexes-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2
 | eval risk_rule_guid="TEST-REAL-TRIGGER-1555", risk_rule_title="Test Alert Trigger", risk_rule_user="admin_test", risk_rule_host="workstation_test"
 | eval _raw = "timestamp=" . _time . " risk_rule_guid=" . risk_rule_guid . " risk_rule_title=\"" . risk_rule_title . "\" risk_rule_user=" . risk_rule_user . " risk_rule_host=" . risk_rule_host
 | collect index="index-test" source="My:Risk" sourcetype="My:Risk"
+```
+
+
+Peek inside the lookup list
+```sql
+| inputlookup observed_risk_rules.csv
+| sort - date_observed
+| fieldformat date_observed = strftime(date_observed, "%Y-%m-%d")
+| fieldformat first_seen = strftime(first_seen, "%Y-%m-%d %H:%M:%S")
+| fieldformat last_seen = strftime(last_seen, "%Y-%m-%d %H:%M:%S")
+| table date_observed, risk_rule_guid,  risk_rule_title, risk_index, date_observed_hits, hits_last_24h, hits_30d, first_seen, last_seen
 ```
