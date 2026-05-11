@@ -1,3 +1,5 @@
+Good for detecting Data Exfiltration, Command & Control (C2) beacons, or Dormant Malware that is slowly increasing its footprint.
+
 # Find Risk_Score Spikes from Daily Baseline (Single-Tenant Version)
 1. The Baseline Generator (Scheduled Report) (consider also making one for the field 'user')
   - Schedule: Daily (e.g., 01:00 AM) Time Range: Last 30 days (-30d@d to -1d@d) Action: Save results to a CSV Lookup.
@@ -70,7 +72,7 @@ index IN ("myindex") source="My:Risk*" earliest=-1h@h latest=@h
 | sort - robust_z
 ```
 
-1. Force a Trigger
+3. Force a Trigger
 Create a fake baseline entry
 ```sql
 | makeresults 

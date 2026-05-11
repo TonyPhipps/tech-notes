@@ -1,3 +1,5 @@
+Good for detecting Credential Abuse and Lateral Movement that happens outside of the "normal" operating rhythm of a specific workstation.
+
 # Find Risk_Score Spikes from Hourly Baseline (Single-Tenant Version)
 1. The Baseline Generator (Scheduled Report) (consider also making one for the field 'user')
   - Schedule: Daily (e.g., 01:00 AM) Time Range: Last 30 days (-30d@d to -1d@d) Action: Save results to a CSV Lookup.
