@@ -75,6 +75,9 @@ Settings > Data Models > New Data Model
 | Days since Date                                                                                       | `\| eval DateParsed=strptime('DateScanned', "%Y-%m-%d %H:%M:%SZ") \| eval DaysSince = round((now()-DateParsed)/86400)`       |
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
 | Truncate hostname to remove FQDN portion.                                                             | `\| eval host=replace(host, "\..*", "")`                                                                                     |
+| Remove digits in a field (useful for overloaded field values)                                         | `\| eval your_field_name = replace(your_field_name, "\d", "")`                                                               |
+| Check if "Message" field has string "test"                                                            | `\| eval has_string=if(like(Message, "%test%"), "True", "False")`                                                            |
+
 
 Date String Parses
 | Date String           | Conversion to Date Eval                        |
