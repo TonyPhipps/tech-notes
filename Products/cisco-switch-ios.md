@@ -3,11 +3,13 @@
   - [Show logs and logging information](#show-logs-and-logging-information)
   - [Review current "monitors"](#review-current-monitors)
   - [Show ARP Table](#show-arp-table)
+- [Authentication](#authentication)
+  - [Create Admin Account](#create-admin-account)
+  - [Local Authentication](#local-authentication)
 - [SPANning](#spanning)
   - [SPAN one VLAN to one Port](#span-one-vlan-to-one-port)
   - [Clear SPAN / Monitoring](#clear-span--monitoring)
 - [Save Config to NVRAM](#save-config-to-nvram)
-- [Create Admin Account](#create-admin-account)
 - [Setup NTP](#setup-ntp)
 - [Setup Logging and Event Forwarding to Syslog Server](#setup-logging-and-event-forwarding-to-syslog-server)
 - [Shutdown One or More Switchports](#shutdown-one-or-more-switchports)
@@ -24,10 +26,12 @@
 show version
 ```
 
+
 ## Show configuration
 ```bash
 show running-config 
 ```
+
 
 ## Show logs and logging information
 ```bash
@@ -35,17 +39,45 @@ show logging
 show logging onboard
 ```
 
+
 ## Review current "monitors"
 ```bash
 show monitor
 ```
+
 
 ## Show ARP Table
 ```bash
 show arp
 ```
 
+
+# Authentication
+
+
+## Create Admin Account
+```bash
+username admin privilege 15 algorithm-type scrypt secret PASSWORD
+```
+
+
+## Local Authentication
+```bash
+configuration terminal
+aaa new-model
+aaa authentication login default local
+aaa authorization exec default local
+aaa authentication attempts login 5
+aaa authentication fail-message ^ Username Or Password Incorrect ^
+no enable secret
+no enable password
+line vty 0 15
+no password 7
+```
+
+
 # SPANning
+
 
 ## SPAN one VLAN to one Port
 ```bash
@@ -56,21 +88,19 @@ monitor session 1 destination interface gigabitethernet 1/0/24
 end
 ```
 
+
 ## Clear SPAN / Monitoring
 ```bash
 no monitor session 1
 no monitor session all
 ```
 
+
 # Save Config to NVRAM
 ```bash
 copy running-config startup-config
 ```
 
-# Create Admin Account
-```bash
-username admin privilege 15 algorithm type scrypt secret PASSWORD
-```
 
 # Setup NTP
 ```bash
@@ -92,7 +122,6 @@ ntp update-calendar
 ip access-list standard ACL-NTP
  permit 192.168.1.50
 ntp access-group peer ACL-NTP
-
 exit
 
 # Verification
@@ -106,6 +135,7 @@ show clock detail
 ```bash
 enable
 configure terminal
+
 
 ! --- Configuration Archiving & Local Backups ---
 archive
@@ -164,6 +194,7 @@ show archive
 copy running-config startup-config
 ```
 
+
 # Shutdown One or More Switchports
 ```bash
 interface gigabitethernet0/2
@@ -173,6 +204,7 @@ shutdown
 interface range gigabitethernet0/2 - 24
 shutdown
 ```
+
 
 # Set Jumbo Frame Support to 9000 Bytes
 (9000 bytes plus 14 byte header)
@@ -185,12 +217,15 @@ copy running-config startup-config
 reload
 ```
 
+
 # MAC Security
+
 
 ## Review Port Security Status
 ```bash
 show port-security interface <interface_id>
 ```
+
 
 ## Clear MAC Port Shutdown Error
 For if MAC security is set to administratively disable
@@ -201,6 +236,7 @@ interface <interface_id>
  no shutdown
 exit
 ```
+
 
 ## Update MAC Port Security with New MAC
 `clear port-security dynamic`
@@ -215,6 +251,7 @@ interface <interface_id>
  switchport port-security mac-address sticky
 exit
 ```
+
 
 ## Bump Up MACs for a Port to 2
 ```bash
