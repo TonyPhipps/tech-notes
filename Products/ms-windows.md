@@ -62,3 +62,34 @@ https://www.microsoft.com/en-us/software-download/windows10
 ```
 
 Tell it to Update/Upgrade (to Windows 10). System components will be repaired/replaced.
+
+
+# Windows KB Updates
+Manually install KB packages
+```ps1
+wusa.exe "C:\Path\To\Your\Patch\kbupdate.msu" /norestart
+Dism /Online /Add-Package /PackagePath:"C:\Path\To\Your\kbupdate.cab"
+```
+
+## Error Code 0x800f0986
+Repair System Files (DISM & SFC):
+```ps1
+dism /online /cleanup-image /restorehealth
+sfc /scannow
+# reboot and try again
+```
+
+Reset Windows Update Components:
+```ps1
+net stop wuauserv
+net stop cryptSvc
+net stop bits
+net stop msiserver
+ren C:\Windows\SoftwareDistribution SoftwareDistribution.old
+ren C:\Windows\System32\catroot2 catroot2.old
+net start wuauserv
+net start cryptSvc
+net start bits
+net start msiserver
+# reboot and try again
+```
