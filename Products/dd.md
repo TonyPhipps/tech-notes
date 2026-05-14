@@ -97,6 +97,10 @@ gunzip -c /media/backup/windows_backup.img.gz | sudo dd of=/dev/sda bs=64K conv=
 
 
 ## Windows Drive Backup  Across Network from a Linux Live CD
+
+Note: this uses uncompressed dd approach. Adjust dd parameters if needed referencing above.
+
+
 ### Target (receiving)
 Set this up first.
 
@@ -105,19 +109,8 @@ Set this up first.
 - -q 1: Quit 1 sec after EOF
 
 ```bash
-nc -l -p 1234 | gunzip -c | dd of=newimage.img bs=64K conv=fsync status=progress
-```
-
-After the run, verify the backup
-
-Windows
-```bat
-certutil -hashfile \\.\PhysicalDrive1 SHA256
-```
-
-Linux
-```bash
-sha256sum newimage.img
+nc -l -p 1234 | gunzip -c | dd if=/media/backup/windows_non_compressed.img of=/dev/sda bs=64K conv=fsync status=progress
+sha256sum -c windows_non_compressed.img.gz.sha256
 ```
 
 
@@ -127,8 +120,9 @@ sha256sum newimage.img
 - gzip -1: Fast compression to speed up the network transfer
 
 ```bash
-dd if=\\.\PhysicalDrive1 bs=64K conv=sparse iflag=fullblock status=progress | gzip -1 | nc 192.168.1.1 1234
+dd if=/dev/sda of=/media/backup/windows_non_compressed.img bs=64K conv=sparse iflag=fullblock status=progress | gzip -1 | nc 192.168.1.1 1234
+sha256sum /dev/sda > /media/backup/windows_non_compressed.img.gz.sha256
 ```
 
-
+Be sure to compare the hashes on both systems immediately after the backup.
 
