@@ -68,6 +68,17 @@ index=_internal source="*metrics.log" group=queue blocked=true
 | timechart span=10min max(max_size_kb) by name
 ```
 
+# Duplicate Data
+Determine if a source has duplicate events
+```sql
+index=theindex sourcetype=thesource
+| eval delay = _indextime - _time 
+| eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S") 
+| stats count, values(source) as sources, values(sourcetype) as sourcetypes values(delay) as delays values(indextime) as indextimes by _raw _time 
+| table sources, sourcetypes, count, delays, _time indextimes _raw 
+| sort -count
+```
+
 
 # Error-Based Troubleshooting
 
