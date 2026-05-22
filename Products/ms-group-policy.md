@@ -17,3 +17,11 @@ Backup-GPO -Name "Your GPO Name" -Path "C:\GPO_Backups" -Comment "Backup of Your
   - Turn off the display (plugged in): 0
   - Turn off the display (on battery): 0
 
+# Disable USB and Hardware Installation
+NOTE: This will stop new USB's, but it may also stop installing anything else like a webcam, etc.
+
+- Computer Configuration > Policies > Windows Settings > Administrative Templates > System > Device Installation > Device Installation Restrictions > 
+  - Prevent installation of removeable devices: Enabled
+  - Allow administrators to override Device Instllation Restriction policies: Enabled
+  - Display a custom message title when device installation is prevented by a policy setting: AH, Ah, ah...
+  - Display a custom message when installation  is prevented by a policy setting: ...you didn't say the magic word!
