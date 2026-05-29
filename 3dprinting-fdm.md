@@ -1,32 +1,3 @@
-# Beep After First Layer
-This bit of code is useful when you want to ensure the first layer adhered properly without standing there waiting for first layer to finish.
-
-After Layer Chang G-Code:
-
-```
-;AFTER_LAYER_CHANGE
-{if layer_num == 1} M300 S1000 P1500 ; beep {endif}
-;[layer_z]
-```
-
-
-# Wait 5 Min for Plate Cooling, then Beep When Done Printing
-Printer Settings > Custom G-code > End G-Code
-Add this to the end
-
-```
-; Wait 5min for plate to cool
-G4 S480 ;Wait
-
-; Play DONE Beeps
-M300 S1000 P1500 ;First beep
-G4 P1 ;Wait
-M300 S750 P1000 ;Second beep
-G4 P1 ;Wait
-M300 S1000 P1500 ;Third beep
-```
-
-
 # Printer Calibration
 Perform these steps whenever you set up a new printer or make a major change, including swapping out the nozzle.
 
@@ -60,7 +31,7 @@ Should not require major adjustments between different filaments.
 
 
 # Filament Calibration
-Assuming your printer is already calibrated, some filamnet vendor/color combinations may may need to be tuned due to things like containing Titanium Oxide. Details are provided after this quick summary.
+Assuming your printer is already calibrated, **some** filamnet vendor/color combinations may may need to be tuned due to things like containing Titanium Oxide. Details are provided after this quick summary.
 
 - Linear Advance / Pressure Advance
   - Adjust Extrusion Multiplier in G-code file first
@@ -75,14 +46,13 @@ Assuming your printer is already calibrated, some filamnet vendor/color combinat
 
 
 ## Extrusion Multiplier / Flow
-- This should be set per filament manufacturer+color.
 - See https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html
 - Print a series of cubes 30x30x3 increasing Extrusion Multiplier by 1-2% until the gaps in between infll and perimeters go away.
 - Print a series of cubes 30x30x3 decreasing Extrusion Multiplier by .5% until the gaps in between infll and perimeters show up again, then pick the one without gaps.
 
 
 ## Linear Advance/Pressure Advance 
-- This should be set per filament manufacturer+color. In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
+- In Prusaslicer: Filament Settings > Custom G-Code > Start G-Code
 - M221 is the Marlin firmware code for extrusion multiplier, if needed
 - I like to keep multiple files, all with the same settings except the extrusion multiplier value, for quicker testing
 - https://ellis3dp.com/Pressure_Linear_Advance_Tool/
@@ -101,13 +71,13 @@ Print this and adjust settings
 
 
 ### Retraction Distance / Length
-- PETG - best to retract slower (30 mm/s) and re-prime even slower (15 mm/s)
-- PETG - Direct Drive: 2 - 4mm
-- PETG - Bowden: 5-7mm. Print a retraction tower at 5, 6, and 7. If you like, go down to .5 increments to find the best length/distance.
 - It's too low if stringing occurs.
 - If you get blobs, but minimal stringing, move on to Retraction Speed.
 - DO NOT exceed the overall length of the nozzle (from the tip to the big opening the filament enters at) or you may cause jams
-
+- PETG
+  - best to retract slower (30 mm/s) and re-prime even slower (15 mm/s)
+  - Direct Drive: 2 - 4mm
+  - Bowden: 5-7mm. Print a retraction tower at 5, 6, and 7. If you like, go down to .5 increments to find the best length/distance.
 
 ### Retraction Z-Lift
 
@@ -117,24 +87,29 @@ Print this and adjust settings
 
 ### Retraction Speed
 Determines how quickly retraction is carried out.
-- PETG - Start at 20mm/s and go up by 1-5mm/s increments until oozing/stringing goes away
-- PETG - Retraction Speed is more important than Length/Distance, but Retraction Length/Distance being too high can show similar symptoms.
+- Prusaslicer default for Core ONE is 25mm/s
+- PETG
+  - Start at 20mm/s and go up by 1-5mm/s increments until oozing/stringing goes away
+  - Retraction Speed is more important than Length/Distance, but Retraction Length/Distance being too high can show similar symptoms.
 
 
 ### Deretraction Speed (or Restart Speed)
 Determines how quickly filament is fed after a retraction.
-- PETG - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
+- PETG 
+  - Start at 0 (or same as Retraction) and reduce speed if blank spots form, especially visible when retracting for each layer.
 
 
 ### Minimum Travel after Retraction
 Controls how frequently retraction occurs in a specific area.
-- PETG - 1-2mm. Start at 2mm and reduce by 0.1mm increments
+- PETG
+  - 1-2mm. Start at 2mm and reduce by 0.1mm increments
 
 
 ## Travel Speed
-- PETG - First layer speed 15-25mm
-- set to 999 and let printer go as fast as possible when not printing
-- Higher is typically better to avoid ooze/drip
+- PETG 
+  - First layer speed 15-25mm
+  - set to 999 and let printer go as fast as possible when not printing
+  - Higher is typically better to avoid ooze/drip
 
 
 ## Max Volumetric Speed
@@ -171,16 +146,17 @@ Great calibration guide alternatives that may provide useful tips/clarifications
 
 
 # Cold Pull
-- Unload Filament
-- Purge once
-- Ensure Hotend is in position to reduce stress on arm (e.g. right side of Mini+)
-- Expose top of Hotend by removing any hardware
-- Set Nozzle Temperature to 270c
-- Insert the filament into the hotend feed hole. Press until filament oozes out the nozzle tip.
-- Set Nozzle Temperature to 0
-- While the hotend is cooling down, continuously push the filament down so that it extrudes from the nozzle. Do so until it cools down to the point where you can't gently push anymore through (around 160c - 170c).
-- When the temperature is near 90c (for PLA) or 150c for PETG and pull the filament straight up using your hands or pliers, pulling it firmly and steadily until completely released.
-- Repeat one more time.
+- Prusa Mini
+  - Unload Filament
+  - Purge once
+  - Ensure Hotend is in position to reduce stress on arm (e.g. right side of Mini+)
+  - Expose top of Hotend by removing any hardware
+  - Set Nozzle Temperature to 270c
+  - Insert the filament into the hotend feed hole. Press until filament oozes out the nozzle tip.
+  - Set Nozzle Temperature to 0
+  - While the hotend is cooling down, continuously push the filament down so that it extrudes from the nozzle. Do so until it cools down to the point where you can't gently push anymore through (around 160c - 170c).
+  - When the temperature is near 90c (for PLA) or 150c for PETG and pull the filament straight up using your hands or pliers, pulling it firmly and steadily until completely released.
+  - Repeat one more time.
 
 
 ## E-Steps
@@ -229,15 +205,16 @@ Sometimes the next layer or neighboring line sticks, causing stringing, pulling,
 
 
 ## Filament Sticks to Nozzle and Eventually Globs Fall Back on Object
-- PETG printed too hot can ooze excessively. Try lowering the nozzle temperature by 5°C to reduce stringing and blobbing. Check the filament's recommended range (usually 220-250°C).
-  - Be sure to check and clean the nozzle before printing (best with nozzle heated).
-  - Consider enabling Wiping when retracting.
-  - Consider increasing retraction distance.
-  - Consider using Seam Position: Nearest to minimize movement.
-  - Consider enabling "Avoid Crossing Perimeters" with a Max Detour Length of 0.
-  - Consider increasing infill percentage, and a simpler infill or 100% infill with Rectilinear.
-  - Consider increasing non-print travel moves.
-  - Consider increasing cooling fan percentage; ensure ducts running and are properly directing airflow.
+- Be sure to check and clean the nozzle before printing (best with nozzle heated).
+- Consider enabling Wiping when retracting.
+- Consider increasing retraction distance.
+- Consider using Seam Position: Nearest to minimize movement.
+- Consider enabling "Avoid Crossing Perimeters" with a Max Detour Length of 0.
+- Consider increasing infill percentage, and a simpler infill or 100% infill with Rectilinear.
+- Consider increasing non-print travel moves.
+- Consider increasing cooling fan percentage; ensure ducts running and are properly directing airflow.
+- PETG
+  - Printed too hot can ooze excessively. Try lowering the nozzle temperature by 5°C to reduce stringing and blobbing. Check the filament's recommended range (usually 220-250°C).
 
 
 ## Seams Have Small Gap
@@ -276,18 +253,19 @@ Like miniature figures with small surface area touching the bed... going
 
 
 ## Warping
-To avoid warping with PLA...
 - The print bed should be properly leveled
 - The distance between nozzle and print bed should not be too far
-- The print bed temperature should be high enough (60+ for PLA)
 - The print bed adhesion should be good enough (clean bed, glue, etc.)
 - The ambient temperature should be as homogeneous as possible (block gusts)
-- Too many bottom layers may cause warping.
-- Fan being too high, too soon may cause warping. Consider increase number of layers without fan and/or how many layers spent stepping up to max fan speed.
+- Part fan being too high, too soon may cause warping. Consider increase number of layers without fan and/or how many layers spent stepping up to max fan speed.
+- PLA
+  - The print bed temperature should be high enough (60+)
+- PETG
+  - The print bed temperature should be high enough (85+)
 
 
 # Layer Shifting
-Belt tension may be loose, allowing teeth to skip and causing the printer to unknowingly continue to print shifted from the original model.
+- Belt tension may be loose, allowing teeth to skip and causing the printer to unknowingly continue to print shifted from the original model.
 
 
 ## Second Layer Peels Away Like "Gills"
@@ -304,24 +282,14 @@ Belt tension may be loose, allowing teeth to skip and causing the printer to unk
 
 ## Something's Just Off
 - Consider toggling the following
-  - Print Settings > Layers and Perimeters > Detect Thin Walls
-  - Print Settings > Layers and Perimeters > Thick Bridges
-  - Print Settings > Layers and Perimeters > Fill Gaps
   - Print Settings > Layers and Perimeters > Perimeter Generation between Classic and Arachne
-  - Filament - Filament Override > Wipe While Retracting (and amount %)
+
 
 # Matte and Silk Filament
 You can typically print the same normal/satin filament as matte by reducing the temperature, or silk by increasing the temperature. As such, you should print filaments specifically designed as matte with lower temps, and silk as higher temps.
 
 
 # Custom G-Code
-
-
-## PETG Overhangs
-- ```M106 S125``` sets fan to 50% (on Prusa Mini)
-- ```M107```  Disables fan
-- ```M220 S100``` - Sets speed to 100%
-- ```M220 S50``` - Sets speed to 50%
 
 
 ## Temp Tower Customization
@@ -334,4 +302,32 @@ Before Layer Change G-Code
 {if layer_num==105}M104 S240{endif} ; Layer 3
 {if layer_num==155}M104 S235{endif} ; Layer 4
 {if layer_num==205}M104 S230{endif} ; Layer 5
+```
+
+## Beep After First Layer
+This bit of code is useful when you want to ensure the first layer adhered properly without standing there waiting for first layer to finish.
+
+After Layer Chang G-Code:
+
+```
+;AFTER_LAYER_CHANGE
+{if layer_num == 1} M300 S1000 P1500 ; beep {endif}
+;[layer_z]
+```
+
+
+## Wait 5 Min for Plate Cooling, then Beep When Done Printing
+Printer Settings > Custom G-code > End G-Code
+Add this to the end
+
+```
+; Wait 5min for plate to cool
+G4 S480 ;Wait
+
+; Play DONE Beeps
+M300 S1000 P1500 ;First beep
+G4 P1 ;Wait
+M300 S750 P1000 ;Second beep
+G4 P1 ;Wait
+M300 S1000 P1500 ;Third beep
 ```
