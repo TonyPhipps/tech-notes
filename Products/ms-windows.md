@@ -93,3 +93,23 @@ net start bits
 net start msiserver
 # reboot and try again
 ```
+
+# Install Windows Pro On Top of Windows Home
+Copy the ISO/CD/DVD contents to ```C:\Win11Setup```
+Create this, saved at  ```C:\Win11Setup\sources\PID.txt```:
+```
+[PID]
+Value=VK7JG-NPHTM-C97JM-9MPGT-3V66T
+```
+
+Create this, saved at  ```C:\Win11Setup\sources\ei.cfg```:
+```
+[Channel]
+Retail
+```
+
+Run setup.exe again
+
+# Skip Forced Microsoft Live Account Use During Installation
+At Sign In screen, press SHIFT+F10 (might need to include Function button to hit F10)
+A command prompt should open. Type ```start ms-cxh:localonly```
