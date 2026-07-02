@@ -4,7 +4,7 @@
 - ```http(s)://<splunk_server>:8000/debug/refresh```
 
 
-# Generate Risk Rule Events in Orignial Index
+# Generate Risk Rule Events in Original Index
 Create a macro named something like 'risk-rule'. Add that macro to the end of a saved search
 ```sql
 yoursearch
@@ -14,19 +14,15 @@ Arguments: risk_rule_title,risk_rule_guid,risk_rule_level
 Definition:
 ```sql
 fields - punct, cribl_*, date_hour, date_mday, date_minute, date_month, date_second, date_wday, date_year, date_zone, linecount, timeendpos, timestartpos, _bkt, _cd, _serial, _si, _pre_msg, _sourcetype, _subsecond, ForwardedRaw, snare_DataString, message, Message, body
-
+| eval risk_info_time = _time
+| fields - _time
 | tojson include_internal=true output_field=risk_info auto(*) 
 | eval risk_rule_title = "$risk_rule_title_arg$"
 | eval risk_rule_guid = "$risk_rule_guid_arg$"
 | eval risk_rule_level = "$risk_rule_level_arg$"
-| eval risk_info_time = _time
 | eval risk_info_sourcetype = sourcetype
 | eval risk_info_source = source
-| eval sourcetype="My:Risk"
-| eval risk_rule_source= case( 
-    match(risk_rule_title,"^RR -"), "My:Risk:Internal",
-    match(risk_rule_title,"^RR -"), "My:Risk:Sigma",
-    1==1, "My:Risk"
+| eval risk_rule_source = "My:Risk"
 )
 | eval risk_rule_level = lower(risk_rule_level)
 | eval risk_score = case(
@@ -41,22 +37,38 @@ fields - punct, cribl_*, date_hour, date_mday, date_minute, date_month, date_sec
 )
 
 | eval host = if(risk_info_sourcetype="forescout*", coalesce(srcHostName, host), host)
-| eval host_coalesce = coalesce(src_host,dst_host,host)
-| rex field=host_coalesce "^(?i)(?<risk_rule_host>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|[^\.]+)" 
-| eval risk_rule_host = upper(risk_rule_host) 
+| foreach src_user,dst_user,user,User,Account_Name,src_host,dst_host,host,ComputerName,dest,dvc,dvc_nt_host,src,src_ip
+    [ eval <<FIELD>> = if (trim(<<FIELD>>) IN ("","-","NOT_TRANSLATED"), null(), <<FIELD>>) ]
 
-| eval User = if(User IN ("NOT_TRANSLATED","-"), null(), User)
-| eval user = if(user IN ("NOT_TRANSLATED","-"), null(), user)
-| eval Account_Name = if(like(Account_Name, "%$"), null(), Account_Name)
-| eval user_coalesce = coalesce(src_user,dst_user,user,User,Account_Name, "-")
-| rex field=user_coalesce "(.+\\\)?(?<risk_rule_user>[^@]+)(@[\w\.-]+)?" 
-| eval risk_rule_user=case(
-    risk_rule_user="SYSTEM" OR risk_rule_user="NETWORK SERVICE", lower(risk_rule_host."$"),
-    1==1, lower(risk_rule_user)
-) 
+``` IP or strip FQDN```
+| foreach src_host,dst_host,host,ComputerName,dest,dvc,dvc_nt_host,src,src_ip
+[ rex field=<<FIELD>> "^(?i)(?<<<FIELD>>>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|[^\.]+)"] 
 
-| table _time, index, risk_rule_source, sourcetype, risk_rule_title, risk_rule_guid, risk_rule_level, risk_score, risk_rule_host, risk_rule_user, risk_info_source, risk_info_sourcetype, risk_info_time, risk_info
-| map maxsearches=5000 search=" | makeresults | eval _time=$_time$, risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\",  risk_rule_level=\"$risk_rule_level$\", risk_score=\"$risk_score$\", risk_rule_host=\"$risk_rule_host$\", risk_rule_user=\"$risk_rule_user$\", risk_info_source=\"$risk_info_source$\", risk_info_sourcetype=\"$risk_info_sourcetype$\", risk_info_time=\"$risk_info_time$\", risk_info=\"$risk_info$\" | collect index=$index$ sourcetype=\"$sourcetype$\" source=\"$risk_rule_source$\""
+| eval risk_rule_host= upper(coalesce(src_host,ComputerName,host))
+| eval risk_object_string = mvappend(src_user,dst_user,user,User,Account_Name)
+
+```Strip domains from each user field```
+| eval risk_object_string = mvmap(risk_object_string, replace(risk_object_string,"(?:.+\\\)?([^@]+)(?:@[\w\.-]+)?","\1"))
+
+```Append risk_object_type to each user field value. Computer account risk is added to host risk, so they are combined here as a single risk_object.```
+| eval risk_object_string = mvmap(risk_object_string, case(
+    risk_object_string IN ("SYSTEM", "NETWORK SERVICE", "LOCAL SERVICE"), lower(risk_object_string  . "@" . risk_rule_host . "|user"),
+    match(risk_object_string,"(?i)(svc)|(service)|(msa)"), lower(risk_object_string  . "|user"),
+    match(risk_object_string,"\$$"), (rtrim(upper(risk_object_string),"$") . "|host"),
+    1==1, lower(risk_object_string . "|user")
+    ) 
+)
+
+| eval host_risk_objects = mvappend(src_host, dst_host, host, ComputerName, dest, dvc, dvc_nt_host, src, src_ip)
+| eval host_risk_objects = mvmap(host_risk_objects , host_risk_objects . "|host")
+| eval risk_object_string = mvappend(risk_object_string, host_risk_objects )
+
+| eval risk_object_string = mvdedup(risk_object_string)
+| eval risk_object_string = if(isnull(risk_object_string), "-",risk_object_string)
+| eval risk_object_string = mvjoin(risk_object_string,";")
+
+| table _time, index, risk_rule_source, sourcetype, risk_rule_title, risk_rule_guid, risk_rule_level, risk_score, risk_rule_host, risk_object_string, risk_info_source, risk_info_sourcetype, risk_info_time, risk_info
+| map maxsearches=5000 search=" | makeresults | eval _time=$_time$, risk_rule_title=\"$risk_rule_title$\", risk_rule_guid=\"$risk_rule_guid$\", risk_rule_level=\"$risk_rule_level$\", risk_score=\"$risk_score$\", risk_rule_host=\"$risk_rule_host$\", risk_object_string=\"$risk_object_string$\", risk_info_source=\"$risk_info_source$\", risk_info_sourcetype=\"$risk_info_sourcetype$\", risk_info_time=\"$risk_info_time$\", risk_info=\"$risk_info$\" | collect index=$index$ sourcetype=\"My:Risk\" source=\"$risk_rule_source$\" host=\"$risk_rule_host$\""
 ```
 
 With arguments: ```risk_rule_title_arg,risk_rule_guid_arg,risk_rule_level_arg```
@@ -65,8 +77,8 @@ With arguments: ```risk_rule_title_arg,risk_rule_guid_arg,risk_rule_level_arg```
 Parse the Risk Rule event generated from the previous macro. This allows building dashboards on it, investigating, etc.
 ```sql
 | eval risk_rule_fire_time = _time
+| eval risk_object_string = split(risk_object_string, ";")
 | fieldformat risk_rule_fire_time = strftime(risk_rule_fire_time,"%Y-%m-%d %H:%M:%S %Z%:z")
 | fromjson risk_info
-| fields - risk_info, nLogName, nTaskCategory, nType
-| sort - _time
+| fields - risk_info, nLogName, nTaskCategory, nType, nOpCode
 ```
