@@ -159,6 +159,15 @@ Great calibration guide alternatives that may provide useful tips/clarifications
   - Repeat one more time.
 
 
+# Cold Pull with Nylon
+- Remove the PTFE guide tube by pushing down on the collet while pulling up on the PTFE guide tube.
+- Unload the PETG normally. Once out, flip open the Nextruder idler lever (the plastic latch on the side of the extruder). This disengages the drive gears so you can manually push and pull filament by hand without damaging the motor.
+- Manually heat the nozzle to 250°C. Push the nylon filament straight down into the top of the Nextruder by hand until it starts actively extruding out of the nozzle tip. This ensures it completely fills the nozzle cavity and displaces the remaining PETG.
+- Turn off the nozzle heater. While the nozzle is cooling down from 250°C down to about 130°C, keep applying light, steady downward pressure on the nylon strand with your hand. This keeps the cavity packed tight as the plastic shrinks.
+- Let the nozzle cool down until it hits roughly 95°C. At this specific temperature, the nylon is solid enough to hold its shape and grab all the debris, but pliable enough to release from the brass/steel nozzle walls.
+- Hold the top of the Core ONE toolhead frame with one hand to stabilize it. With your other hand, grab the nylon strand close to the extruder entry and give it a firm, steady, upward yank. It should pop out with a distinct click.
+
+
 ## E-Steps
 - https://teachingtechyt.github.io/calibration.html#esteps
 - Go to Settings and long press over HW Setup until you hear the beep. That will bring you to the experimental menu where you can adjust e-steps. 
