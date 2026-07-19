@@ -1,6 +1,7 @@
 - [Strange Notes](#strange-notes)
 - [Theme](#theme)
 - [Tokens](#tokens)
+  - [Visual Token Debugging](#visual-token-debugging)
   - [Checkbox to Toggle Tokens](#checkbox-to-toggle-tokens)
   - [Provide a Field for Tokens, but do Not Display to User](#provide-a-field-for-tokens-but-do-not-display-to-user)
   - [Dynamic Dropdown to Toggle Tokens](#dynamic-dropdown-to-toggle-tokens)
@@ -63,6 +64,26 @@ https://splunk.com/en-US/app/myapp/mydashboard?theme="light"
 ```$env:is_free$``` 	      Indicates if the current instance is using a Splunk Enterprise free license. This token is only set when "true".
 
 ```$env:version$``` 	      Current instance product version 
+
+
+## Visual Token Debugging
+Add this directly under ```<fieldset>``` to show values of tokens for quick debugging.
+```xml
+<row>
+  <panel>
+    <html>
+      <div style="color:#fff; font-family:monospace; padding:8px; background:#222;">
+        host = [$host$]<br/>
+        Selected_IP = [$Selected_IP$]<br/>
+        host_hasvalue = [$host_hasvalue$]<br/>
+        host_novalue = [$host_novalue$]<br/>
+        Selected_IP_hasvalue = [$Selected_IP_hasvalue$]<br/>
+        Selected_IP_novalue = [$Selected_IP_novalue$]
+      </div>
+    </html>
+  </panel>
+</row>
+```
 
 
 ## Checkbox to Toggle Tokens
