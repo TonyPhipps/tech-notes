@@ -1,26 +1,31 @@
 # Final Curriculum Tally
 
-* **80 Hours:** Udacity – Developing Android Apps with Kotlin
-* **46 Hours:** Google – Android Basics with Compose
-* **06 Hours:** Independent – Git & GitHub Fundamentals
-* **08 Hours:** Google – Intermediate Android Pathways
-* **40 Hours:** Independent – Comprehensive Capstone Project
-* **Total: 180 Hours**
+- **0 Hours:** Udacity - Kotlin Bootcamp for Programmers
+- **80 Hours:** Udacity – Developing Android Apps with Kotlin
+- **46 Hours:** Google – Android Basics with Compose
+- **06 Hours:** Independent – Git & GitHub Fundamentals
+- **08 Hours:** Google – Intermediate Android Pathways
+- **40 Hours:** Independent – Comprehensive Capstone Project
+- **Total: 180 Hours**
 
 
 # Recommended Courses
 
 
+## Kotlin Bootcamp for Programmers
+- https://www.udacity.com/course/kotlin-bootcamp-for-programmers--ud9011
+
+
 ## Developing Android Apps with Kotlin (80hrs)
-  - https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012
+- https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012
 
 
 ## Android Basics with Compose (46hrs)
-  - https://developer.android.com/courses/android-basics-compose/course
+- https://developer.android.com/courses/android-basics-compose/course
 
 
-## Kotlin Core (134hrs)
-  - https://hyperskill.org/courses/18
+## Kotlin Core (134hrs) (PAID)
+- https://hyperskill.org/courses/18
 
 ## Git and Version Control Fundamentals (6 Hours)
 Before a student starts building software independently, they must learn how to track, save, and back up their code using industry-standard version control.
