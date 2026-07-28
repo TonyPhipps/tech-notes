@@ -145,3 +145,14 @@ Verify fstab is not broken via
 findmnt --verify
 ```
 
+
+# Check NTP Settings
+```bash
+chronyc tracking
+chronyc sources -v
+timedatectl status
+cat /sys/devices/system/clocksource/clocksource0/current_clocksource
+cat /sys/devices/system/clocksource/clocksource0/available_clocksource
+dmesg | egrep -i 'clocksource|timekeeping|tsc|ntp|chronyd'
+journalctl -k | egrep -i 'clocksource|timekeeping|tsc|ntp|chronyd'
+```
