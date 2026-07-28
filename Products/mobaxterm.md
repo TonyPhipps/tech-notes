@@ -3,7 +3,7 @@ Run with smartcard credentials
 \Windows\System32\runas.exe /smartcard /netonly /user:bor.doi.net\elevated-username "C:\Program Files (x86)\Mobatek\MobaXterm\MobaXterm.exe"
 ```
 
-# Transfer Files Using SSH Browser
+# Transfer Files Into Endpoint Using SSH Browser
 In this example we are uploading a file, moving it to /tmp/ adjusting its permisisons, putting it in place, then adjusting permissions again.
 
 - Upload files to /home/youruser
@@ -29,3 +29,15 @@ In this example we are uploading a file, moving it to /tmp/ adjusting its permis
 - Confirm:
 
 `ll /opt/splunk/etc/apps/bor_ics_sigma/local`
+
+
+# Transfer Files Out of Endpoint Using SSH Browser
+In this example, we are preparing a folder for Download
+
+```
+rm -r /tmp/folder-to-download
+mkdir -p /tmp/folder-to-download
+cp -r /opt/splunk/etc/apps/risk_content/* /tmp/folder-to-download/
+find /tmp/folder-to-download -type d -exec chmod 755 {} +
+find /tmp/folder-to-download -type f -exec chmod 644 {} +
+```
