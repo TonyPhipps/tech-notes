@@ -1,4 +1,5 @@
 # Setup Option 1
+
 Pull
 ```
 docker pull splunk/splunk:latest
@@ -195,39 +196,57 @@ docker compose up
 ```
 
 
-
 # Admin
 
 To see a list of example commands and environment variables for running Splunk Enterprise in a container, run:
 
-```docker run -it splunk/splunk help```
+```bash
+docker run -it splunk/splunk help
+```
 
 To see a list of your running containers, run:
 
-```docker ps```
+```bash
+docker ps
+```
 
 Display single container status
-```docker ps -a -f id=<container_id>```
+```bash
+docker ps -a -f id=<container_id>
+```
+
+To restart only Splunk
+```bash
+sudo docker exec -it splunk4dfir sudo /opt/splunk/bin/splunk restart
+```
 
 To stop your Splunk Enterprise container, run:
 
-```docker container stop <container_id>```
+```bash
+docker container stop <container_id>
+```
 
 To restart a stopped container, run:
 
-```docker container start <container_id>```
+```bash
+docker container start <container_id>
+```
 
 To access a running Splunk Enterprise container to perform administrative tasks, such as modifying configuration files, run:
 
-```docker exec -it <container_id> bash```
+```bash
+docker exec -it <container_id> bash
+```
 
 Access the Splunk instance with a browser by using the Docker machine IP address and Splunk Web port. For example, ``http://localhost:8000`
 
 
 ### Data Store
+
 This Docker image has two data volumes:
 - ```/opt/splunk/etc``` - stores Splunk configurations, including applications and lookups
 - ```/opt/splunk/var``` - stores indexed data, logs and internal Splunk data
+
 
 ### Ports
 
@@ -242,6 +261,14 @@ This Docker container exposes the following network ports:
 
 This Docker image uses port 1514 instead of the standard port 514 for the syslog port because network ports below 1024 require root access. See [Run Splunk Enterprise as a different or non-root user](http://docs.splunk.com/Documentation/Splunk/latest/Installation/RunSplunkasadifferentornon-rootuser).
 
+
+## Ingest EVTX files from artifacts/evtx
+
+Drop EVTX files into the artifacts/evtx directory. From the docker host, while the container is running:
+```bash
+sudo docker exec -it splunk4dfir sudo chmod +x /opt/splunk/etc/apps/Splunk4DFIR/bin/ingest_evtx.sh
+sudo docker exec -it splunk4dfir sudo /opt/splunk/etc/apps/Splunk4DFIR/bin/ingest_evtx.sh
+```
 
 
 Resources

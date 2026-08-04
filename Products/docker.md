@@ -81,3 +81,33 @@ List all volumes for a container
 sudo docker volume ls
 sudo docker volume inspect MyContainer_var --format='{{.Mountpoint}}'
 ```
+
+
+# To Build an Image
+- Internet connection is required to build the container image
+1) Open a terminal, cd to `~/path/to/containername/`
+2) Run `sudo docker compose build`
+3) Run `sudo docker compose up` - once it completes, use `CTRL+Z` to send it to the background.
+   - It is possible to just build the image without starting the container, but these steps assume you are testing the deployment as well.
+   - If you do not want to see the logs, run `sudo docker compose up -d` instead to run the command in the background.
+   - If you get a permission error during the Splunk setup steps, run
+      ```bash
+      cd ~/path/to/containername/../
+      sudo setfacl -Rdm o::rx containername
+      sudo setfacl -Rm o::rx containername
+      ```
+4) Connect to http://host-server-ip-address:8000 (HTTPS not enabled on the container)
+   - This assumes the host is configured for NAT with port forwarding. If a bridged network is used, use the VM IP address.
+5) Save the container image for use in an offline environment
+   ```bash
+   sudo docker save containername:latest | gzip > containername.tar.gz
+   ```
+
+  
+# Load saved image for offline use  
+
+Note: For the offline image to be used, the docker compose file must be in a folder named "containername". The image name of a compose container is the folder (containername) plus the service name (servicename).
+```bash
+sudo docker load --input containername-servicename.tar.gz
+```
+  
