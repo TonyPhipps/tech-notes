@@ -174,7 +174,7 @@ service timestamps log datetime show-timezone msec
 ! --- Logging Core Configuration ---
 logging origin-id hostname
 logging trap informational
-logging host 192.168.1.1
+logging host 192.168.1.1 transport udp port 514
 logging facility local7
 logging source-interface loopback0
 logging userinfo
