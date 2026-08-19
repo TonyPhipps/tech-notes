@@ -1,14 +1,22 @@
 # Final Curriculum Tally
 
+- **46 Hours:** Google – Android Basics with Compose
 - **08 Hours:** Udacity - Kotlin Bootcamp for Programmers
 - **80 Hours:** Udacity – Developing Android Apps with Kotlin
-- **46 Hours:** Google – Android Basics with Compose
 - **06 Hours:** Independent – Git & GitHub Fundamentals
 - **40 Hours:** Independent – Comprehensive Capstone Project
 - **Total: 180 Hours**
 
 
 # Recommended Courses
+
+
+## Android Basics with Compose (46hrs)
+- https://developer.android.com/courses/android-basics-compose/course
+- This bridges the gap to Modern Android Development (MAD). It moves away from legacy visual layouts and teaches Jetpack Compose (declarative UI), ensuring the student's skill set aligns perfectly with current standards.
+- Use these tools: 
+  - https://play.kotlinlang.org
+  - https://developer.android.com/studio
 
 
 ## Kotlin Bootcamp for Programmers (8hrs)
@@ -19,11 +27,6 @@
 ## Developing Android Apps with Kotlin (80hrs)
 - https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012
 - A deep, thorough look at the core Android ecosystem. The student spends this massive block understanding app lifecycles, background tasks, connecting to the internet, and basic data persistence.
-
-
-## Android Basics with Compose (46hrs)
-- https://developer.android.com/courses/android-basics-compose/course
-- This bridges the gap to Modern Android Development (MAD). It moves away from legacy visual layouts and teaches Jetpack Compose (declarative UI), ensuring the student's skill set aligns perfectly with current standards.
 
 
 ## Git and Version Control Fundamentals (6 Hours)
