@@ -1,11 +1,11 @@
-# Final Curriculum Tally
-
-- **46 Hours:** Google – Android Basics with Compose
-- **08 Hours:** Udacity - Kotlin Bootcamp for Programmers
-- **80 Hours:** Udacity – Developing Android Apps with Kotlin
-- **06 Hours:** Independent – Git & GitHub Fundamentals
-- **40 Hours:** Independent – Comprehensive Capstone Project
-- **Total: 180 Hours**
+- [Recommended Courses](#recommended-courses)
+  - [Android Basics with Compose (46hrs)](#android-basics-with-compose-46hrs)
+  - [Kotlin Bootcamp for Programmers (8hrs)](#kotlin-bootcamp-for-programmers-8hrs)
+  - [Developing Android Apps with Kotlin (80hrs)](#developing-android-apps-with-kotlin-80hrs)
+  - [Git and Version Control Fundamentals (6 Hours)](#git-and-version-control-fundamentals-6-hours)
+  - [Guided Capstone Portfolio Project (40 Hours)](#guided-capstone-portfolio-project-40-hours)
+  - [Capstone Ideas for High Schoolers](#capstone-ideas-for-high-schoolers)
+  - [Consider Also](#consider-also)
 
 
 # Recommended Courses

@@ -1,4 +1,4 @@
-Install Nessus Offline
+# Install Nessus Offline
 - Generate an Activation Code
 - Download installer (there is only an offline installer currently)
   - https://www.tenable.com/downloads/nessus?loginAttempted=true
@@ -24,7 +24,7 @@ Install Nessus Offline
     - A popup should appear, or the Scans > New Scan button should become available.
 
 
-Scan Systems
+# Scan Systems
 - A Host Discovery Scan is needed first.
 - After hosts are discovered, a Basic Network Scan can be conducted.
 - After the Basic Network Scan is created (and optionally stopped), Configure the scan and go to Credentials
@@ -33,11 +33,34 @@ Scan Systems
 - Expect scans to take a few minutes per target endpoint.
 
 
-Perform credentialed scans on non-domain joined endpoints
+# Perform credentialed scans on non-domain joined endpoints
 - https://docs.tenable.com/nessus/Content/CredentialedChecksOnWindows.htm#ConfigureWindows
   - Create accounts
   - Disable UAC
   - Set Firewall to allow file and printer sharing and other settings
   - Enable Remote Registry
   - Enable the default administrative shares (IPC$ and ADMIN$)
+
+
+# Update Plugins Offline
+- Compilation time: After applying the archive, Nessus will compile the plugins. The web UI may display a "Compiling Plugins" status for 5 to 15 minutes before scans can be initiated.
+- Service Restart: If the plugins do not begin compiling automatically after a CLI update, restart the Nessus daemon:
+
+## Via Web UI
+- Access the Nessus Web UI in your browser (https://<nessus-ip>:8834).
+- Click Settings in the top menu.
+- Select the Software Update tab.
+- Click Manual Software Update in the top-right corner.
+- Choose Upload your own plugin archive, click Continue, and select your all-2.0.tar.gz file.
+- Wait for the progress icon to disappear (spinning circle in bottom-left of browser window).
+
+## Via CLI
+Note: takes a couple minutes to update, then 5-10 more minutes after command complete for compilation. The plugins Last Updated date will NOT update in the web UI until compilation completes. There is no visual indicator for progress on compilation.
+
+```dos
+"C:\Program Files\Tenable\Nessus\nessuscli.exe" update C:\path\to\all-2.0.tar.gz
+```
+
+- It should report "* Update sucessful. The changes will be automatically processed by Nessus"
+- After 5-10min for compliation, verify plugins in Overview tab under Settings > About > Overview > Plugins > Last Updated 1215
 
