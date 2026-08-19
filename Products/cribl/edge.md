@@ -1,4 +1,31 @@
-﻿# Edge Concepts: Cribl Edge Basics
+﻿- [Edge Concepts: Cribl Edge Basics](#edge-concepts-cribl-edge-basics)
+  - [What does Cribl Edge do, again?](#what-does-cribl-edge-do-again)
+  - [Challenges Addressed by Cribl Edge:](#challenges-addressed-by-cribl-edge)
+  - [Key Components of Edge](#key-components-of-edge)
+  - [Key Benefits of Cribl Edge](#key-benefits-of-cribl-edge)
+  - [Remember...](#remember)
+- [Edge Concepts: Sources \& Destinations](#edge-concepts-sources--destinations)
+  - [Edge Sources](#edge-sources)
+  - [Key Sources by Operating System](#key-sources-by-operating-system)
+  - [Cribl Edge Destinations (focusing on Cribl Stream):](#cribl-edge-destinations-focusing-on-cribl-stream)
+  - [Remember...](#remember-1)
+- [Edge Architecture: Overview](#edge-architecture-overview)
+  - [Deployment Modes](#deployment-modes)
+  - [Cribl Edge Fleet Management](#cribl-edge-fleet-management)
+  - [Leader Node Communications](#leader-node-communications)
+  - [Cribl.Cloud Communications](#criblcloud-communications)
+  - [Edge to Worker Group](#edge-to-worker-group)
+  - [Remember...](#remember-2)
+- [Edge Architecture: On-Prem Install](#edge-architecture-on-prem-install)
+  - [Preparation](#preparation)
+  - [BootStart Settings](#bootstart-settings)
+  - [Security](#security)
+  - [Port Requirements](#port-requirements)
+  - [Edge Installation Methods](#edge-installation-methods)
+  - [Remember...](#remember-3)
+
+
+# Edge Concepts: Cribl Edge Basics
 This section explores key concepts of Cribl Edge as a next-generation data collection agent for IT and Security professionals.
 
 ## What does Cribl Edge do, again?

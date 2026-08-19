@@ -1,4 +1,11 @@
-﻿# Lake Concepts: Lake Basics
+﻿- [Lake Concepts: Lake Basics](#lake-concepts-lake-basics)
+  - [Data Lakes and data management challenges](#data-lakes-and-data-management-challenges)
+  - [Offerings](#offerings)
+  - [Features](#features)
+  - [Remember...](#remember)
+
+
+# Lake Concepts: Lake Basics
 This section provides a comprehensive overview of how Cribl Lake addresses common data lake issues by providing a streamlined data management solution.
 
 

@@ -1,4 +1,17 @@
-﻿# Search Concepts: Overview
+﻿
+- [Search Concepts: Overview](#search-concepts-overview)
+  - [Data Search Fundamentals](#data-search-fundamentals)
+  - [Cribl Search: A New Approach](#cribl-search-a-new-approach)
+  - [Search Query Components](#search-query-components)
+  - [Remember...](#remember)
+- [Search Concepts: Search Basics](#search-concepts-search-basics)
+  - [Deployment in Cribl.Cloud](#deployment-in-criblcloud)
+  - [Traditional Search vs Cribl Search](#traditional-search-vs-cribl-search)
+  - [Cribl Search Targets](#cribl-search-targets)
+  - [Shaping and Performing a Cribl Search Query](#shaping-and-performing-a-cribl-search-query)
+  - [Remember...](#remember-1)
+
+# Search Concepts: Overview
 This section explores the fundamentals of searching data and introduces Cribl Search functionalities.
 
 
