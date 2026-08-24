@@ -1,4 +1,102 @@
-Check who service is running as. Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
+# Investigate Crashs
+Errors and fatals in the lead-up to a crash
+```sql
+index=_internal source=*splunkd.log (log_level=ERROR OR log_level=FATAL OR log_level=WARN)
+| sort 0 - _time
+| table _time host log_level component event_message
+```
+
+Find crash events / restarts
+```sql
+index=_internal source=*splunkd.log ("Interrupt signal received" OR "Died" OR "Shutting down" OR "splunkd started" OR "SIGSEGV" OR "assertion" OR "terminate")
+| sort 0 _time
+| table _time host component event_message
+```
+
+ Out-of-memory / process kills (very common "unexpected crash" cause)
+ ```sql
+index=_internal source=*splunkd.log ("out of memory" OR "oom" OR "cannot allocate" OR "bad_alloc" OR "workload" OR "memory limit")
+| table _time host component event_message
+ ```
+
+Memory usage trend around the crash (_introspection)
+```sql
+index=_introspection component=PerProcess data.process=splunkd
+| eval mem_MB = round('data.mem_used', 2)
+| timechart span=1m max(mem_MB) as MaxMem_MB by host
+```
+
+Host-wide resource usage, incl. the I/O the health panel flagged
+```sql
+index=_introspection component=Hostwide
+| timechart span=1m avg(data.cpu_system_pct) as sys_cpu avg(data.cpu_user_pct) as user_cpu avg(data.mem_used) as mem_used
+```
+
+Per-CPU IOWait specifically (ties back to your original warning)
+```sql
+index=_introspection component=Hostwide
+| timechart span=1m avg(data.cpu_idle_pct) as idle max(data.cpu_iowait_pct) as max_iowait avg(data.cpu_iowait_pct) as avg_iowait
+```
+
+Disk space / IO stats per partition
+```sql
+index=_introspection component=IOStats
+| timechart span=1m avg(data.reads_ps) as reads avg(data.writes_ps) as writes avg(data.avg_service_ms) as svc_ms by data.mount_point
+```
+
+Confirm the crash gaps visually (uptime heartbeat)
+ ```sql
+ index=_internal source=*metrics.log group=pipeline
+| timechart span=1m count by host
+ ```
+
+Bucket / index corruption or fsck errors (I/O crashes often corrupt buckets)
+```sql
+index=_internal source=*splunkd.log (component=DatabaseDirectoryManager OR component=BucketMover OR "fsck" OR "corrupt" OR "rawdata" OR "journal")
+| table _time host component event_message
+```
+
+Config or startup errors (if it crashes at/after restart specifically)
+```sql
+index=_internal source=*splunkd.log (component=UiHttpListener OR component=loader OR "Cannot bind" OR "port" OR "license" OR "TcpInputProc")
+| table _time host component event_message
+```
+
+Biggest memory-consuming search processes 
+```sql
+index=_introspection component=PerProcess host=yoursearchhead data.process=splunkd data.search_props.sid=*
+| eval mem_MB=round('data.mem_used',1)
+| stats max(mem_MB) as peak_MB values(data.search_props.type) as type values(data.search_props.app) as app values(data.search_props.user) as user by data.search_props.sid
+| sort - peak_MB
+| head 30
+```
+
+What searches were actually running 
+```sql
+index=_audit host=yoursearchhead action=search (info=granted OR info=completed)
+| eval sid=coalesce(search_id, sid)
+| table _time user app search_id savedsearch_name total_run_time scan_count event_count search
+| sort - total_run_time
+```
+
+Search concurrency over time
+```sql
+index=_internal source=*metrics.log host=yoursearchhead group=search_concurrency
+| timechart span=1m max(active_hist_searches) as historical max(active_realtime_searches) as realtime
+```
+
+Accelerated data model rebuilds/summarization running at crash time
+```sql
+index=_internal source=*scheduler.log host=IBRSACLXSRH310.bor.doi.net savedsearch_name="_ACCELERATE_*"
+| eval run_min=round(run_time/60,1)
+| table _time savedsearch_name status run_min result_count
+| sort - _time
+```
+
+
+
+# Check who service is running as
+Note that the service will NOT run properly without extra permissions beyond a simple "sudoers" group add.
 ```bash
 ps -ef | grep splunk
 ```
