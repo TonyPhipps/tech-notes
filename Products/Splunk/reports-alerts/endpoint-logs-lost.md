@@ -3,6 +3,7 @@ This use case stores a log of last observed event for all hosts and alerts on th
 Run once:
 ```sql
 | tstats min(_time) as first_seen, max(_time) as last_seen where index=* BY index, host
+| eval host=if(match(host, "^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"), host, upper(replace(host, "\..*$", "")))
 | outputlookup last_seen_inventory.csv create_context=user
 ```
 
