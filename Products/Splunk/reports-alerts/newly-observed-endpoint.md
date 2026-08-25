@@ -12,7 +12,7 @@ NOTE: If also running the detection in [endpoint-logs-lost.md](endpoint-logs-los
 ```sql
 | tstats min(_time) as first_seen, latest(_time) as last_seen where index=* earliest=-24h BY index, host
 | inputlookup append=t last_seen_inventory.csv
-| eval host=upper(replace(host, "\..*$", ""))
+| eval host=if(match(host, "^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"), host, upper(replace(host, "\..*$", "")))
 | stats min(first_seen) as first_seen, max(last_seen) as last_seen by index, host
 | outputlookup last_seen_inventory.csv
 | eval status = case(

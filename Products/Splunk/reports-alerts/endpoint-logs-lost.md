@@ -10,6 +10,7 @@ Run this detection/maintenance search daily:
 ```sql
 | tstats latest(_time) as latest_seen where index=* earliest=-24h BY index, host
 | inputlookup append=t last_seen_inventory.csv
+| eval host=if(match(host, "^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"), host, upper(replace(host, "\..*$", "")))
 | stats max(latest_seen) as last_seen by index, host
 | where last_seen > relative_time(now(), "-90d")
 | outputlookup last_seen_inventory.csv
