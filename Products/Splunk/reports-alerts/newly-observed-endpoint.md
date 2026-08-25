@@ -3,14 +3,16 @@ Run this once to create the lookup
 NOTE: It is recommended to reuse the lookup list in [endpoint-logs-lost.md](endpoint-logs-lost.md) as a base.
 ```sql
 | tstats min(_time) as first_seen, max(_time) as last_seen where index=* BY index, host
+| eval host=upper(replace(host, "\..*$", ""))
 | outputlookup last_seen_inventory.csv create_context=user
 ```
 
 Detection
-NOTE: If also running the detection in [endpoint-logs-lost.md](endpoint-logs-lost.md), ensure this one runs BEFORE that one.
+NOTE: If also running the detection in [endpoint-logs-lost.md](endpoint-logs-lost.md), ensure this one runs BEFORE that one, and that they don't both have the line ```| outputlookup last_seen_inventory.csv```.
 ```sql
 | tstats min(_time) as first_seen, latest(_time) as last_seen where index=* earliest=-24h BY index, host
 | inputlookup append=t last_seen_inventory.csv
+| eval host=upper(replace(host, "\..*$", ""))
 | stats min(first_seen) as first_seen, max(last_seen) as last_seen by index, host
 | outputlookup last_seen_inventory.csv
 | eval status = case(
