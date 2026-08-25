@@ -76,7 +76,7 @@ Settings > Data Models > New Data Model
 | Show first and last times                                                                             | `\| stats min(_time) as firstTime max(_time) as lastTime \| convert timeformat="%F %T %Z" ctime(firstTime), ctime(lastTime)` |
 | Days since Date                                                                                       | `\| eval DaysSince = round((now()-DateParsed)/86400)`                                                                        |
 | Check how many events occur in an hour window                                                         | `\| bucket _time span=1h \| stats count by _time`                                                                            |
-| Truncate hostname to remove FQDN portion.                                                             | `\| eval host=replace(host, "\..*", "")`                                                                                     |
+| Truncate hostname to remove FQDN portion.                                                             | `\| eval host=upper(replace(host, "\..*$", ""))`                                                                                     |
 | Remove digits in a field (useful for overloaded field values)                                         | `\| eval your_field_name = replace(your_field_name, "\d", "")`                                                               |
 | Check if "Message" field has string "test"                                                            | `\| eval has_string=if(like(Message, "%test%"), "True", "False")`                                                            |
 
