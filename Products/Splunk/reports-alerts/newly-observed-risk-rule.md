@@ -45,7 +45,7 @@ index IN ("indexes*") sourcetype="My:Risk" earliest=-30d@d latest=@d
    - Schedule daily at 00:30 (30 0 * * *)
    - Schedule Window: Auto
 ```sql
-index IN ("indexes*") sourcetype="My:Risk" earliest=-1d@d latest=@d
+index IN ("index-*") sourcetype="My:Risk" earliest=-1d@d latest=@d 
 | eval risk_index = index, _time = relative_time(now(), "-1d@d")
 | stats 
     count as date_observed_hits 
@@ -61,13 +61,13 @@ index IN ("indexes*") sourcetype="My:Risk" earliest=-1d@d latest=@d
     max(last_seen) as last_seen
     values(risk_rule_title) as risk_rule_title
     by risk_rule_guid, risk_index, _time
-| eventstats 
+|  eventstats 
     sum(date_observed_hits) as hits_30d 
     min(first_seen) as first_seen 
     max(last_seen) as last_seen 
     by risk_rule_guid, risk_index
 | eval temp_24h = if(_time >= relative_time(now(), "-1d@d"), date_observed_hits, 0)
-| eventstats max(temp_24h) as hits_last_24h by risk_rule_guid, risk_index
+| eventstats max(temp_24h) as hits_yesterday by risk_rule_guid, risk_index
 | fields - temp_24h
 | rename _time as date_observed
 | outputlookup observed_risk_rules.csv
