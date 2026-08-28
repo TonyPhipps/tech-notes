@@ -1,15 +1,3 @@
-# Find Newly Observed Events
-- This specific example basically says "show me hosts that were not observed in the last 7d."
-- Most efficient in larger datasets using lookup tables
-```sql
-| inputlookup historical_hosts.csv 
-| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
-| stats count by host 
-| where count=1 
-| fields host
-```
-
-
 # Find Newly Observed Risk Rule Events, Split Approach
 1. Generate the lookup list
     - a lookup of 30d of events, including first seen, last seen dates, etc.
@@ -45,36 +33,35 @@ index IN ("indexes*") sourcetype="My:Risk" earliest=-30d@d latest=@d
    - Schedule daily at 00:30 (30 0 * * *)
    - Schedule Window: Auto
 ```sql
-index IN ("index-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
-| eval risk_index = index, _time = relative_time(now(), "-1d@d")
+index IN ("index-*") sourcetype="My:Risk" earliest=-1d@d latest=@d 
+| eval risk_index = index, date_observed = relative_time(now(), "-1d@d")
 | stats 
     count as date_observed_hits 
     min(_time) as first_seen 
     max(_time) as last_seen 
     values(risk_rule_title) as risk_rule_title 
-    by risk_rule_guid, risk_index, _time
-| append [| inputlookup observed_risk_rules.csv | rename date_observed as _time]
-| where _time > relative_time(now(), "-30d")
+    by risk_rule_guid, risk_index, date_observed
+| append [| inputlookup observed_risk_rules.csv]
+| where date_observed > relative_time(now(), "-30d")
 | stats 
     sum(date_observed_hits) as date_observed_hits
     min(first_seen) as first_seen
     max(last_seen) as last_seen
     values(risk_rule_title) as risk_rule_title
-    by risk_rule_guid, risk_index, _time
+    by risk_rule_guid, risk_index, date_observed
 | eventstats 
     sum(date_observed_hits) as hits_30d 
     min(first_seen) as first_seen 
     max(last_seen) as last_seen 
     by risk_rule_guid, risk_index
-| eval temp_24h = if(_time >= relative_time(now(), "-1d@d"), date_observed_hits, 0)
+| eval temp_24h = if(date_observed >= relative_time(now(), "-1d@d"), date_observed_hits, 0)
 | eventstats max(temp_24h) as hits_yesterday by risk_rule_guid, risk_index
 | fields - temp_24h
-| rename _time as date_observed
 | outputlookup observed_risk_rules.csv
 ```
 
 
-3. REPORT VERSION - Create the alert
+3a. Create the Saved Search Alert
     - A saved search to alert on newly observed risk rules
     - Aggregates the live data from the last 24 hours. We grab the user and host here so you have context for who triggered the new rule.
     - Checks the CSV. If the GUID exists, it pulls the historic_first_seen timestamp. If the GUID does not exist, this field remains null.
@@ -85,7 +72,7 @@ index IN ("index-*") sourcetype="My:Risk" earliest=-1d@d latest=@d
     - Search Earliest Time = -24h
     - Schedule Window: Auto
 ```sql
-index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
+index IN ("index-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, risk_rule_user, risk_rule_host, risk_rule_level, index
 
 ``` HISTORY CHECK ```
@@ -94,7 +81,7 @@ index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@
 
 ``` THROTTLE ```
 | search NOT 
-    [ search index IN ("index-*") source="My:Risk:Alert" earliest=-24h
+    [ search index IN ("index-*") source="My:Risk" earliest=-24h
     | fields risk_rule_guid, index
     | dedup risk_rule_guid, index ]
 
@@ -106,7 +93,7 @@ index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@
 ```
 
 
-4. ALERT VERSION - Create the Alert
+3b. ALERT VERSION - Create the Alert
    - IMPORATNT NOTE: You can't specify an index dynamically this way.
    - A saved search to alert on newly observed risk rules
    - Aggregates the live data from the last 24 hours. We grab the user and host here so you have context for who triggered the new rule.
@@ -125,14 +112,14 @@ index IN ("index-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@
      - Host: $result.host$
      - Index: MyIndex
 ```sql
-index IN ("indexes-*") source="My:Risk*" _index_earliest=-62m@m _index_latest=-2m@m
+index IN ("indexes-*") source="My:Risk" _index_earliest=-62m@m _index_latest=-2m@m
 | stats count as hits_new min(_time) as first_seen_new max(_time) as last_seen_new values(risk_rule_title) as risk_rule_title by risk_rule_guid, user, host, index
 | lookup observed_risk_rules.csv risk_rule_guid OUTPUT first_seen as historic_first_seen
 | where isnull(historic_first_seen)
 ```
 
 
-5. Force the Alert to Fire
+4. Force the Alert to Fire
     - Backdates the risk by 3m to get an immedate alert search to trigger
 ```sql
 | makeresults 
