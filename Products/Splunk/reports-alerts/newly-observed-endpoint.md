@@ -1,3 +1,15 @@
+# Simple Approach
+- This specific example basically says "show me hosts that were not observed in the last 7d."
+- Most efficient in larger datasets using lookup tables
+```sql
+| inputlookup historical_hosts.csv 
+| append [ search index=* earliest=-1d@d latest=now | stats count by host ] 
+| stats count by host 
+| where count=1 
+| fields host
+```
+
+# Lookup-Based Approach
 Run this once to create the lookup
 - Ensure the time range is something far back, like -90d
 NOTE: It is recommended to reuse the lookup list in [endpoint-logs-lost.md](endpoint-logs-lost.md) as a base.
