@@ -24,12 +24,15 @@
 # Show basic device info
 ```bash
 show version
+show license
+show inventory
 ```
 
 
 ## Show configuration
 ```bash
-show running-config 
+show running-config all
+show startup-config all
 ```
 
 
@@ -42,7 +45,7 @@ show logging onboard
 
 ## Review current "monitors"
 ```bash
-show monitor
+show monitor session all
 ```
 
 
