@@ -5,4 +5,6 @@
 - If the police don't recall the testimony with 100% accuracy, it can harm you.
 - If the police don't recall the questions with 100% accuracy, it can harm you, EVEN IF RECORDED.
 - Some other evidence or testimony can claim that part of your testimony or answer is false.
-
+- See https://www.youtube.com/watch?v=d-7o9xYp7eE
+- See https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1998119
+- See https://www.amazon.com/You-Have-Right-Remain-Innocent/dp/1503933393
