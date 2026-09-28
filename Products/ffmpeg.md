@@ -6,10 +6,10 @@ $CutStart  = "01:11:50"
 $CutEnd    = "01:16:00"
 $OutputFile = $InputFile -replace '(\.[^.]+)$', ' clipped$1'
 
-ffmpeg -to $CutStart -i $InputFile -c copy part1.mp4
-ffmpeg -ss $CutEnd -i $InputFile -c copy part2.mp4
+.\ffmpeg.exe -to $CutStart -i $InputFile -c copy part1.mp4
+.\ffmpeg.exe -ss $CutEnd -i $InputFile -c copy part2.mp4
 "file 'part1.mp4'`nfile 'part2.mp4'" | Out-File -FilePath list.txt -Encoding ascii
-ffmpeg -f concat -safe 0 -i list.txt -c copy $OutputFile
+.\ffmpeg.exe -f concat -safe 0 -i list.txt -c copy $OutputFile
 Remove-Item part1.mp4, part2.mp4, list.txt
 ```
 
