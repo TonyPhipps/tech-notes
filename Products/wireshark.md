@@ -109,6 +109,25 @@ SMB
 sudo modprobe usbmon
 ```
 
+# CIP Protocol
+Find if a specific tag was interacted with
+```
+!tcp.analysis.retransmission && !eth.dst == ff:ff:ff:ff:ff:ff && frame matches "your_tag"
+```
+
+Find all CIP Tag Interactions
+```
+!tcp.analysis.retransmission && !eth.dst == ff:ff:ff:ff:ff:ff && cip.symbol != ""
+```
+
+# SMB2 Protocol
+Find potential use of SMB2-based WMI Named Pipe exploitation
+```
+!tcp.analysis.retransmission && (smb2.cmd == 8 || smb2.cmd == 9)
+Review 'smb2.filename' field contents
+```
+
+
 # References and Resources
 - https://packetlife.net/library/cheat-sheets/
 - https://github.com/DhaeyerWolf/ICS-OT_wireshark_profiles
