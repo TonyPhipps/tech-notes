@@ -1,8 +1,12 @@
 # Zeroing
-When the dial on your rifle scope says "up," it means you're moving the reticle (the crosshairs or aiming point) upward in the scope. However, this does not mean you're moving the crosshairs toward the bullet hole. Instead, you're adjusting the aim to compensate for where the bullet actually hit.
+When the dial on your rifle scope says "UP," it indicates the direction you want the bullet's **point of impact** to move on the target. Mechanically, however, this actually moves the reticle (the crosshairs) DOWN inside the scope tube.
+
+A simple rule of thumb to remember the mechanics: **you are always moving the crosshairs toward the bullet hole.**
 
 For example:
+* If your bullet hits low on the target, you want your next shot to hit higher, so you turn the elevation dial to "UP."
+* Inside the scope, this action drives a mechanical screw downward, which pushes the internal reticle *down* toward that low bullet hole.
+* Because your crosshairs are now pointing slightly lower than they were when you fired, you must physically lift the front of the rifle barrel **up** to get the crosshairs back onto the center of the target.
+* Tilting the barrel upward is what causes your next shot to hit higher and strike the bullseye.
 
-    If your bullet hits low on the target, you would turn the "up" dial to move the point of aim upward, which raises where your next shot will hit, making it closer to your original aiming point.
-
-In other words, you're adjusting the reticle so your aim point matches where the bullets are hitting after the adjustment.
+In other words, you are adjusting the internal reticle to match where the bullets are actually hitting, which forces you to change the physical angle of the rifle to get back on target.
