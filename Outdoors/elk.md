@@ -3,17 +3,17 @@
 - **Daily Windows:** Glass an hour before sunrise. Hunt as early and as late as possible. Hunting pressure pushes them further into nocturnal patterns.
 - **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Go enjoy camp during the day, scout out your next glassing vantage point, or slowly still-hunt through dark timber bedding areas.
 - **Seasonality & The Rut:**
-- **Early/Archery (Sep):** Peak rut. Focus on calling, wallows, and active herd dynamics.
-- **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo. They seek sanctuary in steep, nasty terrain and thick cover. Calling is less effective; rely heavily on glassing and spot-and-stalk.
+  - **Early/Archery (Sep):** Peak rut. Focus on calling, wallows, and active herd dynamics.
+  - **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo. They seek sanctuary in steep, nasty terrain and thick cover. Calling is less effective; rely heavily on glassing and spot-and-stalk.
 
 
 
 # Location
 
 - **The Core Triangle:** Locate areas near or intersecting water, food, and bedding sources.
-- **Bedding:** North or northeast-facing slopes, 5-25 degree inclines, under shady, dense "dark timber" (keeps them cool and provides security).
-- **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and at the very edges of daylight.
-- **Water/Wallows:** Crucial in early season. Look for muddy, heavily tracked springs and seeps in the timber.
+  - **Bedding:** North or northeast-facing slopes, 5-25 degree inclines, under shady, dense "dark timber" (keeps them cool and provides security).
+  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and at the very edges of daylight.
+  - **Water/Wallows:** Crucial in early season. Look for muddy, heavily tracked springs and seeps in the timber.
 - **Hunting Pressure:** Go 1-2 miles off motorized dirt roads and trails. Elk hate pressure. Alternatively, look for steep, overlooked pockets close to highways that other hunters ignore because they look too difficult to access.
 
 # Wind & Positioning
