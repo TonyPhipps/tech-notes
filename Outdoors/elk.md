@@ -20,10 +20,8 @@
 
 - **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust the wind forecast without verifying on the ground.
 - **Mind the Thermals:**
-- **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Elk typically bed high. **Do not approach from directly below them.** Side-hill or approach from above.
-- **Evenings (Cooling):** Cool air sinks, pulling scent down into the valleys. Elk move lower to feed. **Do not approach from directly above them.** Approach from below or cross-wind.
-
-
+  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Elk typically bed high. **Do not approach from directly below them.** Side-hill or approach from above.
+  - **Evenings (Cooling):** Cool air sinks, pulling scent down into the valleys. Elk move lower to feed. **Do not approach from directly above them.** Approach from below or cross-wind.
 - **Prevailing Winds:** Combine prevailing weather winds with local thermals. Where they clash, wind swirls unpredictably—avoid these "swirl zones" (often mid-slope or in saddles).
 
 # Glassing
