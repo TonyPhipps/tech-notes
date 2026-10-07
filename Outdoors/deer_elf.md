@@ -15,3 +15,13 @@
 
 # Glassing
 - Glass the timber like a sniper (30min+ easily) for something as small as an ear flicker.
+
+# Elk Tracks
+- Bull - 4 knuckles at widest point
+- Cow - 3 inches at widest point
+
+
+# Elk Scat
+- About 1 inch long
+- Bull is often as wide as it is long
+- Cow is thinner, more oval
