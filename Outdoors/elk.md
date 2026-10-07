@@ -18,21 +18,19 @@
 # Glassing
 - Glass the timber like a sniper (30min+ easily) for something as small as an ear flicker.
 
-# Elk
-
-## Diet
+# Diet
 - Grasses,  woody shrubs, forbs (herbaceous flowering plants)
 
-## Tracks
+# Tracks
 - Bull - 4 knuckles at widest point
 - Cow - 3 inches at widest point
 
-## Scat
+# Scat
 - About 1 inch long
 - Bull is often as wide as it is long
 - Cow is thinner, more oval
 
-## Calling
+# Calling
 - Metal side of call goes toward your throat, dome upward
 - Push the call upward to get a moist seal
 - Exhale with a "shh" feel, but don't actually say "shh"
