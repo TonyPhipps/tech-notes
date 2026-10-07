@@ -1,5 +1,6 @@
 # Timing
-- Hunting pressure pushes them further into nocturnal (hunt closer to sunup/sundown)
+- Hunt as early and as late as possible (Hunting pressure pushes them further into nocturnal)
+- Go enjoy camp during the day, or scout out your next glassing
 
 # Location
 - 1-2 miles off dirt roads (but likely near highways due to no pressure)
