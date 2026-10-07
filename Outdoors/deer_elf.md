@@ -1,4 +1,5 @@
 # Timing
+- Glass an hour before sunrise
 - Hunt as early and as late as possible (Hunting pressure pushes them further into nocturnal)
 - Go enjoy camp during the day, or scout out your next glassing
 
