@@ -8,6 +8,10 @@
 - Under thick, dark cover (they react to hunting pressure by going nocturnal)
 
 # Positioning
-- In mornings, warm air rises, so smell drifts up hills. Deer are more likely to be higher. Don't be below them.
-- In evenings, warm air is pushed downward, so does smell. Deer are more likely to be lower. Don't be above them.
+- Mind Thermals
+  - In mornings, warm air rises, so smell drifts up hills. Deer are more likely to be higher. Don't be below them.
+  - In evenings, warm air is pushed downward, so does smell. Deer are more likely to be lower. Don't be above them.
+- Consider prevailing winds with thermals
+
+# Glassing
 - Glass the timber like a sniper (30min+ easily) for something as small as an ear flicker.
