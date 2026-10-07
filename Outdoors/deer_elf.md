@@ -4,6 +4,8 @@
 - Go enjoy camp during the day, or scout out your next glassing
 
 # Location
+- Near or between water, food, bedding sources
+  - Bedding: North-facing, 5-25 degree slopes, shady timber
 - 1-2 miles off dirt roads (but likely near highways due to no pressure)
 - Under thick, dark cover (they react to hunting pressure by going nocturnal)
 
@@ -18,6 +20,9 @@
 
 # Elk
 
+## Diet
+- Grasses,  woody shrubs, forbs (herbaceous flowering plants)
+
 ## Tracks
 - Bull - 4 knuckles at widest point
 - Cow - 3 inches at widest point
@@ -28,6 +33,9 @@
 - Cow is thinner, more oval
 
 ## Calling
+- Metal side of call goes toward your throat, dome upward
+- Push the call upward to get a moist seal
+- Exhale with a "shh" feel, but don't actually say "shh"
 - Bull Bugling
   - to call Bulls
 - Cow Mew
