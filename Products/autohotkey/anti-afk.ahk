@@ -2,28 +2,36 @@
 #SingleInstance Force
 
 ; ==============================================================================
-; AFK Prevention & Auto-Walk Script for AutoHotkey v2 (Targeting Fortnite)
-; Toggle Anti-AFK Routine: Press [F8]
-; Toggle Auto-Walk Forward: Press [F7]
-; Exit Script:             Press [F12]
+; AFK Prevention, Auto-Walk & Sprint Script for AutoHotkey v2 (Targeting Fortnite)
+; Toggle Sprint Pulse (LShift): Press [F6]
+; Toggle Auto-Walk Forward:     Press [F7]
+; Toggle Anti-AFK Routine:      Press [F8]
+; Exit Script:                  Press [F12]
 ; ==============================================================================
 
 SetTitleMatchMode(2) ; Match title anywhere in the window name
 global TargetWindow := "Fortnite"
 global IsAfkActive := false
 global IsWalking := false
+global IsSprinting := false
 
-F8:: {
-    global IsAfkActive
-    IsAfkActive := !IsAfkActive
-    if (IsAfkActive) {
-        ToolTip("Anti-AFK Started (Targeting Fortnite)")
+F6:: {
+    global IsSprinting
+    IsSprinting := !IsSprinting
+    if (IsSprinting) {
+        if WinExist(TargetWindow) {
+            ToolTip("Auto-Sprint Enabled")
+            SetTimer(AutoSprintLoop, 3000) ; Pulse LShift every 3000 ms (3 seconds)
+            AutoSprintLoop() ; Trigger immediately on toggle
+        } else {
+            ToolTip("Error: Fortnite window not found")
+            IsSprinting := false
+        }
         SetTimer(ToolTip, -2000)
-        SetTimer(PerformAntiAfkActions, 1000)
     } else {
-        ToolTip("Anti-AFK Stopped")
+        SetTimer(AutoSprintLoop, 0)
+        ToolTip("Auto-Sprint Disabled")
         SetTimer(ToolTip, -2000)
-        SetTimer(PerformAntiAfkActions, 0)
     }
 }
 
@@ -49,16 +57,39 @@ F7:: {
     }
 }
 
+F8:: {
+    global IsAfkActive
+    IsAfkActive := !IsAfkActive
+    if (IsAfkActive) {
+        ToolTip("Anti-AFK Started (Targeting Fortnite)")
+        SetTimer(ToolTip, -2000)
+        SetTimer(PerformAntiAfkActions, 1000)
+    } else {
+        ToolTip("Anti-AFK Stopped")
+        SetTimer(ToolTip, -2000)
+        SetTimer(PerformAntiAfkActions, 0)
+    }
+}
+
 F12:: {
-    ; Release 'w' if Auto-Walk was running when exiting
-    if (IsWalking) {
-        SetTimer(AutoWalkLoop, 0)
-        if WinExist(TargetWindow)
-            ControlSend("{w up}",, TargetWindow)
+    ; Disable timers and release keys on exit
+    SetTimer(AutoSprintLoop, 0)
+    SetTimer(AutoWalkLoop, 0)
+    if (WinExist(TargetWindow)) {
+        ControlSend("{LShift up}",, TargetWindow)
+        ControlSend("{w up}",, TargetWindow)
     }
     ToolTip("Exiting Script")
     Sleep(1000)
     ExitApp()
+}
+
+AutoSprintLoop() {
+    if WinExist(TargetWindow) {
+        ControlSend("{LShift down}",, TargetWindow)
+        Sleep(Random(50, 100))
+        ControlSend("{LShift up}",, TargetWindow)
+    }
 }
 
 AutoWalkLoop() {
