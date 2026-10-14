@@ -2,17 +2,19 @@
 #SingleInstance Force
 
 ; ==============================================================================
-; AFK Prevention Script for AutoHotkey v2
-; Toggle ON/OFF: Press [F8]
-; Exit Script:   Press [F12]
+; AFK Prevention & Auto-Walk Script for AutoHotkey v2
+; Toggle Anti-AFK Routine: Press [F8]
+; Toggle Auto-Walk Forward: Press [F7]
+; Exit Script:             Press [F12]
 ; ==============================================================================
 
-global IsActive := false
+global IsAfkActive := false
+global IsWalking := false
 
 F8:: {
-    global IsActive
-    IsActive := !IsActive
-    if (IsActive) {
+    global IsAfkActive
+    IsAfkActive := !IsAfkActive
+    if (IsAfkActive) {
         ToolTip("Anti-AFK Started")
         SetTimer(ToolTip, -2000)
         SetTimer(PerformAntiAfkActions, 1000)
@@ -23,7 +25,24 @@ F8:: {
     }
 }
 
+F7:: {
+    global IsWalking
+    IsWalking := !IsWalking
+    if (IsWalking) {
+        Send("{w down}")
+        ToolTip("Auto-Walk Enabled")
+        SetTimer(ToolTip, -2000)
+    } else {
+        Send("{w up}")
+        ToolTip("Auto-Walk Disabled")
+        SetTimer(ToolTip, -2000)
+    }
+}
+
 F12:: {
+    ; Release 'w' in case Auto-Walk was running when exiting
+    if (IsWalking)
+        Send("{w up}")
     ToolTip("Exiting Script")
     Sleep(1000)
     ExitApp()
@@ -68,4 +87,4 @@ PerformAntiAfkActions() {
     
     ; Schedule the next action with a randomized interval (e.g., 5 to 12 seconds)
     nextActionTime := A_TickCount + Random(5000, 12000)
-}
+}d
