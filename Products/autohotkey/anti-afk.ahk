@@ -32,14 +32,16 @@ F7:: {
     IsWalking := !IsWalking
     if (IsWalking) {
         if WinExist(TargetWindow) {
-            ControlSend("{w down}",, TargetWindow)
             ToolTip("Auto-Walk Enabled")
+            SetTimer(AutoWalkLoop, 2000) ; Re-apply 'w down' every 2000 ms (2 seconds)
+            AutoWalkLoop() ; Trigger immediately on toggle
         } else {
             ToolTip("Error: Fortnite window not found")
             IsWalking := false
         }
         SetTimer(ToolTip, -2000)
     } else {
+        SetTimer(AutoWalkLoop, 0)
         if WinExist(TargetWindow)
             ControlSend("{w up}",, TargetWindow)
         ToolTip("Auto-Walk Disabled")
@@ -49,11 +51,20 @@ F7:: {
 
 F12:: {
     ; Release 'w' if Auto-Walk was running when exiting
-    if (IsWalking && WinExist(TargetWindow))
-        ControlSend("{w up}",, TargetWindow)
+    if (IsWalking) {
+        SetTimer(AutoWalkLoop, 0)
+        if WinExist(TargetWindow)
+            ControlSend("{w up}",, TargetWindow)
+    }
     ToolTip("Exiting Script")
     Sleep(1000)
     ExitApp()
+}
+
+AutoWalkLoop() {
+    if WinExist(TargetWindow) {
+        ControlSend("{w down}",, TargetWindow)
+    }
 }
 
 PerformAntiAfkActions() {
