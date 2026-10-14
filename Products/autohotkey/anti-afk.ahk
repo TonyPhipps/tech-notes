@@ -126,10 +126,10 @@ PerformAntiAfkActions() {
             ControlSend("{" key " up}",, TargetWindow)
             
         case 3:
-            ; Tap Crouch (Ctrl)
-            ControlSend("{Ctrl down}",, TargetWindow)
+            ; Left Mouse Click (Swing/Fire)
+            ControlClick("X100 Y100", TargetWindow,, "Left", 1, "D")
             Sleep(Random(50, 100))
-            ControlSend("{Ctrl up}",, TargetWindow)
+            ControlClick("X100 Y100", TargetWindow,, "Left", 1, "U")
             
         case 4:
             ; Relative mouse movement (Requires Fortnite window focus)
