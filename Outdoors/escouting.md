@@ -35,5 +35,5 @@ Find a good unit to target.
       - 32, 38, 39, 40, 41, 42, 43, 44, 45, 46
       - https://fishandgame.idaho.gov/ifwis/huntplanner/stats/?season=general&game=deer&yr=2025
 - Zoom out to about where the distance indicator is 1mile. This should still show Springs while filtering out a lot of other points.
-- Add a blue waterdrop waypoint to each spring in the area of interest.
+- Add a blue waterdrop waypoint to each spring in the area of interest. Extra points if they are in recent wildfire areas (1-5 years old)
 - Zoom out and figure out the highest concentration, then go check those areas.
