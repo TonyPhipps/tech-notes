@@ -27,3 +27,13 @@
 - **Wallows (Elk Specific):** Look for dark, muddy depressions on flat benches near thick timber or at the heads of drainages. Wallows are critical during the rut for cooling off and scent marking.
 - **Troughs / Tanks / Stock Ponds:** Installed by Ranches or the Forest Service; can hold water late into the season.
 - **Small Man-Made Ponds:** Appear as circular or rectangular dark spots near trails or two-tracks.
+
+# Brand New Unit Approach
+Find a good unit to target.
+  - Filter the Idaho General Deer Season harvest statistics for last year filtering only these units.
+    - Nearby Units
+      - 32, 38, 39, 40, 41, 42, 43, 44, 45, 46
+      - https://fishandgame.idaho.gov/ifwis/huntplanner/stats/?season=general&game=deer&yr=2025
+- Zoom out to about where the distance indicator is 1mile. This should still show Springs while filtering out a lot of other points.
+- Add a blue waterdrop waypoint to each spring in the area of interest.
+- Zoom out and figure out the highest concentration, then go check those areas.
