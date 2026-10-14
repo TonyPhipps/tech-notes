@@ -87,4 +87,4 @@ PerformAntiAfkActions() {
     
     ; Schedule the next action with a randomized interval (e.g., 5 to 12 seconds)
     nextActionTime := A_TickCount + Random(5000, 12000)
-}d
+}
