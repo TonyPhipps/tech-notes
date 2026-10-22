@@ -1,74 +1,78 @@
 # Time-of-Day
-- **Daily Windows:** Glass an hour before sunrise. Hunt as early and as late as possible. Hunting pressure pushes them further into nocturnal patterns.
-- **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Go enjoy camp during the day, scout out your next glassing vantage point, or slowly still-hunt through dark timber bedding areas.
+- **Daily Windows:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
+- **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
 
 
 # Seasonality & The Rut
-  - **Early/Archery (Sep):** Peak rut. Focus on calling, wallows, and active herd dynamics.
-  - **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo. They seek sanctuary in steep, nasty terrain and thick cover. Calling is less effective; rely heavily on glassing and spot-and-stalk.
+- **Early/Archery (Sep):** Peak rut. Focus on calling, wallows, active herd dynamics, and intercepted travel corridors between feed and bedding.
+- **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo to recover. They seek sanctuary in steep, nasty terrain and thick cover. Calling efficiency drops significantly; rely heavily on glassing, reading fresh sign, and spot-and-stalk tactics.
 
 
 # Location
 - **The Core Triangle:** Locate areas near or intersecting water, food, and bedding sources.
-  - **Bedding:** North or northeast-facing slopes, 5-25 degree inclines, under shady, dense "dark timber" (keeps them cool and provides security).
-  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and at the very edges of daylight.
-  - **Water/Wallows:** Crucial in early season. Look for muddy, heavily tracked springs and seeps in the timber.
-- **Hunting Pressure:** Go 1-2 miles off motorized dirt roads and trails. Elk hate pressure. Alternatively, look for steep, overlooked pockets close to highways that other hunters ignore because they look too difficult to access.
+  - **Bedding:** North or northeast-facing slopes, 5–25 degree inclines, under shady, dense "dark timber" for thermal regulation and security. Look for benches (flat topographical steps) embedded on steep upper 1/3 slopes.
+  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and during low-light hours.
+  - **Water/Wallows:** Crucial in early season and high temperatures. Focus on active, muddy springs and seeps inside or immediately adjacent to timber.
+- **Hunting Pressure & Buffers:** Go 1–2 miles off motorized dirt roads and trails, or cross steep topographic barriers (like deep creek drainages) that deter average foot traffic. Alternatively, exploit overlooked pockets close to highways that receive low pressure due to difficult parking or access points.
 
 
 # Winds and Thermals
-- **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust the wind forecast without verifying on the ground.
-- **Consider wind direction**: Having the wind in your face prevents the deer from smelling you. Wind at your back drives your scent to them.
+- **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust a broad area weather forecast without verifying local micro-drafts on the ground.
+- **Consider Wind Direction:** Keep the wind direct or quartering in your face to prevent animals from picking up scent. A tailwind carries your scent straight to them.
 - **Mind the Thermals:**
-  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Elk typically bed high. **Do not approach from directly below them.** Side-hill or approach from above.
-  - **Evenings (Cooling):** Cool air sinks, pulling scent down into the valleys. Animals move lower to feed. **Do not approach from directly above them.** Approach from below or cross-wind.
+  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Up-slope thermal drafts begin 1–2 hours after sunrise as sun hits the slope. Animals bedded high will catch scent rising from below; avoid approaching from directly underneath.
+  - **Evenings (Cooling):** Cool air sinks, pulling scent down into drainages. Down-slope thermal drafts begin late afternoon as shadows fall. Animals moving down to feed will catch scent dropping from above; avoid approaching from directly above.
+  - **Transition Swirls:** Thermal flips (early morning and late afternoon) create swirling, dead-air currents. Avoid making close-range aggressive moves during these volatile windows.
 
 
 # Weather
-- **Consider the rain**: Deer/elk are likely to stay out from under thick rain drops plopping on them. More likely to be in a field during drizzle, or hiding under evergreen trees.
-- **Consider the snow**: You can find tracks easier on snow, and it muffles your footsteps.
-- **Consider the heat**: A hot day will push animals to north/east slopes. A cold day will push them to south/west slopes.
+- **Precipitation:** Animals often move into open parks during light drizzles to escape noisy water dropping off heavy timber canopies. Heavy storms force them into thick evergreen shelter.
+- **Snowfall:** Snow enhances track visibility, muffles footfalls, and forces game off high ridges toward lower winter ranges or sun-exposed slopes.
+- **Temperature:** Hot days drive animals to dense north/east timbered slopes for cooling. Cold, sunlit days push them to south/west facing slopes to feed and absorb solar warmth.
 
 
 # Glassing
-- **Stabilize:** Mount your binoculars to a tripod. It dramatically reduces eye fatigue and allows you to spot minute movements. Otherwise, keep elbows tucked in or rested on your knees, rocks, fences, etc.
-- **The Technique:** Glass the timber like a sniper (30min+ easily). Grid search from top to bottom, or left to right.
-- **What to Look For:** Don't look for a whole deer/elk. Look for horizontal lines (their back) in vertical timber. Look for color anomalies: the tan/cream/white of a rump patch, the pale ivory of an antler tine, or an ear flicker.
+- **Stabilize Equipment:** Mount binoculars or a spotting scope directly to a tripod to eliminate hand-shake, drastically reducing eye fatigue and allowing detection of micro-movements. When unmounted, lock elbows into your chest or rest them firmly on your knees, pack, or rocks.
+- **Grid Technique:** Pan systematically across terrain using a grid pattern. Spend extra time picking apart transition edges where heavy timber meets open feeding clearings.
+- **Visual Targets:** Focus on anomalous features rather than full body silhouettes: horizontal backlines amidst vertical tree trunks, tan/cream rump patches, ear flicks, or the pale glint of an antler tine.
 
 
 # Sign & Biology
 
 ## Diet
-- Grasses (primary), woody shrubs, and forbs (herbaceous flowering plants). If the feed is dried out, find the greenest vegetation on the mountain (often north slopes or near seeps).
-
+- Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
 
 ## Tracks
-- **Bull Elk:** 4 to 4.5 inches long at the widest point. Rounder, blockier, and often push deeper into the dirt. Dewclaws frequently show due to their heavy weight. Staggered, wider walking stride.
-- **Cow Elk:** 3 to 3.5 inches long. Narrower, more pointed, and heart-shaped.
-
+- **Bull Elk:** 4 to 4.5 inches long at widest point. Rounder, blockier profile; pushes deeper into soil; dewclaws frequently show due to heavy body mass; wide walking stance.
+- **Cow Elk:** 3 to 3.5 inches long. Narrower, more pointed, and heart-shaped profile.
+- **Deer:** 2 to 3 inches long. Narrower, distinct teardrop shape; much smaller overall print depth and stride length than elk.
 
 ## Scat
-- **Bull Elk:** About 1 inch long. Often dimpled, blocky, and as wide as it is long. (During summer/early fall when diet is wet, scat may look like a large, singular cow-pie clump).
-- **Cow Elk:** Thinner, smooth, and more oval or pill-shaped.
+- **Bull Elk:** ~1 inch long; dimpled, blocky, and roughly as wide as long. Appears as a single clustered, cow-pie-like mass when feeding on high-moisture summer/early fall forage.
+- **Cow Elk:** Thinner, smooth, distinct oval or pill-shaped pellets.
+- **Deer:** Small, smooth, oval pellets (~0.5 inches long), significantly smaller in volume and individual size than cow elk scat.
 
 
 # Deer Calling
-- **Bucks grunt**: Get a grunt call and use it. It will revert their attention back to you when they consider moving. This is better than the typical foreign-to-nature noise hunters make to draw back attention.
+- **Buck Grunt:** Short, guttural grunt used to grab a buck's attention or stop a moving deer without causing alarm.
+- **Snort-Wheeze:** High-intensity territorial challenge call used against dominant bucks during the pre-rut and rut.
+- **Bleat:** Used to imitate doe or fawn distress, effective for pulling in curious does or cruising bucks during the rut.
 
 
 # Elk Calling
-- **Diaphragm Mechanics:** Metal/tape side goes toward your throat, dome upward against the roof of your mouth. Push the call upward with your tongue to get a moist, airtight seal. Exhale with a "shh" or "hiss" feel from your diaphragm, rather than blowing from your cheeks.
-- **Bull Bugle:**
-  - *Location Bugle:* Clean, high-pitched, to find where they are.
-  - *Challenge Bugle:* Guttural, raspy, ending with aggressive chuckles (grunts) to trigger a dominant bull's territorial instincts.
-- **Cow Mew:**
-  - Social communication to locate other elk or calm a herd. Shorter, dropping off in pitch and pressure at the end.
-  - **Estrus Whine:** Longer, whiny, nasally cow call used during peak rut to indicate a cow is ready to breed. Highly effective for pulling in bulls.
-  - **Calf Chirp:** Short, high-pitched, staccato chirp. Great for stopping a moving elk in its tracks for a shot, or calming a slightly spooked animal.
+- **Diaphragm Mechanics:** Tape/frame side toward throat, dome upward against palate. Form an airtight seal using tongue pressure against the latex. Exhale using steady diaphragm pressure ("shh" air push) rather than puffing cheeks.
+- **Bull Bugles:**
+  - *Location Bugle:* Clean, clear, high-pitched tone to locate surrounding herds.
+  - *Challenge Bugle:* Guttural, raspy call ending with aggressive chuckles to challenge a dominant bull's territory.
+  - *Glunking:* Low, hollow throat sound made by bulls when rounding up or courting cows.
+- **Cow Calls:**
+  - *Cow Mew:* Social locator and herd-reassuring call. Starts higher, smoothly dropping off in pitch and volume.
+  - *Estrus Whine:* Drawn-out, inflected, nasal whine indicating breeding readiness during peak rut.
+  - *Calf Chirp:* Short, high-pitched staccato note used to stop moving animals for a shot or settle skittish elk.
 
 
 # Shot Placement & Recovery
-- **The Vital V:** Aim for the crease resting straight up from the back of the front leg, sitting in the lower third of the body. This hits the heart/lung basket.
-- **Angles:** Broadside or quartering away are the only ethical shots. Never take a quartering-to or straight-on shot.
-- **Post-Shot:** Watch the animal's reaction. If it runs, mark the exact location it stood and the last place you saw it. **Wait 30-60 minutes** before tracking to prevent pushing the elk, unless it falls within sight.
-- **Meat Care:** Elk hold massive amounts of body heat. Break the animal down immediately (the gutless method saves time). Get the quarters off the carcass, into game bags, and hung in the shade using strong Dyneema cordage or paracord to allow the meat to cool.
+- **The Vital Area:** Target the lower-middle third of the chest cavity, directly above or slightly behind the point of the elbow (the "Vital V") to punch through the lungs and heart.
+- **Shot Angles:** Broadside and slight quartering-away present optimal windows. Avoid steep quartering-to, rear, or straight-on shots, as shoulder bones or heavy muscular density block entry to primary organs.
+- **Post-Shot Routine:** Track the animal visually and aurally post-impact; mark the exact shot location and last seen point. Wait 30–60 minutes for vital hits before advancing to prevent pushing a wounded animal out of the country.
+- **Meat Care:** Break down carcass immediately using the gutless method to vent extreme internal body heat. Quarter the animal, place meat into high-breathability game bags, and hang in shaded, wind-ventilated locations using durable paracord or Dyneema cordage.
