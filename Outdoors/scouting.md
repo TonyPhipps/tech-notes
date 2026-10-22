@@ -1,47 +1,42 @@
 # General Strategy & Pressure
-- **Pressure Buffers:** As the season progresses and pressure increases, expect deer/elk to seek sanctuaries at least 1 to 2 miles away from open motorized roads and heavily trafficked ATV trails.
-- **Thermal & Wind Advantage:** Air currents are highly predictable and well-tracked by game. Thermals pull *up-slope* beginning mid-morning as the sun warms the ground, and push *down-slope* in the late afternoon/evening as the air cools. Elk actively use this predictable shift to monitor the terrain below them.
-
+- **Pressure Buffers:** As pressure builds, expect deer and elk to seek sanctuaries at least 1 to 2 miles away from open motorized roads and heavily trafficked ATV trails, prioritizing steep, broken, or thick micro-topography.
+- **Thermal & Wind Advantage:** Air currents follow predictable daily cycles:
+  - **Up-slope (Morning):** Sun warms the valley floors and slopes, pulling thermals upward starting 1–2 hours after sunrise.
+  - **Down-slope (Evening):** Air cools at higher elevations and sinks, pushing thermals down-drainage starting late afternoon.
+  - **Transition Swirls:** Early morning and late afternoon experience dead/swirling air currents during thermal flips—the most dangerous windows for scent detection.
 
 # Food Sources
-- **Transition Zones:** Offer ideal, mixed food sources close to safety escapes. Trace where dark forest meets lighter open slope. 
-    - *Deer Distinction:* Mule deer will heavily utilize broken, arid sagebrush or bitterbrush transition edges for browsing, whereas elk more aggressively prioritize proximity to deep timber.
-- **Meadows:** Appear as bright green or tan patches amid timber, often on flat benches or in drainages.
-- **Recent Burns & Clear Cuts:** Both offer plenty of young, high-protein growth vegetation. Toggle the "Historic Wildfires" layer or look for recent logging — target areas 1–5 years post-disturbance.
-- **Avalanche Chutes:** Prime high-country feeding zones that appear as vertical, light-green or brushy strips slicing through dark timber. Excellent for early-season forage.
+- **Transition Zones (Ecotones):** Edges where dense timber abruptly meets open slopes or meadows offer maximum forage with immediate escape security.
+  - *Deer Distinction:* Mule deer heavily utilize arid sagebrush, bitterbrush, and brushy transition edges for browsing.
+  - *Elk Distinction:* Elk prioritize high-volume grasses, forbs, and sedges in moister soils, rarely straying far from heavy timber cover.
+- **Meadows & Benches:** Bright green (active growth) or tan (cured) openings within timber, typically on flat benches or high-country drainage heads.
+- **Recent Burns & Clear Cuts:** Offer peak nutritional regrowth. Target burns and cuts **1–3 years post-disturbance** for optimal herbaceous forage; **3–5 years** for woody browse.
+- **Avalanche Chutes:** Vertical, brushy corridors slicing through timber. Premium early-season feeding zones rich in high-protein, late-holding vegetation.
 
-
-# Bedding Areas / Safety Escapes
-- **The Upper 1/3 Rule:** Elk strongly prefer bedding on the upper one-third of a ridge or slope. This elevation gives them a visual advantage of the valley below while allowing them to catch rising morning thermals from behind.
-- **Wind Positioning:** Elk typically bed facing downhill with the prevailing wind hitting their backs, allowing their eyes to cover the front and their nose to cover the rear.
-- **North- and East-Facing Slopes:** Cooler, shaded, and hold less wind — ideal for daytime bedding.
-- **Mature Timber / Thick Cover:** Appear as a dense, uniform dark-green canopy on satellite.
-- **Benches:** Give game security + a view + quick escape routes. Look for subtle flattening in contour lines (a little plateau before a drop-off).
-- **Finger Ridges:** Branch off from main ridgelines. Deer often bed along the sides just below the crest.
-- **Rimrock & Broken Terrain (Deer Specific):** Deer often bed in broken, rocky outcrops, rimrock, or under isolated juniper bushes to watch the terrain below, relying more on topography for concealment than the heavy canopy elk prefer.
-- **Saddles:** Offer a good bridge between areas and a quick scouting opportunity for game to feel safe before crossing ridges.
-
+# Bedding Areas & Escapes
+- **The Upper 1/3 Rule:** Elk and mature bucks consistently bed in the upper third of a slope. This provides a visual advantage over the valley below while catching rising morning thermals from below.
+- **Dual-Scent Positioning:** Animals typically bed facing downhill into the visual field, positioned so prevailing top-of-ridge winds hit their backs—allowing eyes/ears to cover the front and nose to cover the rear.
+- **North- & East-Facing Slopes:** Cooler, shaded, and moister with denser timber canopy—ideal for daytime bedding during warm early seasons.
+- **South- & West-Facing Slopes:** Exposed and warmer; preferred for bed sites during freezing late-season periods to capture radiant sun.
+- **Benches & Micro-Benches:** Subtle flattenings in contour lines within steep terrain. They offer secure resting spots, bedding flat ground, and immediate escape routes over the lip.
+- **Finger Ridges:** Secondary spurs branching off main ridgelines. Mule deer frequently bed along the side-ribs just below the crest to stay out of main-ridge wind while watching approaches.
+- **Rimrock & Talus (Deer Specific):** Mule deer leverage broken rocky outcrops, rimrock bluffs, and isolated mountain mahogany/juniper pockets to blend visually while maintaining panoramic field-of-view.
+- **Saddles & Low Gaps:** Natural low-resistance travel corridors between drainages. Game rarely linger in the gap itself; they cross quickly, utilizing side-hill trails just below the sky-lined crest.
 
 # Water Sources
-- **Creeks & Drainages:** Creeks are indicated by solid blue lines (perennial or seasonal). Drainages may appear as small blue dashes or v-shaped draws where vegetation is lush green compared to surroundings.
-- **North-Facing Pockets:** In arid late-summer conditions, small depressions in dense, north-facing timber hold hidden moisture and seeps long after open, exposed creeks dry up.
-- **Seeps:** Often appear in burned or open country as tiny clusters of bright green shrubs.
-- **Wallows (Elk Specific):** Look for dark, muddy depressions on flat benches near thick timber or at the heads of drainages. Wallows are critical during the rut for cooling off and scent marking.
-- **Troughs / Tanks / Stock Ponds:** Installed by Ranches or the Forest Service; can hold water late into the season.
-- **Small Man-Made Ponds:** Appear as circular or rectangular dark spots near trails or two-tracks.
+- **Perennial vs. Intermittent Streams:** Solid blue lines indicate year-round water; dashed blue lines indicate intermittent/ephemeral flows that may dry by late summer.
+- **North-Facing Seeps & Pockets:** In arid late-summer conditions, small depressions in dense, north-facing timber hold hidden moisture, seeps, and wallows long after exposed creeks dry up.
+- **Seeps & Springs:** Indicated on maps or identified visually in burned/open country by isolated, vibrant green shrub clusters.
+- **Wallows (Elk Specific):** Muddy, active depressions on flat benches near heavy cover or drainage heads. Critical for scent-marking and thermoregulation during the fall rut.
+- **Stock Tanks & Guzzlers:** Man-made infrastructure installed by land management agencies or ranches; often hold critical water late into dry seasons.
 
-
-
-
-
-# Brand New Unit Approach
-Find a good unit to target.
-  - Filter the Idaho General Deer Season harvest statistics for last year filtering only these units.
-    - Nearby Units
-      - 32, 38, 39, 40, 41, 42, 43, 44, 45, 46
-      - https://fishandgame.idaho.gov/ifwis/huntplanner/stats/?season=general&game=deer&yr=2025
-- Zoom out to about where the distance indicator is 1mile. This should still show Springs while filtering out a lot of other points.
-- Add a blue waterdrop waypoint to each spring in the area of interest. Extra points if they are in recent wildfire areas (1-5 years old)
-- Zoom out and figure out the highest concentration, then go check those areas.
-
-
+# Brand New Unit Scouting Workflow
+1. **Harvest Data Filter:**
+   - Review and filter the previous season's Idaho General Deer/Elk harvest statistics for targeted GMUs (e.g., GMUs 32, 38, 39, 40, 41, 42, 43, 44, 45, 46) to evaluate harvest success rates, weapon-type density, and point-source hunter pressure.
+2. **Spring Layer Isolation:**
+   - Set mapping zoom level to ~1-mile scale to filter map clutter while keeping labeled springs, seeps, and water points visible.
+3. **High-Value Water Pointing:**
+   - Drop a distinct blue water-drop icon on all springs and seeps. 
+   - Highlight water sources that overlap with **1–5 year old wildfire perimeters** or isolated north-facing timber pockets.
+4. **Cluster Identification:**
+   - Zoom out to identify spring/seep clusters located **>1.5 miles from open roads** and surrounded by steep bedding topography. Target these high-density zones as primary scouting locations.
