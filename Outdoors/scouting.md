@@ -1,9 +1,6 @@
-# General Strategy & Pressure
+# Pressure
 - **Pressure Buffers:** As pressure builds, expect deer and elk to seek sanctuaries at least 1 to 2 miles away from open motorized roads and heavily trafficked ATV trails, prioritizing steep, broken, or thick micro-topography.
-- **Thermal & Wind Advantage:** Air currents follow predictable daily cycles:
-  - **Up-slope (Morning):** Sun warms the valley floors and slopes, pulling thermals upward starting 1–2 hours after sunrise.
-  - **Down-slope (Evening):** Air cools at higher elevations and sinks, pushing thermals down-drainage starting late afternoon.
-  - **Transition Swirls:** Early morning and late afternoon experience dead/swirling air currents during thermal flips—the most dangerous windows for scent detection.
+
 
 # Food Sources
 - **Transition Zones (Ecotones):** Edges where dense timber abruptly meets open slopes or meadows offer maximum forage with immediate escape security.
@@ -12,6 +9,7 @@
 - **Meadows & Benches:** Bright green (active growth) or tan (cured) openings within timber, typically on flat benches or high-country drainage heads.
 - **Recent Burns & Clear Cuts:** Offer peak nutritional regrowth. Target burns and cuts **1–3 years post-disturbance** for optimal herbaceous forage; **3–5 years** for woody browse.
 - **Avalanche Chutes:** Vertical, brushy corridors slicing through timber. Premium early-season feeding zones rich in high-protein, late-holding vegetation.
+
 
 # Bedding Areas & Escapes
 - **The Upper 1/3 Rule:** Elk and mature bucks consistently bed in the upper third of a slope. This provides a visual advantage over the valley below while catching rising morning thermals from below.
@@ -23,12 +21,14 @@
 - **Rimrock & Talus (Deer Specific):** Mule deer leverage broken rocky outcrops, rimrock bluffs, and isolated mountain mahogany/juniper pockets to blend visually while maintaining panoramic field-of-view.
 - **Saddles & Low Gaps:** Natural low-resistance travel corridors between drainages. Game rarely linger in the gap itself; they cross quickly, utilizing side-hill trails just below the sky-lined crest.
 
+
 # Water Sources
 - **Perennial vs. Intermittent Streams:** Solid blue lines indicate year-round water; dashed blue lines indicate intermittent/ephemeral flows that may dry by late summer.
 - **North-Facing Seeps & Pockets:** In arid late-summer conditions, small depressions in dense, north-facing timber hold hidden moisture, seeps, and wallows long after exposed creeks dry up.
 - **Seeps & Springs:** Indicated on maps or identified visually in burned/open country by isolated, vibrant green shrub clusters.
 - **Wallows (Elk Specific):** Muddy, active depressions on flat benches near heavy cover or drainage heads. Critical for scent-marking and thermoregulation during the fall rut.
 - **Stock Tanks & Guzzlers:** Man-made infrastructure installed by land management agencies or ranches; often hold critical water late into dry seasons.
+
 
 # Brand New Unit Scouting Workflow
 1. **Harvest Data Filter:**
