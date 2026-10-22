@@ -1,59 +1,49 @@
-
-
 Supplies
 - Safety glasses
 - Rubber gloves
-- Pressure washer (capable of 1800psi)
+- Pressure washer (approx. 1800 PSI)
 - Sharp knife
-- Five-gallon bucket
+- 5-gallon bucket
 - Dish soap
 - Large paintbrush
 - Tanning formula
-- 3 lbs salt
-- Sandpaper
+- Non-iodized salt (3 lbs)
+- Coarse-grit sandpaper
 
 
-# Day 1
-- Secure hide so it can be sprayed without moving the hide itself. This can even be your foot holding it still, but be prepared for it to get soaked.
-- Flesh the hide with 1800 PSI, keeping the stream at about 45deg and moving so as to avoid ripping a hole.
-  - Alternatively, cut and pull off the meat from the hide by hand with a sharp knife.
-- Pour salt liberally over the flesh side of the hide until it's completely covered.
-- Place a screen, rock, or something else in the 5 gallon bucket to keep the hide elevated (out of its own drippings).
-- Fold the hide, flesh side together, and roll it up. Put it in the bucket, folded-fur end UP (so it drains out fluid).
-- Leave the hide for 24 hours.
+# Day 1: Fleshing & Salting
+- **Secure the Hide:** Anchor the hide so it stays put while spraying (e.g., stepping on an edge, noting your boot will get wet).
+- **Flesh the Hide:** Pressure-wash the flesh side at 1800 PSI. Keep the nozzle moving at a 45° angle to avoid tearing holes. Alternatively, carefully slice and pull off tissue by hand using a sharp knife.
+- **Salt:** Spread a heavy, complete layer of salt over the entire flesh side.
+- **Set Up Drain Bucket:** Place a screen, rock, or small rack at the bottom of a 5-gallon bucket so the hide stays above collected liquid.
+- **Fold & Pack:** Fold the hide flesh-side together, roll it up, and place it in the bucket with the open fold end facing down (fur side up) so fluids drain out freely.
+- **Wait:** Let it drain for 24 hours.
 
 
-# Day 2
-- Shake the old salt off.
-- Dump out the salty fluid.
-- Fill the bucket about halfway with hot water.
-- Add 1/2 lb of table salt per gallon of water to. Mix thoroughly until salt is dissolved.
-- Let the water cool.
-- Immerse the hide in the brine solution and leave overnight (6-8 hours). 
-- NOTE: If left too long, the hair will start falling off the hide.
+# Day 2: Brining
+- **Prep Hide:** Shake off the old salt and pour out all collected liquid from the bucket.
+- **Mix Brine:** Fill the bucket halfway with hot water. Add 1/2 lb of salt per gallon of water and stir until fully dissolved.
+- **Soak:** Let the brine cool completely. Submerge the hide in the solution overnight (6–8 hours).
+  - *Note:* Do not leave the hide in the brine longer than necessary, or hair slip (shedding) will occur.
 
 
-# Day 3
-- Remove the hide and scrape off any remaining pieces of flesh with a sharp knife. 
-  - NOTE: This is an important last step as any remaining bits of flesh will eventually make the hide smell/stiffen if not removed.
-- Wash the hide in water and dish soap to remove all excess grease and salt.
-- Rinse the hide off with a hose or in the tub until there are no remaining soap bubbles.
-- Drape it over a railing or clothesline (hair side down), and let it drip dry until the hide is only slightly damp and still pliable. This will take a couple days. Ensure it's not stiff as a board, you want it malleable for the tanning solution. If it does get stiff, add water until its pliable again.
-- Warm the tanning solution for 30min in hot tap water in a pot.
-- Lay the hide open, flesh side up.
-- Wearing gloves, apply the solution directly from the bottle to the hide.
-  - Pour small amounts at a time onto the hide and use a large paintbrush or gloved hands to spread it around. 
-  - Be sure to cover every bit of the hide with the solution.
-  - Massage the solution into the hide.
-- Fold the hide with the fur facing out.
-- Leave overnight (8-12 hours)
+# Day 3: Cleaning & Applying Tanning Formula
+- **Final Scraping:** Remove the hide from the brine and scrape off any remaining bits of flesh. Any leftover tissue will spoil or stiffen the finished leather.
+- **Wash & Rinse:** Wash the hide with dish soap and warm water to strip excess grease and salt. Rinse thoroughly until no soap bubbles remain.
+- **Drip Dry:** Hang the hide hair-side down over a railing or line. Let it drip dry until it is slightly damp and pliable (typically a few hours to a day depending on humidity). If it dries out or stiffens before tanning, re-dampen it with water.
+- **Warm Formula:** Warm the bottled tanning formula by placing the container in hot tap water for 30 minutes.
+- **Apply Tanning Solution:** Lay the hide flat, flesh-side up. Wearing gloves, pour small amounts of formula and use a paintbrush or your hands to spread and massage it evenly across every square inch of flesh.
+- **Fold:** Fold the hide flesh-side together (fur facing out).
+- **Wait:** Let sit overnight (8–12 hours).
 
-# Days 4, 5, 6
-- Open the hide and let it continue drying. 
-  - Keep in mind that the formula has an odor. Although it's not totally bad (similar to musty wet leather), you'll want to keep the smell in mind when storing the hide during this process. It will quickly permeate a room. Consider hiding it in a garage, basement, or a shed. Ensure no animals can get to it.
-- As soon as its not overly sticky, during this drying time, work the hide while it is still slightly damp to make it soft and pliable.  Skip this step, and your hide will be as stiff as a board. Work the hide during the next roughly 2-3 days as it dries completely.
-  - To work it, stretch and fold the hide in all directions. Pulling it back and forth (flesh side down) over a taut rope or hard surface such as a railing, fence, or concrete. 
-- When the hide is completely dry, you can sand it with corse-grit sandpaper—either by hand or with an electric palm sander—on the tanned-flesh side to soften it more.
+
+# Days 4–6: Drying & Softening
+- **Unfold:** Open the hide flat to begin drying.
+  - *Note:* The formula emits a distinct leather/musty odor. Store the hide in a garage, basement, or shed out of reach of scavengers.
+- **Break/Work the Leather:** As soon as the surface is no longer sticky, stretch and flex the hide continuously while it finishes drying over the next 2–3 days. If you skip working it while damp, the hide will dry stiff as a board.
+  - *Technique:* Pull the flesh side back and forth over a hard edge (railing, fence, taut rope, or rounded beam) and stretch it by hand in all directions.
+- **Sand:** Once the hide is completely dry, sand the flesh side with coarse-grit sandpaper (by hand or with an electric palm sander) to finish softening.
+
 
 References
 - https://www.youtube.com/watch?v=luHsXzrEQ3c
