@@ -324,3 +324,20 @@ foreach ($key in $newProperties.Keys) {
     $myObject | Add-Member -MemberType NoteProperty -Name $key -Value $newProperties[$key]
 }
 ```
+
+
+Check if PowerShell Remoting is Enabled/Configured/Health
+- From endpoint in question:
+
+```
+Test-WSMan
+Get-Service WinRM
+winrm enumerate winrm/config/listener
+Test-PSSession -ComputerName localhost
+```
+ 
+- From remote endpoint
+
+```
+Test-PSSession -ComputerName "ServerNameOrIP"
+```
