@@ -57,6 +57,7 @@
 - **Buck Grunt:** Short, guttural grunt used to grab a buck's attention or stop a moving deer without causing alarm. However, these are sometimes loud and long. Often then are chasing a doe and being noisy while grunting randomly.
 - **Snort-Wheeze:** High-intensity territorial challenge call used against dominant bucks during the pre-rut and rut.
 - **Bleat:** Used to imitate doe or fawn distress, effective for pulling in curious does or cruising bucks during the rut.
+- Consider also using a bone bag to imitate fighting or rubbing an antler on branches to imitate scraping.
 
 
 # Elk Calling
