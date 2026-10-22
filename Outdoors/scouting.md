@@ -31,11 +31,7 @@
 - **Small Man-Made Ponds:** Appear as circular or rectangular dark spots near trails or two-tracks.
 
 
-# Weather
-- **Consider the rain**: Deer/elk are likely to stay out from under thick rain drops plopping on them. More likely to be in a field during drizzle, or hiding under evergreen trees.
-- **Consider the snow**: You can find tracks easier on snow, and it muffles your footsteps.
-- **Consider wind direction**: Having the wind in your face prevents the deer from smelling you. Wind at your back drives your scent to them.
-- **Consider the heat**: A hot day will push animals to north/east slopes. A cold day will push them to south/west slopes.
+
 
 
 # Brand New Unit Approach
