@@ -1,49 +1,82 @@
-Supplies
+### Supplies
 - Safety glasses
 - Rubber gloves
 - Pressure washer (approx. 1800 PSI)
 - Sharp knife
 - 5-gallon bucket
+- pH test strips
 - Dish soap
 - Large paintbrush
 - Tanning formula
-- Non-iodized canning/pickling salt (3 lbs)
+  - Trubond Taxidermy Tanning Kit 1000B
+- Non-iodized canning/pickling salt (1 lb per gallon)
+- Safety Acid Pickle Solution (1/2 oz per gallon)
+  - Or Citrix Acid Powder (3 ounces per gallon)
+  - Optional: Kemal 4
+  - Optional: Deodorizing Wash
+  - Predator: Kemsol Degreaser
 - Coarse-grit sandpaper
+- Vinegar
 
 
-# Day 1: Fleshing & Salting
+# Post-Harvest
+- Keep it cool. Add ice if you cant keep it under 40deg F, keeping bacteria from surviving.
+- Keep ice off the bare skin.
+- Refrigerate the hide for no longer than 2 days before fleshing and pickling.
+- If you need more than 2 days, first apply liberal salt and let it drain for 24h, then freeze it.
+
+
+# Step 1: Fleshing
 - **Secure the Hide:** Anchor the hide so it stays put while spraying (e.g., stepping on an edge, noting your boot will get wet).
 - **Flesh the Hide:** Pressure-wash the flesh side at 1800 PSI. Keep the nozzle moving at a 45° angle to avoid tearing holes. Alternatively, carefully slice and pull off tissue by hand using a sharp knife.
-- **Salt:** Spread a heavy, complete layer of non-iodized salt over the entire flesh side.
-- **Set Up Drain Bucket:** Place a screen, rock, or small rack at the bottom of a 5-gallon bucket so the hide stays elevated above collected liquid.
-- **Fold & Pack:** Fold the hide flesh-side together and roll it loosely. Place it in the bucket with the open edges facing down so fluids drain out freely into the bottom of the bucket.
-- **Wait:** Let it drain for 24 hours.
+- **Flush Out Dirt:** Rinse off the hair-side following the hair follicles to get any dirt rinsed away.
 
 
-# Day 2: Pickling (Setting the Hair)
-- **Prep Hide:** Shake off the old salt and pour out all collected liquid from the bucket.
-- **Mix Pickle Solution:** Fill the bucket halfway with hot water. Add 1/2 lb of non-iodized salt per gallon of water along with an acid source (e.g., 2 quarts of white vinegar or citric acid crystals per gallon of water) to lower the pH and prevent hair slippage. Stir until dissolved.
-- **Soak:** Let the solution cool completely. Submerge the hide overnight (6–8 hours).
+# Step 2: Cleaning
+- **Add Additives:** Add non-iodized salt (1 cup per gallon) and plain white vinegar (1 cup per gallon) to kill bacteria and prevent hair slippage.
+- **Soak Limit:** Soak only until clean and rehydrated (15 to 60 minutes max to avoid bacteria growth).
 
 
-# Day 3: Cleaning & Applying Tanning Formula
-- **Final Scraping:** Remove the hide from the pickle solution and scrape off any remaining bits of flesh. Any leftover tissue will spoil or stiffen the finished leather.
-- **Wash & Rinse:** Wash the hide with dish soap and warm water to strip excess grease and salt. Rinse thoroughly until no soap bubbles remain.
-- **Drip Dry:** Hang the hide over a railing or line. Let it drip dry for a few hours until the surface water is gone and it feels like a damp, cool chamois cloth. *Do not let it dry completely or sit for days without formula, or it will stiffen and spoil.*
-- **Warm Formula:** Warm the bottled tanning formula by placing the container in hot tap water for 30 minutes.
-- **Apply Tanning Solution:** Lay the hide flat, flesh-side up. Wearing gloves, pour small amounts of formula and use a paintbrush or your hands to spread and massage it evenly across every square inch of flesh.
-- **Fold:** Fold the hide flesh-side together (fur facing out).
-- **Wait:** Let sit overnight (8–12 hours).
+# Step 3: Pickling (Setting the Hair)
+- **Mix Solution:** In a large container, mix cold tap water with 
+  - non-iodized fine white salt (1 lb/gallon) and 
+  - safety pickle (0.5oz per gallon) 
+    - OR citric acid powder at 3oz per gallon
+- **Verify pH:** Use pH test strips to ensure the liquid measures **between 2.0 and 2.5 pH**.
+- **Soak Hide:** Submerge the hide hair-side up so skin isn't exposed to air.
+- **Agitate & Monitor:** Stir 4 to 5 times during the first 24 hours, ensuring hair-side is up when done stirring.
+- **Two-Hour Check:** Check pH after the first 2 hours.
+- **Minimum 3 Days:** Leave submerged for a minimum of 3 days.
 
 
-# Days 4–6: Drying & Softening
-- **Unfold:** Open the hide flat to begin drying.
-  - *Note:* The formula emits a distinct leather/musty odor. Store the hide in a garage, basement, or shed out of reach of scavengers.
-- **Break/Work the Leather:** As soon as the surface is no longer sticky, stretch and flex the hide continuously while it finishes drying over the next 2–3 days. If you skip working it while damp, the hide will dry stiff as a board.
-  - *Technique:* Pull the flesh side back and forth directly against a hard edge (railing, fence, taut rope, or rounded beam) with the fur side facing you, and stretch it by hand in all directions.
-- **Sand:** Once the hide is completely dry, sand the flesh side with coarse-grit sandpaper (by hand or with an electric palm sander) to finish softening.
+# Step 4: Neutralizing
+- Remove the hide from pickling solution, hang, and drip-dry for an hour.
+- **Prepare Bath:** Mix cold water with
+  - Salt at 0.25 lb per gallon
+  - Baking soda at 1 oz per gallon.
+- **Add First Soda:** Dissolve the salt and only **half** of the baking soda first to prevent surface-tanning shock.
+- **Soak the Hide:** Submerge in bath for 30 minutes while agitating every 10–15 minutes
+- **Add Second Soda:** Add more baking soda at 1 oz per gallon.
+- **Soak the Hide:** Soak the hide for another 30 min.
+  - For elk or other larger animals, soak for another 30min.
+- **Rinse:** Swirl the hide in clean, cold water mixed with a handful of salt for a few minutes to wash off neutralizing residue.
 
 
-References
-- https://www.youtube.com/watch?v=luHsXzrEQ3c
-- https://www.outdoorlife.com/how-to-tan-deer-hide-easy-way/
+# Step 5: Applying Tanning Oil
+* **Remove Excess Water:** Hang to drip-dry for 1 hour, then roll in towels for 15–20 minutes to absorb surface moisture.
+* **Shake up the Tanning Oil**
+* **Apply Tan:** Lay the hide skin-side up and apply a thin, even coat of tanning oil across the entire skin (pour then spread).
+
+
+# Step 6: Drying & Stretching
+* **Periodic Stretching:** As the hide air-dries on a flat surface at room temperature over 4 to 6 days, pull and stretch the hide in all directions every 12 to 24 hours.
+* **Work Dark Spots:** Pull firmly in all directions until dark wet spots turn white, continuing until the leather remains white and fully dry.
+
+
+# Step 7: Sanding & Softening
+* **Sand Skin:** Once completely dry, run a palm sander with 60 to 80 grit sandpaper over the entire leather side to thin, clean, and break in the hide.
+* **Remove Dust:** Blow away leather dust with an air compressor or tumble dry in a dryer on an **air-only (no heat)** cycle.
+
+
+# References
+- https://www.youtube.com/watch?v=CBd5Efa-hZU
