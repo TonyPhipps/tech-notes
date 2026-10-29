@@ -63,10 +63,6 @@
 # Sign & Biology
 
 
-## Diet
-- Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
-
-
 ## Tracks
 - **Bull Elk:** 4 to 4.5 inches long at widest point. Rounder, blockier profile; pushes deeper into soil; dewclaws frequently show due to heavy body mass; wide walking stance.
 - **Cow Elk:** 3 to 3.5 inches long. Narrower, more pointed, and heart-shaped profile.
@@ -77,6 +73,28 @@
 - **Bull Elk:** ~1 inch long; dimpled, blocky, and roughly as wide as long. Appears as a single clustered, cow-pie-like mass when feeding on high-moisture summer/early fall forage.
 - **Cow Elk:** Thinner, smooth, distinct oval or pill-shaped pellets.
 - **Deer:** Small, smooth, oval pellets (~0.5 inches long), significantly smaller in volume and individual size than cow elk scat.
+
+
+## Diet
+- Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
+
+| Common Name | Plant Type | Seasonal Preference | Usage & Biological Notes |
+| :--- | :--- | :--- | :--- |
+| **Arrowleaf Balsamroot** | Native Forb | **Early** (Aug–Sept) | Cures early into dry brown leaves; usage drops off sharply after September frosts. |
+| **Fireweed** | Native Forb | **Early** (Aug–Sept) | High-protein summer burn/clearcut forage; dies back quickly after hard early-autumn freezes. |
+| **Sticky Geranium** | Native Forb | **Early** (Aug–Sept) | High-calorie mountain meadow forb; foliage dies back and loses value by October. |
+| **Chokecherry** | Deciduous Shrub | **Early to Mid** (Aug–Oct) | High-value foliage in late summer, transitioning to twigs and buds as leaves drop. |
+| **Common Snowberry** | Low Shrub | **Early to Mid** (Aug–Oct) | Peak dietary staple for deer from late summer through October leaf fall. |
+| **Mountain Brome** | Perennial Grass | **Early to Mid** (Aug–Oct) | Fast-growing cool-season grass heavily grazed while green; cured stalks eaten into fall. |
+| **Quaking Aspen** | Deciduous Tree | **Early & Late** (Aug–Sept / Oct–Nov) | Green summer leaves/sprouts targeted early; bark and sapling twigs browsed in late fall. |
+| **Saskatoon Serviceberry** | Deciduous Shrub | **Early & Late** (Aug–Sept / Nov) | Tender foliage eaten in early archery; shifts to dormant terminal twigs in late rifle. |
+| **Antelope Bitterbrush** | Woody Shrub | **Mid to Late** (Oct–Nov) | High-protein winter browse; targeted heavily as frosts kill green herbaceous forage. |
+| **Curl-leaf Mountain Mahogany** | Shrub / Small Tree | **Mid to Late** (Oct–Nov) | Exceptional late-season energy source; critical when snow covers ground vegetation. |
+| **Mountain Big Sagebrush** | Evergreen Shrub | **Mid to Late** (Oct–Nov) | Low interest during green summer months; essential survival browse during late cold snaps. |
+| **Red-osier Dogwood** | Riparian Shrub | **Mid to Late** (Oct–Nov) | Heavily browsed along creek bottoms and seeps after upland green forage dries up. |
+| **Bluebunch Wheatgrass** | Native Bunchgrass | **All Seasons** (Aug–Nov) | Primary cool-season forage; green early, cured standing forage for late-season elk. |
+| **Elk Sedge** | Sedge (Grass-like) | **All Seasons** (Aug–Nov) | Retains moisture under dark timber canopy longer than open grasses; year-round staple. |
+| **Idaho Fescue** | Native Bunchgrass | **All Seasons** (Aug–Nov) | Grazed succulent green early; eaten cured (standing dry grass) through mid and late season. |
 
 
 # Deer Calling
