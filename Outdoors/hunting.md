@@ -1,3 +1,11 @@
+# Clothing
+- Anything that glows under a UV light should be strongly considered to never be worn while hunting.
+- Wash everything in scent-free washing fluid and dry WITHOUT any scent sheets, etc. Avoid EVER washing or scenting anything you wear hunting (including underwear, socks, etc.)
+- Wear scent-free deodorant.
+- Avoid sweating. Dress in layers so you can remove layers.
+- You can't beat animal noses, but you can do your best.
+
+
 # Winds and Thermals
 - **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust a broad area weather forecast without verifying local micro-drafts on the ground.
 - **Consider Wind Direction:** Keep the wind direct or quartering in your face to prevent animals from picking up scent. A tailwind carries your scent straight to them.
