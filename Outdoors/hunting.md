@@ -16,14 +16,14 @@
   - Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas (north and east facing slopes) with wind strictly in your face.
   - Move at a Micro-Crawl. Take 5 to 10 slow, deliberate steps, then stop for several minutes to pick apart the timber with binoculars.
   - Look for pieces of an animals (a tan rump patch, an ear flick, or horizontal backlines) rather than a whole animal silhouette.
-  - Keep a diaphragm call in your mouth while moving through crunchy timber. If you snap a twig or break heavy brush, immediately throw out a soft, relaxed cow mew or calf chirp. This deceives nearby bedded animals into thinking the noise came from another herd member rather than a predator.
+  - If hunting elk, keep a diaphragm call in your mouth while moving through crunchy timber. If you snap a twig or break heavy brush, immediately throw out a soft, relaxed cow mew or calf chirp. This deceives nearby bedded animals into thinking the noise came from another herd member rather than a predator.
   - If hunting early season/rut (September), sit stationary over active wallows, muddy seeps, or narrow saddles connecting feeding areas to north-facing timber bedding slopes.
   - During hot days, sitting quietly near isolated water sources inside or adjacent to timber can yield opportunities when animals break cover to drink.
   - Watch for a good spot to set up for 4pm onward.
 - **Evening Strategy:** Set up and glass, again
-  - Shift to stationary vantage points overlooking active water sources, muddy seeps, wallows, or lower transition edges connecting timber to evening feeding areas.
-  - animals feed in these openings at night and low-light hours and will be moving back into heavy cover shortly after sunrise. Glassing with tripod-mounted optics allows you to scout vast timbered drainages without spreading human scent.
-  - Stay until shooting light ends.
+  - Shift to stationary vantage points overlooking muddy seeps, wallows, or lower transition edges connecting timber to evening feeding areas. If hunting elk, also look for active water sources.
+  - Animals feed in openings at night and low-light hours and will be moving back into heavy cover shortly after sunrise. Glassing with tripod-mounted optics allows you to scout vast timbered drainages without spreading human scent.
+  - Stay out hunting until shooting light ends.
 
 
 # Seasonality & The Rut
