@@ -1,6 +1,28 @@
+# Winds and Thermals
+- **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust a broad area weather forecast without verifying local micro-drafts on the ground.
+- **Consider Wind Direction:** Keep the wind direct or quartering in your face to prevent animals from picking up scent. A tailwind carries your scent straight to them.
+- **Mind the Thermals:**
+  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Up-slope thermal drafts begin 1–2 hours after sunrise as sun hits the slope. Animals bedded high will catch scent rising from below; avoid approaching from directly underneath.
+  - **Evenings (Cooling):** Cool air sinks, pulling scent down into drainages. Down-slope thermal drafts begin late afternoon as shadows fall. Animals moving down to feed will catch scent dropping from above; avoid approaching from directly above.
+  - **Transition Swirls:** Thermal flips (early morning and late afternoon) create swirling, dead-air currents. Avoid making close-range aggressive moves during these volatile windows.
+
 # Time-of-Day
-- **Daily Windows:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
-- **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
+- **Morning Strategy:** Set up and glass
+  - Target higher elevation with good vantage over transition zones
+  - Glass 30–60 minutes before sunrise. Pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
+- **Midday Strategy:** Micro-crawl
+  - Elk bed down between 9:00 AM and 4:00 PM. 
+  - Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas (north and east facing slopes) with wind strictly in your face.
+  - Move at a Micro-Crawl. Take 5 to 10 slow, deliberate steps, then stop for several minutes to pick apart the timber with binoculars.
+  - Look for pieces of an elk (a tan rump patch, an ear flick, or horizontal backlines) rather than a whole animal silhouette.
+  - Keep a diaphragm call in your mouth while moving through crunchy timber. If you snap a twig or break heavy brush, immediately throw out a soft, relaxed cow mew or calf chirp. This deceives nearby bedded elk into thinking the noise came from another herd member rather than a predator.
+  - If hunting early season/rut (September), sit stationary over active wallows, muddy seeps, or narrow saddles connecting feeding areas to north-facing timber bedding slopes.
+  - During hot days, sitting quietly near isolated water sources inside or adjacent to timber can yield opportunities when elk break cover to drink.
+  - Watch for a good spot to set up for 4pm onward.
+- **Evening Strategy:** Set up and glass, again
+  - Shift to stationary vantage points overlooking active water sources, muddy seeps, wallows, or lower transition edges connecting timber to evening feeding areas.
+  - Elk feed in these openings at night and low-light hours and will be moving back into heavy cover shortly after sunrise. Glassing with tripod-mounted optics allows you to scout vast timbered drainages without spreading human scent.
+  - Stay until shooting light ends.
 
 
 # Seasonality & The Rut
@@ -14,15 +36,7 @@
   - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and during low-light hours.
   - **Water/Wallows:** Crucial in early season and high temperatures. Focus on active, muddy springs and seeps inside or immediately adjacent to timber.
 - **Hunting Pressure & Buffers:** Go 1–2 miles off motorized dirt roads and trails, or cross steep topographic barriers (like deep creek drainages) that deter average foot traffic. Alternatively, exploit overlooked pockets close to highways that receive low pressure due to difficult parking or access points.
-
-
-# Winds and Thermals
-- **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust a broad area weather forecast without verifying local micro-drafts on the ground.
-- **Consider Wind Direction:** Keep the wind direct or quartering in your face to prevent animals from picking up scent. A tailwind carries your scent straight to them.
-- **Mind the Thermals:**
-  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Up-slope thermal drafts begin 1–2 hours after sunrise as sun hits the slope. Animals bedded high will catch scent rising from below; avoid approaching from directly underneath.
-  - **Evenings (Cooling):** Cool air sinks, pulling scent down into drainages. Down-slope thermal drafts begin late afternoon as shadows fall. Animals moving down to feed will catch scent dropping from above; avoid approaching from directly above.
-  - **Transition Swirls:** Thermal flips (early morning and late afternoon) create swirling, dead-air currents. Avoid making close-range aggressive moves during these volatile windows.
+- **Target the Pockets:** Use digital mapping to identify high-elevation, north-facing timber pockets that wrap around steep basin heads or isolated seeps. Hike in quietly before dawn, glass the timber edges as light breaks, and only enter the thick timber to still-hunt if you have fresh sign (fresh droppings, tracks, or active rubs/wallows) confirming elk are actively using that specific pocket.
 
 
 # Weather
