@@ -1,3 +1,20 @@
+- [Clothing](#clothing)
+- [Winds and Thermals](#winds-and-thermals)
+- [Time-of-Day](#time-of-day)
+- [Seasonality \& The Rut](#seasonality--the-rut)
+- [Location](#location)
+- [Weather](#weather)
+- [Glassing](#glassing)
+- [Sign \& Biology](#sign--biology)
+  - [Tracks](#tracks)
+  - [Scat](#scat)
+  - [Diet](#diet)
+- [Deer Calling](#deer-calling)
+- [Elk Calling](#elk-calling)
+- [Handling Successful Spotting / Contact](#handling-successful-spotting--contact)
+- [Shot Placement \& Recovery](#shot-placement--recovery)
+
+
 # Clothing
 - Anything that glows under a UV light should be strongly considered to never be worn while hunting.
 - Wash everything in scent-free washing fluid and dry WITHOUT any scent sheets, etc. Avoid EVER washing or scenting anything you wear hunting (including underwear, socks, etc.)
