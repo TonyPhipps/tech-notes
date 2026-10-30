@@ -32,6 +32,7 @@
   - Shift to stationary vantage points overlooking muddy seeps, wallows, or lower transition edges connecting timber to evening feeding areas. If hunting elk, also look for active water sources.
   - Animals feed in openings at night and low-light hours and will be moving back into heavy cover shortly after sunrise. Glassing with tripod-mounted optics allows you to scout vast timbered drainages without spreading human scent.
   - Stay out hunting until shooting light ends.
+- ELK: During the season, a common daily routine involves feeding on sun-exposed south or east benches early in the morning, then migrating over the ridge to bed down in the cool, dense timber of the northern slopes as the day warms up.
 
 
 # Seasonality & The Rut
@@ -114,6 +115,15 @@
   - *Cow Mew:* Social locator and herd-reassuring call. Starts higher, smoothly dropping off in pitch and volume.
   - *Estrus Whine:* Drawn-out, inflected, nasal whine indicating breeding readiness during peak rut.
   - *Calf Chirp:* Short, high-pitched staccato note used to stop moving animals for a shot or settle skittish elk.
+
+
+# Handling Successful Spotting / Contact
+- Hold position (VERY still), hold down noise.
+- Watch and determine if you are detected or are being investigated.
+- Do not move until you are sure the animal is not trying to identify you actively.
+- Check wind direction. If needed, move so the wind is at your face or cross, and thermals benefit you.
+- Get is position.
+- Make a noise if you are in position and need the animal to stand up or stop walking (assuming they aren't already actively trying to ID you)
 
 
 # Shot Placement & Recovery
