@@ -1,8 +1,24 @@
+# Clothing
+- Anything that glows under a UV light should be strongly considered to never be worn while hunting.
+- Wash everything in scent-free washing fluid and dry WITHOUT any scent sheets, etc. Avoid EVER washing or scenting anything you wear hunting (including underwear, socks, etc.)
+- Wear scent-free deodorant.
+- Avoid sweating. Dress in layers so you can remove layers.
+- You can't beat animal noses, but you can do your best.
+# Winds and Thermals
+- **Constantly Check Wind:** Carry milkweed fluff or a powder wind checker. Never trust a broad area weather forecast without verifying local micro-drafts on the ground.
+- **Consider Wind Direction:** Keep the wind direct or quartering in your face to prevent animals from picking up scent. A tailwind carries your scent straight to them.
+- **Mind the Thermals:**
+  - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Up-slope thermal drafts begin 1–2 hours after sunrise as sun hits the slope. Animals bedded high will catch scent rising from below; avoid approaching from directly underneath.
+  - **Evenings (Cooling):** Cool air sinks, pulling scent down into drainages. Down-slope thermal drafts begin late afternoon as shadows fall. Animals moving down to feed will catch scent dropping from above; avoid approaching from directly above.
+  - **Transition Swirls:** Thermal flips (early morning and late afternoon) create swirling, dead-air currents. Avoid making close-range aggressive moves during these volatile windows.
+
+
 # Time-of-Day
 - **Morning Strategy:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
 - **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to rest or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
 - **Evening Strategy:** Similar to morning strategy.
 - **NOTE:** When doing multiple hunts, like morning and midday, either bring extra food and expect a heavier load OR plan to trade out your gear like spotting scope and colder weather gear to fit the occasion.
+- ELK: During the season, a common daily routine involves feeding on sun-exposed south or east benches early in the morning, then migrating over the ridge to bed down in the cool, dense timber of the northern slopes as the day warms up.
 
 
 # Seasonality & The Rut
@@ -17,6 +33,13 @@
   - **Mornings (Warming):** Warm air rises, carrying scent up the mountain. Up-slope thermal drafts begin 1–2 hours after sunrise as sun hits the slope. Animals bedded high will catch scent rising from below; avoid approaching from directly underneath.
   - **Evenings (Cooling):** Cool air sinks, pulling scent down into drainages. Down-slope thermal drafts begin late afternoon as shadows fall. Animals moving down to feed will catch scent dropping from above; avoid approaching from directly above.
   - **Transition Swirls:** Thermal flips (early morning and late afternoon) create swirling, dead-air currents. Avoid making close-range aggressive moves during these volatile windows.
+# Location
+- **The Core Triangle:** Locate areas near or intersecting water, food, and bedding sources.
+  - **Bedding:** North or northeast-facing slopes, 5–25 degree inclines, under shady, dense "dark timber" for thermal regulation and security. Look for benches (flat topographical steps) embedded on steep upper 1/3 slopes.
+  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and during low-light hours.
+  - **Water/Wallows:** Crucial in early season and high temperatures. Focus on active, muddy springs and seeps inside or immediately adjacent to timber.
+- **Hunting Pressure & Buffers:** Go 1–2 miles off motorized dirt roads and trails, or cross steep topographic barriers (like deep creek drainages) that deter average foot traffic. Alternatively, exploit overlooked pockets close to highways that receive low pressure due to difficult parking or access points.
+- **Target the Pockets:** Use digital mapping to identify high-elevation, north-facing timber pockets that wrap around steep basin heads or isolated seeps. Hike in quietly before dawn, glass the timber edges as light breaks, and only enter the thick timber to still-hunt if you have fresh sign (fresh droppings, tracks, or active rubs/wallows) confirming animals are actively using that specific pocket.
 
 
 # Weather
@@ -94,6 +117,15 @@ Fresh sign indicates a recent presence.
   - *Cow Mew:* Social locator and herd-reassuring call. Starts higher, smoothly dropping off in pitch and volume.
   - *Estrus Whine:* Drawn-out, inflected, nasal whine indicating breeding readiness during peak rut.
   - *Calf Chirp:* Short, high-pitched staccato note used to stop moving animals for a shot or settle skittish elk.
+
+
+# Handling Successful Spotting / Contact
+- Hold position (VERY still), hold down noise.
+- Watch and determine if you are detected or are being investigated.
+- Do not move until you are sure the animal is not trying to identify you actively.
+- Check wind direction. If needed, move so the wind is at your face or cross, and thermals benefit you.
+- Get is position.
+- Make a noise if you are in position and need the animal to stand up or stop walking (assuming they aren't already actively trying to ID you)
 
 
 # Shot Placement & Recovery
