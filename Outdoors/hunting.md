@@ -1,17 +1,13 @@
 # Time-of-Day
 - **Morning Strategy:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
-- **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
+- **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to rest or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
 - **Evening Strategy:** Similar to morning strategy.
-- NOTE: When doing multiple hunts, like morning and midday, either bring extra food and expect a heavier load OR plan to trade out your gear like spotting scope and colder weather gear to fit the occasion.
+- **NOTE:** When doing multiple hunts, like morning and midday, either bring extra food and expect a heavier load OR plan to trade out your gear like spotting scope and colder weather gear to fit the occasion.
 
 
 # Seasonality & The Rut
 - **Early/Archery (Sep):** Peak rut. Focus on calling, wallows, active herd dynamics, and intercepted travel corridors between feed and bedding.
 - **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo to recover. They seek sanctuary in steep, nasty terrain and thick cover. Calling efficiency drops significantly; rely heavily on glassing, reading fresh sign, and spot-and-stalk tactics.
-
-
-# Locating/Spotting
-asdf
 
 
 # Winds and Thermals
@@ -38,19 +34,20 @@ asdf
 # Sign
 Fresh sign indicates a recent presence.
 
+
 ## Tracks
 - **Bull Elk:** 4 to 4.5 inches long at widest point. Rounder, blockier profile; pushes deeper into soil; dewclaws frequently show due to heavy body mass; wide walking stance.
 - **Cow Elk:** 3 to 3.5 inches long. Narrower, more pointed, and heart-shaped profile.
 - **Deer:** 2 to 3 inches long. Narrower, distinct teardrop shape; much smaller overall print depth and stride length than elk.
 - Fresh tracks will have sharp edges in mud/snow.
-- Older tracks may have sticks or pine needs covering them.
+- Older tracks may have sticks or pine needles covering them.
 
 
 ## Scat
 - Fresh scat is shiny and without cracks. Note that rain or other weather conditions can cause scat to appear moist again.
 - Fresh scat will be easily compressed when poking it with a nearby stick.
 - Older scat may have water/dirt splashed upon it from recent rainfall.
- 
+
 
 ### Bull Elk
 - ~1 inch long
@@ -68,27 +65,31 @@ Fresh sign indicates a recent presence.
 - Small, smooth, oval pellets
 - Significantly smaller in volume and individual size than cow elk scat.
 
- 
+
 # Calling
 - Consider using a bone bag to imitate fighting or rubbing an antler on branches to imitate scraping when near the rut.
 
 
 ## Deer Calling
-- **Buck Grunt:** Short, guttural grunt used to grab a buck's attention or stop a moving deer without causing alarm. However, these are sometimes loud and long. Often then are chasing a doe and being noisy while grunting randomly.
+- **Buck Grunt:** Short, guttural grunt used to grab a buck's attention or stop a moving deer without causing alarm. Often heard when a buck is chasing a doe or moving noisily while searching.
 - **Snort-Wheeze:** High-intensity territorial challenge call used against dominant bucks during the pre-rut and rut.
 - **Bleat:** Used to imitate doe or fawn distress, effective for pulling in curious does or cruising bucks during the rut.
 
 
 ## Elk Calling
-- **Diaphragm Mechanics:** 
-  - Tape/frame side toward throat, dome upward against palate. The latex should be closer to the outside of the mouth. 
-  - Form an airtight seal using tongue pressure against the latex. 
+- **Diaphragm Mechanics:**
+  - Tape/frame side toward throat, dome upward against palate. The latex should be closer to the outside of the mouth.
+  - Form an airtight seal using tongue pressure against the latex.
   - Exhale using steady diaphragm pressure ("shh" air push) rather than puffing cheeks.
-  - DO NOT move your lips or tongue to help change the sound.
+  - DO NOT move your lips or tongue to help change the pitch.
+
+
 - **Bull Bugles:**
   - *Location Bugle:* Clean, clear, high-pitched tone to locate surrounding herds.
   - *Challenge Bugle:* Guttural, raspy call ending with aggressive chuckles to challenge a dominant bull's territory.
   - *Glunking:* Low, hollow throat sound made by bulls when rounding up or courting cows.
+
+
 - **Cow Calls:**
   - *Cow Mew:* Social locator and herd-reassuring call. Starts higher, smoothly dropping off in pitch and volume.
   - *Estrus Whine:* Drawn-out, inflected, nasal whine indicating breeding readiness during peak rut.
@@ -96,16 +97,16 @@ Fresh sign indicates a recent presence.
 
 
 # Shot Placement & Recovery
-The mail goal is to hit both lungs and/or the heart.
+The main goal is to hit both lungs and/or the heart.
 - **Broadside:** Straight up the back side of the front leg, halfway up torso.
 - **Quarter-toward:** Same as broadside, but optionally between front two legs, then halfway up torso.
 - **Quarter-away:** Straight above farthest leg, halfway up torso.
 - **Facing Toward:** Between front two legs, halfway up torso.
-- **Facing Away:** DO NOT SHOOT. Make a sound and get them to at least quarter-away.
+- **Facing Away:** DO NOT SHOOT. Make a soft sound and get them to at least quarter-away.
 
 
 # Recovery
-- Track the animal visually and aurally post-impact
+- Track the animal visually and aurally post-impact.
 - Mark the exact shot location and last seen point.
 - Wait 30–60 minutes for vital hits before advancing to prevent pushing a wounded animal out of the country.
 - Track using footprints, blood spatter, broken twigs, disturbed ground, etc.
@@ -113,13 +114,12 @@ The mail goal is to hit both lungs and/or the heart.
 
 
 # Harvesting
-- Place on one side.
-- Skin top half while placing the removed hide on the ground, flesh side up.
-- Harvest the backstrap and tenderloin
-- Harvest the front and rear quarters for the skinned side.
-- Consider harvesting the meat between ribs.
-- Flip the carcass over so its resting on the opened hide that was skinned earlier.
-- Harvest the backstrap and tenderloin
-- Harvest the front and rear quarters for the skinned side.
-- Place all quarters and meat into highly-breathable game bags
-- Hang in a shaded, wind-ventilated location using durable paracord or Dyneema cordage. Be careful to avoid leaving it alone where opportunistic animals may access it.
+- Roll the animal onto its side.
+- Skin the top half while placing the removed hide on the ground, flesh side up.
+- Harvest the backstrap and tenderloin.
+- Harvest the front and rear quarters on the exposed side.
+- Harvest the meat between the ribs and neck meat.
+- Flip the carcass over so it rests on the clean hide.
+- Harvest the remaining backstrap, tenderloin, and quarters.
+- Place all meat into highly-breathable game bags immediately.
+- Hang in a shaded, wind-ventilated location using durable paracord or Dyneema cordage. Protect from scavenging wildlife.
