@@ -1,6 +1,8 @@
 # Time-of-Day
-- **Daily Windows:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
+- **Morning Strategy:** Glass 30–60 minutes before sunrise. Hunt as early and as late as possible. Heavy pressure pushes elk into nocturnal feeding patterns, forcing them back to cover well before dawn.
 - **Midday Strategy:** Elk bed down between 9:00 AM and 4:00 PM. Use midday to scout new glassing vantage points, rest, or slowly still-hunt through dark timber bedding areas with wind strictly in your face.
+- **Evening Strategy:** Similar to morning strategy.
+- NOTE: When doing multiple hunts, like morning and midday, either bring extra food and expect a heavier load OR plan to trade out your gear like spotting scope and colder weather gear to fit the occasion.
 
 
 # Seasonality & The Rut
@@ -8,12 +10,8 @@
 - **Rifle/Late Season (Oct-Nov):** Post-rut. Bulls separate into bachelor groups or go solo to recover. They seek sanctuary in steep, nasty terrain and thick cover. Calling efficiency drops significantly; rely heavily on glassing, reading fresh sign, and spot-and-stalk tactics.
 
 
-# Location
-- **The Core Triangle:** Locate areas near or intersecting water, food, and bedding sources.
-  - **Bedding:** North or northeast-facing slopes, 5–25 degree inclines, under shady, dense "dark timber" for thermal regulation and security. Look for benches (flat topographical steps) embedded on steep upper 1/3 slopes.
-  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and during low-light hours.
-  - **Water/Wallows:** Crucial in early season and high temperatures. Focus on active, muddy springs and seeps inside or immediately adjacent to timber.
-- **Hunting Pressure & Buffers:** Go 1–2 miles off motorized dirt roads and trails, or cross steep topographic barriers (like deep creek drainages) that deter average foot traffic. Alternatively, exploit overlooked pockets close to highways that receive low pressure due to difficult parking or access points.
+# Locating/Spotting
+asdf
 
 
 # Winds and Thermals
@@ -37,31 +35,56 @@
 - **Visual Targets:** Focus on anomalous features rather than full body silhouettes: horizontal backlines amidst vertical tree trunks, tan/cream rump patches, ear flicks, or the pale glint of an antler tine.
 
 
-# Sign & Biology
-
-## Diet
-- Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
+# Sign
+Fresh sign indicates a recent presence.
 
 ## Tracks
 - **Bull Elk:** 4 to 4.5 inches long at widest point. Rounder, blockier profile; pushes deeper into soil; dewclaws frequently show due to heavy body mass; wide walking stance.
 - **Cow Elk:** 3 to 3.5 inches long. Narrower, more pointed, and heart-shaped profile.
 - **Deer:** 2 to 3 inches long. Narrower, distinct teardrop shape; much smaller overall print depth and stride length than elk.
+- Fresh tracks will have sharp edges in mud/snow.
+- Older tracks may have sticks or pine needs covering them.
+
 
 ## Scat
-- **Bull Elk:** ~1 inch long; dimpled, blocky, and roughly as wide as long. Appears as a single clustered, cow-pie-like mass when feeding on high-moisture summer/early fall forage.
-- **Cow Elk:** Thinner, smooth, distinct oval or pill-shaped pellets.
-- **Deer:** Small, smooth, oval pellets (~0.5 inches long), significantly smaller in volume and individual size than cow elk scat.
+- Fresh scat is shiny and without cracks. Note that rain or other weather conditions can cause scat to appear moist again.
+- Fresh scat will be easily compressed when poking it with a nearby stick.
+- Older scat may have water/dirt splashed upon it from recent rainfall.
+ 
+
+### Bull Elk
+- ~1 inch long
+- Dimpled, blocky, and roughly as wide as long
+- Appears as a single clustered, cow-pie-like mass when feeding on high-moisture summer/early fall forage.
 
 
-# Deer Calling
+### Cow Elk
+- ~1 inch long
+- Thinner, smooth, distinct oval or pill-shaped pellets.
+
+
+### Deer
+- ~0.5 inches long
+- Small, smooth, oval pellets
+- Significantly smaller in volume and individual size than cow elk scat.
+
+ 
+# Calling
+- Consider using a bone bag to imitate fighting or rubbing an antler on branches to imitate scraping when near the rut.
+
+
+## Deer Calling
 - **Buck Grunt:** Short, guttural grunt used to grab a buck's attention or stop a moving deer without causing alarm. However, these are sometimes loud and long. Often then are chasing a doe and being noisy while grunting randomly.
 - **Snort-Wheeze:** High-intensity territorial challenge call used against dominant bucks during the pre-rut and rut.
 - **Bleat:** Used to imitate doe or fawn distress, effective for pulling in curious does or cruising bucks during the rut.
-- Consider also using a bone bag to imitate fighting or rubbing an antler on branches to imitate scraping.
 
 
-# Elk Calling
-- **Diaphragm Mechanics:** Tape/frame side toward throat, dome upward against palate. Form an airtight seal using tongue pressure against the latex. Exhale using steady diaphragm pressure ("shh" air push) rather than puffing cheeks.
+## Elk Calling
+- **Diaphragm Mechanics:** 
+  - Tape/frame side toward throat, dome upward against palate. The latex should be closer to the outside of the mouth. 
+  - Form an airtight seal using tongue pressure against the latex. 
+  - Exhale using steady diaphragm pressure ("shh" air push) rather than puffing cheeks.
+  - DO NOT move your lips or tongue to help change the sound.
 - **Bull Bugles:**
   - *Location Bugle:* Clean, clear, high-pitched tone to locate surrounding herds.
   - *Challenge Bugle:* Guttural, raspy call ending with aggressive chuckles to challenge a dominant bull's territory.
@@ -73,7 +96,30 @@
 
 
 # Shot Placement & Recovery
-- **The Vital Area:** Target the lower-middle third of the chest cavity, directly above or slightly behind the point of the elbow (the "Vital V") to punch through the lungs and heart.
-- **Shot Angles:** Broadside and slight quartering-away present optimal windows. Avoid steep quartering-to, rear, or straight-on shots, as shoulder bones or heavy muscular density block entry to primary organs.
-- **Post-Shot Routine:** Track the animal visually and aurally post-impact; mark the exact shot location and last seen point. Wait 30–60 minutes for vital hits before advancing to prevent pushing a wounded animal out of the country.
-- **Meat Care:** Break down carcass immediately using the gutless method to vent extreme internal body heat. Quarter the animal, place meat into high-breathability game bags, and hang in shaded, wind-ventilated locations using durable paracord or Dyneema cordage.
+The mail goal is to hit both lungs and/or the heart.
+- **Broadside:** Straight up the back side of the front leg, halfway up torso.
+- **Quarter-toward:** Same as broadside, but optionally between front two legs, then halfway up torso.
+- **Quarter-away:** Straight above farthest leg, halfway up torso.
+- **Facing Toward:** Between front two legs, halfway up torso.
+- **Facing Away:** DO NOT SHOOT. Make a sound and get them to at least quarter-away.
+
+
+# Recovery
+- Track the animal visually and aurally post-impact
+- Mark the exact shot location and last seen point.
+- Wait 30–60 minutes for vital hits before advancing to prevent pushing a wounded animal out of the country.
+- Track using footprints, blood spatter, broken twigs, disturbed ground, etc.
+- Inspect the wound and determine what could have improved your shot.
+
+
+# Harvesting
+- Place on one side.
+- Skin top half while placing the removed hide on the ground, flesh side up.
+- Harvest the backstrap and tenderloin
+- Harvest the front and rear quarters for the skinned side.
+- Consider harvesting the meat between ribs.
+- Flip the carcass over so its resting on the opened hide that was skinned earlier.
+- Harvest the backstrap and tenderloin
+- Harvest the front and rear quarters for the skinned side.
+- Place all quarters and meat into highly-breathable game bags
+- Hang in a shaded, wind-ventilated location using durable paracord or Dyneema cordage. Be careful to avoid leaving it alone where opportunistic animals may access it.
