@@ -2,13 +2,43 @@
 - **Pressure Buffers:** As pressure builds, expect deer and elk to seek sanctuaries at least 1 to 2 miles away from open motorized roads and heavily trafficked ATV trails, prioritizing steep, broken, or thick micro-topography.
 
 
+# Location
+- **The Core Triangle:** Locate areas near or intersecting water, food, and bedding sources.
+  - **Bedding:** North or northeast-facing slopes, 5–25 degree inclines, under shady, dense "dark timber" for thermal regulation and security. Look for benches (flat topographical steps) embedded on steep upper 1/3 slopes.
+  - **Feeding:** Open parks, avalanche chutes, and clear cuts. They feed here mostly at night and during low-light hours.
+  - **Water/Wallows:** Crucial in early season and high temperatures. Focus on active, muddy springs and seeps inside or immediately adjacent to timber.
+- **Hunting Pressure & Buffers:** Go 1–2 miles off motorized dirt roads and trails, or cross steep topographic barriers (like deep creek drainages) that deter average foot traffic. Alternatively, exploit overlooked pockets close to highways that receive low pressure due to difficult parking or access points.
+
+
 # Food Sources
+Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
 - **Transition Zones (Ecotones):** Edges where dense timber abruptly meets open slopes or meadows offer maximum forage with immediate escape security.
   - *Deer Distinction:* Mule deer heavily utilize arid sagebrush, bitterbrush, and brushy transition edges for browsing.
   - *Elk Distinction:* Elk prioritize high-volume grasses, forbs, and sedges in moister soils, rarely straying far from heavy timber cover.
 - **Meadows & Benches:** Bright green (active growth) or tan (cured) openings within timber, typically on flat benches or high-country drainage heads.
 - **Recent Burns & Clear Cuts:** Offer peak nutritional regrowth. Target burns and cuts **1–3 years post-disturbance** for optimal herbaceous forage; **3–5 years** for woody browse.
 - **Avalanche Chutes:** Vertical, brushy corridors slicing through timber. Premium early-season feeding zones rich in high-protein, late-holding vegetation.
+
+## Diet
+- Primary diet consists of grasses, woody shrubs, and forbs (herbaceous flowering plants). As high-elevation feed dries out late season, focus on remaining green vegetation around north slopes, springs, and shaded seeps.
+
+| Common Name | Plant Type | Seasonal Preference | Usage & Biological Notes |
+| :--- | :--- | :--- | :--- |
+| **Arrowleaf Balsamroot** | Native Forb | **Early** (Aug–Sept) | Cures early into dry brown leaves; usage drops off sharply after September frosts. |
+| **Fireweed** | Native Forb | **Early** (Aug–Sept) | High-protein summer burn/clearcut forage; dies back quickly after hard early-autumn freezes. |
+| **Sticky Geranium** | Native Forb | **Early** (Aug–Sept) | High-calorie mountain meadow forb; foliage dies back and loses value by October. |
+| **Chokecherry** | Deciduous Shrub | **Early to Mid** (Aug–Oct) | High-value foliage in late summer, transitioning to twigs and buds as leaves drop. |
+| **Common Snowberry** | Low Shrub | **Early to Mid** (Aug–Oct) | Peak dietary staple for deer from late summer through October leaf fall. |
+| **Mountain Brome** | Perennial Grass | **Early to Mid** (Aug–Oct) | Fast-growing cool-season grass heavily grazed while green; cured stalks eaten into fall. |
+| **Quaking Aspen** | Deciduous Tree | **Early & Late** (Aug–Sept / Oct–Nov) | Green summer leaves/sprouts targeted early; bark and sapling twigs browsed in late fall. |
+| **Saskatoon Serviceberry** | Deciduous Shrub | **Early & Late** (Aug–Sept / Nov) | Tender foliage eaten in early archery; shifts to dormant terminal twigs in late rifle. |
+| **Antelope Bitterbrush** | Woody Shrub | **Mid to Late** (Oct–Nov) | High-protein winter browse; targeted heavily as frosts kill green herbaceous forage. |
+| **Curl-leaf Mountain Mahogany** | Shrub / Small Tree | **Mid to Late** (Oct–Nov) | Exceptional late-season energy source; critical when snow covers ground vegetation. |
+| **Mountain Big Sagebrush** | Evergreen Shrub | **Mid to Late** (Oct–Nov) | Low interest during green summer months; essential survival browse during late cold snaps. |
+| **Red-osier Dogwood** | Riparian Shrub | **Mid to Late** (Oct–Nov) | Heavily browsed along creek bottoms and seeps after upland green forage dries up. |
+| **Bluebunch Wheatgrass** | Native Bunchgrass | **All Seasons** (Aug–Nov) | Primary cool-season forage; green early, cured standing forage for late-season elk. |
+| **Elk Sedge** | Sedge (Grass-like) | **All Seasons** (Aug–Nov) | Retains moisture under dark timber canopy longer than open grasses; year-round staple. |
+| **Idaho Fescue** | Native Bunchgrass | **All Seasons** (Aug–Nov) | Grazed succulent green early; eaten cured (standing dry grass) through mid and late season. |
 
 
 # Bedding Areas & Escapes
@@ -40,3 +70,10 @@
    - Highlight water sources that overlap with **1–5 year old wildfire perimeters** or isolated north-facing timber pockets.
 4. **Cluster Identification:**
    - Zoom out to identify spring/seep clusters located **>1.5 miles from open roads** and surrounded by steep bedding topography. Target these high-density zones as primary scouting locations.
+
+
+## In-Person Prep
+Before hunting season, visit the area often and do the following.
+- Track each game trail on On-X.
+- Mark/confirm water sources.
+- Mark food sources.
