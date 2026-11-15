@@ -1,44 +1,27 @@
-﻿# Ripping via VLC
+﻿# Rip with VLC
+Rip to .ts, including all audio tracks
+```
 & "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=mkv,dst=E:\clean_rip.mkv}" --sout-all vlc://quit
-
-
-
-# Ripping va Handbrake
-Did not work in my own testing.
-
-Download:
-- https://handbrake.fr/
-- libdvdcss-2.dll
-
-
-# Ripping via MPV
-Did not work in my own testing.
-
-Download:
-- https://github.com/shinchiro/mpv-winbuild-cmake/releases
-  - Download mpv-x86_64-v3-YYYYMMDD-git-xxxxxxx.7z from shinchiro’s mpv-winbuild-cmake GitHub releases (or install it directly via Windows Package Manager).
-
-Decrypt The DVD
-```
-cd X:\Users\Tony\Downloads\mpv-x86_64-v3-20261111-git-bcde6b93cc
-.\mpv dvd:// --dvd-device=H: --frames=0 -v | Select-String "title"
-.\mpv dvd://1 --dvd-device=H: --ovc=copy --oac=copy --o=e:\decrypted.mkv
-.\mpv dvd://0 --dvd-device=H: --stream-dump=e:\decrypted.vob
 ```
 
+Rip to .ts, includes all English audio tracks and subtitles
+```
+& "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=ts,dst=E:\clean_rip.ts}" --sout-all --sout-spu vlc://quit
 
-## ffmpeg convert
-Convert it (Lossless)
-```
-ffmpeg -fflags +genpts -i e:\decrypted.vob -map 0:v -map 0:a -c copy output.mkv
-```
-
-Shrink into mp4
-```
-ffmpeg -fflags +genpts -i e:\decrypted.vob -vf yadif -c:v libx264 -crf 18 -preset slow -c:a copy output.mp4
+& "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=ts,dst=E:\clean_rip.ts}" --sout-all --sout-spu vlc://quit
 ```
 
-Shrink into mp4 and 1080p resolution
+# Convert to mkv with ffmpeg
+https://www.gyan.dev/ffmpeg/builds/
+
+First, copy libdvdcss-2.dll to the ffmpeg's \bin\ folder
+
+Filters to only English audio tracks (this should include commentaries)
 ```
-ffmpeg -fflags +genpts -i decrypted.vob -vf "yadif,scale=-2:1080:flags=lanczos" -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -c:a aac -b:a 192k output_1080p.mp4
+\ffmpeg.exe -fflags +genpts -i E:\clean_rip.ts -vf "yadif" -map 0:v:0 -map 0:a:m:language:eng -map 0:s -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -c:a copy -c:s copy E:\output_original.mkv
+```
+
+Same as above, but scaled to 1080p
+```
+.\ffmpeg.exe -fflags +genpts -i E:\clean_rip.ts -vf "yadif,scale=-2:1080:flags=lanczos" -map 0:v:0 -map 0:a:m:language:eng -map 0:s -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -c:a copy -c:s copy E:\output_1080p.mkv
 ```
