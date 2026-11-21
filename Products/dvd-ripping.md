@@ -1,27 +1,27 @@
-﻿# Rip with VLC
-Rip to .ts, including all audio tracks
-```
-& "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=mkv,dst=E:\clean_rip.mkv}" --sout-all vlc://quit
-```
+﻿# Rip With MakeMKV Beta
+https://www.makemkv.com/download/
 
-Rip to .ts, includes all English audio tracks and subtitles
-```
-& "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=ts,dst=E:\clean_rip.ts}" --sout-all --sout-spu vlc://quit
 
-& "C:\Program Files\VideoLAN\VLC\vlc.exe" -I dummy dvdsimple:///H:\#0 --sout="#std{access=file,mux=ts,dst=E:\clean_rip.ts}" --sout-all --sout-spu vlc://quit
-```
-
+# Resize with ffmpeg to Pixel 9 Phone Resolution
 # Convert to mkv with ffmpeg
 https://www.gyan.dev/ffmpeg/builds/
 
 First, copy libdvdcss-2.dll to the ffmpeg's \bin\ folder
 
-Filters to only English audio tracks (this should include commentaries)
-```
-\ffmpeg.exe -fflags +genpts -i E:\clean_rip.ts -vf "yadif" -map 0:v:0 -map 0:a:m:language:eng -map 0:s -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -c:a copy -c:s copy E:\output_original.mkv
+1080p, filtering to only English audio tracks (this should include commentaries)
+```ps
+$inFile = "E:\temp\The Many Adventures Of Winnie The Pooh Special Edition_t00.mkv"
+$outFile = "E:\temp\output.mkv"
+$ffmpeg = "F:\GoogleDrive\Tony\Portable\Standalone\ffmpeg-2026-11-11-git-23c4540053-full_build\bin\ffmpeg.exe"
+
+& $ffmpeg -analyzeduration 100M -probesize 100M -i $inFile -map "0:v:0" -map "0:a:m:language:eng" -map "0:s:m:language:eng" -c:v libx265 -crf 22 -preset medium -c:a aac -b:a 192k -c:s copy $outFile
 ```
 
-Same as above, but scaled to 1080p
-```
-.\ffmpeg.exe -fflags +genpts -i E:\clean_rip.ts -vf "yadif,scale=-2:1080:flags=lanczos" -map 0:v:0 -map 0:a:m:language:eng -map 0:s -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -c:a copy -c:s copy E:\output_1080p.mkv
+4k UHD Source, downscaling to Pixel 9
+```ps
+$inFile = "E:\temp\your_4k_movie.mkv"
+$outFile = "E:\temp\output_4k.mkv"
+$ffmpeg = "F:\GoogleDrive\Tony\Portable\Standalone\ffmpeg-2026-11-11-git-23c4540053-full_build\bin\ffmpeg.exe"
+
+& $ffmpeg -analyzeduration 100M -probesize 100M -i $inFile -map "0:v:0" -map "0:a:m:language:eng" -map "0:s:m:language:eng" -vf "scale=2424:-2" -c:v libx265 -pix_fmt yuv420p10le -crf 22 -preset medium -c:a aac -b:a 192k -c:s copy $outFile
 ```
